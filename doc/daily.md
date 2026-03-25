@@ -19,7 +19,7 @@ git add .
 git commit -m "mô tả rõ ràng nội dung thanh đổi" 
 ```
 
-### Bước 4: Đẩy code của em lên GitHub (ví dụ e tạo branch feature/login)
+### Bước 4: Đẩy code của bạn lên GitHub (ví dụ e tạo branch feature/login)
 ```bash
 git push origin feature/<tên tính năng>
 ```
