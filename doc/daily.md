@@ -34,3 +34,6 @@ Bấm vào đó, viết vài dòng mô tả em đã làm gì.
 
 ## ⁉️ Sau đó tuyệt đối không tự ấn nút Merge!
 ## nhớ bảo tester vào test nhé, ổn thì tester sẽ merge
+
+### Bước 6: sử dụng tính năng project của github
+kéo thả task của mình từ **in process** lên **in review** rồi bảo tester check. tester check xong sẽ để sang done, nếu có lỗi tester sẽ yêu cầu dev sửa lại. bạn kéo thả lại từ **in review** sang **in process**
