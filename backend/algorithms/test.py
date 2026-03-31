@@ -1,4 +1,4 @@
-from graph import create_munich_graph
+from graph_test import create_munich_graph
 from astar import find_route_with_lines as astar
 from dijkstra import find_route_with_lines as dijkstra
 
