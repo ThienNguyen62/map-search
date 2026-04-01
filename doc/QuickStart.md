@@ -9,16 +9,18 @@
 ### **Bước 1: Clone repository**
 ```bash
 git clone 
-cd project
+cd project //( tên folder chính chứa project)
 ```
 
-### **Bước 2: Cài đặt Python dependencies**
+### **Bước 2: Cài đặt Môi trường**
 ```bash
-# Di chuyển vào thư mục backend
-cd backend
-
-# Cài đặt các thư viện cần thiết
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
+```
+### **Bước 3: Chạy**
+```bash
+cd backend python app.py
 
 # Nếu gặp lỗi permission, thử:
 pip install --user -r requirements.txt
