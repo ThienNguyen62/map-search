@@ -8,7 +8,7 @@ https://github.com/ThienNguyen62/map-search.git
 ## 0. Cấu hình Git (Chỉ cần làm 1 lần)
 
 Thiết lập thông tin để Git nhận diện bạn trong mỗi commit:
-
+VD:
 ```bash
 git config --global user.name "ThienNguyen62"
 git config --global user.email "your_email@gmail.com"
@@ -33,7 +33,7 @@ cd map-search
 1. **clean code**
 2. **chú thích rõ ràng trước mỗi function**
 ## 4. Quy tắc đặt tên nhánh (Naming Convention)
-*   **các em đặt tên nhánh theo cấu trúc:** <loại-nhánh>/<tên-công-việc>
+*   **các BẠN đặt tên nhánh theo cấu trúc:** <loại-nhánh>/<tên-công-việc>
 *   **VÍ DỤ:** 
 *    Tạo tính năng mới: feature/login, feature/them-khoan-thu, feature/tao-database
 *    Sửa lỗi bug: bugfix/loi-tinh-tien, bugfix/sai-giao-dien
@@ -53,3 +53,4 @@ git branch
 git branch <ten-branch>
 git checkout <ten-branch>
 git checkout -b <ten-branch>
+git clone <tên-branch><URL>
