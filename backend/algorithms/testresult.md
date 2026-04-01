@@ -1,7 +1,8 @@
 Powershell
+
 python -m venv .venv
 .venv\Scripts\Activate
-pip install -r requirements.txt    / pip install networkx geopy
+pip install -r requirements.txt
 python test.py trạm_1 trạm_2 (Ví dụ U2_01 U3_20)
 
 
