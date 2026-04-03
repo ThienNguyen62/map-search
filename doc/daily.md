@@ -37,3 +37,14 @@ Bấm vào đó, viết vài dòng mô tả em đã làm gì.
 
 ### Bước 6: sử dụng tính năng project của github
 kéo thả task của mình từ **in process** lên **in review** rồi bảo tester check. tester check xong sẽ để sang done, nếu có lỗi tester sẽ yêu cầu dev sửa lại. bạn kéo thả lại từ **in review** sang **in process**
+
+
+### Đối với tester hoặc các bạn muốn clone code từ branch về kiểm tra
+Kiểm tra list branch
+```bash
+git branch -a
+```
+clone code ở branch
+```bash
+git clone -b <branch_name> <repo_url>
+```
