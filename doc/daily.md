@@ -21,6 +21,7 @@ git commit -m "mô tả rõ ràng nội dung thanh đổi"
 
 ### Bước 4: Đẩy code của bạn lên GitHub (ví dụ e tạo branch feature/login)
 ```bash
+git checkout -b ten-nhanh
 git push origin feature/<tên tính năng>
 ```
 vd: git push origin feature/<login>

@@ -1,6 +1,18 @@
-flask==3.0.3
+
 networkx==3.3
 pandas==2.2.2
 numpy==1.26.4
 geopy==2.4.1
 flask-caching==2.3.0
+# Web framework
+flask==3.0.0
+flask-cors==4.0.0        # Cho phép frontend gọi backend (CORS)
+# Data & geometry
+geopy==2.4.1              # Tính khoảng cách địa lý (heuristic A*)
+# Database
+# (SQLite có sẵn trong Python, không cần cài thêm)
+# Testing
+pytest==7.4.0
+pytest-flask==1.3.0
+# Dev tools
+python-dotenv==1.0.0     # Quản lý biến môi trường
