@@ -1,11 +1,21 @@
-User (Frontend - Leaflet)
+👤 USER (click trên map)
         ↓
-API (Backend - Flask/FastAPI)
+🌐 FRONTEND (Leaflet / JS)
+        ↓  (fetch POST /api/path)
+🚪 API (routes.py)
         ↓
-Service Layer
+🧠 SERVICE (pathfinding_service.py)
         ↓
-Algorithm (Dijkstra / A*)
+⚙️ ALGORITHM (astar.py)
         ↓
-Graph/Data
+🧱 GRAPH (models + data)
         ↓
-Trả kết quả → Frontend hiển thị
+⚙️ ALGORITHM tính xong
+        ↓
+🧠 SERVICE format lại
+        ↓
+🚪 API trả JSON
+        ↓
+🌐 FRONTEND nhận data
+        ↓
+🗺️ VẼ ĐƯỜNG ĐI
