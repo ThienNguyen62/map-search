@@ -1,0 +1,101 @@
+[
+  {
+    "route_id": "swm-1-0U1G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U1",
+    "route_long_name": "Olympia-Einkaufszentrum - Hauptbahnhof - Sendlinger Tor - Mangfallplatz",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U2G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U2",
+    "route_long_name": "Feldmoching - Scheidplatz - Hauptbahnhof - Sendlinger Tor - Innsbrucker Ring - Messestadt Ost",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U3G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U3",
+    "route_long_name": "Moosach - Scheidplatz - Münchner Freiheit - Odeonsplatz - Sendlinger Tor - Fürstenried West",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U4G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U4",
+    "route_long_name": "Westendstraße - Hauptbahnhof - Odeonsplatz - Arabellapark",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U5G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U5",
+    "route_long_name": "Laimer Platz - Hauptbahnhof - Odeonsplatz - Innsbrucker Ring - Neuperlach Süd",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U6G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U6",
+    "route_long_name": "Garching-Forschungszentrum - Fröttmaning - Münchner Freiheit - Odeonsplatz - Sendlinger Tor - Harras - Klinikum Großhadern",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U7G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U7",
+    "route_long_name": "Olympia-Einkaufszentrum - Hauptbahnhof - Sendlinger Tor - Innsbrucker Ring - Neuperlach Zentrum",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-1-0U8G-1",
+    "agency_id": "swm-07",
+    "route_short_name": "U8",
+    "route_long_name": "Olympiazentrum - Scheidplatz - Hauptbahnhof - Sendlinger Tor - Innsbrucker Ring - Neuperlach Zentrum",
+    "route_type": "1",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  },
+  {
+    "route_id": "swm-35-501G-1",
+    "agency_id": "Default",
+    "route_short_name": "U1",
+    "route_long_name": "",
+    "route_type": "3",
+    "route_color": "327AB9",
+    "route_text_color": "FFFFFF",
+    "route_url": "",
+    "ticketing_deep_link_id": "MVV_ticketing"
+  }
+]

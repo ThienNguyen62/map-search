@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version
+"Münchner VerkehrsVerbund (MVV)","https://www.mvv-auskunft.de","DE","20260216","20260614","20260301"

@@ -1,0 +1,359 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+.app-shell,
+.map-area {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f2f4f8;
+    color: #1f2937;
+}
+
+button {
+    font: inherit;
+}
+
+.app-shell {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #3f3b6e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 18px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar-header strong {
+    display: block;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+}
+
+.sidebar-header span {
+    display: block;
+    margin-top: 6px;
+    color: #d8d7f2;
+    font-size: 0.95rem;
+}
+
+.lang-select {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    font-weight: 700;
+}
+
+.sidebar-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tab {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 10px;
+    color: #c8c7f8;
+    background: rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.tab.active,
+.tab:hover {
+    background: #6d69bb;
+    color: #ffffff;
+}
+
+.search-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-row label {
+    font-size: 0.95rem;
+    color: #d8d7f2;
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 10px 14px;
+    gap: 10px;
+}
+
+.select-btn {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.select-btn:hover {
+    background: rgba(255,255,255,0.14);
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.search-card input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.search-card input::placeholder {
+    color: rgba(255,255,255,0.68);
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    background: #6d82ff;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: #4e62f6;
+}
+
+.promo-card {
+    background: #181735;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.promo-image {
+    height: 140px;
+    background: linear-gradient(135deg, #5b5cd6 0%, #2c66bd 100%);
+    background-image: linear-gradient(135deg, #5b5cd6 0%, #2c66bd 100%), url('');
+    background-size: cover;
+    background-position: center;
+}
+
+.promo-copy {
+    padding: 18px 20px;
+}
+
+.promo-copy strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.promo-copy p {
+    margin: 0 0 16px;
+    color: #d1d1f3;
+    line-height: 1.5;
+}
+
+.promo-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.promo-buttons button {
+    flex: 1;
+    border: none;
+    border-radius: 14px;
+    padding: 11px 0;
+    color: #1f2a4a;
+    background: #e9e7ff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.data-card,
+.result-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 18px 20px;
+    color: #e5e7ff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.data-card h3 {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.file-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.file-row label {
+    font-size: 0.95rem;
+    color: #c8c7f8;
+}
+
+.file-row input {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: transparent;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.hint {
+    margin: 12px 0 0;
+    color: #c8c7f8;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.map-area {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    height: 100%;
+}
+
+.map-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.map-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.map-switch {
+    display: flex;
+    gap: 10px;
+}
+
+.map-switch button {
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.map-switch button.active {
+    background: #1e40af;
+    border-color: #1e40af;
+    color: #ffffff;
+}
+
+#map {
+    flex: 1;
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+}
+
+@media (max-width: 1100px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .map-area {
+        padding: 20px 20px 40px;
+    }
+
+    #map {
+        min-height: 520px;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        padding: 16px;
+    }
+
+    .search-card {
+        padding: 16px;
+    }
+
+    .sidebar-tabs {
+        grid-template-columns: 1fr;
+    }
+}
+
