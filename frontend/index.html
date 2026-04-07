@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!--
+    Layout tổng của ứng dụng:
+    - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, tải dữ liệu bổ sung.
+    - Map area: bản đồ Leaflet và thanh chuyển lớp nền.
+-->
 <div class="app-shell">
     <aside class="sidebar">
         <div class="sidebar-header">
@@ -79,8 +84,10 @@
     </main>
 </div>
 <datalist id="stations"></datalist>
+<!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
 <script src="script.js"></script>
 </body>
 </html>

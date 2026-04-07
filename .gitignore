@@ -174,4 +174,4 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
-projectAI/gesamt_gtfs/stop_times.txt
+projectAI/gesamt_gtfs/stop_times.txtfile raw/gesamt_gtfs/stop_times.txt
