@@ -42,17 +42,41 @@ const lineColors = {
 };
 
 function loadGraph() {
-    // Du lieu graph da duoc tien xu ly tu GTFS va dat tai frontend/data.
-    fetch('data/metro_graph.json')
-        .then(response => response.json())
-        .then(data => {
-            graph = data;
-            initGraph();
-        })
-        .catch(error => {
-            console.error('Lỗi tải metro_graph.json', error);
-            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu tuyến metro.</p>';
-        });
+    // Uu tien thu muc data o root du an (noi luu file ban da tao).
+    const graphCandidates = [
+        '/data/metro_graph.json',
+        'data/metro_graph.json',
+        '../data/metro_graph.json',
+        '/frontend/data/metro_graph.json'
+    ];
+
+    const tryLoad = async () => {
+        let lastError = null;
+        for (const path of graphCandidates) {
+            try {
+                const response = await fetch(path, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+                if (!data || !Array.isArray(data.stations) || !Array.isArray(data.edges)) {
+                    throw new Error('JSON khong dung dinh dang graph');
+                }
+                graph = data;
+                initGraph();
+                console.log(`Da tai du lieu graph tu: ${path}`);
+                return;
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        console.error('Loi tai metro_graph.json', lastError);
+        document.getElementById('result').innerHTML =
+            '<p>Không thể tải dữ liệu tuyến metro. Hãy chạy local server tại thư mục gốc map-search để dùng file data/metro_graph.json.</p>';
+    };
+
+    tryLoad();
 }
 
 function initGraph() {
