@@ -1,3 +1,4 @@
+// Khoi tao ban do trung tam Munich.
 const map = L.map("map", {
     center: [48.1371, 11.5754],
     zoom: 12,
@@ -19,6 +20,7 @@ osmLayer.addTo(map);
 map.addControl(L.control.scale());
 map.addControl(L.control.zoom({ position: 'topright' }));
 
+// graph: du lieu do thi metro sau khi nap tu metro_graph.json.
 let graph = { stations: [], edges: [] };
 let graphById = {};
 let stationIdByName = {};
@@ -40,19 +42,45 @@ const lineColors = {
 };
 
 function loadGraph() {
-    fetch('data/metro_graph.json')
-        .then(response => response.json())
-        .then(data => {
-            graph = data;
-            initGraph();
-        })
-        .catch(error => {
-            console.error('Lỗi tải metro_graph.json', error);
-            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu tuyến metro.</p>';
-        });
+    // Uu tien thu muc data o root du an (noi luu file ban da tao).
+    const graphCandidates = [
+        '/data/metro_graph.json',
+        'data/metro_graph.json',
+        '../data/metro_graph.json',
+        '/frontend/data/metro_graph.json'
+    ];
+
+    const tryLoad = async () => {
+        let lastError = null;
+        for (const path of graphCandidates) {
+            try {
+                const response = await fetch(path, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+                if (!data || !Array.isArray(data.stations) || !Array.isArray(data.edges)) {
+                    throw new Error('JSON khong dung dinh dang graph');
+                }
+                graph = data;
+                initGraph();
+                console.log(`Da tai du lieu graph tu: ${path}`);
+                return;
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        console.error('Loi tai metro_graph.json', lastError);
+        document.getElementById('result').innerHTML =
+            '<p>Không thể tải dữ liệu tuyến metro. Hãy chạy local server tại thư mục gốc map-search để dùng file data/metro_graph.json.</p>';
+    };
+
+    tryLoad();
 }
 
 function initGraph() {
+    // Tao cac index de tra cuu nhanh khi tim duong va ve ban do.
     graphById = {};
     stationIdByName = {};
     graph.stations.forEach(station => {
@@ -73,6 +101,7 @@ function initGraph() {
 }
 
 function buildAdjacency() {
+    // Danh sach ke 2 chieu de chay Dijkstra tren do thi vo huong.
     adjacency = {};
     graph.edges.forEach(edge => {
         if (!adjacency[edge.from]) adjacency[edge.from] = [];
@@ -84,6 +113,7 @@ function buildAdjacency() {
 }
 
 function seedStationOptions() {
+    // Do danh sach ga vao datalist de ho tro goi y ten ga.
     const datalist = document.getElementById('stations');
     datalist.innerHTML = '';
     graph.stations
@@ -97,6 +127,7 @@ function seedStationOptions() {
 }
 
 function findStationIdByName(name) {
+    // Uu tien tim exact match, fallback sang partial match de de su dung.
     const key = name.trim().toLowerCase();
     if (!key) return null;
     if (stationIdByName[key]) return stationIdByName[key];
@@ -107,6 +138,7 @@ function findStationIdByName(name) {
 }
 
 function dijkstra(startId, endId) {
+    // Tim duong di ngan nhat theo tong thoi gian di chuyen giua cac ga.
     const costs = {};
     const previous = {};
     const visited = new Set();
@@ -153,6 +185,7 @@ function dijkstra(startId, endId) {
 }
 
 function drawStations() {
+    // Ve marker cho tung ga va cho phep click de gan ga di/den.
     stationLayerGroup.clearLayers();
     stationMarkers = {};
     graph.stations.forEach(station => {
@@ -170,6 +203,7 @@ function drawStations() {
 }
 
 function drawNetwork() {
+    // Ve toan bo mang luoi metro (net mờ) de nguoi dung nhin tong quan.
     networkLayer.clearLayers();
     graph.edges.forEach(edge => {
         const from = graphById[edge.from];
@@ -191,6 +225,7 @@ function selectStation(station) {
 }
 
 function renderRoute(edges) {
+    // Ve tuyen ket qua voi do day lon hon va danh dau cac ga doi tuyen.
     if (currentRouteLayer) {
         map.removeLayer(currentRouteLayer);
     }
@@ -242,7 +277,34 @@ function formatMinutes(value) {
     return seconds === 0 ? `${minutes} phút` : `${minutes} phút ${seconds} giây`;
 }
 
+function haversineKm(lat1, lon1, lat2, lon2) {
+    const earthRadiusKm = 6371;
+    const toRadians = degrees => degrees * Math.PI / 180;
+    const deltaLat = toRadians(lat2 - lat1);
+    const deltaLon = toRadians(lon2 - lon1);
+    const a = Math.sin(deltaLat / 2) ** 2 + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(deltaLon / 2) ** 2;
+    return 2 * earthRadiusKm * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function formatDistanceKm(value) {
+    if (value == null || Number.isNaN(value)) return 'không rõ khoảng cách';
+    return `${value.toFixed(2)} km`;
+}
+
+function getStationDistanceKm(fromId, toId) {
+    const from = graphById[fromId];
+    const to = graphById[toId];
+    if (!from || !to) return null;
+    const fromLat = Number(from.lat);
+    const fromLon = Number(from.lon);
+    const toLat = Number(to.lat);
+    const toLon = Number(to.lon);
+    if ([fromLat, fromLon, toLat, toLon].some(Number.isNaN)) return null;
+    return haversineKm(fromLat, fromLon, toLat, toLon);
+}
+
 function showResult(route, fromName, toName) {
+    // Gom cac canh lien tiep cung line thanh segment de hien thi de doc.
     const result = document.getElementById('result');
     if (!route) {
         result.innerHTML = `<p>Không tìm thấy lộ trình giữa <strong>${fromName}</strong> và <strong>${toName}</strong>.</p>`;
@@ -251,21 +313,25 @@ function showResult(route, fromName, toName) {
     let segments = [];
     let currentSegment = null;
     route.edges.forEach(edge => {
+        const distance = getStationDistanceKm(edge.from, edge.to);
         if (!currentSegment || currentSegment.line !== edge.line) {
             if (currentSegment) segments.push(currentSegment);
-            currentSegment = { line: edge.line, from: edge.from, to: edge.to, time: edge.time };
+            currentSegment = { line: edge.line, from: edge.from, to: edge.to, time: edge.time, distance: distance || 0 };
         } else {
             currentSegment.to = edge.to;
             currentSegment.time += edge.time;
+            currentSegment.distance += distance || 0;
         }
     });
     if (currentSegment) segments.push(currentSegment);
+
+    const totalDistance = segments.reduce((sum, seg) => sum + (seg.distance || 0), 0);
 
     const segmentHtml = segments.map((seg, index) => {
         const from = graphById[seg.from];
         const to = graphById[seg.to];
         const stops = route.path.slice(route.path.indexOf(seg.from), route.path.indexOf(seg.to) + 1).length;
-        return `<li><strong>Đoạn ${index + 1} - Tuyến ${seg.line}</strong>: ${from.name} → ${to.name} (${formatMinutes(seg.time)})<br><small>${stops} ga trên tuyến</small></li>`;
+        return `<li><strong>Đoạn ${index + 1} - Tuyến ${seg.line}</strong>: ${from.name} → ${to.name} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
     }).join('');
 
     const listItems = route.path.map((id, index) => {
@@ -278,6 +344,7 @@ function showResult(route, fromName, toName) {
     result.innerHTML = `
         <p>Lộ trình từ <strong>${fromName}</strong> đến <strong>${toName}</strong>:</p>
         <p><strong>Tổng thời gian dự kiến:</strong> ${formatMinutes(route.cost)}</p>
+        <p><strong>Tổng khoảng cách ước tính:</strong> ${formatDistanceKm(totalDistance)}</p>
         <p><strong>Số ga đi qua:</strong> ${route.path.length}</p>
         <p><strong>Số lần chuyển tuyến:</strong> ${transferCount}</p>
         <p><strong>Thời gian từng đoạn trước khi chuyển trạm:</strong></p>
@@ -288,6 +355,7 @@ function showResult(route, fromName, toName) {
 }
 
 function findRoute() {
+    // Validate dau vao, chay tim duong, sau do cap nhat UI va ban do.
     const fromInput = document.getElementById('fromStation').value;
     const toInput = document.getElementById('toStation').value;
     const fromId = findStationIdByName(fromInput);
@@ -314,6 +382,7 @@ function findRoute() {
 }
 
 function setMapMode(mode) {
+    // Chuyen qua lai giua nen ban do thuong va nen ve tinh.
     if (mode === 'satellite') {
         map.removeLayer(osmLayer);
         satelliteLayer.addTo(map);
@@ -330,6 +399,7 @@ loadGraph();
 setMapMode('map');
 
 window.addEventListener('load', () => {
+    // Dam bao map tinh lai kich thuoc sau khi layout render xong.
     setTimeout(() => {
         map.invalidateSize(true);
     }, 200);
@@ -350,12 +420,14 @@ const toInput = document.getElementById('toStation');
 
 if (selectFromBtn) {
     selectFromBtn.addEventListener('click', () => {
+        // Bat che do chon ga di truc tiep bang click marker.
         selectingFrom = true;
         alert('Bấm vào marker trên bản đồ để chọn ga đi.');
     });
 }
 if (selectToBtn) {
     selectToBtn.addEventListener('click', () => {
+        // Bat che do chon ga den truc tiep bang click marker.
         selectingFrom = false;
         alert('Bấm vào marker trên bản đồ để chọn ga đến.');
     });
