@@ -58,7 +58,7 @@ def _get_edge_data(G: nx.Graph, u: Any, v: Any) -> dict:
         # MultiGraph: G[u][v] là dict {key: edge_data}
         # Chọn edge có travel_time nhỏ nhất (đường nhanh nhất giữa 2 ga).
         edges = G[u][v]
-        return min(edges.values(), key=lambda d: d.get("travel_time", d.get("weight", DEFAULT_TRAVEL_TIME_S)))
+        return min(edges.values(), key=lambda d: d.get("travel_time", d.get("time", d.get("weight", DEFAULT_TRAVEL_TIME_S))))
     return G[u][v]
 
 
@@ -233,7 +233,7 @@ def a_star_subway(
                 continue
 
             edge_data = _get_edge_data(G, current, neighbor)
-            travel_time = float(edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
+            travel_time = float(edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))))
             neighbor_line = _get_line_info(edge_data)
 
             penalty = _transfer_cost(node_line[current], neighbor_line, transfer_penalty, line_change_penalty)
@@ -324,7 +324,7 @@ def format_route_info(path: list, G: nx.Graph) -> list[dict]:
         u, v = path[i], path[i + 1]
         edge_data = _get_edge_data(G, u, v)
         line = _get_line_info(edge_data)
-        travel_time = float(edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
+        travel_time = float(edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))))
 
         if line != current_line:
             # Lưu đoạn cũ (nếu có)
