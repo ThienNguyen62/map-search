@@ -42,25 +42,44 @@ const lineColors = {
 };
 
 function loadGraph() {
-    // Load data từ backend API thay vì local file
-    console.log('Loading graph from API...');
-    fetch('http://127.0.0.1:5000/api/graph')
-        .then(response => {
-            console.log('Graph API response status:', response.status);
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Graph data loaded:', data.stations.length, 'stations,', data.edges.length, 'edges');
-            graph = data;
-            initGraph();
-        })
-        .catch(error => {
-            console.error('Lỗi tải graph từ API:', error);
-            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu tuyến metro từ backend.</p>';
-        });
+    // Thu tu fallback: API backend -> file local frontend -> file local root data.
+    const sources = [
+        'http://127.0.0.1:5000/api/graph',
+        './metro_graph.json',
+        '/data/metro_graph.json',
+        '../data/metro_graph.json'
+    ];
+
+    const tryLoad = index => {
+        if (index >= sources.length) {
+            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu điểm ga. Hãy chạy backend hoặc đặt file metro_graph.json trong thư mục frontend.</p>';
+            return;
+        }
+
+        const url = sources[index];
+        console.log('Loading graph from:', url);
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !Array.isArray(data.stations) || !Array.isArray(data.edges)) {
+                    throw new Error('Invalid graph payload');
+                }
+                console.log('Graph loaded:', data.stations.length, 'stations,', data.edges.length, 'edges');
+                graph = data;
+                initGraph();
+            })
+            .catch(error => {
+                console.warn('Load failed from source:', url, error);
+                tryLoad(index + 1);
+            });
+    };
+
+    tryLoad(0);
 }
 
 function initGraph() {
@@ -265,79 +284,80 @@ function renderRoute(edges) {
             console.error('Error fitting bounds:', error);
         }
     }
+}
 
-    function formatMinutes(value) {
-        const totalSeconds = Math.round(value * 60);
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return seconds === 0 ? `${minutes} phút` : `${minutes} phút ${seconds} giây`;
+function formatMinutes(value) {
+    const totalSeconds = Math.round(value * 60);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return seconds === 0 ? `${minutes} phút` : `${minutes} phút ${seconds} giây`;
+}
+
+function haversineKm(lat1, lon1, lat2, lon2) {
+    const earthRadiusKm = 6371;
+    const toRadians = degrees => degrees * Math.PI / 180;
+    const deltaLat = toRadians(lat2 - lat1);
+    const deltaLon = toRadians(lon2 - lon1);
+    const a = Math.sin(deltaLat / 2) ** 2 + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(deltaLon / 2) ** 2;
+    return 2 * earthRadiusKm * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function formatDistanceKm(value) {
+    if (value == null || Number.isNaN(value)) return 'không rõ khoảng cách';
+    return `${value.toFixed(2)} km`;
+}
+
+function getStationDistanceKm(fromId, toId) {
+    const from = graphById[fromId];
+    const to = graphById[toId];
+    if (!from || !to) return null;
+    const fromLat = Number(from.lat);
+    const fromLon = Number(from.lon);
+    const toLat = Number(to.lat);
+    const toLon = Number(to.lon);
+    if ([fromLat, fromLon, toLat, toLon].some(Number.isNaN)) return null;
+    return haversineKm(fromLat, fromLon, toLat, toLon);
+}
+
+function showResult(route, fromName, toName) {
+    // Gom cac canh lien tiep cung line thanh segment de hien thi de doc.
+    const result = document.getElementById('result');
+    if (!route) {
+        result.innerHTML = `<p>Không tìm thấy lộ trình giữa <strong>${fromName}</strong> và <strong>${toName}</strong>.</p>`;
+        return;
     }
-
-    function haversineKm(lat1, lon1, lat2, lon2) {
-        const earthRadiusKm = 6371;
-        const toRadians = degrees => degrees * Math.PI / 180;
-        const deltaLat = toRadians(lat2 - lat1);
-        const deltaLon = toRadians(lon2 - lon1);
-        const a = Math.sin(deltaLat / 2) ** 2 + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(deltaLon / 2) ** 2;
-        return 2 * earthRadiusKm * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
-    function formatDistanceKm(value) {
-        if (value == null || Number.isNaN(value)) return 'không rõ khoảng cách';
-        return `${value.toFixed(2)} km`;
-    }
-
-    function getStationDistanceKm(fromId, toId) {
-        const from = graphById[fromId];
-        const to = graphById[toId];
-        if (!from || !to) return null;
-        const fromLat = Number(from.lat);
-        const fromLon = Number(from.lon);
-        const toLat = Number(to.lat);
-        const toLon = Number(to.lon);
-        if ([fromLat, fromLon, toLat, toLon].some(Number.isNaN)) return null;
-        return haversineKm(fromLat, fromLon, toLat, toLon);
-    }
-
-    function showResult(route, fromName, toName) {
-        // Gom cac canh lien tiep cung line thanh segment de hien thi de doc.
-        const result = document.getElementById('result');
-        if (!route) {
-            result.innerHTML = `<p>Không tìm thấy lộ trình giữa <strong>${fromName}</strong> và <strong>${toName}</strong>.</p>`;
-            return;
+    let segments = [];
+    let currentSegment = null;
+    route.edges.forEach(edge => {
+        const distance = getStationDistanceKm(edge.from, edge.to);
+        if (!currentSegment || currentSegment.line !== edge.line) {
+            if (currentSegment) segments.push(currentSegment);
+            currentSegment = { line: edge.line, from: edge.from, to: edge.to, time: edge.time, distance: distance || 0 };
+        } else {
+            currentSegment.to = edge.to;
+            currentSegment.time += edge.time;
+            currentSegment.distance += distance || 0;
         }
-        let segments = [];
-        let currentSegment = null;
-        route.edges.forEach(edge => {
-            const distance = getStationDistanceKm(edge.from, edge.to);
-            if (!currentSegment || currentSegment.line !== edge.line) {
-                if (currentSegment) segments.push(currentSegment);
-                currentSegment = { line: edge.line, from: edge.from, to: edge.to, time: edge.time, distance: distance || 0 };
-            } else {
-                currentSegment.to = edge.to;
-                currentSegment.time += edge.time;
-                currentSegment.distance += distance || 0;
-            }
-        });
-        if (currentSegment) segments.push(currentSegment);
+    });
+    if (currentSegment) segments.push(currentSegment);
 
-        const totalDistance = segments.reduce((sum, seg) => sum + (seg.distance || 0), 0);
+    const totalDistance = segments.reduce((sum, seg) => sum + (seg.distance || 0), 0);
 
-        const segmentHtml = segments.map((seg, index) => {
-            const from = graphById[seg.from];
-            const to = graphById[seg.to];
-            const stops = route.path.slice(route.path.indexOf(seg.from), route.path.indexOf(seg.to) + 1).length;
-            return `<li><strong>Đoạn ${index + 1} - Tuyến ${seg.line}</strong>: ${from.name} → ${to.name} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
-        }).join('');
+    const segmentHtml = segments.map((seg, index) => {
+        const from = graphById[seg.from];
+        const to = graphById[seg.to];
+        const stops = route.path.slice(route.path.indexOf(seg.from), route.path.indexOf(seg.to) + 1).length;
+        return `<li><strong>Đoạn ${index + 1} - Tuyến ${seg.line}</strong>: ${from.name} → ${to.name} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
+    }).join('');
 
-        const listItems = route.path.map((id, index) => {
-            const station = graphById[id];
-            return `<li>${index + 1}. ${station.name}</li>`;
-        }).join('');
+    const listItems = route.path.map((id, index) => {
+        const station = graphById[id];
+        return `<li>${index + 1}. ${station.name}</li>`;
+    }).join('');
 
-        const transferCount = Math.max(0, segments.length - 1);
+    const transferCount = Math.max(0, segments.length - 1);
 
-        result.innerHTML = `
+    result.innerHTML = `
         <p>Lộ trình từ <strong>${fromName}</strong> đến <strong>${toName}</strong>:</p>
         <p><strong>Tổng thời gian dự kiến:</strong> ${formatMinutes(route.cost)}</p>
         <p><strong>Tổng khoảng cách ước tính:</strong> ${formatDistanceKm(totalDistance)}</p>
@@ -348,7 +368,7 @@ function renderRoute(edges) {
         <p><strong>Danh sách ga:</strong></p>
         <ol>${listItems}</ol>
     `;
-    }
+}
     // last code
     // function findRoute() {
     //     // Validate dau vao, chay tim duong, sau do cap nhat UI va ban do.
@@ -402,8 +422,7 @@ function renderRoute(edges) {
             console.log('Response data:', result);
 
             if (!response.ok || result.error) {
-                document.getElementById('result').innerHTML = `<p>Lỗi: ${result.error || 'Không tìm thấy lộ trình'}</p>`;
-                return;
+                throw new Error(result.error || 'Backend path API failed');
             }
 
             // Rebuild edges từ path
@@ -422,8 +441,18 @@ function renderRoute(edges) {
             showResult(route, fromInput, toInput);
             renderRoute(route.edges);
         } catch (error) {
-            console.error('Lỗi API:', error);
-            document.getElementById('result').innerHTML = '<p>Lỗi kết nối backend.</p>';
+            console.warn('Backend unavailable, switching to local Dijkstra:', error);
+            const fromId = findStationIdByName(fromInput);
+            const toId = findStationIdByName(toInput);
+            if (!fromId || !toId) {
+                document.getElementById('result').innerHTML = '<p>Không tìm thấy ga trong dữ liệu hiện có.</p>';
+                return;
+            }
+            const route = dijkstra(fromId, toId);
+            showResult(route, fromInput, toInput);
+            if (route) {
+                renderRoute(route.edges);
+            }
         }
     }
 
@@ -484,4 +513,3 @@ function renderRoute(edges) {
     if (toInput) {
         toInput.addEventListener('focus', () => selectingFrom = false);
     }
-}
