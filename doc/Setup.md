@@ -2,6 +2,6 @@
 hướng dẫn cách chạy
 
 Chạy backend: python backend/app.py
-Chạy frontend: python -m http.server 8000
-Mở http://localhost:8000/frontend/index.html
+Chạy frontend: open with live sever
+Mở http://127.0.0.1:5500/frontend/index.html
 Nhập ga đi/đến và bấm "Tìm đường"
