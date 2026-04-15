@@ -1,93 +1,130 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Munich - Tìm đường tàu điện ngầm</title>
+
+    <!-- Import CSS của Leaflet (thư viện bản đồ) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Import CSS của ứng dụng -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<!--
+    <!--
     Layout tổng của ứng dụng:
     - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, tải dữ liệu bổ sung.
     - Map area: bản đồ Leaflet và thanh chuyển lớp nền.
 -->
-<div class="app-shell">
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div>
-                <strong>Munchen</strong>
-                <span>Tàu điện ngầm</span>
-            </div>
-            <div class="lang-select">
-                <span>VI</span>
-            </div>
-        </div>
+    <div class="app-shell">
 
-        <div class="sidebar-tabs">
-            <button class="tab active">Sơ đồ</button>
-            <button class="tab">Bản đồ</button>
-            <button class="tab">Thông tin</button>
-        </div>
-
-        <div class="search-card">
-            <div class="input-row">
-                <label for="fromStation">Từ</label>
-                <div class="input-with-icon">
-                    <span class="icon">⇨</span>
-                    <input id="fromStation" list="stations" placeholder="Ga đi" autocomplete="off">
+        <!-- =========================
+         SIDEBAR (ĐIỀU KHIỂN)
+         =========================
+     -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <strong>Munchen</strong>
+                    <span>Tàu điện ngầm</span>
                 </div>
-                <button id="selectFromBtn" class="select-btn">Chọn trên bản đồ</button>
-            </div>
-            <div class="input-row">
-                <label for="toStation">Đến</label>
-                <div class="input-with-icon">
-                    <span class="icon">⌖</span>
-                    <input id="toStation" list="stations" placeholder="Ga đến" autocomplete="off">
+                <div class="lang-select">
+                    <span>VI</span>
                 </div>
-                <button id="selectToBtn" class="select-btn">Chọn trên bản đồ</button>
             </div>
-            <button id="findRouteBtn" class="primary-btn">Tìm đường</button>
-        </div>
+            <!--tabs điều hướng-->
+            <div class="sidebar-tabs">
+                <button class="tab active">Sơ đồ</button>
+                <button class="tab">Bản đồ</button>
+                <button class="tab">Thông tin</button>
+            </div>
+            <!-- =========================
+             KHỐI NHẬP DỮ LIỆU TÌM ĐƯỜNG
+             ========================= -->
+            <div class="search-card">
+                <div class="input-row">
+                    <label for="fromStation">Từ</label>
+                    <!-- Input có icon -->
+                    <div class="input-with-icon">
+                        <span class="icon">⇨</span>
+                        <input id="fromStation" list="stations" placeholder="Ga đi" autocomplete="off">
+                    </div>
+                    <!--chọn ga trực tiếp trên bản đồ-->
+                    <button id="selectFromBtn" class="select-btn">Chọn trên bản đồ</button>
+                </div>
+                <!-- Nhập ga đến -->
+                <div class="input-row">
+                    <label for="toStation">Đến</label>
+                    <div class="input-with-icon">
+                        <span class="icon">⌖</span>
+                        <input id="toStation" list="stations" placeholder="Ga đến" autocomplete="off">
+                    </div>
+                    <button id="selectToBtn" class="select-btn">Chọn trên bản đồ</button>
+                </div>
+                <!-- Tìm đường -->
+                <button id="findRouteBtn" class="primary-btn">Tìm đường</button>
+            </div>
+            <!-- 
+            =========================
+             KẾT QUẢ LỘ TRÌNH
+            =========================
+            -->
 
-        <div id="result" class="result-card">
-            <h3>Kết quả lộ trình</h3>
-            <p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>
-        </div>
+            <div id="result" class="result-card">
+                <h3>Kết quả lộ trình</h3>
+                <p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>
+            </div>
+            <!-- 
+             =========================
+             IMPORT DATA (GTFS / FILE)
+             ========================= 
+             -->
 
-        <div class="data-card">
-            <h3>Nhập dữ liệu</h3>
-            <div class="file-row">
-                <label for="stopsFile">Stops (stops.txt)</label>
-                <input id="stopsFile" type="file" accept=".txt,.csv,.json">
+        
+            <div class="data-card">
+                <h3>Nhập dữ liệu</h3>
+                <div class="file-row">
+                    <label for="stopsFile">Stops (stops.txt)</label>
+                    <input id="stopsFile" type="file" accept=".txt,.csv,.json">
+                </div>
+                 <!-- File stop_times -->
+                <div class="file-row">
+                    <label for="stopTimesFile">Stop times (stop_times.txt)</label>
+                    <input id="stopTimesFile" type="file" accept=".txt,.csv">
+                </div>
+                <button id="loadDataBtn" class="secondary-btn">Tải dữ liệu và vẽ ga</button>
+                <p class="hint">Chỉ cần chọn file stops.txt, hệ thống sẽ tạo marker ga trên bản đồ.</p>
             </div>
-            <div class="file-row">
-                <label for="stopTimesFile">Stop times (stop_times.txt)</label>
-                <input id="stopTimesFile" type="file" accept=".txt,.csv">
-            </div>
-            <button id="loadDataBtn" class="secondary-btn">Tải dữ liệu và vẽ ga</button>
-            <p class="hint">Chỉ cần chọn file stops.txt, hệ thống sẽ tạo marker ga trên bản đồ.</p>
-        </div>
-    </aside>
+        </aside>
+         <!-- =========================
+         MAP AREA
+         ========================= -->
 
-    <main class="map-area">
-        <div class="map-toolbar">
-            <div class="map-title">Bản đồ</div>
-            <div class="map-switch">
-                <button class="active">Bản đồ</button>
-                <button>Vệ tinh</button>
+        <main class="map-area">
+            <div class="map-toolbar">
+                <div class="map-title">Bản đồ</div>
+                <div class="map-switch">
+                    <button class="active">Bản đồ</button>
+                    <button>Vệ tinh</button>
+                </div>
             </div>
-        </div>
-        <div id="map"></div>
-    </main>
-</div>
-<datalist id="stations"></datalist>
-<!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            <div id="map"></div>
+        </main>
+    </div>
+    <datalist id="stations"></datalist>
+    <!-- =========================
+     SCRIPT
+     ========================= -->
+
+    <!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
-<script src="script.js"></script>
+    <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
+    <script src="script.js"></script>
 </body>
+
 </html>
