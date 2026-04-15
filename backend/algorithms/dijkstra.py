@@ -46,7 +46,7 @@ def _get_edge_data(G: nx.Graph, u: Any, v: Any) -> dict:
         edges = G[u][v]
         return min(
             edges.values(),
-            key=lambda d: d.get("travel_time", d.get("weight", DEFAULT_TRAVEL_TIME_S))
+            key=lambda d: d.get("travel_time", d.get("time", d.get("weight", DEFAULT_TRAVEL_TIME_S)))
         )
     return G[u][v]
 
@@ -168,7 +168,7 @@ def dijkstra_subway(
 
             edge_data = _get_edge_data(G, current, neighbor)
             travel_time = float(
-                edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))
+                edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
             )
             neighbor_line = _get_line_info(edge_data)
 
@@ -258,7 +258,7 @@ def format_route_info(path: list, G: nx.Graph) -> list[dict]:
         edge_data = _get_edge_data(G, u, v)
         line = _get_line_info(edge_data)
         travel_time = float(
-            edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))
+            edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
         )
 
         if line != current_line:
@@ -343,3 +343,9 @@ def find_route_with_lines(G: nx.Graph, start: Any, end: Any) -> dict:
     Wrapper đơn giản của dijkstra_subway().
     """
     return dijkstra_subway(G, start, end)
+
+
+def dijkstra(G: nx.Graph, orig_node: Any, dest_node: Any, transfer_penalty: int = 300, line_change_penalty: int = 120):
+    """Compatibility wrapper for backend code that expects (path, cost)."""
+    result = dijkstra_subway(G, orig_node, dest_node, transfer_penalty, line_change_penalty)
+    return result["path"], result["total_time"]
