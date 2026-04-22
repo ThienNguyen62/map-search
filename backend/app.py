@@ -33,7 +33,9 @@ app.config.update(
 app.register_blueprint(api_blueprint, url_prefix="/api")
 # load admin data
 def load_admins():
-    path = os.path.join(os.path.dirname(__file__), 'data', 'admin.json')
+    path = os.path.join(os.path.dirname(__file__), '..', 'data', 'admin.json')
+    path = os.path.abspath(path)
+
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)['admins']
 
