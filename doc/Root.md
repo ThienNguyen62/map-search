@@ -1,3 +1,6 @@
+
+// ĐÂY LÀ BẢN CŨ, CLONE CODE VỀ ĐỂ XEM BẢN MỚI
+
 project-root/
 │
 ├── backend/                  # Python core (não hệ thống)
