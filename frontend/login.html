@@ -1,0 +1,157 @@
+<!-- trang login test, ae sửa lại giao diện cho đẹp -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập — Munich Metro Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: #1a1a2e;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        .login-card {
+            background: #16213e; border: 1px solid #0f3460;
+            border-radius: 12px; padding: 40px 36px;
+            width: 100%; max-width: 380px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .login-logo { text-align: center; margin-bottom: 28px; }
+        .metro-badge {
+            display: inline-block; background: #007bff; color: white;
+            font-weight: 700; font-size: 22px;
+            width: 52px; height: 52px; line-height: 52px;
+            border-radius: 50%; margin-bottom: 10px;
+        }
+        .login-logo h1 { font-size: 18px; color: #e0e0e0; font-weight: 600; }
+        .login-logo p  { font-size: 13px; color: #888; margin-top: 4px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 13px; color: #aaa; margin-bottom: 6px; font-weight: 500; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 10px 14px;
+            background: #0f3460; border: 1px solid #1a4a7a;
+            border-radius: 8px; color: #e0e0e0; font-size: 14px;
+            outline: none; transition: border-color 0.2s;
+        }
+        input:focus { border-color: #007bff; }
+        input::placeholder { color: #555; }
+        .btn-login {
+            width: 100%; padding: 11px; background: #007bff; color: white;
+            border: none; border-radius: 8px; font-size: 15px; font-weight: 600;
+            cursor: pointer; margin-top: 6px; transition: background 0.2s;
+        }
+        .btn-login:hover    { background: #0069d9; }
+        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+        .error-msg {
+            display: none;
+            background: rgba(220,53,69,0.15); border: 1px solid rgba(220,53,69,0.4);
+            color: #ff6b7a; border-radius: 8px; padding: 10px 14px;
+            font-size: 13px; margin-bottom: 16px; text-align: center;
+        }
+        .error-msg.show { display: block; }
+        .back-link {
+            display: block; text-align: center; margin-top: 20px;
+            font-size: 13px; color: #888; text-decoration: none;
+        }
+        .back-link:hover { color: #007bff; }
+        .spinner {
+            display: inline-block; width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.3); border-top-color: white;
+            border-radius: 50%; animation: spin 0.7s linear infinite;
+            margin-right: 6px; vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-logo">
+            <div class="metro-badge">M</div>
+            <h1>Munich Metro Admin</h1>
+            <p>Đăng nhập để quản lý hệ thống</p>
+        </div>
+
+        <div id="errorMsg" class="error-msg"></div>
+
+        <div class="form-group">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" placeholder="Nhập tên đăng nhập" autocomplete="username" />
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" placeholder="Nhập mật khẩu" autocomplete="current-password" />
+        </div>
+
+        <button class="btn-login" id="loginBtn" onclick="handleLogin()">Đăng nhập</button>
+        <a href="index.html" class="back-link">← Quay lại trang chính</a>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:5000';
+
+        // Đã có session → thẳng vào admin
+        (async function checkAlreadyLoggedIn() {
+            try {
+                const res  = await fetch(`${API_URL}/api/me`, {
+                    credentials: 'include'   // gửi cookie session
+                });
+                const data = await res.json();
+                if (data.is_admin) window.location.replace('admin.html');
+            } catch (_) {}
+        })();
+
+        document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+        async function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const btn      = document.getElementById('loginBtn');
+
+            hideError();
+
+            if (!username || !password) {
+                showError('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>Đang đăng nhập...';
+
+            try {
+                const res  = await fetch(`${API_URL}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',   // bắt buộc: nhận cookie session từ backend
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    // Session đã được set bởi backend qua cookie — không cần lưu gì
+                    window.location.replace('admin.html');
+                } else {
+                    showError(data.message || 'Đăng nhập thất bại.');
+                }
+            } catch (_) {
+                showError('Không thể kết nối tới server. Vui lòng kiểm tra backend đang chạy.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Đăng nhập';
+            }
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+        function hideError() {
+            document.getElementById('errorMsg').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

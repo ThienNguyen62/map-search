@@ -1,0 +1,9 @@
+{
+  "admins": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "display_name": "Administrator"
+    }
+  ]
+}
