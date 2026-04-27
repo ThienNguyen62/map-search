@@ -1,12 +1,10 @@
 let currentRole = "user"; // 'user' or 'admin'
 
 // Handle form submission
-document
-  .getElementById("loginForm")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleLogin();
-  });
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  handleLogin();
+});
 
 function switchRole(role) {
   currentRole = role;
@@ -102,9 +100,7 @@ function handleLogin() {
         } else {
           localStorage.removeItem("rememberMe");
         }
-        showSuccess(
-          "Đăng nhập thành công (Người dùng)! Đang chuyển hướng...",
-        );
+        showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
         setTimeout(() => {
           window.location.href = "index.html";
         }, 1500);

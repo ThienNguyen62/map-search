@@ -1,17 +1,13 @@
 // Handle form submission
-document
-  .getElementById("signupForm")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleSignUp();
-  });
+document.getElementById("signupForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  handleSignUp();
+});
 
 // Password strength checker
-document
-  .getElementById("password")
-  .addEventListener("input", function () {
-    checkPasswordStrength(this.value);
-  });
+document.getElementById("password").addEventListener("input", function () {
+  checkPasswordStrength(this.value);
+});
 
 function checkPasswordStrength(password) {
   const strengthDiv = document.getElementById("passwordStrength");
@@ -54,8 +50,7 @@ function handleSignUp() {
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const password = document.getElementById("password").value;
-  const confirmPassword =
-    document.getElementById("confirmPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
   const agreeTerms = document.getElementById("agreeTerms").checked;
 
   // Clear messages
@@ -78,9 +73,7 @@ function handleSignUp() {
   }
 
   if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-    showError(
-      "Tên người dùng chỉ được chứa chữ cái, số và dấu gạch dưới",
-    );
+    showError("Tên người dùng chỉ được chứa chữ cái, số và dấu gạch dưới");
     return;
   }
 
@@ -127,9 +120,7 @@ function handleSignUp() {
         showError(data.error || "Đăng ký thất bại");
         return;
       }
-      showSuccess(
-        "Đăng ký thành công! Đang chuyển hướng tới đăng nhập...",
-      );
+      showSuccess("Đăng ký thành công! Đang chuyển hướng tới đăng nhập...");
       setTimeout(() => {
         window.location.href = "login.html";
       }, 1500);

@@ -84,13 +84,14 @@ async function loadUserData() {
     }
 
     // Load login history (assuming this endpoint exists)
-    const historyResponse = await fetch("http://127.0.0.1:5000/api/auth/login-history");
+    const historyResponse = await fetch(
+      "http://127.0.0.1:5000/api/auth/login-history",
+    );
     const historyData = await historyResponse.json();
 
     loading.style.display = "none";
 
     renderUsersSection(usersData.users || [], historyData.history || []);
-
   } catch (err) {
     loading.style.display = "none";
     error.textContent = err.message || "Không thể kết nối tới server";
@@ -105,29 +106,30 @@ function renderUsersSection(users, loginHistory) {
 
   // Group login history by user
   const userActivity = {};
-  loginHistory.forEach(entry => {
+  loginHistory.forEach((entry) => {
     if (!userActivity[entry.username]) {
       userActivity[entry.username] = [];
     }
     userActivity[entry.username].push(entry);
   });
 
-  const userRows = users.map(user => {
-    const userLogins = userActivity[user.username] || [];
-    const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
-    const totalLogins = userLogins.length;
+  const userRows = users
+    .map((user) => {
+      const userLogins = userActivity[user.username] || [];
+      const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
+      const totalLogins = userLogins.length;
 
-    return `
+      return `
       <tr>
         <td>${user.id}</td>
         <td>${user.username}</td>
         <td>${user.email}</td>
         <td>${user.first_name} ${user.last_name}</td>
-        <td>${user.phone || '-'}</td>
+        <td>${user.phone || "-"}</td>
         <td><span class="status ${user.role}">${user.role}</span></td>
         <td>${totalLogins}</td>
-        <td>${lastLogin ? new Date(lastLogin.timestamp).toLocaleString('vi-VN') : 'Chưa đăng nhập'}</td>
-        <td>${new Date(user.created_at).toLocaleString('vi-VN')}</td>
+        <td>${lastLogin ? new Date(lastLogin.timestamp).toLocaleString("vi-VN") : "Chưa đăng nhập"}</td>
+        <td>${new Date(user.created_at).toLocaleString("vi-VN")}</td>
         <td>
           <button class="view-history-btn" onclick="showUserHistory('${user.username}')">
             📋 Xem lịch sử
@@ -135,7 +137,8 @@ function renderUsersSection(users, loginHistory) {
         </td>
       </tr>
     `;
-  }).join('');
+    })
+    .join("");
 
   content.innerHTML = `
     <div class="users-table-container">
@@ -189,17 +192,21 @@ function showUserHistory(username) {
 
   // Load user-specific history
   fetch(`http://127.0.0.1:5000/api/auth/user-history/${username}`)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       if (data.history && data.history.length > 0) {
-        const historyRows = data.history.map(entry => `
+        const historyRows = data.history
+          .map(
+            (entry) => `
           <tr>
-            <td>${new Date(entry.timestamp).toLocaleString('vi-VN')}</td>
-            <td>${entry.ip_address || 'N/A'}</td>
-            <td>${entry.user_agent ? entry.user_agent.substring(0, 50) + '...' : 'N/A'}</td>
+            <td>${new Date(entry.timestamp).toLocaleString("vi-VN")}</td>
+            <td>${entry.ip_address || "N/A"}</td>
+            <td>${entry.user_agent ? entry.user_agent.substring(0, 50) + "..." : "N/A"}</td>
             <td><span class="status success">Thành công</span></td>
           </tr>
-        `).join('');
+        `,
+          )
+          .join("");
 
         modalBody.innerHTML = `
           <div class="history-table-container">
@@ -222,7 +229,7 @@ function showUserHistory(username) {
         modalBody.innerHTML = `<p>Không có lịch sử đăng nhập nào cho người dùng này.</p>`;
       }
     })
-    .catch(err => {
+    .catch((err) => {
       modalBody.innerHTML = `<div class="error-message">Không thể tải lịch sử: ${err.message}</div>`;
     });
 }
