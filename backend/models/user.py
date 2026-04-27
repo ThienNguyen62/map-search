@@ -1,6 +1,7 @@
 import os
 import sqlite3
 import hashlib
+import hmac
 import binascii
 from datetime import datetime
 
@@ -44,7 +45,7 @@ def verify_password(stored_password: str, provided_password: str) -> bool:
         salt = binascii.unhexlify(salt_hex)
         expected_hash = binascii.unhexlify(hash_hex)
         test_hash = hashlib.pbkdf2_hmac('sha256', provided_password.encode('utf-8'), salt, 100_000)
-        return hashlib.compare_digest(test_hash, expected_hash)
+        return hmac.compare_digest(test_hash, expected_hash)
     except Exception:
         return False
 
