@@ -1,49 +1,45 @@
 let currentRole = "user"; // 'user' or 'admin'
 
-// Khởi tạo sự kiện Submit cho form
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  handleLogin();
-});
+// Handle form submission
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleLogin();
+  });
 
-// Chuyển đổi giữa chế độ Người dùng và Admin
 function switchRole(role) {
   currentRole = role;
 
-  // Cập nhật giao diện nút tab
+  // Update button styling
   document.querySelectorAll(".role-tab-btn").forEach((btn) => {
     btn.classList.remove("active");
   });
   document.querySelector(`[data-role="${role}"]`).classList.add("active");
 
-  // Ẩn/Hiện các trường thông tin tùy theo role
-  const emailGroup = document.getElementById("emailGroup");
-  const emailInput = document.getElementById("email");
-  const signupLink = document.querySelector(".signup-link");
-
+  // Update form fields visibility
   if (role === "admin") {
-    emailGroup.style.display = "none";
-    emailInput.removeAttribute("required");
-    signupLink.style.display = "none";
+    document.getElementById("emailGroup").style.display = "none";
+    document.getElementById("email").removeAttribute("required");
+    document.querySelector(".signup-link").style.display = "none";
   } else {
-    emailGroup.style.display = "block";
-    emailInput.setAttribute("required", "");
-    signupLink.style.display = "block";
+    document.getElementById("emailGroup").style.display = "block";
+    document.getElementById("email").setAttribute("required", "");
+    document.querySelector(".signup-link").style.display = "block";
   }
 
-  // Reset form và xóa thông báo cũ
+  // Clear form
   document.getElementById("loginForm").reset();
   clearMessages();
 }
 
-// Xử lý logic đăng nhập
 function handleLogin() {
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
 
+  // Clear messages
   clearMessages();
 
-  // Validate cơ bản
   if (!username) {
     showError("Vui lòng nhập tên người dùng");
     return;
@@ -78,7 +74,6 @@ function handleLogin() {
     payload.email = document.getElementById("email").value.trim();
   }
 
-  // Gọi API tới Backend Flask
   fetch("http://127.0.0.1:5000/api/auth/login", {
     method: "POST",
     headers: {
@@ -89,13 +84,11 @@ function handleLogin() {
     .then(async (response) => {
       const data = await response.json();
       showLoading(false);
-
       if (!response.ok) {
         showError(data.error || "Đăng nhập thất bại");
         return;
       }
 
-      // Xử lý khi đăng nhập thành công
       if (currentRole === "user") {
         const rememberMe = document.getElementById("rememberMe").checked;
         if (rememberMe) {
@@ -109,13 +102,15 @@ function handleLogin() {
         } else {
           localStorage.removeItem("rememberMe");
         }
-        showSuccess("Đăng nhập thành công! Đang chuyển hướng...");
+        showSuccess(
+          "Đăng nhập thành công (Người dùng)! Đang chuyển hướng...",
+        );
         setTimeout(() => {
-          window.location.href = "index.html"; // Chuyển sang trang bản đồ
+          window.location.href = "index.html";
         }, 1500);
       } else {
         localStorage.removeItem("rememberMe");
-        showSuccess("Đăng nhập Admin thành công!");
+        showSuccess("Đăng nhập thành công (Admin)! Đang chuyển hướng...");
         setTimeout(() => {
           window.location.href = "admin.html";
         }, 1500);
@@ -123,39 +118,32 @@ function handleLogin() {
     })
     .catch(() => {
       showLoading(false);
-      showError(
-        "Không thể kết nối tới server. Hãy kiểm tra backend đang chạy cổng 5000.",
-      );
+      showError("Không thể kết nối tới server. Hãy kiểm tra backend.");
     });
 }
 
-// Kiểm tra định dạng email
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-// Hiển thị thông báo lỗi
 function showError(message) {
   const errorDiv = document.getElementById("errorMessage");
   errorDiv.textContent = message;
   errorDiv.classList.add("show");
 }
 
-// Hiển thị thông báo thành công
 function showSuccess(message) {
   const successDiv = document.getElementById("successMessage");
   successDiv.textContent = message;
   successDiv.classList.add("show");
 }
 
-// Xóa các thông báo
 function clearMessages() {
   document.getElementById("errorMessage").classList.remove("show");
   document.getElementById("successMessage").classList.remove("show");
 }
 
-// Hiệu ứng loading cho nút bấm
 function showLoading(show) {
   const loading = document.getElementById("loading");
   const button = document.querySelector(".login-btn");
@@ -179,7 +167,7 @@ function handleSignUp(e) {
   window.location.href = "signup.html";
 }
 
-// Tự động điền thông tin nếu trước đó có chọn "Nhớ mật khẩu"
+// Load saved credentials if "Remember me" was checked before
 window.addEventListener("load", function () {
   const saved = localStorage.getItem("rememberMe");
   if (saved) {

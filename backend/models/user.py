@@ -22,6 +22,18 @@ CREATE TABLE IF NOT EXISTS users (
 );
 """
 
+SQL_CREATE_LOGIN_HISTORY = """
+CREATE TABLE IF NOT EXISTS login_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    ip_address TEXT,
+    user_agent TEXT,
+    success BOOLEAN NOT NULL,
+    FOREIGN KEY (username) REFERENCES users (username)
+);
+"""
+
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -54,6 +66,7 @@ def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(SQL_CREATE_USERS)
+    cursor.execute(SQL_CREATE_LOGIN_HISTORY)
     conn.commit()
     conn.close()
     _ensure_default_admin()
@@ -111,6 +124,50 @@ def list_users():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT id, username, email, first_name, last_name, phone, role, created_at FROM users ORDER BY id DESC")
+    rows = cursor.fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+def record_login_attempt(username: str, ip_address: str = None, user_agent: str = None, success: bool = True):
+    """Record a login attempt in the history table."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    timestamp = datetime.utcnow().isoformat()
+    cursor.execute(
+        "INSERT INTO login_history (username, timestamp, ip_address, user_agent, success) VALUES (?, ?, ?, ?, ?)",
+        (username, timestamp, ip_address, user_agent, success)
+    )
+    conn.commit()
+    conn.close()
+
+
+def get_login_history(limit: int = 100):
+    """Get recent login history for all users."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT lh.*, u.first_name, u.last_name, u.email
+        FROM login_history lh
+        JOIN users u ON lh.username = u.username
+        ORDER BY lh.timestamp DESC
+        LIMIT ?
+    """, (limit,))
+    rows = cursor.fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+def get_user_login_history(username: str, limit: int = 50):
+    """Get login history for a specific user."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT * FROM login_history
+        WHERE username = ?
+        ORDER BY timestamp DESC
+        LIMIT ?
+    """, (username, limit))
     rows = cursor.fetchall()
     conn.close()
     return [dict(row) for row in rows]

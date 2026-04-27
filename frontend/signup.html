@@ -9,15 +9,19 @@
 
   <body>
     <div class="signup-container">
+      <!-- Header -->
       <div class="signup-header">
         <h1>Tạo Tài Khoản</h1>
         <p>Đăng ký để sử dụng Munich Metro</p>
       </div>
 
+      <!-- Messages -->
       <div class="error-message" id="errorMessage"></div>
       <div class="success-message" id="successMessage"></div>
 
+      <!-- Form -->
       <form id="signupForm">
+        <!-- Name fields -->
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">Họ</label>
@@ -41,6 +45,7 @@
           </div>
         </div>
 
+        <!-- Username -->
         <div class="form-group">
           <label for="username">Tên người dùng</label>
           <input
@@ -55,6 +60,7 @@
           </small>
         </div>
 
+        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input
@@ -66,6 +72,7 @@
           />
         </div>
 
+        <!-- Phone (Optional) -->
         <div class="form-group">
           <label for="phone">Số điện thoại (tùy chọn)</label>
           <input
@@ -76,6 +83,7 @@
           />
         </div>
 
+        <!-- Password -->
         <div class="form-group">
           <label for="password">Mật khẩu</label>
           <input
@@ -88,6 +96,7 @@
           <div class="password-strength" id="passwordStrength"></div>
         </div>
 
+        <!-- Confirm Password -->
         <div class="form-group">
           <label for="confirmPassword">Xác nhận mật khẩu</label>
           <input
@@ -99,6 +108,7 @@
           />
         </div>
 
+        <!-- Terms and Conditions -->
         <div class="terms-group">
           <input type="checkbox" id="agreeTerms" name="agreeTerms" required />
           <label for="agreeTerms">
@@ -123,13 +133,16 @@
           </label>
         </div>
 
+        <!-- Loading indicator -->
         <div class="loading" id="loading">
           <span>Đang xử lý...</span>
         </div>
 
+        <!-- Submit button -->
         <button type="submit" class="signup-btn">Đăng Ký</button>
       </form>
 
+      <!-- Login link -->
       <div class="login-link">
         Đã có tài khoản? <a href="login.html">Đăng nhập tại đây</a>
       </div>

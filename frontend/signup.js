@@ -1,13 +1,17 @@
-// Bắt sự kiện nộp form
-document.getElementById("signupForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  handleSignUp();
-});
+// Handle form submission
+document
+  .getElementById("signupForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleSignUp();
+  });
 
-// Kiểm tra độ mạnh mật khẩu khi người dùng gõ
-document.getElementById("password").addEventListener("input", function () {
-  checkPasswordStrength(this.value);
-});
+// Password strength checker
+document
+  .getElementById("password")
+  .addEventListener("input", function () {
+    checkPasswordStrength(this.value);
+  });
 
 function checkPasswordStrength(password) {
   const strengthDiv = document.getElementById("passwordStrength");
@@ -18,8 +22,12 @@ function checkPasswordStrength(password) {
   }
 
   let strength = 0;
+
+  // Length check
   if (password.length >= 8) strength++;
   if (password.length >= 12) strength++;
+
+  // Character variety check
   if (/[a-z]/.test(password)) strength++;
   if (/[A-Z]/.test(password)) strength++;
   if (/[0-9]/.test(password)) strength++;
@@ -46,30 +54,42 @@ function handleSignUp() {
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+  const confirmPassword =
+    document.getElementById("confirmPassword").value;
   const agreeTerms = document.getElementById("agreeTerms").checked;
 
+  // Clear messages
   clearMessages();
 
-  // Validate phía client
-  if (!firstName || !lastName) {
-    showError("Vui lòng nhập đầy đủ họ và tên");
+  // Validation
+  if (!firstName) {
+    showError("Vui lòng nhập họ");
     return;
   }
 
-  if (username.length < 3 || !/^[a-zA-Z0-9_]+$/.test(username)) {
+  if (!lastName) {
+    showError("Vui lòng nhập tên");
+    return;
+  }
+
+  if (!username || username.length < 3) {
+    showError("Tên người dùng phải có ít nhất 3 ký tự");
+    return;
+  }
+
+  if (!/^[a-zA-Z0-9_]+$/.test(username)) {
     showError(
-      "Tên người dùng không hợp lệ (tối thiểu 3 ký tự, không ký tự đặc biệt)",
+      "Tên người dùng chỉ được chứa chữ cái, số và dấu gạch dưới",
     );
     return;
   }
 
-  if (!isValidEmail(email)) {
+  if (!email || !isValidEmail(email)) {
     showError("Vui lòng nhập email hợp lệ");
     return;
   }
 
-  if (password.length < 8) {
+  if (!password || password.length < 8) {
     showError("Mật khẩu phải có ít nhất 8 ký tự");
     return;
   }
@@ -80,13 +100,12 @@ function handleSignUp() {
   }
 
   if (!agreeTerms) {
-    showError("Bạn phải đồng ý với điều khoản dịch vụ");
+    showError("Vui lòng đồng ý với Điều khoản dịch vụ");
     return;
   }
 
   showLoading(true);
 
-  // Gửi yêu cầu tới Backend
   fetch("http://127.0.0.1:5000/api/auth/signup", {
     method: "POST",
     headers: {
@@ -104,14 +123,12 @@ function handleSignUp() {
     .then(async (response) => {
       const data = await response.json();
       showLoading(false);
-
       if (!response.ok) {
         showError(data.error || "Đăng ký thất bại");
         return;
       }
-
       showSuccess(
-        "Đăng ký thành công! Đang chuyển hướng tới trang đăng nhập...",
+        "Đăng ký thành công! Đang chuyển hướng tới đăng nhập...",
       );
       setTimeout(() => {
         window.location.href = "login.html";
@@ -119,19 +136,20 @@ function handleSignUp() {
     })
     .catch(() => {
       showLoading(false);
-      showError("Không thể kết nối tới server. Vui lòng kiểm tra Backend.");
+      showError("Không thể kết nối tới server. Hãy kiểm tra backend.");
     });
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 function showError(message) {
   const errorDiv = document.getElementById("errorMessage");
   errorDiv.textContent = message;
   errorDiv.classList.add("show");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo(0, 0);
 }
 
 function showSuccess(message) {
@@ -148,6 +166,7 @@ function clearMessages() {
 function showLoading(show) {
   const loading = document.getElementById("loading");
   const button = document.querySelector(".signup-btn");
+
   if (show) {
     loading.classList.add("show");
     button.disabled = true;

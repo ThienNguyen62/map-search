@@ -3,69 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard - Munich Metro</title>
-    <link rel="stylesheet" href="admin.css" />
+    <title>Đăng Nhập - Munich Tàu Điện Ngầm</title>
+    <link rel="stylesheet" href="login.css" />
   </head>
+
   <body>
-    <div class="admin-layout">
-      <aside class="sidebar">
-        <div class="sidebar-header">
-          <h2>Metro Admin</h2>
-        </div>
-        <nav class="sidebar-nav">
-          <ul>
-            <li class="active">
-              <a href="#" onclick="showSection('overview')">📊 Tổng quan</a>
-            </li>
-            <li>
-              <a href="#" onclick="showSection('stations')"
-                >🚉 Quản lý ga tàu</a
-              >
-            </li>
-            <li>
-              <a href="#" onclick="showSection('routes')"
-                >🛣️ Quản lý tuyến đường</a
-              >
-            </li>
-            <li>
-              <a href="#" onclick="showSection('users')">👥 Người dùng</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="sidebar-footer">
-          <button class="logout-btn" onclick="handleLogout()">
-            🚪 Đăng xuất
-          </button>
-        </div>
-      </aside>
+    <div class="login-container">
+      <!-- Header -->
+      <div class="login-header">
+        <h1>Munich Metro</h1>
+        <p>Tìm đường tàu điện ngầm</p>
+      </div>
 
-      <main class="main-content">
-        <header class="top-bar">
-          <h1 id="section-title">Tổng quan hệ thống</h1>
-          <div class="admin-profile">
-            <span id="admin-name">Xin chào, Admin</span>
-          </div>
-        </header>
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button
+          type="button"
+          class="role-tab-btn active"
+          data-role="user"
+          onclick="switchRole('user')"
+        >
+          👤 Người Dùng
+        </button>
+        <button
+          type="button"
+          class="role-tab-btn"
+          data-role="admin"
+          onclick="switchRole('admin')"
+        >
+          🔑 Admin
+        </button>
+      </div>
 
-        <section id="content-area" class="content-area">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <h3>Tổng ga tàu</h3>
-              <p class="stat-number">150</p>
-            </div>
-            <div class="stat-card">
-              <h3>Tuyến đang chạy</h3>
-              <p class="stat-number">8</p>
-            </div>
-            <div class="stat-card">
-              <h3>Người dùng mới</h3>
-              <p class="stat-number">+12</p>
-            </div>
-          </div>
-        </section>
-      </main>
+      <!-- Messages -->
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <!-- Form -->
+      <form id="loginForm">
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Tên người dùng</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Nhập tên người dùng"
+            required
+          />
+        </div>
+
+        <!-- Email (Optional for user, hidden for admin) -->
+        <div class="form-group" id="emailGroup">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Nhập email của bạn"
+            required
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Mật khẩu</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Nhập mật khẩu"
+            required
+          />
+        </div>
+
+        <!-- Remember me & Forgot password -->
+        <div class="checkbox-group">
+          <label style="margin: 0; display: flex; align-items: center">
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+            <span style="margin-left: 6px">Nhớ mật khẩu</span>
+          </label>
+          <a
+            href="#"
+            class="forgot-password"
+            onclick="handleForgotPassword(event)"
+            >Quên mật khẩu?</a
+          >
+        </div>
+
+        <!-- Loading indicator -->
+        <div class="loading" id="loading">
+          <span>Đang xử lý...</span>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="login-btn">Đăng Nhập</button>
+      </form>
+
+      <!-- Sign up link -->
+      <div class="signup-link">
+        Chưa có tài khoản?
+        <a href="#" onclick="handleSignUp(event)">Đăng ký ngay</a>
+      </div>
     </div>
 
-    <script src="admin.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

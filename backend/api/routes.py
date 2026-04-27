@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from services.pathfinding_service import find_path, graph
-from models.user import init_db, create_user, get_user_by_username, get_user_by_email, verify_password, list_users, hash_password
+from models.user import init_db, create_user, get_user_by_username, get_user_by_email, verify_password, list_users, hash_password, record_login_attempt, get_login_history, get_user_login_history
 
 api_blueprint = Blueprint("api", __name__)
 
@@ -73,18 +73,26 @@ def login():
 
     user = get_user_by_username(username)
     if not user:
+        record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), False)
         return jsonify({"error": "User not found"}), 404
 
     if role == 'user' and user['role'] != 'user':
+        record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), False)
         return jsonify({"error": "This user is not a normal user"}), 403
     if role == 'admin' and user['role'] != 'admin':
+        record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), False)
         return jsonify({"error": "This account is not an admin"}), 403
 
     if role == 'user' and user['email'] != email:
+        record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), False)
         return jsonify({"error": "Email does not match"}), 400
 
     if not verify_password(user['password_hash'], password):
+        record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), False)
         return jsonify({"error": "Password is incorrect"}), 400
+
+    # Record successful login
+    record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), True)
 
     return jsonify({
         "message": "Login successful",
@@ -100,6 +108,26 @@ def login():
 @api_blueprint.route("/auth/users", methods=["GET"])
 def get_users():
     return jsonify({"users": list_users()})
+
+@api_blueprint.route("/auth/login-history", methods=["GET"])
+def get_login_history_endpoint():
+    """Get recent login history for all users."""
+    try:
+        limit = int(request.args.get('limit', 100))
+        history = get_login_history(limit)
+        return jsonify({"history": history})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@api_blueprint.route("/auth/user-history/<username>", methods=["GET"])
+def get_user_history_endpoint(username):
+    """Get login history for a specific user."""
+    try:
+        limit = int(request.args.get('limit', 50))
+        history = get_user_login_history(username, limit)
+        return jsonify({"history": history})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @api_blueprint.route("/graph", methods=["GET"])
 def get_graph():
