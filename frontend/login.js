@@ -32,6 +32,7 @@ function switchRole(role) {
 }
 
 function handleLogin() {
+  console.log("handleLogin called, currentRole:", currentRole);
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
 
@@ -81,6 +82,7 @@ function handleLogin() {
   })
     .then(async (response) => {
       const data = await response.json();
+      console.log("Login response:", response.status, data);
       showLoading(false);
       if (!response.ok) {
         showError(data.error || "Đăng nhập thất bại");
@@ -88,6 +90,7 @@ function handleLogin() {
       }
 
       if (currentRole === "user") {
+        console.log("User login successful, redirecting to index.html");
         const rememberMe = document.getElementById("rememberMe").checked;
         if (rememberMe) {
           localStorage.setItem(
@@ -101,15 +104,14 @@ function handleLogin() {
           localStorage.removeItem("rememberMe");
         }
         showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1500);
+        console.log("Redirecting to index.html now...");
+        window.location.replace("index.html");
       } else {
+        console.log("Admin login successful, redirecting to admin.html");
         localStorage.removeItem("rememberMe");
         showSuccess("Đăng nhập thành công (Admin)! Đang chuyển hướng...");
-        setTimeout(() => {
-          window.location.href = "admin.html";
-        }, 1500);
+        console.log("Redirecting to admin.html now...");
+        window.location.replace("admin.html");
       }
     })
     .catch(() => {
