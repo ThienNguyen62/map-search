@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Munich Tàu Điện Ngầm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1f2937;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .role-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .role-tab-btn {
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+
+        .role-tab-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .role-tab-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .role-tab-btn.active:hover {
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+            border-left: 4px solid #dc2626;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .success-message {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+            border-left: 4px solid #22c55e;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- Header -->
+        <div class="login-header">
+            <h1>Munich Metro</h1>
+            <p>Tìm đường tàu điện ngầm</p>
+        </div>
+
+        <!-- Role Tabs -->
+        <div class="role-tabs">
+            <button type="button" class="role-tab-btn active" data-role="user" onclick="switchRole('user')">
+                👤 Người Dùng
+            </button>
+            <button type="button" class="role-tab-btn" data-role="admin" onclick="switchRole('admin')">
+                🔑 Admin
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <!-- Form -->
+        <form id="loginForm">
+            <!-- Username -->
+            <div class="form-group">
+                <label for="username">Tên người dùng</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Nhập tên người dùng" 
+                    required
+                >
+            </div>
+
+            <!-- Email (Optional for user, hidden for admin) -->
+            <div class="form-group" id="emailGroup">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Nhập email của bạn" 
+                    required
+                >
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Nhập mật khẩu" 
+                    required
+                >
+            </div>
+
+            <!-- Remember me & Forgot password -->
+            <div class="checkbox-group">
+                <label style="margin: 0; display: flex; align-items: center;">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <span style="margin-left: 6px;">Nhớ mật khẩu</span>
+                </label>
+                <a href="#" class="forgot-password" onclick="handleForgotPassword(event)">Quên mật khẩu?</a>
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="loading" id="loading">
+                <span>Đang xử lý...</span>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="login-btn">Đăng Nhập</button>
+        </form>
+
+        <!-- Sign up link -->
+        <div class="signup-link">
+            Chưa có tài khoản? <a href="#" onclick="handleSignUp(event)">Đăng ký ngay</a>
+        </div>
+    </div>
+
+    <script>
+        let currentRole = 'user'; // 'user' or 'admin'
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+
+        function switchRole(role) {
+            currentRole = role;
+            
+            // Update button styling
+            document.querySelectorAll('.role-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-role="${role}"]`).classList.add('active');
+
+            // Update form fields visibility
+            if (role === 'admin') {
+                document.getElementById('emailGroup').style.display = 'none';
+                document.getElementById('email').removeAttribute('required');
+                document.querySelector('.signup-link').style.display = 'none';
+            } else {
+                document.getElementById('emailGroup').style.display = 'block';
+                document.getElementById('email').setAttribute('required', '');
+                document.querySelector('.signup-link').style.display = 'block';
+            }
+
+            // Clear form
+            document.getElementById('loginForm').reset();
+            clearMessages();
+        }
+
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Clear messages
+            clearMessages();
+
+            if (!username) {
+                showError('Vui lòng nhập tên người dùng');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Mật khẩu phải có ít nhất 6 ký tự');
+                return;
+            }
+
+            if (currentRole === 'user') {
+                const email = document.getElementById('email').value.trim();
+                if (!email) {
+                    showError('Vui lòng nhập email');
+                    return;
+                }
+                if (!isValidEmail(email)) {
+                    showError('Email không hợp lệ');
+                    return;
+                }
+            }
+
+            showLoading(true);
+
+            const payload = {
+                username: username,
+                password: password,
+                role: currentRole
+            };
+
+            if (currentRole === 'user') {
+                payload.email = document.getElementById('email').value.trim();
+            }
+
+            fetch('http://127.0.0.1:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(async response => {
+                    const data = await response.json();
+                    showLoading(false);
+                    if (!response.ok) {
+                        showError(data.error || 'Đăng nhập thất bại');
+                        return;
+                    }
+
+                    if (currentRole === 'user') {
+                        const rememberMe = document.getElementById('rememberMe').checked;
+                        if (rememberMe) {
+                            localStorage.setItem('rememberMe', JSON.stringify({
+                                username: username,
+                                email: payload.email
+                            }));
+                        } else {
+                            localStorage.removeItem('rememberMe');
+                        }
+                        showSuccess('Đăng nhập thành công (Người dùng)! Đang chuyển hướng...');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                    } else {
+                        localStorage.removeItem('rememberMe');
+                        showSuccess('Đăng nhập thành công (Admin)! Đang chuyển hướng...');
+                        setTimeout(() => {
+                            window.location.href = 'admin-dashboard.html';
+                        }, 1500);
+                    }
+                })
+                .catch(() => {
+                    showLoading(false);
+                    showError('Không thể kết nối tới server. Hãy kiểm tra backend.');
+                });
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.classList.add('show');
+        }
+
+        function clearMessages() {
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            const button = document.querySelector('.login-btn');
+            
+            if (show) {
+                loading.classList.add('show');
+                button.disabled = true;
+            } else {
+                loading.classList.remove('show');
+                button.disabled = false;
+            }
+        }
+
+        function handleForgotPassword(e) {
+            e.preventDefault();
+            alert('Tính năng "Quên mật khẩu" sẽ được triển khai sớm!');
+        }
+
+        function handleSignUp(e) {
+            e.preventDefault();
+            window.location.href = 'signup.html';
+        }
+
+        // Load saved credentials if "Remember me" was checked before
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('rememberMe');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('username').value = data.username;
+                document.getElementById('email').value = data.email;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+    </script>
+</body>
+
+</html>

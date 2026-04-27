@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Munich Metro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .page-shell {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #334155;
+        }
+
+        .header a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            padding: 28px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .info-text {
+            color: #475569;
+            margin-bottom: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            color: #475569;
+            font-weight: 700;
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status.user {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .status.admin {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .loading,
+        .error-message {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .loading.show,
+        .error-message.show {
+            display: block;
+        }
+
+        .loading {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-shell">
+        <div class="header">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p class="info-text">Danh sách tài khoản người dùng được lưu trong SQLite.</p>
+            </div>
+            <a href="login.html">↩️ Quay về đăng nhập</a>
+        </div>
+
+        <div class="card">
+            <h2>Người dùng đã đăng ký</h2>
+            <p class="info-text">Dữ liệu được lưu trong file <strong>backend/users.db</strong>.</p>
+            <div class="loading" id="loading">Đang tải dữ liệu...</div>
+            <div class="error-message" id="errorMessage"></div>
+            <div id="userTableContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        function renderUsers(users) {
+            if (!users || users.length === 0) {
+                document.getElementById('userTableContainer').innerHTML = '<p>Hiện chưa có tài khoản nào.</p>';
+                return;
+            }
+
+            const rows = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.first_name} ${user.last_name}</td>
+                    <td>${user.phone || '-'}</td>
+                    <td><span class="status ${user.role}">${user.role}</span></td>
+                    <td>${new Date(user.created_at).toLocaleString('vi-VN')}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('userTableContainer').innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên người dùng</th>
+                            <th>Email</th>
+                            <th>Họ tên</th>
+                            <th>Điện thoại</th>
+                            <th>Vai trò</th>
+                            <th>Ngày tạo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            loading.classList.toggle('show', show);
+        }
+
+        function showError(message) {
+            const error = document.getElementById('errorMessage');
+            error.textContent = message;
+            error.classList.add('show');
+        }
+
+        async function loadUsers() {
+            showLoading(true);
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/auth/users');
+                const data = await response.json();
+                showLoading(false);
+                if (!response.ok) {
+                    showError(data.error || 'Không thể tải danh sách người dùng.');
+                    return;
+                }
+                renderUsers(data.users || []);
+            } catch (err) {
+                showLoading(false);
+                showError('Không thể kết nối tới backend.');
+            }
+        }
+
+        loadUsers();
+    </script>
+</body>
+
+</html>
