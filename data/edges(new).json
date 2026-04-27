@@ -1,0 +1,2535 @@
+{
+  "description": "Direct connection data between adjacent Munich transit stations. Distance in km, time in minutes, price estimate in EUR.",
+  "total_connections": 281,
+  "connections": [
+    {
+      "from_id": "US_MARIENPLATZ",
+      "from_name": "Marienplatz",
+      "to_id": "US_KARLSPLATZ",
+      "to_name": "Karlsplatz (Stachus)",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "US_MARIENPLATZ",
+      "from_name": "Marienplatz",
+      "to_id": "S_ISARTOR",
+      "to_name": "Isartor",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "US_MARIENPLATZ",
+      "from_name": "Marienplatz",
+      "to_id": "U_ODEONSPLATZ",
+      "to_name": "Odeonsplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "US_MARIENPLATZ",
+      "from_name": "Marienplatz",
+      "to_id": "U_SENDLINGER_TOR",
+      "to_name": "Sendlinger Tor",
+      "distance_km": 0.9,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "US_KARLSPLATZ",
+      "from_name": "Karlsplatz (Stachus)",
+      "to_id": "US_HAUPTBAHNHOF",
+      "to_name": "Hauptbahnhof",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "US_KARLSPLATZ",
+      "from_name": "Karlsplatz (Stachus)",
+      "to_id": "US_MARIENPLATZ",
+      "to_name": "Marienplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "US_HAUPTBAHNHOF",
+      "from_name": "Hauptbahnhof",
+      "to_id": "US_KARLSPLATZ",
+      "to_name": "Karlsplatz (Stachus)",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "US_HAUPTBAHNHOF",
+      "from_name": "Hauptbahnhof",
+      "to_id": "U_THERESIENWIESE",
+      "to_name": "Theresienwiese",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "US_HAUPTBAHNHOF",
+      "from_name": "Hauptbahnhof",
+      "to_id": "U_STIGLMAIERPLATZ",
+      "to_name": "Stiglmaierplatz",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "US_HAUPTBAHNHOF",
+      "from_name": "Hauptbahnhof",
+      "to_id": "U_KOENIGSPLATZ",
+      "to_name": "Königsplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "S_ISARTOR",
+      "from_name": "Isartor",
+      "to_id": "US_MARIENPLATZ",
+      "to_name": "Marienplatz",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "S_ISARTOR",
+      "from_name": "Isartor",
+      "to_id": "S_ROSENHEIMER_PLATZ",
+      "to_name": "Rosenheimer Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "S_OSTBAHNHOF",
+      "from_name": "Ostbahnhof",
+      "to_id": "S_ROSENHEIMER_PLATZ",
+      "to_name": "Rosenheimer Platz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "S_OSTBAHNHOF",
+      "from_name": "Ostbahnhof",
+      "to_id": "U_MAX_WEBER_PLATZ",
+      "to_name": "Max-Weber-Platz",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "S_OSTBAHNHOF",
+      "from_name": "Ostbahnhof",
+      "to_id": "S_LEUCHTENBERGRING",
+      "to_name": "Leuchtenbergring",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_ODEONSPLATZ",
+      "from_name": "Odeonsplatz",
+      "to_id": "US_MARIENPLATZ",
+      "to_name": "Marienplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ODEONSPLATZ",
+      "from_name": "Odeonsplatz",
+      "to_id": "U_LEHEL",
+      "to_name": "Lehel",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_ODEONSPLATZ",
+      "from_name": "Odeonsplatz",
+      "to_id": "U_UNIVERSITAET",
+      "to_name": "Universität",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_SENDLINGER_TOR",
+      "from_name": "Sendlinger Tor",
+      "to_id": "US_MARIENPLATZ",
+      "to_name": "Marienplatz",
+      "distance_km": 0.9,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_SENDLINGER_TOR",
+      "from_name": "Sendlinger Tor",
+      "to_id": "U_GOETHEPLATZ",
+      "to_name": "Goetheplatz",
+      "distance_km": 0.5,
+      "time_min": 1,
+      "price_estimate_eur": 0.9
+    },
+    {
+      "from_id": "U_SENDLINGER_TOR",
+      "from_name": "Sendlinger Tor",
+      "to_id": "U_FRAUNHOFERSTRASSE",
+      "to_name": "Fraunhoferstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_THERESIENWIESE",
+      "from_name": "Theresienwiese",
+      "to_id": "US_HAUPTBAHNHOF",
+      "to_name": "Hauptbahnhof",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "U_THERESIENWIESE",
+      "from_name": "Theresienwiese",
+      "to_id": "U_SCHWANTHALERHOEHE",
+      "to_name": "Schwanthalerhöhe",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_SCHWANTHALERHOEHE",
+      "from_name": "Schwanthalerhöhe",
+      "to_id": "U_THERESIENWIESE",
+      "to_name": "Theresienwiese",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_SCHWANTHALERHOEHE",
+      "from_name": "Schwanthalerhöhe",
+      "to_id": "U_HEIMERANPLATZ",
+      "to_name": "Heimeranplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_HEIMERANPLATZ",
+      "from_name": "Heimeranplatz",
+      "to_id": "U_SCHWANTHALERHOEHE",
+      "to_name": "Schwanthalerhöhe",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_HEIMERANPLATZ",
+      "from_name": "Heimeranplatz",
+      "to_id": "U_WESTENDSTRASSE",
+      "to_name": "Westendstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_WESTENDSTRASSE",
+      "from_name": "Westendstraße",
+      "to_id": "U_HEIMERANPLATZ",
+      "to_name": "Heimeranplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_WESTENDSTRASSE",
+      "from_name": "Westendstraße",
+      "to_id": "U_LAIMER_PLATZ",
+      "to_name": "Laimer Platz",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_WESTENDSTRASSE",
+      "from_name": "Westendstraße",
+      "to_id": "U_FRIEDENHEIMER_STRASSE",
+      "to_name": "Friedenheimer Straße",
+      "distance_km": 1.3,
+      "time_min": 3,
+      "price_estimate_eur": 1.7
+    },
+    {
+      "from_id": "U_LAIMER_PLATZ",
+      "from_name": "Laimer Platz",
+      "to_id": "U_WESTENDSTRASSE",
+      "to_name": "Westendstraße",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_LAIMER_PLATZ",
+      "from_name": "Laimer Platz",
+      "to_id": "U_FRIEDENHEIMER_STRASSE",
+      "to_name": "Friedenheimer Straße",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_FRIEDENHEIMER_STRASSE",
+      "from_name": "Friedenheimer Straße",
+      "to_id": "U_LAIMER_PLATZ",
+      "to_name": "Laimer Platz",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_FRIEDENHEIMER_STRASSE",
+      "from_name": "Friedenheimer Straße",
+      "to_id": "U_WESTENDSTRASSE",
+      "to_name": "Westendstraße",
+      "distance_km": 1.3,
+      "time_min": 3,
+      "price_estimate_eur": 1.7
+    },
+    {
+      "from_id": "U_LEHEL",
+      "from_name": "Lehel",
+      "to_id": "U_ODEONSPLATZ",
+      "to_name": "Odeonsplatz",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_LEHEL",
+      "from_name": "Lehel",
+      "to_id": "U_MAX_WEBER_PLATZ",
+      "to_name": "Max-Weber-Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MAX_WEBER_PLATZ",
+      "from_name": "Max-Weber-Platz",
+      "to_id": "U_LEHEL",
+      "to_name": "Lehel",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MAX_WEBER_PLATZ",
+      "from_name": "Max-Weber-Platz",
+      "to_id": "S_OSTBAHNHOF",
+      "to_name": "Ostbahnhof",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_MAX_WEBER_PLATZ",
+      "from_name": "Max-Weber-Platz",
+      "to_id": "U_PRINZREGENTENPLATZ",
+      "to_name": "Prinzregentenplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_PRINZREGENTENPLATZ",
+      "from_name": "Prinzregentenplatz",
+      "to_id": "U_MAX_WEBER_PLATZ",
+      "to_name": "Max-Weber-Platz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_PRINZREGENTENPLATZ",
+      "from_name": "Prinzregentenplatz",
+      "to_id": "U_BOEHMERWALDPLATZ",
+      "to_name": "Böhmerwaldplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_BOEHMERWALDPLATZ",
+      "from_name": "Böhmerwaldplatz",
+      "to_id": "U_PRINZREGENTENPLATZ",
+      "to_name": "Prinzregentenplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_BOEHMERWALDPLATZ",
+      "from_name": "Böhmerwaldplatz",
+      "to_id": "U_RICHARD_STRAUSS_STRASSE",
+      "to_name": "Richard-Strauss-Straße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_RICHARD_STRAUSS_STRASSE",
+      "from_name": "Richard-Strauss-Straße",
+      "to_id": "U_BOEHMERWALDPLATZ",
+      "to_name": "Böhmerwaldplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_RICHARD_STRAUSS_STRASSE",
+      "from_name": "Richard-Strauss-Straße",
+      "to_id": "U_ARABELLAPARK",
+      "to_name": "Arabellapark",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ARABELLAPARK",
+      "from_name": "Arabellapark",
+      "to_id": "U_RICHARD_STRAUSS_STRASSE",
+      "to_name": "Richard-Strauss-Straße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_GOETHEPLATZ",
+      "from_name": "Goetheplatz",
+      "to_id": "U_SENDLINGER_TOR",
+      "to_name": "Sendlinger Tor",
+      "distance_km": 0.5,
+      "time_min": 1,
+      "price_estimate_eur": 0.9
+    },
+    {
+      "from_id": "U_GOETHEPLATZ",
+      "from_name": "Goetheplatz",
+      "to_id": "U_POCCISTRASSE",
+      "to_name": "Poccistraße",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_POCCISTRASSE",
+      "from_name": "Poccistraße",
+      "to_id": "U_GOETHEPLATZ",
+      "to_name": "Goetheplatz",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_POCCISTRASSE",
+      "from_name": "Poccistraße",
+      "to_id": "U_IMPLERSTRASSE",
+      "to_name": "Implerstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_IMPLERSTRASSE",
+      "from_name": "Implerstraße",
+      "to_id": "U_POCCISTRASSE",
+      "to_name": "Poccistraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_IMPLERSTRASSE",
+      "from_name": "Implerstraße",
+      "to_id": "U_BRUDERMUHLSTRASSE",
+      "to_name": "Brudermühlstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_IMPLERSTRASSE",
+      "from_name": "Implerstraße",
+      "to_id": "U_HARRAS",
+      "to_name": "Harras",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_BRUDERMUHLSTRASSE",
+      "from_name": "Brudermühlstraße",
+      "to_id": "U_IMPLERSTRASSE",
+      "to_name": "Implerstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_BRUDERMUHLSTRASSE",
+      "from_name": "Brudermühlstraße",
+      "to_id": "U_THALKIRCHEN",
+      "to_name": "Thalkirchen",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_THALKIRCHEN",
+      "from_name": "Thalkirchen",
+      "to_id": "U_BRUDERMUHLSTRASSE",
+      "to_name": "Brudermühlstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_THALKIRCHEN",
+      "from_name": "Thalkirchen",
+      "to_id": "U_OBERSENDLING",
+      "to_name": "Obersendling",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_OBERSENDLING",
+      "from_name": "Obersendling",
+      "to_id": "U_THALKIRCHEN",
+      "to_name": "Thalkirchen",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_OBERSENDLING",
+      "from_name": "Obersendling",
+      "to_id": "U_AIDENBACHSTRASSE",
+      "to_name": "Aidenbachstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_AIDENBACHSTRASSE",
+      "from_name": "Aidenbachstraße",
+      "to_id": "U_OBERSENDLING",
+      "to_name": "Obersendling",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_AIDENBACHSTRASSE",
+      "from_name": "Aidenbachstraße",
+      "to_id": "U_MACHTLFINGER_STRASSE",
+      "to_name": "Machtlfinger Straße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MACHTLFINGER_STRASSE",
+      "from_name": "Machtlfinger Straße",
+      "to_id": "U_AIDENBACHSTRASSE",
+      "to_name": "Aidenbachstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MACHTLFINGER_STRASSE",
+      "from_name": "Machtlfinger Straße",
+      "to_id": "U_FORSTENRIEDER_ALLEE",
+      "to_name": "Forstenrieder Allee",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_FORSTENRIEDER_ALLEE",
+      "from_name": "Forstenrieder Allee",
+      "to_id": "U_MACHTLFINGER_STRASSE",
+      "to_name": "Machtlfinger Straße",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_FORSTENRIEDER_ALLEE",
+      "from_name": "Forstenrieder Allee",
+      "to_id": "U_BASLER_STRASSE",
+      "to_name": "Basler Straße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_BASLER_STRASSE",
+      "from_name": "Basler Straße",
+      "to_id": "U_FORSTENRIEDER_ALLEE",
+      "to_name": "Forstenrieder Allee",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_BASLER_STRASSE",
+      "from_name": "Basler Straße",
+      "to_id": "U_FUERSTENRIED_WEST",
+      "to_name": "Fürstenried West",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_FUERSTENRIED_WEST",
+      "from_name": "Fürstenried West",
+      "to_id": "U_BASLER_STRASSE",
+      "to_name": "Basler Straße",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_HARRAS",
+      "from_name": "Harras",
+      "to_id": "U_IMPLERSTRASSE",
+      "to_name": "Implerstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_HARRAS",
+      "from_name": "Harras",
+      "to_id": "U_PARTNACHPLATZ",
+      "to_name": "Partnachplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_PARTNACHPLATZ",
+      "from_name": "Partnachplatz",
+      "to_id": "U_HARRAS",
+      "to_name": "Harras",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_PARTNACHPLATZ",
+      "from_name": "Partnachplatz",
+      "to_id": "U_WESTPARK",
+      "to_name": "Westpark",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_WESTPARK",
+      "from_name": "Westpark",
+      "to_id": "U_PARTNACHPLATZ",
+      "to_name": "Partnachplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_WESTPARK",
+      "from_name": "Westpark",
+      "to_id": "U_HOLZAPFELKREUTH",
+      "to_name": "Holzapfelkreuth",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_HOLZAPFELKREUTH",
+      "from_name": "Holzapfelkreuth",
+      "to_id": "U_WESTPARK",
+      "to_name": "Westpark",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_HOLZAPFELKREUTH",
+      "from_name": "Holzapfelkreuth",
+      "to_id": "U_HADERNER_STERN",
+      "to_name": "Haderner Stern",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_HADERNER_STERN",
+      "from_name": "Haderner Stern",
+      "to_id": "U_HOLZAPFELKREUTH",
+      "to_name": "Holzapfelkreuth",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_HADERNER_STERN",
+      "from_name": "Haderner Stern",
+      "to_id": "U_GROSSHADERN",
+      "to_name": "Großhadern",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_GROSSHADERN",
+      "from_name": "Großhadern",
+      "to_id": "U_HADERNER_STERN",
+      "to_name": "Haderner Stern",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_GROSSHADERN",
+      "from_name": "Großhadern",
+      "to_id": "U_KLINIKUM_GROSSHADERN",
+      "to_name": "Klinikum Großhadern",
+      "distance_km": 0.6,
+      "time_min": 1,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_KLINIKUM_GROSSHADERN",
+      "from_name": "Klinikum Großhadern",
+      "to_id": "U_GROSSHADERN",
+      "to_name": "Großhadern",
+      "distance_km": 0.6,
+      "time_min": 1,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_FRAUNHOFERSTRASSE",
+      "from_name": "Fraunhoferstraße",
+      "to_id": "U_SENDLINGER_TOR",
+      "to_name": "Sendlinger Tor",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_FRAUNHOFERSTRASSE",
+      "from_name": "Fraunhoferstraße",
+      "to_id": "U_KOLUMBUSPLATZ",
+      "to_name": "Kolumbusplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_KOLUMBUSPLATZ",
+      "from_name": "Kolumbusplatz",
+      "to_id": "U_FRAUNHOFERSTRASSE",
+      "to_name": "Fraunhoferstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_KOLUMBUSPLATZ",
+      "from_name": "Kolumbusplatz",
+      "to_id": "U_CANDIDPLATZ",
+      "to_name": "Candidplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_KOLUMBUSPLATZ",
+      "from_name": "Kolumbusplatz",
+      "to_id": "U_SILBERHORNSTRASSE",
+      "to_name": "Silberhornstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_CANDIDPLATZ",
+      "from_name": "Candidplatz",
+      "to_id": "U_KOLUMBUSPLATZ",
+      "to_name": "Kolumbusplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_CANDIDPLATZ",
+      "from_name": "Candidplatz",
+      "to_id": "U_WETTERSTEINPLATZ",
+      "to_name": "Wettersteinplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_WETTERSTEINPLATZ",
+      "from_name": "Wettersteinplatz",
+      "to_id": "U_CANDIDPLATZ",
+      "to_name": "Candidplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_WETTERSTEINPLATZ",
+      "from_name": "Wettersteinplatz",
+      "to_id": "U_ST_QUIRIN_PLATZ",
+      "to_name": "St.-Quirin-Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ST_QUIRIN_PLATZ",
+      "from_name": "St.-Quirin-Platz",
+      "to_id": "U_WETTERSTEINPLATZ",
+      "to_name": "Wettersteinplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ST_QUIRIN_PLATZ",
+      "from_name": "St.-Quirin-Platz",
+      "to_id": "U_MANGFALLPLATZ",
+      "to_name": "Mangfallplatz",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MANGFALLPLATZ",
+      "from_name": "Mangfallplatz",
+      "to_id": "U_ST_QUIRIN_PLATZ",
+      "to_name": "St.-Quirin-Platz",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_SILBERHORNSTRASSE",
+      "from_name": "Silberhornstraße",
+      "to_id": "U_KOLUMBUSPLATZ",
+      "to_name": "Kolumbusplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_SILBERHORNSTRASSE",
+      "from_name": "Silberhornstraße",
+      "to_id": "U_UNTERSBERGSTRASSE",
+      "to_name": "Untersbergstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_UNTERSBERGSTRASSE",
+      "from_name": "Untersbergstraße",
+      "to_id": "U_SILBERHORNSTRASSE",
+      "to_name": "Silberhornstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_UNTERSBERGSTRASSE",
+      "from_name": "Untersbergstraße",
+      "to_id": "U_GIESING",
+      "to_name": "Giesing",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_GIESING",
+      "from_name": "Giesing",
+      "to_id": "U_UNTERSBERGSTRASSE",
+      "to_name": "Untersbergstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_GIESING",
+      "from_name": "Giesing",
+      "to_id": "U_KARL_PREIS_PLATZ",
+      "to_name": "Karl-Preis-Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_KARL_PREIS_PLATZ",
+      "from_name": "Karl-Preis-Platz",
+      "to_id": "U_GIESING",
+      "to_name": "Giesing",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_KARL_PREIS_PLATZ",
+      "from_name": "Karl-Preis-Platz",
+      "to_id": "U_INNSBRUCKER_RING",
+      "to_name": "Innsbrucker Ring",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_INNSBRUCKER_RING",
+      "from_name": "Innsbrucker Ring",
+      "to_id": "U_KARL_PREIS_PLATZ",
+      "to_name": "Karl-Preis-Platz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_INNSBRUCKER_RING",
+      "from_name": "Innsbrucker Ring",
+      "to_id": "U_JOSEFSBURG",
+      "to_name": "Josephsburg",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_INNSBRUCKER_RING",
+      "from_name": "Innsbrucker Ring",
+      "to_id": "U_MICHAELIBAD",
+      "to_name": "Michaelibad",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_JOSEFSBURG",
+      "from_name": "Josephsburg",
+      "to_id": "U_INNSBRUCKER_RING",
+      "to_name": "Innsbrucker Ring",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_JOSEFSBURG",
+      "from_name": "Josephsburg",
+      "to_id": "U_KREILLERSTRASSE",
+      "to_name": "Kreillerstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_KREILLERSTRASSE",
+      "from_name": "Kreillerstraße",
+      "to_id": "U_JOSEFSBURG",
+      "to_name": "Josephsburg",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_KREILLERSTRASSE",
+      "from_name": "Kreillerstraße",
+      "to_id": "U_TRUDERING",
+      "to_name": "Trudering (U-Bahn)",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_TRUDERING",
+      "from_name": "Trudering (U-Bahn)",
+      "to_id": "U_KREILLERSTRASSE",
+      "to_name": "Kreillerstraße",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_TRUDERING",
+      "from_name": "Trudering (U-Bahn)",
+      "to_id": "U_MOOSFELD",
+      "to_name": "Moosfeld",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "U_TRUDERING",
+      "from_name": "Trudering (U-Bahn)",
+      "to_id": "S_TRUDERING",
+      "to_name": "Trudering (S-Bahn)",
+      "distance_km": 0.2,
+      "time_min": 1,
+      "price_estimate_eur": 0.5
+    },
+    {
+      "from_id": "U_MOOSFELD",
+      "from_name": "Moosfeld",
+      "to_id": "U_TRUDERING",
+      "to_name": "Trudering (U-Bahn)",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "U_MOOSFELD",
+      "from_name": "Moosfeld",
+      "to_id": "U_MESSESTADT_WEST",
+      "to_name": "Messestadt West",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MESSESTADT_WEST",
+      "from_name": "Messestadt West",
+      "to_id": "U_MOOSFELD",
+      "to_name": "Moosfeld",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MESSESTADT_WEST",
+      "from_name": "Messestadt West",
+      "to_id": "U_MESSESTADT_OST",
+      "to_name": "Messestadt Ost",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_MESSESTADT_OST",
+      "from_name": "Messestadt Ost",
+      "to_id": "U_MESSESTADT_WEST",
+      "to_name": "Messestadt West",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_MICHAELIBAD",
+      "from_name": "Michaelibad",
+      "to_id": "U_INNSBRUCKER_RING",
+      "to_name": "Innsbrucker Ring",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_MICHAELIBAD",
+      "from_name": "Michaelibad",
+      "to_id": "U_QUIDDE_STRASSE",
+      "to_name": "Quiddestraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_QUIDDE_STRASSE",
+      "from_name": "Quiddestraße",
+      "to_id": "U_MICHAELIBAD",
+      "to_name": "Michaelibad",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_QUIDDE_STRASSE",
+      "from_name": "Quiddestraße",
+      "to_id": "U_NEUPERLACH_ZENTRUM",
+      "to_name": "Neuperlach Zentrum",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_NEUPERLACH_ZENTRUM",
+      "from_name": "Neuperlach Zentrum",
+      "to_id": "U_QUIDDE_STRASSE",
+      "to_name": "Quiddestraße",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_NEUPERLACH_ZENTRUM",
+      "from_name": "Neuperlach Zentrum",
+      "to_id": "U_THERESE_GIEHSE_ALLEE",
+      "to_name": "Therese-Giehse-Allee",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_THERESE_GIEHSE_ALLEE",
+      "from_name": "Therese-Giehse-Allee",
+      "to_id": "U_NEUPERLACH_ZENTRUM",
+      "to_name": "Neuperlach Zentrum",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_THERESE_GIEHSE_ALLEE",
+      "from_name": "Therese-Giehse-Allee",
+      "to_id": "U_NEUPERLACH_SUED",
+      "to_name": "Neuperlach Süd",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_NEUPERLACH_SUED",
+      "from_name": "Neuperlach Süd",
+      "to_id": "U_THERESE_GIEHSE_ALLEE",
+      "to_name": "Therese-Giehse-Allee",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_UNIVERSITAET",
+      "from_name": "Universität",
+      "to_id": "U_ODEONSPLATZ",
+      "to_name": "Odeonsplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_UNIVERSITAET",
+      "from_name": "Universität",
+      "to_id": "U_GISELASTRASSE",
+      "to_name": "Giselastraße",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_GISELASTRASSE",
+      "from_name": "Giselastraße",
+      "to_id": "U_UNIVERSITAET",
+      "to_name": "Universität",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_GISELASTRASSE",
+      "from_name": "Giselastraße",
+      "to_id": "U_MUENCHNER_FREIHEIT",
+      "to_name": "Münchner Freiheit",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_MUENCHNER_FREIHEIT",
+      "from_name": "Münchner Freiheit",
+      "to_id": "U_GISELASTRASSE",
+      "to_name": "Giselastraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_MUENCHNER_FREIHEIT",
+      "from_name": "Münchner Freiheit",
+      "to_id": "U_BONNER_PLATZ",
+      "to_name": "Bonner Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MUENCHNER_FREIHEIT",
+      "from_name": "Münchner Freiheit",
+      "to_id": "U_DIETLINDENSTRASSE",
+      "to_name": "Dietlindenstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_BONNER_PLATZ",
+      "from_name": "Bonner Platz",
+      "to_id": "U_MUENCHNER_FREIHEIT",
+      "to_name": "Münchner Freiheit",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_BONNER_PLATZ",
+      "from_name": "Bonner Platz",
+      "to_id": "U_SCHEIDPLATZ",
+      "to_name": "Scheidplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_SCHEIDPLATZ",
+      "from_name": "Scheidplatz",
+      "to_id": "U_BONNER_PLATZ",
+      "to_name": "Bonner Platz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_SCHEIDPLATZ",
+      "from_name": "Scheidplatz",
+      "to_id": "U_HOHENZOLLERNPLATZ",
+      "to_name": "Hohenzollernplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_SCHEIDPLATZ",
+      "from_name": "Scheidplatz",
+      "to_id": "U_PETUELRING",
+      "to_name": "Petuelring",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_SCHEIDPLATZ",
+      "from_name": "Scheidplatz",
+      "to_id": "U_MILBERTSHOFEN",
+      "to_name": "Milbertshofen",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_HOHENZOLLERNPLATZ",
+      "from_name": "Hohenzollernplatz",
+      "to_id": "U_SCHEIDPLATZ",
+      "to_name": "Scheidplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_HOHENZOLLERNPLATZ",
+      "from_name": "Hohenzollernplatz",
+      "to_id": "U_JOSEPHSPLATZ",
+      "to_name": "Josephsplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_JOSEPHSPLATZ",
+      "from_name": "Josephsplatz",
+      "to_id": "U_HOHENZOLLERNPLATZ",
+      "to_name": "Hohenzollernplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_JOSEPHSPLATZ",
+      "from_name": "Josephsplatz",
+      "to_id": "U_THERESIENSTRASSE",
+      "to_name": "Theresienstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_THERESIENSTRASSE",
+      "from_name": "Theresienstraße",
+      "to_id": "U_JOSEPHSPLATZ",
+      "to_name": "Josephsplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_THERESIENSTRASSE",
+      "from_name": "Theresienstraße",
+      "to_id": "U_KOENIGSPLATZ",
+      "to_name": "Königsplatz",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_KOENIGSPLATZ",
+      "from_name": "Königsplatz",
+      "to_id": "U_THERESIENSTRASSE",
+      "to_name": "Theresienstraße",
+      "distance_km": 0.6,
+      "time_min": 2,
+      "price_estimate_eur": 1.0
+    },
+    {
+      "from_id": "U_KOENIGSPLATZ",
+      "from_name": "Königsplatz",
+      "to_id": "US_HAUPTBAHNHOF",
+      "to_name": "Hauptbahnhof",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_DIETLINDENSTRASSE",
+      "from_name": "Dietlindenstraße",
+      "to_id": "U_MUENCHNER_FREIHEIT",
+      "to_name": "Münchner Freiheit",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_DIETLINDENSTRASSE",
+      "from_name": "Dietlindenstraße",
+      "to_id": "U_NORDFRIEDHOF",
+      "to_name": "Nordfriedhof",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_NORDFRIEDHOF",
+      "from_name": "Nordfriedhof",
+      "to_id": "U_DIETLINDENSTRASSE",
+      "to_name": "Dietlindenstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_NORDFRIEDHOF",
+      "from_name": "Nordfriedhof",
+      "to_id": "U_ALTE_HEIDE",
+      "to_name": "Alte Heide",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_ALTE_HEIDE",
+      "from_name": "Alte Heide",
+      "to_id": "U_NORDFRIEDHOF",
+      "to_name": "Nordfriedhof",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_ALTE_HEIDE",
+      "from_name": "Alte Heide",
+      "to_id": "U_STUDENTENSTADT",
+      "to_name": "Studentenstadt",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_STUDENTENSTADT",
+      "from_name": "Studentenstadt",
+      "to_id": "U_ALTE_HEIDE",
+      "to_name": "Alte Heide",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_STUDENTENSTADT",
+      "from_name": "Studentenstadt",
+      "to_id": "U_FREIMANN",
+      "to_name": "Freimann",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_FREIMANN",
+      "from_name": "Freimann",
+      "to_id": "U_STUDENTENSTADT",
+      "to_name": "Studentenstadt",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_FREIMANN",
+      "from_name": "Freimann",
+      "to_id": "U_KIEFERNGARTEN",
+      "to_name": "Kieferngarten",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_KIEFERNGARTEN",
+      "from_name": "Kieferngarten",
+      "to_id": "U_FREIMANN",
+      "to_name": "Freimann",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "U_KIEFERNGARTEN",
+      "from_name": "Kieferngarten",
+      "to_id": "U_FROTTMANING",
+      "to_name": "Fröttmaning",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "U_FROTTMANING",
+      "from_name": "Fröttmaning",
+      "to_id": "U_KIEFERNGARTEN",
+      "to_name": "Kieferngarten",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "U_FROTTMANING",
+      "from_name": "Fröttmaning",
+      "to_id": "U_GARCHING_HOCHBRUECK",
+      "to_name": "Garching-Hochbrück",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "U_GARCHING_HOCHBRUECK",
+      "from_name": "Garching-Hochbrück",
+      "to_id": "U_FROTTMANING",
+      "to_name": "Fröttmaning",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "U_GARCHING_HOCHBRUECK",
+      "from_name": "Garching-Hochbrück",
+      "to_id": "U_GARCHING",
+      "to_name": "Garching",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "U_GARCHING",
+      "from_name": "Garching",
+      "to_id": "U_GARCHING_HOCHBRUECK",
+      "to_name": "Garching-Hochbrück",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "U_GARCHING",
+      "from_name": "Garching",
+      "to_id": "U_GARCHING_FORSCHUNGSZENTRUM",
+      "to_name": "Garching-Forschungszentrum",
+      "distance_km": 1.4,
+      "time_min": 4,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "U_GARCHING_FORSCHUNGSZENTRUM",
+      "from_name": "Garching-Forschungszentrum",
+      "to_id": "U_GARCHING",
+      "to_name": "Garching",
+      "distance_km": 1.4,
+      "time_min": 4,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "U_PETUELRING",
+      "from_name": "Petuelring",
+      "to_id": "U_SCHEIDPLATZ",
+      "to_name": "Scheidplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_PETUELRING",
+      "from_name": "Petuelring",
+      "to_id": "U_OLYMPIAZENTRUM",
+      "to_name": "Olympiazentrum",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_OLYMPIAZENTRUM",
+      "from_name": "Olympiazentrum",
+      "to_id": "U_PETUELRING",
+      "to_name": "Petuelring",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_OLYMPIAZENTRUM",
+      "from_name": "Olympiazentrum",
+      "to_id": "U_OBERWIESENFELD",
+      "to_name": "Oberwiesenfeld",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_OBERWIESENFELD",
+      "from_name": "Oberwiesenfeld",
+      "to_id": "U_OLYMPIAZENTRUM",
+      "to_name": "Olympiazentrum",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_OBERWIESENFELD",
+      "from_name": "Oberwiesenfeld",
+      "to_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "to_name": "Olympia-Einkaufszentrum",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "from_name": "Olympia-Einkaufszentrum",
+      "to_id": "U_OBERWIESENFELD",
+      "to_name": "Oberwiesenfeld",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "from_name": "Olympia-Einkaufszentrum",
+      "to_id": "U_GEORG_BRAUCHLE_RING",
+      "to_name": "Georg-Brauchle-Ring",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "from_name": "Olympia-Einkaufszentrum",
+      "to_id": "U_MOOSACHER_ST_MARTINS_PLATZ",
+      "to_name": "Moosacher St.-Martins-Platz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_GEORG_BRAUCHLE_RING",
+      "from_name": "Georg-Brauchle-Ring",
+      "to_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "to_name": "Olympia-Einkaufszentrum",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_GEORG_BRAUCHLE_RING",
+      "from_name": "Georg-Brauchle-Ring",
+      "to_id": "U_WESTFRIEDHOF",
+      "to_name": "Westfriedhof",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_WESTFRIEDHOF",
+      "from_name": "Westfriedhof",
+      "to_id": "U_GEORG_BRAUCHLE_RING",
+      "to_name": "Georg-Brauchle-Ring",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_WESTFRIEDHOF",
+      "from_name": "Westfriedhof",
+      "to_id": "U_GERN",
+      "to_name": "Gern",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_GERN",
+      "from_name": "Gern",
+      "to_id": "U_WESTFRIEDHOF",
+      "to_name": "Westfriedhof",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_GERN",
+      "from_name": "Gern",
+      "to_id": "U_ROTKREUZPLATZ",
+      "to_name": "Rotkreuzplatz",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ROTKREUZPLATZ",
+      "from_name": "Rotkreuzplatz",
+      "to_id": "U_GERN",
+      "to_name": "Gern",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_ROTKREUZPLATZ",
+      "from_name": "Rotkreuzplatz",
+      "to_id": "U_MAILLINGERSTRASSE",
+      "to_name": "Maillingerstraße",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_MAILLINGERSTRASSE",
+      "from_name": "Maillingerstraße",
+      "to_id": "U_ROTKREUZPLATZ",
+      "to_name": "Rotkreuzplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_MAILLINGERSTRASSE",
+      "from_name": "Maillingerstraße",
+      "to_id": "U_STIGLMAIERPLATZ",
+      "to_name": "Stiglmaierplatz",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_STIGLMAIERPLATZ",
+      "from_name": "Stiglmaierplatz",
+      "to_id": "U_MAILLINGERSTRASSE",
+      "to_name": "Maillingerstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_STIGLMAIERPLATZ",
+      "from_name": "Stiglmaierplatz",
+      "to_id": "US_HAUPTBAHNHOF",
+      "to_name": "Hauptbahnhof",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MOOSACHER_ST_MARTINS_PLATZ",
+      "from_name": "Moosacher St.-Martins-Platz",
+      "to_id": "U_OLYMPIA_EINKAUFSZENTRUM",
+      "to_name": "Olympia-Einkaufszentrum",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_MOOSACHER_ST_MARTINS_PLATZ",
+      "from_name": "Moosacher St.-Martins-Platz",
+      "to_id": "U_MOOSACH",
+      "to_name": "Moosach (U-Bahn)",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MOOSACH",
+      "from_name": "Moosach (U-Bahn)",
+      "to_id": "U_MOOSACHER_ST_MARTINS_PLATZ",
+      "to_name": "Moosacher St.-Martins-Platz",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_MOOSACH",
+      "from_name": "Moosach (U-Bahn)",
+      "to_id": "S_MOOSACH_SBAHN",
+      "to_name": "Moosach (S-Bahn)",
+      "distance_km": 0.2,
+      "time_min": 1,
+      "price_estimate_eur": 0.5
+    },
+    {
+      "from_id": "U_FELDMOCHING",
+      "from_name": "Feldmoching",
+      "to_id": "U_HASENBERGL",
+      "to_name": "Hasenbergl",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_HASENBERGL",
+      "from_name": "Hasenbergl",
+      "to_id": "U_FELDMOCHING",
+      "to_name": "Feldmoching",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "U_HASENBERGL",
+      "from_name": "Hasenbergl",
+      "to_id": "U_DUELFERSTRASSE",
+      "to_name": "Dülferstraße",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_DUELFERSTRASSE",
+      "from_name": "Dülferstraße",
+      "to_id": "U_HASENBERGL",
+      "to_name": "Hasenbergl",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_DUELFERSTRASSE",
+      "from_name": "Dülferstraße",
+      "to_id": "U_HARTHOF",
+      "to_name": "Harthof",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_HARTHOF",
+      "from_name": "Harthof",
+      "to_id": "U_DUELFERSTRASSE",
+      "to_name": "Dülferstraße",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_HARTHOF",
+      "from_name": "Harthof",
+      "to_id": "U_AM_HART",
+      "to_name": "Am Hart",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_AM_HART",
+      "from_name": "Am Hart",
+      "to_id": "U_HARTHOF",
+      "to_name": "Harthof",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "U_AM_HART",
+      "from_name": "Am Hart",
+      "to_id": "U_FRANKFURTER_RING",
+      "to_name": "Frankfurter Ring",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_FRANKFURTER_RING",
+      "from_name": "Frankfurter Ring",
+      "to_id": "U_AM_HART",
+      "to_name": "Am Hart",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "U_FRANKFURTER_RING",
+      "from_name": "Frankfurter Ring",
+      "to_id": "U_MILBERTSHOFEN",
+      "to_name": "Milbertshofen",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_MILBERTSHOFEN",
+      "from_name": "Milbertshofen",
+      "to_id": "U_FRANKFURTER_RING",
+      "to_name": "Frankfurter Ring",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "U_MILBERTSHOFEN",
+      "from_name": "Milbertshofen",
+      "to_id": "U_SCHEIDPLATZ",
+      "to_name": "Scheidplatz",
+      "distance_km": 0.7,
+      "time_min": 2,
+      "price_estimate_eur": 1.1
+    },
+    {
+      "from_id": "S_ROSENHEIMER_PLATZ",
+      "from_name": "Rosenheimer Platz",
+      "to_id": "S_ISARTOR",
+      "to_name": "Isartor",
+      "distance_km": 0.9,
+      "time_min": 2,
+      "price_estimate_eur": 1.3
+    },
+    {
+      "from_id": "S_ROSENHEIMER_PLATZ",
+      "from_name": "Rosenheimer Platz",
+      "to_id": "S_OSTBAHNHOF",
+      "to_name": "Ostbahnhof",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "S_LEUCHTENBERGRING",
+      "from_name": "Leuchtenbergring",
+      "to_id": "S_OSTBAHNHOF",
+      "to_name": "Ostbahnhof",
+      "distance_km": 1.1,
+      "time_min": 3,
+      "price_estimate_eur": 1.5
+    },
+    {
+      "from_id": "S_LEUCHTENBERGRING",
+      "from_name": "Leuchtenbergring",
+      "to_id": "S_BERGWEG",
+      "to_name": "Bergweg",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "S_BERGWEG",
+      "from_name": "Bergweg",
+      "to_id": "S_LEUCHTENBERGRING",
+      "to_name": "Leuchtenbergring",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "S_BERGWEG",
+      "from_name": "Bergweg",
+      "to_id": "S_TRUDERING",
+      "to_name": "Trudering (S-Bahn)",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "S_TRUDERING",
+      "from_name": "Trudering (S-Bahn)",
+      "to_id": "S_BERGWEG",
+      "to_name": "Bergweg",
+      "distance_km": 1.0,
+      "time_min": 3,
+      "price_estimate_eur": 1.4
+    },
+    {
+      "from_id": "S_TRUDERING",
+      "from_name": "Trudering (S-Bahn)",
+      "to_id": "U_TRUDERING",
+      "to_name": "Trudering (U-Bahn)",
+      "distance_km": 0.2,
+      "time_min": 1,
+      "price_estimate_eur": 0.5
+    },
+    {
+      "from_id": "S_TRUDERING",
+      "from_name": "Trudering (S-Bahn)",
+      "to_id": "S_GRONSDORF",
+      "to_name": "Gronsdorf",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_GRONSDORF",
+      "from_name": "Gronsdorf",
+      "to_id": "S_TRUDERING",
+      "to_name": "Trudering (S-Bahn)",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_GRONSDORF",
+      "from_name": "Gronsdorf",
+      "to_id": "S_HAAR",
+      "to_name": "Haar",
+      "distance_km": 1.5,
+      "time_min": 3,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_HAAR",
+      "from_name": "Haar",
+      "to_id": "S_GRONSDORF",
+      "to_name": "Gronsdorf",
+      "distance_km": 1.5,
+      "time_min": 3,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_HAAR",
+      "from_name": "Haar",
+      "to_id": "S_VATERSTETTEN",
+      "to_name": "Vaterstetten",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_VATERSTETTEN",
+      "from_name": "Vaterstetten",
+      "to_id": "S_HAAR",
+      "to_name": "Haar",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_VATERSTETTEN",
+      "from_name": "Vaterstetten",
+      "to_id": "S_BALDHAM",
+      "to_name": "Baldham",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_BALDHAM",
+      "from_name": "Baldham",
+      "to_id": "S_VATERSTETTEN",
+      "to_name": "Vaterstetten",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_BALDHAM",
+      "from_name": "Baldham",
+      "to_id": "S_ZORNEDING",
+      "to_name": "Zorneding",
+      "distance_km": 2.2,
+      "time_min": 5,
+      "price_estimate_eur": 2.5
+    },
+    {
+      "from_id": "S_ZORNEDING",
+      "from_name": "Zorneding",
+      "to_id": "S_BALDHAM",
+      "to_name": "Baldham",
+      "distance_km": 2.2,
+      "time_min": 5,
+      "price_estimate_eur": 2.5
+    },
+    {
+      "from_id": "S_ZORNEDING",
+      "from_name": "Zorneding",
+      "to_id": "S_EBERSBERG",
+      "to_name": "Ebersberg",
+      "distance_km": 4.0,
+      "time_min": 8,
+      "price_estimate_eur": 3.8
+    },
+    {
+      "from_id": "S_EBERSBERG",
+      "from_name": "Ebersberg",
+      "to_id": "S_ZORNEDING",
+      "to_name": "Zorneding",
+      "distance_km": 4.0,
+      "time_min": 8,
+      "price_estimate_eur": 3.8
+    },
+    {
+      "from_id": "S_GRUENWALD",
+      "from_name": "Grünwald",
+      "to_id": "S_HOLLRIEGELKREUTH",
+      "to_name": "Hollriegelskreuth",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "S_HOLLRIEGELKREUTH",
+      "from_name": "Hollriegelskreuth",
+      "to_id": "S_GRUENWALD",
+      "to_name": "Grünwald",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "S_HOLLRIEGELKREUTH",
+      "from_name": "Hollriegelskreuth",
+      "to_id": "S_PULLACH",
+      "to_name": "Pullach",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_PULLACH",
+      "from_name": "Pullach",
+      "to_id": "S_HOLLRIEGELKREUTH",
+      "to_name": "Hollriegelskreuth",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_PULLACH",
+      "from_name": "Pullach",
+      "to_id": "S_HOELLRIEGEL",
+      "to_name": "Höllriegelskreuth",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "S_HOELLRIEGEL",
+      "from_name": "Höllriegelskreuth",
+      "to_id": "S_PULLACH",
+      "to_name": "Pullach",
+      "distance_km": 1.2,
+      "time_min": 3,
+      "price_estimate_eur": 1.6
+    },
+    {
+      "from_id": "S_HOELLRIEGEL",
+      "from_name": "Höllriegelskreuth",
+      "to_id": "S_BUCHHOF",
+      "to_name": "Buchhof",
+      "distance_km": 1.4,
+      "time_min": 4,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_BUCHHOF",
+      "from_name": "Buchhof",
+      "to_id": "S_HOELLRIEGEL",
+      "to_name": "Höllriegelskreuth",
+      "distance_km": 1.4,
+      "time_min": 4,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_BUCHHOF",
+      "from_name": "Buchhof",
+      "to_id": "S_WOLFRATSHAUSEN",
+      "to_name": "Wolfratshausen",
+      "distance_km": 2.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_WOLFRATSHAUSEN",
+      "from_name": "Wolfratshausen",
+      "to_id": "S_BUCHHOF",
+      "to_name": "Buchhof",
+      "distance_km": 2.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_DAGLFING",
+      "from_name": "Daglfing",
+      "to_id": "S_ENGLSCHALKING",
+      "to_name": "Englschalking",
+      "distance_km": 1.7,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_ENGLSCHALKING",
+      "from_name": "Englschalking",
+      "to_id": "S_DAGLFING",
+      "to_name": "Daglfing",
+      "distance_km": 1.7,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_ENGLSCHALKING",
+      "from_name": "Englschalking",
+      "to_id": "S_JOHANNESKIRCHEN",
+      "to_name": "Johanneskirchen",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "S_JOHANNESKIRCHEN",
+      "from_name": "Johanneskirchen",
+      "to_id": "S_ENGLSCHALKING",
+      "to_name": "Englschalking",
+      "distance_km": 1.5,
+      "time_min": 4,
+      "price_estimate_eur": 1.9
+    },
+    {
+      "from_id": "S_JOHANNESKIRCHEN",
+      "from_name": "Johanneskirchen",
+      "to_id": "S_UNTERFOEHRING",
+      "to_name": "Unterföhring",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_UNTERFOEHRING",
+      "from_name": "Unterföhring",
+      "to_id": "S_JOHANNESKIRCHEN",
+      "to_name": "Johanneskirchen",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_UNTERFOEHRING",
+      "from_name": "Unterföhring",
+      "to_id": "S_ISMANING",
+      "to_name": "Ismaning",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_ISMANING",
+      "from_name": "Ismaning",
+      "to_id": "S_UNTERFOEHRING",
+      "to_name": "Unterföhring",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_ISMANING",
+      "from_name": "Ismaning",
+      "to_id": "S_HALLBERGMOOS",
+      "to_name": "Hallbergmoos",
+      "distance_km": 1.7,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_HALLBERGMOOS",
+      "from_name": "Hallbergmoos",
+      "to_id": "S_ISMANING",
+      "to_name": "Ismaning",
+      "distance_km": 1.7,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_HALLBERGMOOS",
+      "from_name": "Hallbergmoos",
+      "to_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "to_name": "Flughafen Besucherpark",
+      "distance_km": 2.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "from_name": "Flughafen Besucherpark",
+      "to_id": "S_HALLBERGMOOS",
+      "to_name": "Hallbergmoos",
+      "distance_km": 12.0,
+      "time_min": 20,
+      "price_estimate_eur": 8.0
+    },
+    {
+      "from_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "from_name": "Flughafen Besucherpark",
+      "to_id": "S_FLUGHAFEN_MUENCHEN",
+      "to_name": "Flughafen München",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "from_name": "Flughafen Besucherpark",
+      "to_id": "S_NEUFAHRN_BEI_FREISING",
+      "to_name": "Neufahrn (bei Freising)",
+      "distance_km": 4.2,
+      "time_min": 6,
+      "price_estimate_eur": 3.5
+    },
+    {
+      "from_id": "S_FLUGHAFEN_MUENCHEN",
+      "from_name": "Flughafen München",
+      "to_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "to_name": "Flughafen Besucherpark",
+      "distance_km": 0.8,
+      "time_min": 2,
+      "price_estimate_eur": 1.2
+    },
+    {
+      "from_id": "S_FREISING",
+      "from_name": "Freising",
+      "to_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "to_name": "Flughafen Besucherpark",
+      "distance_km": 6.5,
+      "time_min": 10,
+      "price_estimate_eur": 4.5
+    },
+    {
+      "from_id": "S_DACHAU",
+      "from_name": "Dachau",
+      "to_id": "S_KARLSFELD",
+      "to_name": "Karlsfeld",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_KARLSFELD",
+      "from_name": "Karlsfeld",
+      "to_id": "S_DACHAU",
+      "to_name": "Dachau",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_KARLSFELD",
+      "from_name": "Karlsfeld",
+      "to_id": "S_ALLACH",
+      "to_name": "Allach",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_ALLACH",
+      "from_name": "Allach",
+      "to_id": "S_KARLSFELD",
+      "to_name": "Karlsfeld",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_ALLACH",
+      "from_name": "Allach",
+      "to_id": "S_UNTERMENZING",
+      "to_name": "Untermenzing",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_UNTERMENZING",
+      "from_name": "Untermenzing",
+      "to_id": "S_ALLACH",
+      "to_name": "Allach",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.1
+    },
+    {
+      "from_id": "S_UNTERMENZING",
+      "from_name": "Untermenzing",
+      "to_id": "S_OBERMENZING",
+      "to_name": "Obermenzing",
+      "distance_km": 1.5,
+      "time_min": 3,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_OBERMENZING",
+      "from_name": "Obermenzing",
+      "to_id": "S_UNTERMENZING",
+      "to_name": "Untermenzing",
+      "distance_km": 1.5,
+      "time_min": 3,
+      "price_estimate_eur": 1.8
+    },
+    {
+      "from_id": "S_OBERMENZING",
+      "from_name": "Obermenzing",
+      "to_id": "S_LAIM",
+      "to_name": "Laim (S-Bahn)",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_LAIM",
+      "from_name": "Laim (S-Bahn)",
+      "to_id": "S_OBERMENZING",
+      "to_name": "Obermenzing",
+      "distance_km": 1.6,
+      "time_min": 4,
+      "price_estimate_eur": 2.0
+    },
+    {
+      "from_id": "S_LAIM",
+      "from_name": "Laim (S-Bahn)",
+      "to_id": "US_HAUPTBAHNHOF",
+      "to_name": "Hauptbahnhof",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_LAIM",
+      "from_name": "Laim (S-Bahn)",
+      "to_id": "S_MOOSACH_SBAHN",
+      "to_name": "Moosach (S-Bahn)",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_PASING",
+      "from_name": "Pasing",
+      "to_id": "S_LAIM",
+      "to_name": "Laim (S-Bahn)",
+      "distance_km": 2.2,
+      "time_min": 4,
+      "price_estimate_eur": 2.6
+    },
+    {
+      "from_id": "S_PASING",
+      "from_name": "Pasing",
+      "to_id": "S_LOCHHAM",
+      "to_name": "Lochham",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_PASING",
+      "from_name": "Pasing",
+      "to_id": "S_OBERMENZING",
+      "to_name": "Obermenzing",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_LOCHHAM",
+      "from_name": "Lochham",
+      "to_id": "S_PASING",
+      "to_name": "Pasing",
+      "distance_km": 2.0,
+      "time_min": 4,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_LOCHHAM",
+      "from_name": "Lochham",
+      "to_id": "S_GRÄFELFING",
+      "to_name": "Gräfelfing",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_GRÄFELFING",
+      "from_name": "Gräfelfing",
+      "to_id": "S_LOCHHAM",
+      "to_name": "Lochham",
+      "distance_km": 1.8,
+      "time_min": 4,
+      "price_estimate_eur": 2.2
+    },
+    {
+      "from_id": "S_GRÄFELFING",
+      "from_name": "Gräfelfing",
+      "to_id": "S_PLANEGG",
+      "to_name": "Planegg",
+      "distance_km": 1.9,
+      "time_min": 4,
+      "price_estimate_eur": 2.3
+    },
+    {
+      "from_id": "S_PLANEGG",
+      "from_name": "Planegg",
+      "to_id": "S_GRÄFELFING",
+      "to_name": "Gräfelfing",
+      "distance_km": 1.9,
+      "time_min": 4,
+      "price_estimate_eur": 2.3
+    },
+    {
+      "from_id": "S_PLANEGG",
+      "from_name": "Planegg",
+      "to_id": "S_GAUTING",
+      "to_name": "Gauting",
+      "distance_km": 2.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_GAUTING",
+      "from_name": "Gauting",
+      "to_id": "S_PLANEGG",
+      "to_name": "Planegg",
+      "distance_km": 2.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_GAUTING",
+      "from_name": "Gauting",
+      "to_id": "S_STOCKDORF",
+      "to_name": "Stockdorf",
+      "distance_km": 2.2,
+      "time_min": 5,
+      "price_estimate_eur": 2.6
+    },
+    {
+      "from_id": "S_STOCKDORF",
+      "from_name": "Stockdorf",
+      "to_id": "S_GAUTING",
+      "to_name": "Gauting",
+      "distance_km": 2.2,
+      "time_min": 5,
+      "price_estimate_eur": 2.6
+    },
+    {
+      "from_id": "S_STOCKDORF",
+      "from_name": "Stockdorf",
+      "to_id": "S_WEßLING",
+      "to_name": "Weßling",
+      "distance_km": 2.3,
+      "time_min": 5,
+      "price_estimate_eur": 2.7
+    },
+    {
+      "from_id": "S_WEßLING",
+      "from_name": "Weßling",
+      "to_id": "S_STOCKDORF",
+      "to_name": "Stockdorf",
+      "distance_km": 2.3,
+      "time_min": 5,
+      "price_estimate_eur": 2.7
+    },
+    {
+      "from_id": "S_WEßLING",
+      "from_name": "Weßling",
+      "to_id": "S_HERRNSCHING",
+      "to_name": "Herrsching",
+      "distance_km": 3.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_HERRNSCHING",
+      "from_name": "Herrsching",
+      "to_id": "S_WEßLING",
+      "to_name": "Weßling",
+      "distance_km": 3.0,
+      "time_min": 5,
+      "price_estimate_eur": 2.8
+    },
+    {
+      "from_id": "S_MARKT_SCHWABEN",
+      "from_name": "Markt Schwaben",
+      "to_id": "S_EBERSBERG",
+      "to_name": "Ebersberg",
+      "distance_km": 8.0,
+      "time_min": 12,
+      "price_estimate_eur": 5.5
+    },
+    {
+      "from_id": "S_NEUFAHRN_BEI_FREISING",
+      "from_name": "Neufahrn (bei Freising)",
+      "to_id": "S_FLUGHAFEN_BESUCHERPARK",
+      "to_name": "Flughafen Besucherpark",
+      "distance_km": 4.2,
+      "time_min": 6,
+      "price_estimate_eur": 3.5
+    },
+    {
+      "from_id": "S_MOOSACH_SBAHN",
+      "from_name": "Moosach (S-Bahn)",
+      "to_id": "S_LAIM",
+      "to_name": "Laim (S-Bahn)",
+      "distance_km": 2.5,
+      "time_min": 5,
+      "price_estimate_eur": 2.4
+    },
+    {
+      "from_id": "S_MOOSACH_SBAHN",
+      "from_name": "Moosach (S-Bahn)",
+      "to_id": "U_MOOSACH",
+      "to_name": "Moosach (U-Bahn)",
+      "distance_km": 0.2,
+      "time_min": 1,
+      "price_estimate_eur": 0.5
+    }
+  ]
+}
