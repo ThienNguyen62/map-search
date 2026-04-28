@@ -46,7 +46,7 @@ def _get_edge_data(G: nx.Graph, u: Any, v: Any) -> dict:
         edges = G[u][v]
         return min(
             edges.values(),
-            key=lambda d: d.get("travel_time", d.get("time", d.get("weight", DEFAULT_TRAVEL_TIME_S)))
+            key=lambda d: d.get("travel_time", d.get("weight", DEFAULT_TRAVEL_TIME_S))
         )
     return G[u][v]
 
@@ -138,6 +138,8 @@ def dijkstra_subway(
 
     # Priority queue: (cost, counter, node)
     # Dijkstra chỉ dùng g_score (chi phí thực), không có heuristic
+    # cost = g(n): chi phí thực từ start → node
+    # Node được pop ra đầu tiên luôn có cost nhỏ nhất trong queue
     counter = 0
     queue: list[tuple[float, int, Any]] = [(0.0, counter, orig_node)]
 
@@ -151,14 +153,24 @@ def dijkstra_subway(
 
     while queue:
         cost, _, current = heapq.heappop(queue)
-
+        # Lazy deletion:
+        # - Heap có thể chứa nhiều entry cho cùng 1 node
+        #   (do không có decrease-key)
+        # - Chỉ xử lý node lần đầu tiên (khi cost là tối ưu)
+        # - Các entry cũ sẽ bị skip
         if current in visited:
             continue
 
         visited.add(current)
         visited_order.append(current)
-
-        # Dijkstra: khi pop dest_node lần đầu → đường ngắn nhất đã tìm được
+        # EARLY EXIT (tối ưu quan trọng)
+        # Khi dest_node được pop ra khỏi heap lần đầu:
+        # → đây là đường đi NGẮN NHẤT tuyệt đối
+        # WHY:
+        # - Heap luôn pop node có cost nhỏ nhất
+        # - Nếu tồn tại đường tốt hơn → nó đã được pop trước đó
+        #
+        # => Có thể break ngay, không cần duyệt toàn bộ graph
         if current == dest_node:
             break
 
@@ -168,7 +180,7 @@ def dijkstra_subway(
 
             edge_data = _get_edge_data(G, current, neighbor)
             travel_time = float(
-                edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
+                edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))
             )
             neighbor_line = _get_line_info(edge_data)
 
@@ -179,6 +191,12 @@ def dijkstra_subway(
             segment_time = travel_time + penalty
             tentative_time = time_scores[current] + segment_time
 
+            # RELAXATION STEP
+            # Nếu tìm được đường tốt hơn tới neighbor:
+            # → cập nhật lại cost và đường đi
+            # INVARIANT:
+            # - time_scores[node] luôn là chi phí tốt nhất đã biết từ start → node
+            # Đây là điều đảm bảo thuật toán hội tụ về shortest path
             if neighbor not in time_scores or tentative_time < time_scores[neighbor]:
                 came_from[neighbor] = current
                 time_scores[neighbor] = tentative_time
@@ -187,6 +205,8 @@ def dijkstra_subway(
                 # Dijkstra: push g_score thẳng, không cộng heuristic
                 counter += 1
                 heapq.heappush(queue, (tentative_time, counter, neighbor))
+                # Push trạng thái mới vào heap
+                # Không xóa entry cũ → dùng lazy deletion ở trên
 
                 edges_explored[(current, neighbor)] = {
                     "travel_time": travel_time,
@@ -194,6 +214,10 @@ def dijkstra_subway(
                     "total_time": segment_time,
                     "line": neighbor_line,
                 }
+                # Lưu lại thông tin edge đã explore
+                # Debug / visualization
+                # Phân tích đường đi (trace lại decision của thuật toán)
+                # Có thể bị overwrite nếu tìm được đường tốt hơn
 
     return _build_result(
         found=dest_node in came_from or dest_node == orig_node,
@@ -243,6 +267,17 @@ def format_route_info(path: list, G: nx.Graph) -> list[dict]:
 
     Returns list[dict], mỗi dict:
         from_node, to_node, line, num_stops, duration_s, duration_min
+        WHY:
+        - Output dễ đọc hơn (thay vì từng edge)
+        - Phù hợp với UI (hiển thị từng chặng)
+
+        LOGIC:
+        - Khi line thay đổi → kết thúc segment cũ
+        - Bắt đầu segment mới
+
+        INVARIANT:
+        - Tổng duration của segments = tổng thời gian path
+
     """
     if not path or len(path) < 2:
         return []
@@ -258,7 +293,7 @@ def format_route_info(path: list, G: nx.Graph) -> list[dict]:
         edge_data = _get_edge_data(G, u, v)
         line = _get_line_info(edge_data)
         travel_time = float(
-            edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
+            edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))
         )
 
         if line != current_line:
@@ -343,9 +378,3 @@ def find_route_with_lines(G: nx.Graph, start: Any, end: Any) -> dict:
     Wrapper đơn giản của dijkstra_subway().
     """
     return dijkstra_subway(G, start, end)
-
-
-def dijkstra(G: nx.Graph, orig_node: Any, dest_node: Any, transfer_penalty: int = 300, line_change_penalty: int = 120):
-    """Compatibility wrapper for backend code that expects (path, cost)."""
-    result = dijkstra_subway(G, orig_node, dest_node, transfer_penalty, line_change_penalty)
-    return result["path"], result["total_time"]

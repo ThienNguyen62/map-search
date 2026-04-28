@@ -2,16 +2,19 @@
 A* Subway Route Finder
 ======================
 Thuật toán A* tối ưu cho mạng lưới tàu điện ngầm.
+Cost Function:
+total_cost = travel_time + transfer_penalty
+A*:
+- g(n): thời gian thực tế từ start → n
+- h(n): heuristic_time (geodesic / max_speed)
+- f(n) = g(n) + h(n)
 
-Các vấn đề đã sửa so với phiên bản cũ:
-- Hỗ trợ MultiGraph / MultiDiGraph (OSMnx compatible)
-- Heuristic admissible: dùng max_speed từ graph thay vì hardcode
-- reconstruct_path có vòng bảo vệ chống loop vô hạn
-- segment_time được khởi tạo đúng trong format_route_info
-- edges tracking dùng dict để tránh trùng lặp
-- is_different_system logic được đảo ngược lại cho đúng
-- Tất cả magic numbers được document rõ ràng
+Design Goals:
+- Hỗ trợ MultiGraph (OSMnx)
+- Heuristic admissible
+- Tránh infinite loop khi reconstruct path
 """
+
 
 import heapq
 import logging
@@ -53,12 +56,16 @@ def _is_multigraph(G: nx.Graph) -> bool:
 
 
 def _get_edge_data(G: nx.Graph, u: Any, v: Any) -> dict:
-    """Lấy edge data an toàn, hỗ trợ cả Graph lẫn MultiGraph."""
+    """Lấy edge data an toàn, hỗ trợ cả Graph lẫn MultiGraph.
+        WHY:
+    - NetworkX MultiGraph cho phép nhiều edge giữa cùng 2 node (u, v)
+    - Mỗi edge có thể đại diện cho các tuyến khác nhau (line khác nhau)
+    - Ta cần chọn edge "tốt nhất" để tính shortest path"""
     if _is_multigraph(G):
         # MultiGraph: G[u][v] là dict {key: edge_data}
         # Chọn edge có travel_time nhỏ nhất (đường nhanh nhất giữa 2 ga).
         edges = G[u][v]
-        return min(edges.values(), key=lambda d: d.get("travel_time", d.get("time", d.get("weight", DEFAULT_TRAVEL_TIME_S))))
+        return min(edges.values(), key=lambda d: d.get("travel_time", d.get("weight", DEFAULT_TRAVEL_TIME_S)))
     return G[u][v]
 
 
@@ -96,12 +103,42 @@ def _get_max_speed(G: nx.Graph) -> float:
 
     return max_speed
 
-
 def _node_coords(G: nx.Graph, node: Any) -> tuple[float, float]:
-    """Lấy (lat, lon) của node."""
+    """
+    Lấy tọa độ (latitude, longitude) của một node trong graph.
+    
+    WHY cần hàm này?
+    - OSMnx thường dùng 'y' cho latitude, 'x' cho longitude
+    - NetworkX thuần túy có thể dùng 'lat' và 'lon'
+    - Hàm này xử lý cả hai trường hợp, trả về định dạng chuẩn (lat, lon)
+    
+    Parameters
+    ----------
+    G : NetworkX Graph
+        Đồ thị chứa node
+    node : Any
+        ID của node cần lấy tọa độ
+    
+    Returns
+    -------
+    tuple[float, float]
+        (latitude, longitude) - Vĩ độ, Kinh độ
+        Trả về (0.0, 0.0) nếu không tìm thấy tọa độ
+    """
+    # Truy xuất dictionary chứa attributes của node
     data = G.nodes[node]
+    
+    # Ưu tiên lấy 'y' (cách đặt tên của OSMnx) hoặc 'lat'
+    # OSMnx: node['y'] = vĩ độ (latitude)
+    # NetworkX thuần: node['lat'] = vĩ độ
     lat = data.get("y", data.get("lat", 0.0))
+    
+    # Ưu tiên lấy 'x' (cách đặt tên của OSMnx) hoặc 'lon'  
+    # OSMnx: node['x'] = kinh độ (longitude)
+    # NetworkX thuần: node['lon'] = kinh độ
     lon = data.get("x", data.get("lon", 0.0))
+    
+    # Ép kiểu về float để đảm bảo tính toán chính xác
     return float(lat), float(lon)
 
 
@@ -126,7 +163,17 @@ def _transfer_cost(
     transfer_penalty: int,
     line_change_penalty: int,
 ) -> int:
-    """Tính penalty khi chuyển tuyến."""
+    """Tính penalty khi chuyển tuyến.
+    LOGIC:
+- Không có line → không phạt (start node hoặc thiếu data)
+- Cùng line → không phạt
+- Khác line → áp dụng transfer_penalty
+- Nếu khác hệ thống (metro khác nhau) → thêm line_change_penalty
+
+WHY:
+- Mô phỏng thực tế: đổi line tốn thời gian (đi bộ, chờ tàu)
+- Đổi hệ thống thường tốn thêm (ví dụ metro → tram)
+"""
     if current_line is None or next_line is None:
         return 0
     if current_line == next_line:
@@ -147,16 +194,62 @@ def heuristic_time(G: nx.Graph, node: Any, dest_node: Any, max_speed: float) -> 
     Heuristic admissible: thời gian tối thiểu theo đường thẳng (giây).
 
     Dùng max_speed (tốc độ nhanh nhất có thể) để đảm bảo không overestimate.
-    """
-    node_coords = _node_coords(G, node)
-    dest_coords = _node_coords(G, dest_node)
+    IDEA:
+    - Dùng khoảng cách địa lý (great-circle distance)
+    - Chia cho max_speed → thời gian nhanh nhất có thể
 
+    WHY ADMISSIBLE:
+    - max_speed là tốc độ lớn nhất trong graph
+    → heuristic luôn <= thời gian thực tế
+    → đảm bảo A* tìm đúng shortest path
+
+    TRADE-OFF:
+    - Nếu max_speed quá lớn → heuristic yếu (gần giống Dijkstra)
+    - Nếu max_speed chính xác → A* rất nhanh
+    """
+    # BƯỚC 1: LẤY TỌA ĐỘ (kinh độ, vĩ độ) CỦA HAI ĐIỂM
+    # ====================================================
+    # node: điểm đang xét (current node trong A*)
+    # dest_node: điểm đích cần đến
+    # Hàm _node_coords trả về tuple (latitude, longitude)
+    node_coords = _node_coords(G, node)      # Ví dụ: (21.0285, 105.8542) - Hà Nội
+    dest_coords = _node_coords(G, dest_node) # Ví dụ: (21.0065, 105.8435) - ga khác
+    
+    # BƯỚC 2: KIỂM TRA DỮ LIỆU HỢP LỆ
+    # ================================
+    # Nếu tọa độ là (0.0, 0.0) → thiếu dữ liệu GPS
+    # Trả về 0 để heuristic không overestimate (vẫn đúng nhưng kém hiệu quả)
     if node_coords == (0.0, 0.0) or dest_coords == (0.0, 0.0):
         return 0.0  # Thiếu dữ liệu tọa độ → heuristic = 0 (vẫn correct nhưng kém hiệu quả)
-
-    distance_m = geodesic(node_coords, dest_coords).meters
+    
+    # BƯỚC 3: TÍNH KHOẢNG CÁCH ĐỊA LÝ (GEODESIC DISTANCE)
+    # ====================================================
+    # geodesic(): tính khoảng cách ngắn nhất giữa 2 điểm trên bề mặt ellipsoid Trái Đất
+    # Công thức: sử dụng mô hình WGS84 (hệ tọa độ GPS chuẩn)
+    # Khác với Euclidean (đường thẳng trong không gian 3D) 
+    # và khác với Haversine (công thức gần đúng trên mặt cầu)
+    # 
+    # Ví dụ: Hà Nội (21.0285, 105.8542) đến ga Cát Linh (21.0288, 105.8357)
+    # → geodesic() ≈ 1,850 meters (khoảng cách thực tế trên mặt đất)
+    distance_m = geodesic(node_coords, dest_coords).meters  # Đơn vị: meters
+    
+    # BƯỚC 4: CHUYỂN KHOẢNG CÁCH → THỜI GIAN HEURISTIC
+    # =================================================
+    # Công thức: time = distance / speed
+    # - distance: meters (khoảng cách địa lý)
+    # - max_speed: m/s (tốc độ tối đa trong toàn bộ mạng lưới)
+    # 
+    # Lý do chia cho max_speed:
+    #   → Giả sử tàu có thể chạy với vận tốc tối đa trên đường thẳng
+    #   → Đây là thời gian NHANH NHẤT có thể (lower bound)
+    #   → Đảm bảo heuristic ADMISSIBLE (không overestimate)
+    # 
+    # Ví dụ: distance = 1850m, max_speed = 11.1 m/s (40 km/h)
+    # → heuristic = 1850 / 11.1 ≈ 166.7 giây (~2.8 phút)
+    # 
+    # Trong thực tế, tàu phải đi theo đường ray, dừng đỗ, đổi tuyến...
+    # → thời gian thực LUÔN lớn hơn 166.7 giây
     return distance_m / max_speed
-
 
 # ---------------------------------------------------------------------------
 # A* core
@@ -219,27 +312,33 @@ def a_star_subway(
     while queue:
         f, _, current = heapq.heappop(queue)
 
+        # Skip nếu node đã xử lý (lazy deletion pattern)
+        # Heap không hỗ trợ decrease-key nên có thể tồn tại entry cũ
+
         if current in visited:
             continue
 
         visited.add(current)
         visited_order.append(current)
-
+        # A*: khi pop dest_node → đã tìm được đường tối ưu
         if current == dest_node:
             break
 
         for neighbor in G.neighbors(current):
             if neighbor in visited:
                 continue
-
+            # Tính chi phí đi từ current → neighbor
             edge_data = _get_edge_data(G, current, neighbor)
-            travel_time = float(edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))))
+            travel_time = float(edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
             neighbor_line = _get_line_info(edge_data)
 
             penalty = _transfer_cost(node_line[current], neighbor_line, transfer_penalty, line_change_penalty)
             segment_time = travel_time + penalty
+            # g(n): chi phí thực từ start → neighbor
             tentative_time = time_scores[current] + segment_time
-
+            # RELAXATION STEP (core của A*/Dijkstra)
+            # Nếu tìm được đường tốt hơn tới neighbor → cập nhật
+            # time_scores[node] luôn là chi phí tốt nhất đã biết từ start → node
             if neighbor not in time_scores or tentative_time < time_scores[neighbor]:
                 came_from[neighbor] = current
                 time_scores[neighbor] = tentative_time
@@ -324,7 +423,7 @@ def format_route_info(path: list, G: nx.Graph) -> list[dict]:
         u, v = path[i], path[i + 1]
         edge_data = _get_edge_data(G, u, v)
         line = _get_line_info(edge_data)
-        travel_time = float(edge_data.get("travel_time", edge_data.get("time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S))))
+        travel_time = float(edge_data.get("travel_time", edge_data.get("weight", DEFAULT_TRAVEL_TIME_S)))
 
         if line != current_line:
             # Lưu đoạn cũ (nếu có)

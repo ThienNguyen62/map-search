@@ -4,7 +4,7 @@
 import os
 import json
 import networkx as nx
-from algorithms.dijkstra import dijkstra
+from algorithms.dijkstra import dijkstra_subway
 from models.graph import Graph
 from models.station import Station
 from models.edge import Edge
@@ -35,10 +35,11 @@ def find_path(source, target, mode="shortest"):
     if source not in graph.station_by_id or target not in graph.station_by_id:
         return {"error": "Invalid station ID"}
 
-    # hiện tại chỉ dùng dijkstra
-    path, cost = dijkstra(nx_graph, source, target)
+    # Sử dụng dijkstra_subway để tìm đường
+    result = dijkstra_subway(nx_graph, source, target)
 
     return {
-        "path": path,
-        "cost": cost
+        "path": result.get("path", []),
+        "cost": result.get("total_time", 0),
+        "found": result.get("found", False)
     }
