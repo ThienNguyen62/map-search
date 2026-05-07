@@ -1,0 +1,44 @@
+/* Animation for selected station markers */
+@keyframes pulse-marker {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+@keyframes pulse-marker-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+    }
+}
+
+/* Styles for selected station markers */
+.station-marker-from {
+    animation: pulse-marker 2s infinite;
+}
+
+.station-marker-to {
+    animation: pulse-marker-red 2s infinite;
+}
+
+/* Tooltip for selected stations */
+.leaflet-popup-content {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+}
+
+.leaflet-popup-content strong {
+    color: #1f2937;
+    font-weight: 700;
+}

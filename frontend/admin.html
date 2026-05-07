@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Munich Metro - Admin</title>
+	<style>
+		:root {
+			--bg: #f4f6fb;
+			--panel: #ffffff;
+			--text: #1e293b;
+			--muted: #64748b;
+			--primary: #0f766e;
+			--primary-dark: #0b5b55;
+			--danger: #b42318;
+			--danger-soft: #fef3f2;
+			--ok: #027a48;
+			--ok-soft: #ecfdf3;
+			--warn: #b54708;
+			--warn-soft: #fffaeb;
+			--shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
+			--radius: 18px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			color: var(--text);
+			background:
+				radial-gradient(circle at 10% 10%, rgba(15, 118, 110, 0.15), transparent 42%),
+				radial-gradient(circle at 90% 8%, rgba(2, 122, 72, 0.12), transparent 35%),
+				var(--bg);
+		}
+
+		.admin-shell {
+			min-height: 100vh;
+			padding: 26px;
+			display: grid;
+			gap: 20px;
+			grid-template-columns: 330px 1fr;
+			align-items: start;
+		}
+
+		.sidebar {
+			background: linear-gradient(170deg, #083344 0%, #115e59 100%);
+			color: #ffffff;
+			border-radius: 22px;
+			box-shadow: var(--shadow);
+			padding: 22px;
+			position: sticky;
+			top: 22px;
+		}
+
+		.sidebar h1 {
+			margin: 0;
+			font-size: 1.45rem;
+			letter-spacing: 0.02em;
+		}
+
+		.sidebar p {
+			margin: 8px 0 0;
+			color: #d5f5ef;
+			line-height: 1.5;
+			font-size: 0.95rem;
+		}
+
+		.nav-btn {
+			margin-top: 18px;
+			display: inline-block;
+			text-decoration: none;
+			background: rgba(255, 255, 255, 0.16);
+			color: #ffffff;
+			padding: 10px 14px;
+			border-radius: 999px;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			font-weight: 700;
+			transition: background 0.2s ease;
+		}
+
+		.nav-btn:hover {
+			background: rgba(255, 255, 255, 0.26);
+		}
+
+		.summary-list {
+			margin: 18px 0 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 10px;
+		}
+
+		.summary-list li {
+			background: rgba(255, 255, 255, 0.14);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 14px;
+			padding: 12px;
+		}
+
+		.summary-list strong {
+			display: block;
+			font-size: 1.2rem;
+			margin-bottom: 4px;
+		}
+
+		.main {
+			display: grid;
+			gap: 18px;
+		}
+
+		.header {
+			background: var(--panel);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+			padding: 18px 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 14px;
+			flex-wrap: wrap;
+		}
+
+		.header h2 {
+			margin: 0;
+			font-size: 1.35rem;
+		}
+
+		.header p {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		.header-actions {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			border: none;
+			border-radius: 12px;
+			padding: 10px 14px;
+			font-weight: 700;
+			cursor: pointer;
+			transition: transform 0.15s ease, opacity 0.2s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-1px);
+		}
+
+		.btn-primary {
+			background: var(--primary);
+			color: #ffffff;
+		}
+
+		.btn-primary:hover {
+			background: var(--primary-dark);
+		}
+
+		.btn-ghost {
+			background: #e2e8f0;
+			color: #1e293b;
+		}
+
+		.btn-danger {
+			background: var(--danger);
+			color: #ffffff;
+		}
+
+		.grid {
+			display: grid;
+			gap: 18px;
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		.card {
+			background: var(--panel);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+			padding: 18px;
+		}
+
+		.card h3 {
+			margin: 0 0 6px;
+			font-size: 1.06rem;
+		}
+
+		.card > p {
+			margin: 0 0 14px;
+			color: var(--muted);
+			font-size: 0.94rem;
+			line-height: 1.5;
+		}
+
+		.span-7 {
+			grid-column: span 7;
+		}
+
+		.span-5 {
+			grid-column: span 5;
+		}
+
+		.span-12 {
+			grid-column: span 12;
+		}
+
+		.line-table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.93rem;
+		}
+
+		.line-table th,
+		.line-table td {
+			padding: 10px 8px;
+			border-bottom: 1px solid #e2e8f0;
+			text-align: left;
+			vertical-align: middle;
+		}
+
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 95px;
+			padding: 6px 10px;
+			border-radius: 999px;
+			font-weight: 700;
+			font-size: 0.82rem;
+		}
+
+		.badge-ok {
+			background: var(--ok-soft);
+			color: var(--ok);
+		}
+
+		.badge-banned {
+			background: var(--danger-soft);
+			color: var(--danger);
+		}
+
+		.row-actions {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		label {
+			display: block;
+			margin: 0 0 6px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: #334155;
+		}
+
+		input,
+		textarea,
+		select {
+			width: 100%;
+			border: 1px solid #cbd5e1;
+			border-radius: 10px;
+			padding: 10px 12px;
+			font: inherit;
+			color: inherit;
+			background: #ffffff;
+		}
+
+		textarea {
+			min-height: 95px;
+			resize: vertical;
+		}
+
+		.field-grid {
+			display: grid;
+			gap: 10px;
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.status-msg {
+			margin-top: 10px;
+			font-size: 0.88rem;
+			color: var(--muted);
+		}
+
+		.notice-list,
+		.history-list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 10px;
+			max-height: 320px;
+			overflow: auto;
+		}
+
+		.notice-item,
+		.history-item {
+			border: 1px solid #e2e8f0;
+			border-radius: 12px;
+			padding: 12px;
+			background: #ffffff;
+		}
+
+		.notice-item h4 {
+			margin: 0 0 6px;
+			font-size: 0.95rem;
+		}
+
+		.notice-item p,
+		.history-item p {
+			margin: 0;
+			color: #475569;
+			font-size: 0.9rem;
+			line-height: 1.45;
+		}
+
+		.history-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.history-head h3 {
+			margin: 0;
+		}
+
+		.history-tools {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.history-tools input[type="date"] {
+			width: auto;
+			min-width: 170px;
+		}
+
+		.history-row {
+			display: flex;
+			gap: 10px;
+			align-items: flex-start;
+		}
+
+		.history-check {
+			margin-top: 3px;
+		}
+
+		.history-content {
+			flex: 1;
+		}
+
+		.meta {
+			margin-top: 7px;
+			font-size: 0.82rem;
+			color: #64748b;
+		}
+
+		.alert-low {
+			border-left: 5px solid #0284c7;
+		}
+
+		.alert-medium {
+			border-left: 5px solid var(--warn);
+			background: var(--warn-soft);
+		}
+
+		.alert-high {
+			border-left: 5px solid var(--danger);
+			background: var(--danger-soft);
+		}
+
+		@media (max-width: 1200px) {
+			.admin-shell {
+				grid-template-columns: 1fr;
+			}
+
+			.sidebar {
+				position: static;
+			}
+		}
+
+		@media (max-width: 900px) {
+			.span-7,
+			.span-5 {
+				grid-column: span 12;
+			}
+
+			.field-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="admin-shell">
+		<aside class="sidebar">
+			<h1>Admin Metro</h1>
+			<p>Bảng điều khiển vận hành nội bộ: khóa tuyến, mở tuyến, đóng ga và phát thông báo gián đoạn dịch vụ.</p>
+			<a class="nav-btn" href="index.html">Quay lại trang người dùng</a>
+			<ul class="summary-list">
+				<li>
+					<strong id="summaryLines">0</strong>
+					Tổng số tuyến
+				</li>
+				<li>
+					<strong id="summaryBlocked">0</strong>
+					Tuyến đang bị cấm
+				</li>
+				<li>
+					<strong id="summaryStations">0</strong>
+					Ga đang tạm đóng
+				</li>
+			</ul>
+		</aside>
+
+		<main class="main">
+			<section class="header">
+				<div>
+					<h2>Điều hành hệ thống tuyến Munich</h2>
+					<p id="lastUpdate">Chưa có thao tác gần đây.</p>
+				</div>
+				<div class="header-actions">
+					<button id="exportBtn" class="btn btn-ghost" type="button">Xuất cấu hình JSON</button>
+					<button id="resetBtn" class="btn btn-danger" type="button">Khôi phục mặc định</button>
+				</div>
+			</section>
+
+			<section class="grid">
+				<article class="card span-7">
+					<h3>Quản lý tuyến metro</h3>
+					<p>Khóa tuyến khi bảo trì hoặc sự cố. Mỗi thay đổi sẽ được ghi vào lịch sử thao tác.</p>
+					<table class="line-table" id="lineTable">
+						<thead>
+							<tr>
+								<th>Tuyến</th>
+								<th>Trạng thái</th>
+								<th>Lý do / ghi chú</th>
+								<th>Hành động</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</article>
+
+				<article class="card span-5">
+					<h3>Đóng / mở ga</h3>
+					<p>Áp dụng khi ga quá tải, bảo trì thang máy hoặc xử lý an ninh.</p>
+					<div>
+						<label for="stationSelect">Chọn ga</label>
+						<select id="stationSelect"></select>
+					</div>
+					<div style="margin-top:10px;">
+						<label for="stationReason">Lý do</label>
+						<input id="stationReason" placeholder="Ví dụ: Bảo trì thang cuốn">
+					</div>
+					<div style="margin-top:12px;" class="row-actions">
+						<button id="closeStationBtn" class="btn btn-danger" type="button">Đóng ga</button>
+						<button id="openStationBtn" class="btn btn-primary" type="button">Mở lại ga</button>
+					</div>
+					<p id="stationStatus" class="status-msg"></p>
+				</article>
+
+				<article class="card span-5">
+					<h3>Tạo thông báo vận hành</h3>
+					<p>Thông báo nội bộ cho trực ban và quản lý ca.</p>
+					<div class="field-grid">
+						<div>
+							<label for="noticeLevel">Mức độ</label>
+							<select id="noticeLevel">
+								<option value="low">Thấp</option>
+								<option value="medium">Trung bình</option>
+								<option value="high">Khẩn cấp</option>
+							</select>
+						</div>
+						<div>
+							<label for="noticeLine">Tuyến liên quan</label>
+							<select id="noticeLine"></select>
+						</div>
+					</div>
+					<div style="margin-top:10px;">
+						<label for="noticeTitle">Tiêu đề</label>
+						<input id="noticeTitle" placeholder="Ví dụ: Chậm 10 phút do kỹ thuật">
+					</div>
+					<div style="margin-top:10px;">
+						<label for="noticeBody">Nội dung</label>
+						<textarea id="noticeBody" placeholder="Mô tả chi tiết và hướng xử lý"></textarea>
+					</div>
+					<div style="margin-top:12px;" class="row-actions">
+						<button id="createNoticeBtn" class="btn btn-primary" type="button">Tạo thông báo</button>
+					</div>
+				</article>
+
+				<article class="card span-7">
+					<h3>Danh sách thông báo</h3>
+					<p>Các thông báo mới nhất hiển thị ở trên cùng.</p>
+					<ul id="noticeList" class="notice-list"></ul>
+				</article>
+
+				<article class="card span-12">
+					<div class="history-head">
+						<h3>Lịch sử thao tác admin</h3>
+						<div class="history-tools">
+							<input id="historyDate" type="date" aria-label="Lọc ngày để xóa lịch sử">
+							<button id="deleteByDateBtn" class="btn btn-ghost" type="button">Xóa theo ngày</button>
+							<button id="deleteSelectedHistoryBtn" class="btn btn-ghost" type="button">Xóa mục đã chọn</button>
+							<button id="clearHistoryBtn" class="btn btn-ghost" type="button">Xóa tất cả</button>
+						</div>
+					</div>
+					<p>Theo dõi toàn bộ thao tác cấm/mở tuyến, đóng/mở ga và tạo thông báo.</p>
+					<ul id="historyList" class="history-list"></ul>
+				</article>
+			</section>
+		</main>
+	</div>
+
+	<script>
+		const STORAGE_KEY = "metroAdminStateV1";
+
+		const defaultState = {
+			lines: [
+				{ id: "U1", blocked: false, reason: "" },
+				{ id: "U2", blocked: false, reason: "" },
+				{ id: "U3", blocked: false, reason: "" },
+				{ id: "U4", blocked: false, reason: "" },
+				{ id: "U5", blocked: false, reason: "" },
+				{ id: "U6", blocked: false, reason: "" },
+				{ id: "U7", blocked: false, reason: "" },
+				{ id: "U8", blocked: false, reason: "" }
+			],
+			stations: [],
+			notices: [],
+			history: []
+		};
+
+		const state = loadState();
+		const selectedHistoryIds = new Set();
+		ensureHistoryIds();
+		hydrateStationData().finally(() => {
+			renderAll();
+		});
+
+		document.getElementById("exportBtn").addEventListener("click", exportConfig);
+		document.getElementById("resetBtn").addEventListener("click", resetState);
+		document.getElementById("closeStationBtn").addEventListener("click", () => setStationStatus(true));
+		document.getElementById("openStationBtn").addEventListener("click", () => setStationStatus(false));
+		document.getElementById("createNoticeBtn").addEventListener("click", createNotice);
+		document.getElementById("clearHistoryBtn").addEventListener("click", clearHistory);
+		document.getElementById("deleteByDateBtn").addEventListener("click", deleteHistoryByDate);
+		document.getElementById("deleteSelectedHistoryBtn").addEventListener("click", deleteSelectedHistory);
+
+		function loadState() {
+			try {
+				const raw = localStorage.getItem(STORAGE_KEY);
+				if (!raw) return JSON.parse(JSON.stringify(defaultState));
+				const parsed = JSON.parse(raw);
+				return {
+					lines: Array.isArray(parsed.lines) ? parsed.lines : JSON.parse(JSON.stringify(defaultState.lines)),
+					stations: Array.isArray(parsed.stations) ? parsed.stations : [],
+					notices: Array.isArray(parsed.notices) ? parsed.notices : [],
+					history: Array.isArray(parsed.history) ? parsed.history : []
+				};
+			} catch {
+				return JSON.parse(JSON.stringify(defaultState));
+			}
+		}
+
+		function saveState() {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+		}
+
+		function createHistoryId() {
+			if (window.crypto && crypto.randomUUID) {
+				return crypto.randomUUID();
+			}
+			return `history-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+		}
+
+		function ensureHistoryIds() {
+			let changed = false;
+			state.history = state.history.map(item => {
+				if (item && item.id) return item;
+				changed = true;
+				return {
+					...item,
+					id: createHistoryId()
+				};
+			});
+			if (changed) {
+				saveState();
+			}
+		}
+
+		async function hydrateStationData() {
+			if (state.stations.length > 0) return;
+
+			const sources = [
+				"../data/metro_graph.json",
+				"./metro_graph.json",
+				"/data/metro_graph.json",
+				"http://127.0.0.1:5000/api/graph"
+			];
+
+			for (const source of sources) {
+				try {
+					const response = await fetch(source);
+					if (!response.ok) continue;
+					const data = await response.json();
+					if (!data || !Array.isArray(data.stations)) continue;
+					state.stations = data.stations
+						.map(st => ({
+							id: st.id || st.name,
+							name: st.name || st.id,
+							closed: false,
+							reason: ""
+						}))
+						.sort((a, b) => a.name.localeCompare(b.name, "vi"));
+					saveState();
+					return;
+				} catch {
+					// try next source
+				}
+			}
+
+			// fallback nếu không tải được dữ liệu ga
+			state.stations = [
+				{ id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
+				{ id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
+				{ id: "sample-3", name: "Munchner Freiheit", closed: false, reason: "" }
+			];
+			saveState();
+		}
+
+		function renderAll() {
+			renderSummary();
+			renderLines();
+			renderStationSelect();
+			renderNoticeLineOptions();
+			renderNotices();
+			renderHistory();
+			updateLastAction();
+		}
+
+		function renderSummary() {
+			const blockedLines = state.lines.filter(line => line.blocked).length;
+			const closedStations = state.stations.filter(st => st.closed).length;
+			document.getElementById("summaryLines").textContent = String(state.lines.length);
+			document.getElementById("summaryBlocked").textContent = String(blockedLines);
+			document.getElementById("summaryStations").textContent = String(closedStations);
+		}
+
+		function renderLines() {
+			const tbody = document.querySelector("#lineTable tbody");
+			tbody.innerHTML = "";
+
+			state.lines.forEach(line => {
+				const tr = document.createElement("tr");
+
+				const nameCell = document.createElement("td");
+				nameCell.textContent = line.id;
+
+				const statusCell = document.createElement("td");
+				const badge = document.createElement("span");
+				badge.className = `badge ${line.blocked ? "badge-banned" : "badge-ok"}`;
+				badge.textContent = line.blocked ? "Dang cam" : "Hoat dong";
+				statusCell.appendChild(badge);
+
+				const reasonCell = document.createElement("td");
+				reasonCell.textContent = line.reason || "-";
+
+				const actionCell = document.createElement("td");
+				const wrap = document.createElement("div");
+				wrap.className = "row-actions";
+
+				const banBtn = document.createElement("button");
+				banBtn.type = "button";
+				banBtn.className = "btn btn-danger";
+				banBtn.textContent = "Cam";
+				banBtn.addEventListener("click", () => {
+					const reason = window.prompt(`Nhap ly do cam tuyen ${line.id}:`, line.reason || "Bao tri dinh ky");
+					if (reason === null) return;
+					line.blocked = true;
+					line.reason = reason.trim();
+					addHistory(`Cam tuyen ${line.id}`, line.reason || "Khong co ghi chu");
+					saveState();
+					renderAll();
+				});
+
+				const openBtn = document.createElement("button");
+				openBtn.type = "button";
+				openBtn.className = "btn btn-primary";
+				openBtn.textContent = "Mo";
+				openBtn.addEventListener("click", () => {
+					line.blocked = false;
+					line.reason = "";
+					addHistory(`Mo lai tuyen ${line.id}`, "Tuyen da hoat dong binh thuong");
+					saveState();
+					renderAll();
+				});
+
+				wrap.appendChild(banBtn);
+				wrap.appendChild(openBtn);
+				actionCell.appendChild(wrap);
+
+				tr.appendChild(nameCell);
+				tr.appendChild(statusCell);
+				tr.appendChild(reasonCell);
+				tr.appendChild(actionCell);
+				tbody.appendChild(tr);
+			});
+		}
+
+		function renderStationSelect() {
+			const select = document.getElementById("stationSelect");
+			select.innerHTML = "";
+
+			state.stations.forEach(station => {
+				const option = document.createElement("option");
+				option.value = station.id;
+				option.textContent = station.closed ? `${station.name} (tam dong)` : station.name;
+				select.appendChild(option);
+			});
+
+			updateStationStatusMessage();
+		}
+
+		function updateStationStatusMessage() {
+			const select = document.getElementById("stationSelect");
+			const station = state.stations.find(st => st.id === select.value) || state.stations[0];
+			const msg = document.getElementById("stationStatus");
+			if (!station) {
+				msg.textContent = "Khong co du lieu ga.";
+				return;
+			}
+			msg.textContent = station.closed
+				? `Ga dang tam dong. Ly do: ${station.reason || "Khong ro"}`
+				: "Ga dang mo binh thuong.";
+		}
+
+		function setStationStatus(closed) {
+			const select = document.getElementById("stationSelect");
+			const reasonInput = document.getElementById("stationReason");
+			const station = state.stations.find(st => st.id === select.value);
+			if (!station) return;
+
+			if (closed) {
+				const reason = reasonInput.value.trim() || "Tam dong de xu ly van hanh";
+				station.closed = true;
+				station.reason = reason;
+				addHistory(`Dong ga ${station.name}`, reason);
+			} else {
+				station.closed = false;
+				station.reason = "";
+				addHistory(`Mo lai ga ${station.name}`, "Ga hoat dong tro lai");
+			}
+
+			reasonInput.value = "";
+			saveState();
+			renderAll();
+		}
+
+		function renderNoticeLineOptions() {
+			const lineSelect = document.getElementById("noticeLine");
+			const current = lineSelect.value;
+			lineSelect.innerHTML = "";
+
+			const allOption = document.createElement("option");
+			allOption.value = "ALL";
+			allOption.textContent = "Toan mang";
+			lineSelect.appendChild(allOption);
+
+			state.lines.forEach(line => {
+				const option = document.createElement("option");
+				option.value = line.id;
+				option.textContent = line.id;
+				lineSelect.appendChild(option);
+			});
+
+			lineSelect.value = current || "ALL";
+		}
+
+		function createNotice() {
+			const level = document.getElementById("noticeLevel").value;
+			const line = document.getElementById("noticeLine").value;
+			const title = document.getElementById("noticeTitle").value.trim();
+			const body = document.getElementById("noticeBody").value.trim();
+
+			if (!title || !body) {
+				window.alert("Vui long nhap day du tieu de va noi dung thong bao.");
+				return;
+			}
+
+			const notice = {
+				id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+				level,
+				line,
+				title,
+				body,
+				createdAt: new Date().toISOString()
+			};
+
+			state.notices.unshift(notice);
+			addHistory("Tao thong bao", `${title} (${line === "ALL" ? "Toan mang" : line})`);
+			saveState();
+
+			document.getElementById("noticeTitle").value = "";
+			document.getElementById("noticeBody").value = "";
+			renderAll();
+		}
+
+		function renderNotices() {
+			const list = document.getElementById("noticeList");
+			list.innerHTML = "";
+
+			if (state.notices.length === 0) {
+				const li = document.createElement("li");
+				li.className = "notice-item";
+				li.innerHTML = "<p>Chua co thong bao nao.</p>";
+				list.appendChild(li);
+				return;
+			}
+
+			state.notices.forEach(notice => {
+				const li = document.createElement("li");
+				li.className = `notice-item alert-${notice.level}`;
+				li.innerHTML = `
+					<h4>${escapeHtml(notice.title)}</h4>
+					<p>${escapeHtml(notice.body)}</p>
+					<div class="meta">${formatLineLabel(notice.line)} | ${formatTime(notice.createdAt)}</div>
+				`;
+				list.appendChild(li);
+			});
+		}
+
+		function renderHistory() {
+			const list = document.getElementById("historyList");
+			list.innerHTML = "";
+
+			if (state.history.length === 0) {
+				selectedHistoryIds.clear();
+				const li = document.createElement("li");
+				li.className = "history-item";
+				li.innerHTML = "<p>Chua co thao tac nao.</p>";
+				list.appendChild(li);
+				return;
+			}
+
+			const activeIds = new Set(state.history.map(item => item.id));
+			Array.from(selectedHistoryIds).forEach(id => {
+				if (!activeIds.has(id)) {
+					selectedHistoryIds.delete(id);
+				}
+			});
+
+			state.history.forEach(item => {
+				const li = document.createElement("li");
+				li.className = "history-item";
+				const checked = selectedHistoryIds.has(item.id) ? "checked" : "";
+				li.innerHTML = `
+					<div class="history-row">
+						<input class="history-check" type="checkbox" data-history-id="${item.id}" ${checked}>
+						<div class="history-content">
+							<strong>${escapeHtml(item.action)}</strong>
+							<p>${escapeHtml(item.note)}</p>
+							<div class="meta">${formatTime(item.at)}</div>
+						</div>
+					</div>
+				`;
+				const checkbox = li.querySelector(".history-check");
+				checkbox.addEventListener("change", event => {
+					const id = event.target.getAttribute("data-history-id");
+					if (!id) return;
+					if (event.target.checked) {
+						selectedHistoryIds.add(id);
+					} else {
+						selectedHistoryIds.delete(id);
+					}
+				});
+				list.appendChild(li);
+			});
+		}
+
+		function addHistory(action, note) {
+			state.history.unshift({
+				id: createHistoryId(),
+				action,
+				note,
+				at: new Date().toISOString()
+			});
+
+			if (state.history.length > 120) {
+				state.history.length = 120;
+			}
+		}
+
+		function updateLastAction() {
+			const el = document.getElementById("lastUpdate");
+			if (!state.history.length) {
+				el.textContent = "Chua co thao tac gan day.";
+				return;
+			}
+			const last = state.history[0];
+			el.textContent = `Lan cuoi: ${last.action} (${formatTime(last.at)})`;
+		}
+
+		function exportConfig() {
+			const payload = {
+				exportedAt: new Date().toISOString(),
+				lines: state.lines,
+				stations: state.stations,
+				notices: state.notices
+			};
+
+			const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+			const url = URL.createObjectURL(blob);
+			const anchor = document.createElement("a");
+			anchor.href = url;
+			anchor.download = "metro-admin-config.json";
+			anchor.click();
+			URL.revokeObjectURL(url);
+
+			addHistory("Xuat cau hinh", "Da tai file metro-admin-config.json");
+			saveState();
+			renderAll();
+		}
+
+		function resetState() {
+			const ok = window.confirm("Ban chac chan muon khoi phuc trang thai mac dinh?");
+			if (!ok) return;
+
+			const fresh = JSON.parse(JSON.stringify(defaultState));
+			state.lines = fresh.lines;
+			state.stations = fresh.stations;
+			state.notices = fresh.notices;
+			state.history = fresh.history;
+			localStorage.removeItem(STORAGE_KEY);
+
+			hydrateStationData().finally(() => {
+				addHistory("Khoi phuc mac dinh", "Du lieu admin da duoc reset");
+				saveState();
+				renderAll();
+			});
+		}
+
+		function clearHistory() {
+			if (!state.history.length) {
+				window.alert("Lich su hien dang rong.");
+				return;
+			}
+
+			const ok = window.confirm("Ban co chac chan muon xoa toan bo lich su thao tac admin?");
+			if (!ok) return;
+
+			state.history = [];
+			selectedHistoryIds.clear();
+			saveState();
+			renderAll();
+		}
+
+		function getLocalDateKey(iso) {
+			const date = new Date(iso);
+			const y = date.getFullYear();
+			const m = String(date.getMonth() + 1).padStart(2, "0");
+			const d = String(date.getDate()).padStart(2, "0");
+			return `${y}-${m}-${d}`;
+		}
+
+		function deleteHistoryByDate() {
+			const input = document.getElementById("historyDate");
+			const selectedDate = input.value;
+			if (!selectedDate) {
+				window.alert("Vui long chon ngay can xoa.");
+				return;
+			}
+
+			const before = state.history.length;
+			state.history = state.history.filter(item => getLocalDateKey(item.at) !== selectedDate);
+			const removed = before - state.history.length;
+			if (removed <= 0) {
+				window.alert("Khong co lich su nao trong ngay da chon.");
+				return;
+			}
+
+			selectedHistoryIds.clear();
+			saveState();
+			renderAll();
+			window.alert(`Da xoa ${removed} muc lich su trong ngay ${selectedDate}.`);
+		}
+
+		function deleteSelectedHistory() {
+			if (!selectedHistoryIds.size) {
+				window.alert("Vui long tich chon it nhat 1 muc lich su de xoa.");
+				return;
+			}
+
+			const selectedIds = new Set(selectedHistoryIds);
+			const before = state.history.length;
+			state.history = state.history.filter(item => !selectedIds.has(item.id));
+			const removed = before - state.history.length;
+			selectedHistoryIds.clear();
+			saveState();
+			renderAll();
+			window.alert(`Da xoa ${removed} muc lich su da chon.`);
+		}
+
+		function formatLineLabel(line) {
+			return line === "ALL" ? "Toan mang" : line;
+		}
+
+		function formatTime(iso) {
+			return new Date(iso).toLocaleString("vi-VN", {
+				day: "2-digit",
+				month: "2-digit",
+				year: "numeric",
+				hour: "2-digit",
+				minute: "2-digit"
+			});
+		}
+
+		function escapeHtml(value) {
+			return String(value)
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/\"/g, "&quot;")
+				.replace(/'/g, "&#039;");
+		}
+
+		document.getElementById("stationSelect").addEventListener("change", updateStationStatusMessage);
+	</script>
+</body>
+
+</html>

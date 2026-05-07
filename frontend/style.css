@@ -24,6 +24,32 @@ body {
     background: #f2f4f8;
     color: #1f2937;
 }
+
+.admin-mode-btn {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 1200;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(24, 23, 53, 0.82);
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-mode-btn:hover {
+    background: rgba(30, 64, 175, 0.88);
+    transform: translateY(-1px);
+}
+
+.admin-mode-btn:active {
+    transform: translateY(0);
+}
 /* đồng bộ font cho button với body*/
 button {
     font: inherit;
@@ -358,7 +384,7 @@ button {
 .map-area {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 76px 20px 20px;
     gap: 16px;
     height: 100%;
 }
@@ -418,7 +444,7 @@ button {
     }
 
     .map-area {
-        padding: 20px 20px 40px;
+        padding: 72px 20px 40px;
     }
 
     #map {
@@ -429,6 +455,13 @@ button {
 @media (max-width: 700px) {
     .sidebar {
         padding: 16px;
+    }
+
+    .admin-mode-btn {
+        top: 10px;
+        right: 10px;
+        padding: 9px 12px;
+        font-size: 0.9rem;
     }
 
     .search-card {
