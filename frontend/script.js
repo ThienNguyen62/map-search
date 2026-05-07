@@ -30,6 +30,11 @@ let networkLayer = L.layerGroup().addTo(map);
 let stationLayerGroup = L.layerGroup().addTo(map);
 let adjacency = {};
 let selectingFrom = true;
+let selectedStationMarkers = {
+    from: null,
+    to: null
+};
+let selectedStationLayer = L.layerGroup().addTo(map);
 const lineColors = {
     U1: '#007bff', // Blue
     U2: '#dc3545', // Red
@@ -232,6 +237,11 @@ function drawStations() {
     stationMarkers = {};
     graph.stations.forEach(station => {
         console.log('Drawing station:', station.name, station.lat, station.lon);
+        const operationStatus = getStationOperationStatus(station.id);
+        const statusColor = operationStatus.statusLabel === 'Đóng' ? '#b42318' : '#027a48';
+        const statusText = operationStatus.statusLabel === 'Đóng'
+            ? `Đóng${operationStatus.reason ? ` - ${operationStatus.reason}` : ''}`
+            : 'Mở';
         const marker = L.circleMarker([station.lat, station.lon], {
             radius: 6,
             color: '#005b96',
@@ -239,11 +249,66 @@ function drawStations() {
             fillOpacity: 0.9,
             weight: 2
         }).addTo(stationLayerGroup);
-        marker.bindPopup(`<strong>${station.name}</strong><br/>${station.id}`);
+        marker.bindPopup(`<strong>${station.name}</strong><br/>${station.id}<br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`);
         marker.on('click', () => selectStation(station));
         stationMarkers[station.id] = marker;
     });
     console.log('Stations drawn, markers count:', Object.keys(stationMarkers).length);
+}
+
+function createCustomPinIcon(markerType) {
+    // Tạo SVG pin marker
+    let color = markerType === 'from' ? '#4CAF50' : '#F44336';
+    let strokeColor = markerType === 'from' ? '#2E7D32' : '#C62828';
+    
+    const svg = `
+        <svg width="40" height="50" viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 1 C28 1 35 8 35 15 C35 25 20 48 20 48 C20 48 5 25 5 15 C5 8 12 1 20 1 Z" 
+                  fill="${color}" stroke="${strokeColor}" stroke-width="2"/>
+            <circle cx="20" cy="15" r="6" fill="white" stroke="${strokeColor}" stroke-width="1.5"/>
+        </svg>
+    `;
+    
+    return L.icon({
+        iconUrl: 'data:image/svg+xml;base64,' + btoa(svg),
+        iconSize: [40, 50],
+        iconAnchor: [20, 50],
+        popupAnchor: [0, -40],
+        className: `station-marker-${markerType}`
+    });
+}
+
+function markStationOnMap(stationId, markerType = 'from') {
+    // Xóa marker cũ nếu có
+    if (selectedStationMarkers[markerType]) {
+        selectedStationLayer.removeLayer(selectedStationMarkers[markerType]);
+    }
+    
+    const station = graphById[stationId];
+    if (!station) return;
+    
+    // Xác định tên loại ga
+    const label = markerType === 'from' ? 'Ga đi' : 'Ga đến';
+    
+    // Tạo custom pin marker
+    const marker = L.marker([station.lat, station.lon], {
+        icon: createCustomPinIcon(markerType)
+    });
+    
+    // Thêm popup hiển thị loại ga
+    marker.bindPopup(`<strong>${label}</strong><br/>${station.name}`);
+    marker.openPopup();
+    
+    marker.addTo(selectedStationLayer);
+    selectedStationMarkers[markerType] = marker;
+}
+
+function clearStationMarker(markerType = 'from') {
+    // Xóa marker của ga đã chọn
+    if (selectedStationMarkers[markerType]) {
+        selectedStationLayer.removeLayer(selectedStationMarkers[markerType]);
+        selectedStationMarkers[markerType] = null;
+    }
 }
 
 function drawNetwork() {
@@ -263,8 +328,10 @@ function drawNetwork() {
 function selectStation(station) {
     if (selectingFrom) {
         document.getElementById('fromStation').value = station.name;
+        markStationOnMap(station.id, 'from');
     } else {
         document.getElementById('toStation').value = station.name;
+        markStationOnMap(station.id, 'to');
     }
 }
 
@@ -357,6 +424,78 @@ function getStationDistanceKm(fromId, toId) {
     return haversineKm(fromLat, fromLon, toLat, toLon);
 }
 
+function getBlockedLinesFromAdminState() {
+    // Doc du lieu quan tri tu localStorage de biet tuyen nao dang bi cam.
+    const storageKey = 'metroAdminStateV1';
+    try {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return new Set();
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.lines)) return new Set();
+        return new Set(
+            parsed.lines
+                .filter(line => line && line.blocked)
+                .map(line => line.id)
+        );
+    } catch (error) {
+        console.warn('Cannot parse admin state from localStorage:', error);
+        return new Set();
+    }
+}
+
+function getRouteOperationStatus(route) {
+    // Mac dinh la "Mo". Neu co it nhat 1 tuyen trong lo trinh bi cam thi "Dong".
+    const blockedLines = getBlockedLinesFromAdminState();
+    if (blockedLines.size === 0 || !route || !Array.isArray(route.edges)) {
+        return { statusLabel: 'Mở', blockedRouteLines: [] };
+    }
+
+    const blockedRouteLines = Array.from(
+        new Set(route.edges.map(edge => edge.line).filter(line => blockedLines.has(line)))
+    );
+
+    return blockedRouteLines.length > 0
+        ? { statusLabel: 'Đóng', blockedRouteLines }
+        : { statusLabel: 'Mở', blockedRouteLines: [] };
+}
+
+function getStationOperationStatus(stationId) {
+    // Mặc định là mở. Nếu admin đóng ga thì popup hiển thị Đóng.
+    try {
+        const raw = localStorage.getItem('metroAdminStateV1');
+        if (!raw) return { statusLabel: 'Mở', reason: '' };
+
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.stations)) {
+            return { statusLabel: 'Mở', reason: '' };
+        }
+
+        const station = parsed.stations.find(item => item && item.id === stationId);
+        if (!station || !station.closed) {
+            return { statusLabel: 'Mở', reason: '' };
+        }
+
+        return {
+            statusLabel: 'Đóng',
+            reason: station.reason || 'Đang tạm dừng hoạt động'
+        };
+    } catch (error) {
+        console.warn('Cannot parse station admin state from localStorage:', error);
+        return { statusLabel: 'Mở', reason: '' };
+    }
+}
+
+function centerMapToStation(stationId) {
+    // Định tâm bản đồ đến vị trí ga và phóng to để xem rõ.
+    const station = graphById[stationId];
+    if (!station) return;
+    map.setView([station.lat, station.lon], 15);
+    // Hiển thị popup của marker ga
+    if (stationMarkers[stationId]) {
+        stationMarkers[stationId].openPopup();
+    }
+}
+
 function showResult(route, fromName, toName) {
     // Gom cac canh lien tiep cung line thanh segment de hien thi de doc.
     const result = document.getElementById('result');
@@ -390,13 +529,18 @@ function showResult(route, fromName, toName) {
 
     const listItems = route.path.map((id, index) => {
         const station = graphById[id];
-        return `<li>${index + 1}. ${station.name}</li>`;
+        return `<li><span class="station-link" data-station-id="${id}" style="cursor: pointer; color: #0066cc; text-decoration: underline;">${index + 1}. ${station.name}</span></li>`;
     }).join('');
 
     const transferCount = Math.max(0, segments.length - 1);
+    const operationStatus = getRouteOperationStatus(route);
+    const blockedLinesText = operationStatus.blockedRouteLines.length > 0
+        ? ` (${operationStatus.blockedRouteLines.join(', ')} đang bị cấm)`
+        : '';
 
     result.innerHTML = `
         <p>Lộ trình từ <strong>${fromName}</strong> đến <strong>${toName}</strong>:</p>
+        <p><strong>Trạng thái vận hành:</strong> ${operationStatus.statusLabel}${blockedLinesText}</p>
         <p><strong>Tổng thời gian dự kiến:</strong> ${formatMinutes(route.cost)}</p>
         <p><strong>Tổng khoảng cách ước tính:</strong> ${formatDistanceKm(totalDistance)}</p>
         <p><strong>Số ga đi qua:</strong> ${route.path.length}</p>
@@ -406,6 +550,23 @@ function showResult(route, fromName, toName) {
         <p><strong>Danh sách ga:</strong></p>
         <ol>${listItems}</ol>
     `;
+
+    // Thêm event listeners cho các ga trong danh sách để điều hướng bản đồ
+    document.querySelectorAll('.station-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const stationId = link.getAttribute('data-station-id');
+            centerMapToStation(stationId);
+        });
+        // Thêm hiệu ứng hover
+        link.addEventListener('mouseenter', () => {
+            link.style.fontWeight = 'bold';
+            link.style.textDecoration = 'underline double';
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.fontWeight = 'normal';
+            link.style.textDecoration = 'underline';
+        });
+    });
 }
     // last code
     // function findRoute() {
@@ -547,7 +708,37 @@ function showResult(route, fromName, toName) {
     }
     if (fromInput) {
         fromInput.addEventListener('focus', () => selectingFrom = true);
+        fromInput.addEventListener('change', () => {
+            if (fromInput.value.trim()) {
+                const stationId = findStationIdByName(fromInput.value);
+                if (stationId) {
+                    markStationOnMap(stationId, 'from');
+                }
+            } else {
+                clearStationMarker('from');
+            }
+        });
+        fromInput.addEventListener('input', () => {
+            if (!fromInput.value.trim()) {
+                clearStationMarker('from');
+            }
+        });
     }
     if (toInput) {
         toInput.addEventListener('focus', () => selectingFrom = false);
+        toInput.addEventListener('change', () => {
+            if (toInput.value.trim()) {
+                const stationId = findStationIdByName(toInput.value);
+                if (stationId) {
+                    markStationOnMap(stationId, 'to');
+                }
+            } else {
+                clearStationMarker('to');
+            }
+        });
+        toInput.addEventListener('input', () => {
+            if (!toInput.value.trim()) {
+                clearStationMarker('to');
+            }
+        });
     }

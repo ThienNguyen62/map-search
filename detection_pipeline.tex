@@ -1,0 +1,117 @@
+    \documentclass[11pt]{article}
+    \usepackage[utf8]{inputenc}
+    \usepackage[english]{babel}
+    \usepackage{tikz}
+    \usepackage{graphicx}
+    \usepackage{float}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+
+    \usetikzlibrary{shapes,arrows,positioning,calc,decorations.pathreplacing}
+
+    % Define colors
+    \definecolor{detectioncolor}{RGB}{173,216,230}  % Light blue
+    \definecolor{processingcolor}{RGB}{144,238,144} % Light green
+    \definecolor{hardwarecolor}{RGB}{221,160,221}   % Light purple
+    \definecolor{decisioncolor}{RGB}{255,255,153}   % Light yellow
+    \definecolor{failurecolor}{RGB}{255,200,200}    % Light red
+
+    % Define styles
+    \tikzstyle{box}=[rectangle, minimum width=2.5cm, minimum height=0.8cm, text width=2.3cm, align=center, draw, thick]
+    \tikzstyle{detectionbox}=[box, fill=detectioncolor]
+    \tikzstyle{processingbox}=[box, fill=processingcolor]
+    \tikzstyle{hardwarebox}=[box, fill=hardwarecolor]
+    \tikzstyle{failurebox}=[box, fill=failurecolor]
+    \tikzstyle{decision}=[diamond, minimum width=2cm, minimum height=1cm, draw, thick, fill=decisioncolor, aspect=2]
+    \tikzstyle{arrow}=[->, >=stealth, line width=1.5pt]
+    \tikzstyle{dashedbox}=[dashed, thick, inner sep=0.2cm]
+
+    \begin{document}
+
+    \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.2cm, auto]
+
+        % 1) NIGHTTIME CAMERA INPUT
+        \node[box, fill=white, draw=black, line width=2pt] (input) {Nighttime Camera Input};
+        
+        % Detection Module Box
+        \node[inner sep=0.3cm, dashedbox, below=0.5cm of input, minimum width=4cm, minimum height=5.5cm] (detectionbox) {};
+        
+        % Detection module label
+    \node[left=0.1cm of detectionbox.north west, anchor=south east, font=\bfseries] {\textbf{1) Detection Module}};
+        % Frame Acquisition
+        \node[detectionbox, below=0.3cm of input] (frame) {Frame Acquisition\\$(I_t)$};
+        
+        % YOLO Detection
+        \node[detectionbox, below=0.3cm of frame] (yolo) {YOLO Ensemble Detection\\(Module A)};
+        
+        % NMS
+        \node[detectionbox, below=0.3cm of yolo] (nms) {Weighted Non-Maximum\\Suppression (NMS)};
+        
+        % Detection Output
+        \node[detectionbox, below=0.3cm of nms] (output) {Detection Output\\$(x, y, \text{confidence})$};
+        
+        % Vision Quality Check
+        \node[decision, below=1.2cm of output] (quality) {Vision Quality\\Check};
+        
+        % Post-processing & Mapping Box
+        \node[inner sep=0.3cm, dashedbox, below=1cm of quality, minimum width=4cm, minimum height=3cm] (processingbox) {};
+        
+        % Post-processing label
+    \node[left=0.1cm of processingbox.north west, anchor=south east, font=\bfseries] {\textbf{2) Post-processing}\\[-0.1cm]\textbf{\& Mapping}};
+        % Pixel-to-Grid Mapping
+        \node[processingbox, below=0.3cm of quality] (mapping) {Pixel-to-Grid Mapping};
+        
+        % Temporal Suppression
+        \node[processingbox, below=0.3cm of mapping] (temporal) {Temporal Suppression\\(hold time = 0 ms)};
+        
+        % Hardware Interface & Output Box
+        \node[inner sep=0.3cm, dashedbox, below=0.8cm of temporal, minimum width=4cm, minimum height=3cm] (hardwarebox) {};
+        
+        % Hardware label
+    \node[left=0.1cm of hardwarebox.north west, anchor=south east, font=\bfseries] {\textbf{3) Hardware Interface}\\[-0.1cm]\textbf{\& Output}};
+        % Microcontroller
+        \node[hardwarebox, below=0.5cm of temporal] (micro) {Microcontroller\\(Arduino Uno)};
+        
+        % LED Matrix
+        \node[hardwarebox, below=0.3cm of micro] (led) {8×8 LED Matrix\\Display};
+        
+        % Detection Failure (Glare Flash)
+        \node[failurebox, right=3cm of quality] (failure) {Detection Failure\\(Glare Flash)};
+        
+        % Legend
+        \node[inner sep=0.15cm, draw, thick, below=3cm of led, minimum width=5cm, minimum height=2.5cm] (legend) {
+            \begin{tikzpicture}[node distance=0.3cm]
+                \node[detectionbox, minimum width=0.6cm, minimum height=0.3cm] (l1) {}; \node[right=0.3cm of l1] {1) Detection Module};
+                \node[processingbox, minimum width=0.6cm, minimum height=0.3cm, below=0.2cm of l1] (l2) {}; \node[right=0.3cm of l2] {2) Post-processing \& Mapping};
+                \node[hardwarebox, minimum width=0.6cm, minimum height=0.3cm, below=0.2cm of l2] (l3) {}; \node[right=0.3cm of l3] {3) Hardware Interface \& Output};
+                \node[fill=decisioncolor, draw, diamond, minimum width=0.4cm, minimum height=0.4cm, below=0.2cm of l3] (l4) {}; \node[right=0.3cm of l4] {Decision};
+                \node[failurebox, minimum width=0.6cm, minimum height=0.3cm, below=0.2cm of l4] (l5) {}; \node[right=0.3cm of l5] {Failure Handling};
+            \end{tikzpicture}
+        };
+        
+        % Arrows
+        \draw[arrow] (input) -- (frame);
+        \draw[arrow] (frame) -- (yolo);
+        \draw[arrow] (yolo) -- (nms);
+        \draw[arrow] (nms) -- (output);
+        \draw[arrow] (output) -- (quality);
+        
+        % Quality check branches
+        \draw[arrow, color=darkgreen] (quality) -- node[above, font=\small] {Valid Detection} (mapping);
+        \draw[arrow, color=red] (quality) -- node[above, font=\small, text=red] {Degraded Condition} node[below, font=\small, text=red] {(Glare)} (failure);
+        
+        % Post-processing flow
+        \draw[arrow] (mapping) -- (temporal);
+        
+        % Hardware flow
+        \draw[arrow] (temporal) -- (micro);
+        \draw[arrow] (micro) -- (led);
+
+    \end{tikzpicture}
+    \caption{Overview of the nighttime vision detection pipeline. The system consists of three main modules: (1) Detection Module processes camera input using YOLO ensemble and NMS; (2) Post-processing \& Mapping converts pixel coordinates to grid representation; (3) Hardware Interface communicates with the LED matrix display. Quality checks at each stage handle degraded conditions.}
+    \label{fig:detection_pipeline}
+    \end{figure}
+
+    \end{document}
