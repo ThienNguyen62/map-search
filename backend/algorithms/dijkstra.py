@@ -378,3 +378,12 @@ def find_route_with_lines(G: nx.Graph, start: Any, end: Any) -> dict:
     Wrapper đơn giản của dijkstra_subway().
     """
     return dijkstra_subway(G, start, end)
+
+
+def dijkstra(G: nx.Graph, orig_node: Any, dest_node: Any) -> tuple[list[Any], float]:
+    """Backward-compatible alias for the pathfinding service.
+
+    Returns a tuple (path, total_time) matching the caller expectation.
+    """
+    result = dijkstra_subway(G, orig_node, dest_node)
+    return result.get("path", []), result.get("total_time", 0.0)
