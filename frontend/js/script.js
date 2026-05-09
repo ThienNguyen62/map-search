@@ -20,7 +20,7 @@ osmLayer.addTo(map);
 map.addControl(L.control.scale());
 map.addControl(L.control.zoom({ position: 'topright' }));
 
-// graph: du lieu do thi metro sau khi nap tu metro_graph.json.
+// graph: du lieu do thi metro sau khi nap tu stations.json va edges.json.
 let graph = { stations: [], edges: [] };
 let graphById = {};
 let stationIdByName = {};
@@ -36,34 +36,58 @@ let selectedStationMarkers = {
 };
 let selectedStationLayer = L.layerGroup().addTo(map);
 const lineColors = {
-    U1: '#007bff', // Blue
-    U2: '#dc3545', // Red
-    U3: '#28a745', // Green
-    U4: '#ffc107', // Yellow
-    U5: '#6f42c1', // Purple
-    U6: '#17a2b8', // Cyan
-    U7: '#fd7e14', // Orange
-    U8: '#e83e8c'  // Pink
+    // U-Bahn (màu chính thức MVV)
+    U1: '#417AB4', // xanh dương
+    U2: '#D4311E', // đỏ
+    U3: '#F5821F', // cam
+    U4: '#00A76D', // xanh lá
+    U5: '#BF7F50', // nâu
+    U6: '#0065A3', // xanh navy
+    U7: '#8246AF', // tím (U7 = U1+U2 blend)
+    U8: '#C4071C', // đỏ đậm (U8 = U2+U3 blend)
+    // S-Bahn (màu chính thức MVV)
+    S1: '#1A9BD7', // xanh nhạt
+    S2: '#76B82A', // xanh lá nhạt
+    S3: '#951B81', // tím hồng
+    S4: '#E2001A', // đỏ tươi
+    S6: '#00A550', // xanh lá đậm
+    S7: '#964B00', // nâu đậm
+    S8: '#000000', // đen (Flughafen)
+    // Fallback
+    U:  '#417AB4',
+    S:  '#1A9BD7',
+    US: '#888888',
 };
 
 function loadGraph() {
-
     // Thu tu fallback: API backend -> file local frontend -> file local root data.
-    const sources = [
-        'http://127.0.0.1:5000/api/graph',
-        './metro_graph.json',
-        '/data/metro_graph.json',
-        '../data/metro_graph.json'
+    const stationsSources = [
+        'http://127.0.0.1:5000/api/stations',
+        './stations.json',
+        '/data/stations.json',
+        '../data/stations.json'
+    ];
+    
+    const edgesSources = [
+        'http://127.0.0.1:5000/api/edges',
+        './edges.json',
+        '/data/edges.json',
+        '../data/edges.json'
     ];
 
-    const tryLoad = index => {
-        if (index >= sources.length) {
-            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu điểm ga. Hãy chạy backend hoặc đặt file metro_graph.json trong thư mục frontend.</p>';
+    let stationsData = null;
+    let edgesData = null;
+    let stationsDone = false;
+    let edgesDone = false;
+
+    const tryLoadStations = index => {
+        if (index >= stationsSources.length) {
+            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu stations.json. Hãy chạy backend hoặc đặt file stations.json trong thư mục frontend.</p>';
             return;
         }
 
-        const url = sources[index];
-        console.log('Loading graph from:', url);
+        const url = stationsSources[index];
+        console.log('Loading stations from:', url);
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -72,57 +96,113 @@ function loadGraph() {
                 return response.json();
             })
             .then(data => {
-                if (!data || !Array.isArray(data.stations) || !Array.isArray(data.edges)) {
-                    throw new Error('Invalid graph payload');
+                if (!data || !Array.isArray(data)) {
+                    throw new Error('Invalid stations payload');
                 }
-                console.log('Graph loaded:', data.stations.length, 'stations,', data.edges.length, 'edges');
-                graph = data;
-                initGraph();
+                console.log('Stations loaded:', data.length, 'stations');
+                stationsData = data;
+                stationsDone = true;
+                if (stationsDone && edgesDone) {
+                    graph = { stations: stationsData, edges: edgesData };
+                    initGraph();
+                }
             })
             .catch(error => {
                 console.warn('Load failed from source:', url, error);
-                tryLoad(index + 1);
+                tryLoadStations(index + 1);
             });
     };
 
-    tryLoad(0);
-// =======
-//     // Uu tien thu muc data o root du an (noi luu file ban da tao).
-//     const graphCandidates = [
-//         '/data/metro_graph.json',
-//         'data/metro_graph.json',
-//         '../data/metro_graph.json',
-//         '/frontend/data/metro_graph.json'
-//     ];
+const tryLoadEdges = index => {
+    if (index >= edgesSources.length) {
+        document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu edges.json. Hãy chạy backend hoặc đặt file edges.json trong thư mục frontend.</p>';
+        return;
+    }
 
-//     const tryLoad = async () => {
-//         let lastError = null;
-//         for (const path of graphCandidates) {
-//             try {
-//                 const response = await fetch(path, { cache: 'no-store' });
-//                 if (!response.ok) {
-//                     throw new Error(`HTTP ${response.status}`);
-//                 }
-//                 const data = await response.json();
-//                 if (!data || !Array.isArray(data.stations) || !Array.isArray(data.edges)) {
-//                     throw new Error('JSON khong dung dinh dang graph');
-//                 }
-//                 graph = data;
-//                 initGraph();
-//                 console.log(`Da tai du lieu graph tu: ${path}`);
-//                 return;
-//             } catch (error) {
-//                 lastError = error;
-//             }
-//         }
+    const url = edgesSources[index];
+    console.log('Loading edges from:', url);
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Raw edges data:', data);
+            
+            // Kiểm tra nhiều cấu trúc dữ liệu khác nhau
+            let edgesArray = null;
+            
+            if (Array.isArray(data)) {
+                edgesArray = data;
+                console.log('Data is array, length:', edgesArray.length);
+            } 
+            else if (data && typeof data === 'object') {
+                if (Array.isArray(data.connections)) {
+                    edgesArray = data.connections;
+                    console.log('Found connections array, length:', edgesArray.length);
+                }
+                else if (Array.isArray(data.edges)) {
+                    edgesArray = data.edges;
+                    console.log('Found edges array, length:', edgesArray.length);
+                }
+                else if (data.data && Array.isArray(data.data)) {
+                    edgesArray = data.data;
+                    console.log('Found data array, length:', edgesArray.length);
+                }
+            }
+            
+            if (!edgesArray || edgesArray.length === 0) {
+                console.error('Invalid edges payload:', data);
+                throw new Error('Invalid edges payload: no connections/edges array found');
+            }
+            
+            // Suy ra line từ prefix của station ID vì edges.json không có trường line.
+            // US_ = ga dùng chung U+S, ưu tiên theo đầu kia.
+            // U_ → U-Bahn, S_ → S-Bahn, US_ → xét đầu còn lại.
+            const inferLine = (fromId, toId) => {
+                const fromPrefix = (fromId || '').split('_')[0];
+                const toPrefix = (toId || '').split('_')[0];
+                if (fromPrefix === 'U') return 'U';
+                if (fromPrefix === 'S') return 'S';
+                if (fromPrefix === 'US') {
+                    if (toPrefix === 'U') return 'U';
+                    if (toPrefix === 'S') return 'S';
+                    return 'US';
+                }
+                return fromPrefix || 'U';
+            };
 
-//         console.error('Loi tai metro_graph.json', lastError);
-//         document.getElementById('result').innerHTML =
-//             '<p>Không thể tải dữ liệu tuyến metro. Hãy chạy local server tại thư mục gốc map-search để dùng file data/metro_graph.json.</p>';
-//     };
+            // Transform dữ liệu
+            edgesData = edgesArray.map(edge => {
+                const fromId = edge.from_id || edge.from;
+                const toId = edge.to_id || edge.to;
+                return {
+                    from: fromId,
+                    to: toId,
+                    time: edge.time_min || edge.time || 1,
+                    line: edge.line || inferLine(fromId, toId)
+                };
+            });
+            
+            console.log('Transformed edges:', edgesData.length, 'edges');
+            console.log('First edge sample:', edgesData[0]);
+            
+            edgesDone = true;
+            if (stationsDone && edgesDone) {
+                graph = { stations: stationsData, edges: edgesData };
+                initGraph();
+            }
+        })
+        .catch(error => {
+            console.warn('Load failed from source:', url, error);
+            tryLoadEdges(index + 1);
+        });
+};
 
-//     tryLoad();
-// >>>>>>> main
+    tryLoadStations(0);
+    tryLoadEdges(0);
 }
 
 function initGraph() {
@@ -312,15 +392,15 @@ function clearStationMarker(markerType = 'from') {
 }
 
 function drawNetwork() {
-    // Ve toan bo mang luoi metro (net mờ) de nguoi dung nhin tong quan.
     networkLayer.clearLayers();
     graph.edges.forEach(edge => {
         const from = graphById[edge.from];
         const to = graphById[edge.to];
         if (!from || !to) return;
+        const color = lineColors[edge.line] || '#7589a0';
         L.polyline(
             [[from.lat, from.lon], [to.lat, to.lon]],
-            { color: lineColors[edge.line] || '#7589a0', weight: 2, opacity: 0.35 }
+            { color, weight: 2, opacity: 0.4 }
         ).addTo(networkLayer);
     });
 }
@@ -568,177 +648,151 @@ function showResult(route, fromName, toName) {
         });
     });
 }
-    // last code
-    // function findRoute() {
-    //     // Validate dau vao, chay tim duong, sau do cap nhat UI va ban do.
-    //     const fromInput = document.getElementById('fromStation').value;
-    //     const toInput = document.getElementById('toStation').value;
-    //     const fromId = findStationIdByName(fromInput);
-    //     const toId = findStationIdByName(toInput);
-    //     if (!fromId || !toId) {
-    //         document.getElementById('result').innerHTML = '<p>Vui lòng chọn ga hợp lệ từ danh sách gợi ý.</p>';
-    //         return;
-    //     }
-    //     if (fromId === toId) {
-    //         document.getElementById('result').innerHTML = '<p>Ga đi và ga đến phải khác nhau.</p>';
-    //         return;
-    //     }
-    //     const route = dijkstra(fromId, toId);
-    //     if (route) {
-    //         showResult(route, fromInput, toInput);
-    //         try {
-    //             renderRoute(route.edges);
-    //         } catch (error) {
-    //             console.error('Lỗi khi vẽ lộ trình', error);
-    //         }
-    //     } else {
-    //         showResult(route, fromInput, toInput);
-    //     }
-    // }
-    async function findRoute() {
-        const fromInput = document.getElementById('fromStation').value;
-        const toInput = document.getElementById('toStation').value;
 
-        if (!fromInput || !toInput) {
-            document.getElementById('result').innerHTML = '<p>Vui lòng chọn ga hợp lệ từ danh sách gợi ý.</p>';
-            return;
-        }
-        if (fromInput === toInput) {
-            document.getElementById('result').innerHTML = '<p>Ga đi và ga đến phải khác nhau.</p>';
-            return;
+async function findRoute() {
+    const fromInput = document.getElementById('fromStation').value;
+    const toInput = document.getElementById('toStation').value;
+
+    if (!fromInput || !toInput) {
+        document.getElementById('result').innerHTML = '<p>Vui lòng chọn ga hợp lệ từ danh sách gợi ý.</p>';
+        return;
+    }
+    if (fromInput === toInput) {
+        document.getElementById('result').innerHTML = '<p>Ga đi và ga đến phải khác nhau.</p>';
+        return;
+    }
+
+    try {
+        console.log('Calling API with:', { source: fromInput, target: toInput });
+        const response = await fetch('http://127.0.0.1:5000/api/path', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ source: fromInput, target: toInput })
+        });
+
+        console.log('Response status:', response.status);
+        const result = await response.json();
+        console.log('Response data:', result);
+
+        if (!response.ok || result.error) {
+            throw new Error(result.error || 'Backend path API failed');
         }
 
-        try {
-            console.log('Calling API with:', { source: fromInput, target: toInput });
-            const response = await fetch('http://127.0.0.1:5000/api/path', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ source: fromInput, target: toInput })
-            });
-
-            console.log('Response status:', response.status);
-            const result = await response.json();
-            console.log('Response data:', result);
-
-            if (!response.ok || result.error) {
-                throw new Error(result.error || 'Backend path API failed');
+        // Rebuild edges từ path
+        const edgeDetails = [];
+        for (let i = 0; i < result.path.length - 1; i++) {
+            const fromId = result.path[i];
+            const toId = result.path[i + 1];
+            const neighbors = adjacency[fromId] || [];
+            const edge = neighbors.find(e => e.to === toId);
+            if (edge) {
+                edgeDetails.push({ from: fromId, to: toId, line: edge.line, time: edge.cost });
             }
+        }
 
-            // Rebuild edges từ path
-            const edgeDetails = [];
-            for (let i = 0; i < result.path.length - 1; i++) {
-                const fromId = result.path[i];
-                const toId = result.path[i + 1];
-                const neighbors = adjacency[fromId] || [];
-                const edge = neighbors.find(e => e.to === toId);
-                if (edge) {
-                    edgeDetails.push({ from: fromId, to: toId, line: edge.line, time: edge.cost });
-                }
-            }
-
-            const route = { path: result.path, cost: result.cost, edges: edgeDetails };
-            showResult(route, fromInput, toInput);
+        const route = { path: result.path, cost: result.cost, edges: edgeDetails };
+        showResult(route, fromInput, toInput);
+        renderRoute(route.edges);
+    } catch (error) {
+        console.warn('Backend unavailable, switching to local Dijkstra:', error);
+        const fromId = findStationIdByName(fromInput);
+        const toId = findStationIdByName(toInput);
+        if (!fromId || !toId) {
+            document.getElementById('result').innerHTML = '<p>Không tìm thấy ga trong dữ liệu hiện có.</p>';
+            return;
+        }
+        const route = dijkstra(fromId, toId);
+        showResult(route, fromInput, toInput);
+        if (route) {
             renderRoute(route.edges);
-        } catch (error) {
-            console.warn('Backend unavailable, switching to local Dijkstra:', error);
-            const fromId = findStationIdByName(fromInput);
-            const toId = findStationIdByName(toInput);
-            if (!fromId || !toId) {
-                document.getElementById('result').innerHTML = '<p>Không tìm thấy ga trong dữ liệu hiện có.</p>';
-                return;
-            }
-            const route = dijkstra(fromId, toId);
-            showResult(route, fromInput, toInput);
-            if (route) {
-                renderRoute(route.edges);
-            }
         }
     }
+}
 
-    function setMapMode(mode) {
-        // Chuyen qua lai giua nen ban do thuong va nen ve tinh.
-        if (mode === 'satellite') {
-            map.removeLayer(osmLayer);
-            satelliteLayer.addTo(map);
+function setMapMode(mode) {
+    // Chuyen qua lai giua nen ban do thuong va nen ve tinh.
+    if (mode === 'satellite') {
+        map.removeLayer(osmLayer);
+        satelliteLayer.addTo(map);
+    } else {
+        map.removeLayer(satelliteLayer);
+        osmLayer.addTo(map);
+    }
+    document.querySelectorAll('.map-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === (mode === 'satellite' ? 'Vệ tinh' : 'Bản đồ'));
+    });
+}
+
+loadGraph();
+setMapMode('map');
+
+window.addEventListener('load', () => {
+    // Dam bao map tinh lai kich thuoc sau khi layout render xong.
+    setTimeout(() => {
+        map.invalidateSize(true);
+    }, 200);
+});
+
+document.getElementById('findRouteBtn').addEventListener('click', findRoute);
+document.querySelectorAll('.map-switch button').forEach(button => {
+    button.addEventListener('click', () => {
+        const mode = button.textContent.trim() === 'Vệ tinh' ? 'satellite' : 'map';
+        setMapMode(mode);
+    });
+});
+
+const selectFromBtn = document.getElementById('selectFromBtn');
+const selectToBtn = document.getElementById('selectToBtn');
+const fromInput = document.getElementById('fromStation');
+const toInput = document.getElementById('toStation');
+
+if (selectFromBtn) {
+    selectFromBtn.addEventListener('click', () => {
+        // Bat che do chon ga di truc tiep bang click marker.
+        selectingFrom = true;
+        alert('Bấm vào marker trên bản đồ để chọn ga đi.');
+    });
+}
+if (selectToBtn) {
+    selectToBtn.addEventListener('click', () => {
+        // Bat che do chon ga den truc tiep bang click marker.
+        selectingFrom = false;
+        alert('Bấm vào marker trên bản đồ để chọn ga đến.');
+    });
+}
+if (fromInput) {
+    fromInput.addEventListener('focus', () => selectingFrom = true);
+    fromInput.addEventListener('change', () => {
+        if (fromInput.value.trim()) {
+            const stationId = findStationIdByName(fromInput.value);
+            if (stationId) {
+                markStationOnMap(stationId, 'from');
+            }
         } else {
-            map.removeLayer(satelliteLayer);
-            osmLayer.addTo(map);
+            clearStationMarker('from');
         }
-        document.querySelectorAll('.map-switch button').forEach(btn => {
-            btn.classList.toggle('active', btn.textContent.trim() === (mode === 'satellite' ? 'Vệ tinh' : 'Bản đồ'));
-        });
-    }
-
-    loadGraph();
-    setMapMode('map');
-
-    window.addEventListener('load', () => {
-        // Dam bao map tinh lai kich thuoc sau khi layout render xong.
-        setTimeout(() => {
-            map.invalidateSize(true);
-        }, 200);
     });
-
-    document.getElementById('findRouteBtn').addEventListener('click', findRoute);
-    document.querySelectorAll('.map-switch button').forEach(button => {
-        button.addEventListener('click', () => {
-            const mode = button.textContent.trim() === 'Vệ tinh' ? 'satellite' : 'map';
-            setMapMode(mode);
-        });
+    fromInput.addEventListener('input', () => {
+        if (!fromInput.value.trim()) {
+            clearStationMarker('from');
+        }
     });
-
-    const selectFromBtn = document.getElementById('selectFromBtn');
-    const selectToBtn = document.getElementById('selectToBtn');
-    const fromInput = document.getElementById('fromStation');
-    const toInput = document.getElementById('toStation');
-
-    if (selectFromBtn) {
-        selectFromBtn.addEventListener('click', () => {
-            // Bat che do chon ga di truc tiep bang click marker.
-            selectingFrom = true;
-            alert('Bấm vào marker trên bản đồ để chọn ga đi.');
-        });
-    }
-    if (selectToBtn) {
-        selectToBtn.addEventListener('click', () => {
-            // Bat che do chon ga den truc tiep bang click marker.
-            selectingFrom = false;
-            alert('Bấm vào marker trên bản đồ để chọn ga đến.');
-        });
-    }
-    if (fromInput) {
-        fromInput.addEventListener('focus', () => selectingFrom = true);
-        fromInput.addEventListener('change', () => {
-            if (fromInput.value.trim()) {
-                const stationId = findStationIdByName(fromInput.value);
-                if (stationId) {
-                    markStationOnMap(stationId, 'from');
-                }
-            } else {
-                clearStationMarker('from');
+}
+if (toInput) {
+    toInput.addEventListener('focus', () => selectingFrom = false);
+    toInput.addEventListener('change', () => {
+        if (toInput.value.trim()) {
+            const stationId = findStationIdByName(toInput.value);
+            if (stationId) {
+                markStationOnMap(stationId, 'to');
             }
-        });
-        fromInput.addEventListener('input', () => {
-            if (!fromInput.value.trim()) {
-                clearStationMarker('from');
-            }
-        });
-    }
-    if (toInput) {
-        toInput.addEventListener('focus', () => selectingFrom = false);
-        toInput.addEventListener('change', () => {
-            if (toInput.value.trim()) {
-                const stationId = findStationIdByName(toInput.value);
-                if (stationId) {
-                    markStationOnMap(stationId, 'to');
-                }
-            } else {
-                clearStationMarker('to');
-            }
-        });
-        toInput.addEventListener('input', () => {
-            if (!toInput.value.trim()) {
-                clearStationMarker('to');
-            }
-        });
-    }
+        } else {
+            clearStationMarker('to');
+        }
+    });
+    toInput.addEventListener('input', () => {
+        if (!toInput.value.trim()) {
+            clearStationMarker('to');
+        }
+    });
+}
