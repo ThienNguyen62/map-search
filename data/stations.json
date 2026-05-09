@@ -1,1044 +1,1654 @@
-{
-  "stations": [
-    {
-      "id": "de:09162:1",
-      "name": "Karlsplatz (Stachus)",
-      "lat": 48.1401406,
-      "lon": 11.5657553,
-      "children": [
-        "de:09162:1:32:72",
-        "de:09162:1:51:51",
-        "de:09162:1:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:1010",
-      "name": "Neuperlach Süd U5 Gleis 1 Ri Therese-Giehse-Allee",
-      "lat": 48.0888796,
-      "lon": 11.6452203,
-      "children": [
-        "de:09162:1010:51:51",
-        "de:09162:1010:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:1020",
-      "name": "Therese-Giehse-Allee Gleis 1 Ri Neuperlach Zentrum",
-      "lat": 48.0946578,
-      "lon": 11.6427499,
-      "children": [
-        "de:09162:1020:51:51",
-        "de:09162:1020:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1030",
-      "name": "Neuperlach Zentrum Gleis 1 Ri Quiddestraße",
-      "lat": 48.1012512,
-      "lon": 11.6462803,
-      "children": [
-        "de:09162:1030:51:51",
-        "de:09162:1030:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1040",
-      "name": "Quiddestraße Gleis 1 Ri Michaelibad",
-      "lat": 48.1082037,
-      "lon": 11.6467295,
-      "children": [
-        "de:09162:1040:51:51",
-        "de:09162:1040:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1050",
-      "name": "Michaelibad Gleis 1 Ri Innsbrucker Ring",
-      "lat": 48.1183998,
-      "lon": 11.6317905,
-      "children": [
-        "de:09162:1050:51:51",
-        "de:09162:1050:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1060",
-      "name": "Innsbrucker Ring U2/U7/U8 Gleis 1 Ri Karl-Preis-Platz",
-      "lat": 48.1204747,
-      "lon": 11.6188548,
-      "children": [
-        "de:09162:1060:51:51",
-        "de:09162:1060:51:53",
-        "de:09162:1060:52:52",
-        "de:09162:1060:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:1070",
-      "name": "Karl-Preis-Platz Gleis 1 Ri Giesing",
-      "lat": 48.11792,
-      "lon": 11.6082995,
-      "children": [
-        "de:09162:1070:51:51",
-        "de:09162:1070:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:110",
-      "name": "Königsplatz Gleis 1 Ri Theresienstraße",
-      "lat": 48.14496,
-      "lon": 11.5632401,
-      "children": [
-        "de:09162:110:51:51",
-        "de:09162:110:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1110",
-      "name": "Giesing U-Bahn Gleis 1",
-      "lat": 48.1110588,
-      "lon": 11.5956333,
-      "children": [
-        "de:09162:1110:51:51",
-        "de:09162:1110:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1130",
-      "name": "Harras U-Bahn Gleis 1 Ri Implerstraße",
-      "lat": 48.1168465,
-      "lon": 11.5377998,
-      "children": [
-        "de:09162:1130:51:51",
-        "de:09162:1130:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1140",
-      "name": "Implerstraße U6 Gleis 1 Ri Poccistraße",
-      "lat": 48.1202828,
-      "lon": 11.5485256,
-      "children": [
-        "de:09162:1140:51:51",
-        "de:09162:1140:51:53",
-        "de:09162:1140:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:1150",
-      "name": "Heimeranplatz U-Bahn Gleis 1 Ri Westendstraße",
-      "lat": 48.1335822,
-      "lon": 11.5322572,
-      "children": [
-        "de:09162:1150:51:51",
-        "de:09162:1150:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1160",
-      "name": "Untersbergstraße Gleis 1 Ri Silberhornstraße",
-      "lat": 48.1126123,
-      "lon": 11.5876024,
-      "children": [
-        "de:09162:1160:51:51",
-        "de:09162:1160:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1170",
-      "name": "Silberhornstraße Gleis 1 Ri Kolumbusplatz",
-      "lat": 48.1148194,
-      "lon": 11.580883,
-      "children": [
-        "de:09162:1170:51:51",
-        "de:09162:1170:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1180",
-      "name": "Candidplatz Gleis 1 Ri Kolumbusplatz",
-      "lat": 48.1130741,
-      "lon": 11.5717291,
-      "children": [
-        "de:09162:1180:51:51",
-        "de:09162:1180:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1190",
-      "name": "Wettersteinplatz Gleis 1 Ri Candidplatz",
-      "lat": 48.1082337,
-      "lon": 11.5757805,
-      "children": [
-        "de:09162:1190:51:51",
-        "de:09162:1190:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:120",
-      "name": "Theresienstraße Gleis 1 Ri Josephsplatz",
-      "lat": 48.151553,
-      "lon": 11.5645696,
-      "children": [
-        "de:09162:120:51:51",
-        "de:09162:120:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1200",
-      "name": "St.-Quirin-Platz Gleis 1 Ri Wettersteinplatz",
-      "lat": 48.1044486,
-      "lon": 11.5814579,
-      "children": [
-        "de:09162:1200:51:51",
-        "de:09162:1200:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1210",
-      "name": "Mangfallplatz Gleis 1 Ri St.-Quirin-Platz",
-      "lat": 48.0969437,
-      "lon": 11.5790145,
-      "children": [
-        "de:09162:1210:51:51",
-        "de:09162:1210:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1220",
-      "name": "Josephsburg Gleis 1 Ri Innsbrucker Ring",
-      "lat": 48.1266032,
-      "lon": 11.6337309,
-      "children": [
-        "de:09162:1220:51:51",
-        "de:09162:1220:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1230",
-      "name": "Kreillerstraße Gleis 1 Ri Josephsburg",
-      "lat": 48.1258416,
-      "lon": 11.6466307,
-      "children": [
-        "de:09162:1230:51:51",
-        "de:09162:1230:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1240",
-      "name": "Moosfeld Gleis 1 Ri Trudering",
-      "lat": 48.1308303,
-      "lon": 11.670957,
-      "children": [
-        "de:09162:1240:51:51",
-        "de:09162:1240:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1250",
-      "name": "Messestadt West Gleis 1 Ri Moosfeld",
-      "lat": 48.1334863,
-      "lon": 11.6907918,
-      "children": [
-        "de:09162:1250:51:51",
-        "de:09162:1250:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1260",
-      "name": "Messestadt Ost Gleis 1 Ri Messestadt West",
-      "lat": 48.1334383,
-      "lon": 11.7034401,
-      "children": [
-        "de:09162:1260:51:51",
-        "de:09162:1260:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:130",
-      "name": "Josephsplatz Gleis 1 Ri Hohenzollernplatz",
-      "lat": 48.1556043,
-      "lon": 11.5671657,
-      "children": [
-        "de:09162:130:51:51",
-        "de:09162:130:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1330",
-      "name": "Partnachplatz Gleis 1 Ri Harras",
-      "lat": 48.1169185,
-      "lon": 11.5266068,
-      "children": [
-        "de:09162:1330:51:51",
-        "de:09162:1330:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1340",
-      "name": "Westpark Gleis 1 Ri Partnachplatz",
-      "lat": 48.117944,
-      "lon": 11.5162582,
-      "children": [
-        "de:09162:1340:51:51",
-        "de:09162:1340:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:140",
-      "name": "Hohenzollernplatz Gleis 1 Ri Scheidplatz",
-      "lat": 48.1623936,
-      "lon": 11.5688815,
-      "children": [
-        "de:09162:140:51:51",
-        "de:09162:140:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1430",
-      "name": "Brudermühlstraße Gleis 1 Ri Implerstraße",
-      "lat": 48.1122044,
-      "lon": 11.5487143,
-      "children": [
-        "de:09162:1430:51:51",
-        "de:09162:1430:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1440",
-      "name": "Thalkirchen (Tierpark) Gleis 1 Ri Brudermühlstraße",
-      "lat": 48.102769,
-      "lon": 11.5460463,
-      "children": [
-        "de:09162:1440:51:51",
-        "de:09162:1440:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1450",
-      "name": "Obersendling Gleis 1 Ri Thalkirchen",
-      "lat": 48.0981676,
-      "lon": 11.5358864,
-      "children": [
-        "de:09162:1450:51:51",
-        "de:09162:1450:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1460",
-      "name": "Aidenbachstraße Gleis 1 Ri Obersendling",
-      "lat": 48.0978856,
-      "lon": 11.5249988,
-      "children": [
-        "de:09162:1460:51:51",
-        "de:09162:1460:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1470",
-      "name": "Machtlfinger Straße Gleis 1 Ri Aidenbachstraße",
-      "lat": 48.0972437,
-      "lon": 11.514722,
-      "children": [
-        "de:09162:1470:51:51",
-        "de:09162:1470:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1480",
-      "name": "Forstenrieder Allee Gleis 1 Ri Machtlfinger Straße",
-      "lat": 48.0950298,
-      "lon": 11.4989836,
-      "children": [
-        "de:09162:1480:51:51",
-        "de:09162:1480:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1490",
-      "name": "Basler Straße Gleis 1 Ri Forstenrieder Allee",
-      "lat": 48.0908657,
-      "lon": 11.490764,
-      "children": [
-        "de:09162:1490:51:51",
-        "de:09162:1490:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:150",
-      "name": "Fraunhoferstraße Gleis 1 Ri Sendlinger Tor",
-      "lat": 48.1294153,
-      "lon": 11.5742085,
-      "children": [
-        "de:09162:150:51:51",
-        "de:09162:150:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1500",
-      "name": "Fürstenried West Gleis 1 Ri Basler Straße",
-      "lat": 48.0884776,
-      "lon": 11.4802537,
-      "children": [
-        "de:09162:1500:51:51",
-        "de:09162:1500:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1510",
-      "name": "Holzapfelkreuth Gleis 1 Ri Westpark",
-      "lat": 48.1162648,
-      "lon": 11.5018492,
-      "children": [
-        "de:09162:1510:51:51",
-        "de:09162:1510:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1520",
-      "name": "Haderner Stern Gleis 1 Ri Holzapfelkreuth",
-      "lat": 48.1183338,
-      "lon": 11.4890302,
-      "children": [
-        "de:09162:1520:51:51",
-        "de:09162:1520:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1530",
-      "name": "Großhadern Gleis 1 Ri Haderner Stern",
-      "lat": 48.1146934,
-      "lon": 11.4770826,
-      "children": [
-        "de:09162:1530:51:51",
-        "de:09162:1530:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:1540",
-      "name": "Klinikum Großhadern Gleis 1 Ri Großhadern",
-      "lat": 48.1090315,
-      "lon": 11.473714,
-      "children": [
-        "de:09162:1540:51:51",
-        "de:09162:1540:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:160",
-      "name": "Kolumbusplatz U2 Gleis 1 Ri Fraunhofer",
-      "lat": 48.119959,
-      "lon": 11.5767058,
-      "children": [
-        "de:09162:160:51:51",
-        "de:09162:160:51:53",
-        "de:09162:160:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:170",
-      "name": "Stiglmaierplatz",
-      "lat": 48.1468181,
-      "lon": 11.5590809,
-      "children": [
-        "de:09162:170:33:43",
-        "de:09162:170:37:77",
-        "de:09162:170:51:51",
-        "de:09162:170:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:180",
-      "name": "Maillingerstraße",
-      "lat": 48.1504023,
-      "lon": 11.5441598,
-      "children": [
-        "de:09162:180:31:41",
-        "de:09162:180:32:42",
-        "de:09162:180:51:51",
-        "de:09162:180:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:190",
-      "name": "Rotkreuzplatz",
-      "lat": 48.1528415,
-      "lon": 11.533937,
-      "children": [
-        "de:09162:190:1:1",
-        "de:09162:190:51:51",
-        "de:09162:190:51:52",
-        "de:09162:190:6:6"
-      ]
-    },
-    {
-      "id": "de:09162:2",
-      "name": "Marienplatz U-Bahn Gleis 1 Ri Odeonsplatz",
-      "lat": 48.1376828,
-      "lon": 11.5764543,
-      "children": [
-        "de:09162:2:51:51",
-        "de:09162:2:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:200",
-      "name": "Westfriedhof",
-      "lat": 48.1692599,
-      "lon": 11.5279183,
-      "children": [
-        "de:09162:200:1:4",
-        "de:09162:200:1:7",
-        "de:09162:200:51:51",
-        "de:09162:200:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:204",
-      "name": "Neuhausen",
-      "lat": 48.1563593,
-      "lon": 11.5314936,
-      "children": [
-        "de:09162:204:1:1",
-        "de:09162:204:4:4"
-      ]
-    },
-    {
-      "id": "de:09162:205",
-      "name": "Volkartstraße",
-      "lat": 48.1547833,
-      "lon": 11.5329578,
-      "children": [
-        "de:09162:205:32:72",
-        "de:09162:205:71:71"
-      ]
-    },
-    {
-      "id": "de:09162:240",
-      "name": "Theresienwiese Gleis 1 Ri Schwanthalerhöhe",
-      "lat": 48.1357165,
-      "lon": 11.5521279,
-      "children": [
-        "de:09162:240:51:51",
-        "de:09162:240:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:250",
-      "name": "Schwanthalerhöhe Gleis 1 Ri Heimeranplatz",
-      "lat": 48.133834,
-      "lon": 11.5410876,
-      "children": [
-        "de:09162:250:51:51",
-        "de:09162:250:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:260",
-      "name": "Westendstraße Gleis 1",
-      "lat": 48.1347692,
-      "lon": 11.5214325,
-      "children": [
-        "de:09162:260:51:51",
-        "de:09162:260:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:270",
-      "name": "Friedenheimer Straße Gleis 1 Ri Laimer Platz",
-      "lat": 48.1351709,
-      "lon": 11.5107335,
-      "children": [
-        "de:09162:270:51:51",
-        "de:09162:270:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:280",
-      "name": "Laimer Platz Gleis 1 Ausstieg",
-      "lat": 48.1355006,
-      "lon": 11.5019211,
-      "children": [
-        "de:09162:280:51:51",
-        "de:09162:280:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:30",
-      "name": "Poccistraße Gleis 1 Ri Goetheplatz",
-      "lat": 48.1255958,
-      "lon": 11.5505109,
-      "children": [
-        "de:09162:30:51:51",
-        "de:09162:30:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:300",
-      "name": "Moosach U-Bahn Gleis 1 Ausstieg",
-      "lat": 48.1810432,
-      "lon": 11.5081643,
-      "children": [
-        "de:09162:300:51:51",
-        "de:09162:300:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:304",
-      "name": "Hanauer Straße",
-      "lat": 48.1717582,
-      "lon": 11.5285651,
-      "children": [
-        "de:09162:304:1:1",
-        "de:09162:304:1:2"
-      ]
-    },
-    {
-      "id": "de:09162:312",
-      "name": "Georg-Brauchle-Ring",
-      "lat": 48.1768442,
-      "lon": 11.5292748,
-      "children": [
-        "de:09162:312:4:4",
-        "de:09162:312:51:51",
-        "de:09162:312:51:52",
-        "de:09162:312:7:7"
-      ]
-    },
-    {
-      "id": "de:09162:320",
-      "name": "Feldmoching U-Bahn Gleis 1 Ausstieg",
-      "lat": 48.2138746,
-      "lon": 11.5410247,
-      "children": [
-        "de:09162:320:51:51",
-        "de:09162:320:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:340",
-      "name": "Petuelring Gleis 1 Ri Olympiazentrum",
-      "lat": 48.1756761,
-      "lon": 11.5658182,
-      "children": [
-        "de:09162:340:51:51",
-        "de:09162:340:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:350",
-      "name": "Olympiazentrum U3 Gleis 1 Ri Oberwiesenfeld",
-      "lat": 48.1793421,
-      "lon": 11.5561074,
-      "children": [
-        "de:09162:350:51:51",
-        "de:09162:350:51:53",
-        "de:09162:350:52:52",
-        "de:09162:350:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:360",
-      "name": "Olympia-Einkaufszentrum",
-      "lat": 48.1820435,
-      "lon": 11.5299215,
-      "children": [
-        "de:09162:360:3:3",
-        "de:09162:360:51:51",
-        "de:09162:360:52:52",
-        "de:09162:360:53:53",
-        "de:09162:360:53:54"
-      ]
-    },
-    {
-      "id": "de:09162:370",
-      "name": "Moosacher St.-Martins-Platz Gleis 1 Ri Moosach Bf",
-      "lat": 48.1818757,
-      "lon": 11.5187285,
-      "children": [
-        "de:09162:370:51:51",
-        "de:09162:370:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:380",
-      "name": "Oberwiesenfeld Gleis 1 Ri Olympia-Einkaufszentrum",
-      "lat": 48.1860384,
-      "lon": 11.5475734,
-      "children": [
-        "de:09162:380:51:51",
-        "de:09162:380:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:40",
-      "name": "Goetheplatz Gleis 1 Ri Sendlinger Tor",
-      "lat": 48.1290375,
-      "lon": 11.5574459,
-      "children": [
-        "de:09162:40:51:51",
-        "de:09162:40:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:400",
-      "name": "Scheidplatz U3 Gleis 1 Ri Petuelring",
-      "lat": 48.1715844,
-      "lon": 11.5730137,
-      "children": [
-        "de:09162:400:51:51",
-        "de:09162:400:51:53",
-        "de:09162:400:52:52",
-        "de:09162:400:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:410",
-      "name": "Bonner Platz Gleis 1 Ri Scheidplatz",
-      "lat": 48.1667256,
-      "lon": 11.578179,
-      "children": [
-        "de:09162:410:51:51",
-        "de:09162:410:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:420",
-      "name": "Freimann Gleis 1 Ri Kieferngarten",
-      "lat": 48.1920093,
-      "lon": 11.6143991,
-      "children": [
-        "de:09162:420:51:51",
-        "de:09162:420:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:430",
-      "name": "Kieferngarten Gleis 1 Ri Fröttmaning",
-      "lat": 48.2037933,
-      "lon": 11.6132582,
-      "children": [
-        "de:09162:430:51:51",
-        "de:09162:430:51:53",
-        "de:09162:430:52:52",
-        "de:09162:430:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:470",
-      "name": "Fröttmaning Gleis 1 Ri Garching-Hochbrück",
-      "lat": 48.2118753,
-      "lon": 11.6168964,
-      "children": [
-        "de:09162:470:51:51",
-        "de:09162:470:51:53",
-        "de:09162:470:52:52",
-        "de:09162:470:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:5",
-      "name": "Ostbahnhof U-Bahn Gleis 1",
-      "lat": 48.1281441,
-      "lon": 11.6036732,
-      "children": [
-        "de:09162:5:51:51",
-        "de:09162:5:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:50",
-      "name": "Sendlinger Tor U3/U6 Gleis 1 Ri Marienplatz",
-      "lat": 48.1334803,
-      "lon": 11.5671298,
-      "children": [
-        "de:09162:50:51:51",
-        "de:09162:50:51:52",
-        "de:09162:50:53:53",
-        "de:09162:50:54:54"
-      ]
-    },
-    {
-      "id": "de:09162:500",
-      "name": "Münchner Freiheit U6 Gleis 1 Ri Dietlindenstraße",
-      "lat": 48.1616087,
-      "lon": 11.5863268,
-      "children": [
-        "de:09162:500:51:51",
-        "de:09162:500:51:53",
-        "de:09162:500:52:52",
-        "de:09162:500:52:54"
-      ]
-    },
-    {
-      "id": "de:09162:510",
-      "name": "Dietlindenstraße Gleis 1 Ri Nordfriedhof",
-      "lat": 48.1671091,
-      "lon": 11.5909082,
-      "children": [
-        "de:09162:510:51:51",
-        "de:09162:510:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:520",
-      "name": "Nordfriedhof Gleis 1 Ri Alte Heide",
-      "lat": 48.1730282,
-      "lon": 11.596855,
-      "children": [
-        "de:09162:520:51:51",
-        "de:09162:520:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:530",
-      "name": "Alte Heide Gleis 1 Ri Studentenstadt",
-      "lat": 48.1785933,
-      "lon": 11.602703,
-      "children": [
-        "de:09162:530:51:51",
-        "de:09162:530:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:540",
-      "name": "Studentenstadt Gleis 1 Ri Freimann",
-      "lat": 48.183481,
-      "lon": 11.6077067,
-      "children": [
-        "de:09162:540:51:51",
-        "de:09162:540:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:560",
-      "name": "Böhmerwaldplatz Gleis 1 Ri Prinzregentenplatz",
-      "lat": 48.1434315,
-      "lon": 11.6154322,
-      "children": [
-        "de:09162:560:51:51",
-        "de:09162:560:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:570",
-      "name": "Prinzregentenplatz Gleis 1 Ri Max-Weber-Platz",
-      "lat": 48.1392894,
-      "lon": 11.606979,
-      "children": [
-        "de:09162:570:51:51",
-        "de:09162:570:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:580",
-      "name": "Max-Weber-Platz U5 Gleis 1 Ri Lehel",
-      "lat": 48.1357285,
-      "lon": 11.5987325,
-      "children": [
-        "de:09162:580:51:51",
-        "de:09162:580:51:53",
-        "de:09162:580:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:590",
-      "name": "Lehel Gleis 1 Ri Odeonsplatz",
-      "lat": 48.139739,
-      "lon": 11.5879437,
-      "children": [
-        "de:09162:590:51:51",
-        "de:09162:590:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:6",
-      "name": "Hauptbahnhof (U, Tram)",
-      "lat": 48.139727,
-      "lon": 11.5610392,
-      "children": [
-        "de:09162:6:33:43",
-        "de:09162:6:51:51",
-        "de:09162:6:51:53",
-        "de:09162:6:52:52",
-        "de:09162:6:52:54",
-        "de:09162:6:55:55",
-        "de:09162:6:55:56"
-      ]
-    },
-    {
-      "id": "de:09162:60",
-      "name": "Odeonsplatz U3/U6 Gleis 1 Ri Universität",
-      "lat": 48.1433536,
-      "lon": 11.5780982,
-      "children": [
-        "de:09162:60:51:51",
-        "de:09162:60:51:52",
-        "de:09162:60:53:53",
-        "de:09162:60:54:54"
-      ]
-    },
-    {
-      "id": "de:09162:670",
-      "name": "Arabellapark Gleis 1 Ri Richard-Strauss-Straße",
-      "lat": 48.1535967,
-      "lon": 11.6220258,
-      "children": [
-        "de:09162:670:51:51",
-        "de:09162:670:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:680",
-      "name": "Richard-Strauss-Straße Gleis 1 Ri Böhmerwaldplatz",
-      "lat": 48.1485084,
-      "lon": 11.616564,
-      "children": [
-        "de:09162:680:51:51",
-        "de:09162:680:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:70",
-      "name": "Universität Gleis 1 Ri Giselastraße",
-      "lat": 48.1502645,
-      "lon": 11.5811794,
-      "children": [
-        "de:09162:70:51:51",
-        "de:09162:70:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:7000",
-      "name": "Hauptbahnhof Nord",
-      "lat": 48.1424545,
-      "lon": 11.5607787,
-      "children": [
-        "de:09162:7000:32:42",
-        "de:09162:7000:37:77"
-      ]
-    },
-    {
-      "id": "de:09162:740",
-      "name": "Milbertshofen Gleis 1 Ri Frankfurter Ring",
-      "lat": 48.1807557,
-      "lon": 11.5732203,
-      "children": [
-        "de:09162:740:51:51",
-        "de:09162:740:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:750",
-      "name": "Frankfurter Ring Gleis 1 Ri Am Hart",
-      "lat": 48.1867691,
-      "lon": 11.5727802,
-      "children": [
-        "de:09162:750:51:51",
-        "de:09162:750:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:760",
-      "name": "Am Hart Gleis 1 Ri Harthof",
-      "lat": 48.1958238,
-      "lon": 11.5718998,
-      "children": [
-        "de:09162:760:51:51",
-        "de:09162:760:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:770",
-      "name": "Harthof Gleis 1 Ri Dülferstraße",
-      "lat": 48.2043082,
-      "lon": 11.5694654,
-      "children": [
-        "de:09162:770:51:51",
-        "de:09162:770:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:780",
-      "name": "Dülferstraße Gleis 1 Ri Hasenbergl",
-      "lat": 48.2124499,
-      "lon": 11.5633029,
-      "children": [
-        "de:09162:780:51:51",
-        "de:09162:780:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:790",
-      "name": "Hasenbergl Gleis 1 Ri Feldmoching",
-      "lat": 48.2134855,
-      "lon": 11.5548678,
-      "children": [
-        "de:09162:790:51:51",
-        "de:09162:790:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:80",
-      "name": "Giselastraße Gleis 1 Ri Münchner Freiheit",
-      "lat": 48.1566949,
-      "lon": 11.5841618,
-      "children": [
-        "de:09162:80:51:51",
-        "de:09162:80:51:52"
-      ]
-    },
-    {
-      "id": "de:09162:920",
-      "name": "Trudering Gleis 1 Ri Kreillerstraße",
-      "lat": 48.1257697,
-      "lon": 11.6621625,
-      "children": [
-        "de:09162:920:51:51",
-        "de:09162:920:52:52"
-      ]
-    },
-    {
-      "id": "de:09162:990",
-      "name": "Gern",
-      "lat": 48.1637478,
-      "lon": 11.5290053,
-      "children": [
-        "de:09162:990:31:41",
-        "de:09162:990:32:42",
-        "de:09162:990:51:51",
-        "de:09162:990:51:52"
-      ]
-    },
-    {
-      "id": "de:09184:460",
-      "name": "Garching, Forschungszentrum Gleis 1",
-      "lat": 48.2647896,
-      "lon": 11.671487,
-      "children": [
-        "de:09184:460:11:51",
-        "de:09184:460:11:52"
-      ]
-    },
-    {
-      "id": "de:09184:480",
-      "name": "Garching-Hochbrück Gleis 1",
-      "lat": 48.2474328,
-      "lon": 11.6311707,
-      "children": [
-        "de:09184:480:11:51",
-        "de:09184:480:12:52"
-      ]
-    },
-    {
-      "id": "de:09184:490",
-      "name": "Garching Gleis 1",
-      "lat": 48.2491974,
-      "lon": 11.6522811,
-      "children": [
-        "de:09184:490:11:51",
-        "de:09184:490:11:52"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "US_MARIENPLATZ",
+    "name": "Marienplatz",
+    "lat": 48.1374,
+    "lon": 11.5755,
+    "children": ["U3", "U6", "S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "US_KARLSPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.2 },
+      { "to": "S_ISARTOR", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_ODEONSPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_SENDLINGER_TOR", "distance": 0.9, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "US_KARLSPLATZ",
+    "name": "Karlsplatz (Stachus)",
+    "lat": 48.1395,
+    "lon": 11.5656,
+    "children": ["U4", "U5", "S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "US_HAUPTBAHNHOF", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "US_MARIENPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "US_HAUPTBAHNHOF",
+    "name": "Hauptbahnhof",
+    "lat": 48.1402,
+    "lon": 11.5586,
+    "children": ["U1", "U2", "U4", "U5", "S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "US_KARLSPLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_THERESIENWIESE", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "U_STIGLMAIERPLATZ", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_KOENIGSPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "S_ISARTOR",
+    "name": "Isartor",
+    "lat": 48.1365,
+    "lon": 11.5837,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "US_MARIENPLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "S_ROSENHEIMER_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "S_OSTBAHNHOF",
+    "name": "Ostbahnhof",
+    "lat": 48.1269,
+    "lon": 11.6042,
+    "children": ["U5", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "S_ROSENHEIMER_PLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_MAX_WEBER_PLATZ", "distance": 1.1, "time": 3, "price_estimate": 1.5 },
+      { "to": "S_LEUCHTENBERGRING", "distance": 1.1, "time": 3, "price_estimate": 1.5 }
+    ]
+  },
+  {
+    "id": "U_ODEONSPLATZ",
+    "name": "Odeonsplatz",
+    "lat": 48.1421,
+    "lon": 11.5778,
+    "children": ["U3", "U4", "U5", "U6"],
+    "neighbors": [
+      { "to": "US_MARIENPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_LEHEL", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_UNIVERSITAET", "distance": 0.9, "time": 2, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_SENDLINGER_TOR",
+    "name": "Sendlinger Tor",
+    "lat": 48.1333,
+    "lon": 11.5669,
+    "children": ["U1", "U2", "U3", "U6"],
+    "neighbors": [
+      { "to": "US_MARIENPLATZ", "distance": 0.9, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_GOETHEPLATZ", "distance": 0.5, "time": 1, "price_estimate": 0.9 },
+      { "to": "U_FRAUNHOFERSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_THERESIENWIESE",
+    "name": "Theresienwiese",
+    "lat": 48.1375,
+    "lon": 11.5536,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "US_HAUPTBAHNHOF", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "U_SCHWANTHALERHOEHE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_SCHWANTHALERHOEHE",
+    "name": "Schwanthalerhöhe",
+    "lat": 48.1352,
+    "lon": 11.5456,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "U_THERESIENWIESE", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_HEIMERANPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_HEIMERANPLATZ",
+    "name": "Heimeranplatz",
+    "lat": 48.1331,
+    "lon": 11.5365,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "U_SCHWANTHALERHOEHE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_WESTENDSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_WESTENDSTRASSE",
+    "name": "Westendstraße",
+    "lat": 48.1305,
+    "lon": 11.5275,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "U_HEIMERANPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_LAIMER_PLATZ", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_FRIEDENHEIMER_STRASSE", "distance": 1.3, "time": 3, "price_estimate": 1.7 }
+    ]
+  },
+  {
+    "id": "U_LAIMER_PLATZ",
+    "name": "Laimer Platz",
+    "lat": 48.1285,
+    "lon": 11.5182,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_WESTENDSTRASSE", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_FRIEDENHEIMER_STRASSE", "distance": 0.6, "time": 2, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_FRIEDENHEIMER_STRASSE",
+    "name": "Friedenheimer Straße",
+    "lat": 48.1295,
+    "lon": 11.5125,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_LAIMER_PLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.0 },
+      { "to": "U_WESTENDSTRASSE", "distance": 1.3, "time": 3, "price_estimate": 1.7 }
+    ]
+  },
+  {
+    "id": "U_LEHEL",
+    "name": "Lehel",
+    "lat": 48.1398,
+    "lon": 11.5845,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "U_ODEONSPLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_MAX_WEBER_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_MAX_WEBER_PLATZ",
+    "name": "Max-Weber-Platz",
+    "lat": 48.1357,
+    "lon": 11.5954,
+    "children": ["U4", "U5"],
+    "neighbors": [
+      { "to": "U_LEHEL", "distance": 0.9, "time": 2, "price_estimate": 1.4 },
+      { "to": "S_OSTBAHNHOF", "distance": 1.1, "time": 3, "price_estimate": 1.5 },
+      { "to": "U_PRINZREGENTENPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_PRINZREGENTENPLATZ",
+    "name": "Prinzregentenplatz",
+    "lat": 48.1402,
+    "lon": 11.6041,
+    "children": ["U4"],
+    "neighbors": [
+      { "to": "U_MAX_WEBER_PLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_BOEHMERWALDPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_BOEHMERWALDPLATZ",
+    "name": "Böhmerwaldplatz",
+    "lat": 48.1435,
+    "lon": 11.6112,
+    "children": ["U4"],
+    "neighbors": [
+      { "to": "U_PRINZREGENTENPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_RICHARD_STRAUSS_STRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_RICHARD_STRAUSS_STRASSE",
+    "name": "Richard-Strauss-Straße",
+    "lat": 48.1472,
+    "lon": 11.619,
+    "children": ["U4"],
+    "neighbors": [
+      { "to": "U_BOEHMERWALDPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_ARABELLAPARK", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_ARABELLAPARK",
+    "name": "Arabellapark",
+    "lat": 48.1512,
+    "lon": 11.624,
+    "children": ["U4"],
+    "neighbors": [
+      { "to": "U_RICHARD_STRAUSS_STRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_GOETHEPLATZ",
+    "name": "Goetheplatz",
+    "lat": 48.1296,
+    "lon": 11.5628,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_SENDLINGER_TOR", "distance": 0.5, "time": 1, "price_estimate": 0.9 },
+      { "to": "U_POCCISTRASSE", "distance": 0.6, "time": 2, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_POCCISTRASSE",
+    "name": "Poccistraße",
+    "lat": 48.1252,
+    "lon": 11.5584,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_GOETHEPLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.0 },
+      { "to": "U_IMPLERSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_IMPLERSTRASSE",
+    "name": "Implerstraße",
+    "lat": 48.1194,
+    "lon": 11.5531,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_POCCISTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_BRUDERMUHLSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_HARRAS", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_BRUDERMUHLSTRASSE",
+    "name": "Brudermühlstraße",
+    "lat": 48.1123,
+    "lon": 11.5492,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_IMPLERSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_THALKIRCHEN", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_THALKIRCHEN",
+    "name": "Thalkirchen",
+    "lat": 48.1047,
+    "lon": 11.5445,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_BRUDERMUHLSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_OBERSENDLING", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_OBERSENDLING",
+    "name": "Obersendling",
+    "lat": 48.0951,
+    "lon": 11.539,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_THALKIRCHEN", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_AIDENBACHSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_AIDENBACHSTRASSE",
+    "name": "Aidenbachstraße",
+    "lat": 48.0878,
+    "lon": 11.534,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_OBERSENDLING", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_MACHTLFINGER_STRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_MACHTLFINGER_STRASSE",
+    "name": "Machtlfinger Straße",
+    "lat": 48.0795,
+    "lon": 11.5285,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_AIDENBACHSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_FORSTENRIEDER_ALLEE", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_FORSTENRIEDER_ALLEE",
+    "name": "Forstenrieder Allee",
+    "lat": 48.0705,
+    "lon": 11.522,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_MACHTLFINGER_STRASSE", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_BASLER_STRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_BASLER_STRASSE",
+    "name": "Basler Straße",
+    "lat": 48.0623,
+    "lon": 11.515,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_FORSTENRIEDER_ALLEE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_FUERSTENRIED_WEST", "distance": 1.1, "time": 3, "price_estimate": 1.5 }
+    ]
+  },
+  {
+    "id": "U_FUERSTENRIED_WEST",
+    "name": "Fürstenried West",
+    "lat": 48.054,
+    "lon": 11.507,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_BASLER_STRASSE", "distance": 1.1, "time": 3, "price_estimate": 1.5 }
+    ]
+  },
+  {
+    "id": "U_HARRAS",
+    "name": "Harras",
+    "lat": 48.1142,
+    "lon": 11.5437,
+    "children": ["U6", "S7"],
+    "neighbors": [
+      { "to": "U_IMPLERSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_PARTNACHPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_PARTNACHPLATZ",
+    "name": "Partnachplatz",
+    "lat": 48.1081,
+    "lon": 11.5375,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_HARRAS", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_WESTPARK", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_WESTPARK",
+    "name": "Westpark",
+    "lat": 48.101,
+    "lon": 11.5298,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_PARTNACHPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_HOLZAPFELKREUTH", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_HOLZAPFELKREUTH",
+    "name": "Holzapfelkreuth",
+    "lat": 48.0925,
+    "lon": 11.522,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_WESTPARK", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_HADERNER_STERN", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_HADERNER_STERN",
+    "name": "Haderner Stern",
+    "lat": 48.084,
+    "lon": 11.512,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_HOLZAPFELKREUTH", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_GROSSHADERN", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_GROSSHADERN",
+    "name": "Großhadern",
+    "lat": 48.076,
+    "lon": 11.504,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_HADERNER_STERN", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_KLINIKUM_GROSSHADERN", "distance": 0.6, "time": 1, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_KLINIKUM_GROSSHADERN",
+    "name": "Klinikum Großhadern",
+    "lat": 48.072,
+    "lon": 11.499,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_GROSSHADERN", "distance": 0.6, "time": 1, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_FRAUNHOFERSTRASSE",
+    "name": "Fraunhoferstraße",
+    "lat": 48.1289,
+    "lon": 11.5741,
+    "children": ["U1", "U2"],
+    "neighbors": [
+      { "to": "U_SENDLINGER_TOR", "distance": 0.7, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_KOLUMBUSPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_KOLUMBUSPLATZ",
+    "name": "Kolumbusplatz",
+    "lat": 48.1231,
+    "lon": 11.5806,
+    "children": ["U1", "U2"],
+    "neighbors": [
+      { "to": "U_FRAUNHOFERSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_CANDIDPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_SILBERHORNSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_CANDIDPLATZ",
+    "name": "Candidplatz",
+    "lat": 48.1168,
+    "lon": 11.5839,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_KOLUMBUSPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_WETTERSTEINPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_WETTERSTEINPLATZ",
+    "name": "Wettersteinplatz",
+    "lat": 48.1095,
+    "lon": 11.5865,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_CANDIDPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_ST_QUIRIN_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_ST_QUIRIN_PLATZ",
+    "name": "St.-Quirin-Platz",
+    "lat": 48.1012,
+    "lon": 11.588,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_WETTERSTEINPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MANGFALLPLATZ", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_MANGFALLPLATZ",
+    "name": "Mangfallplatz",
+    "lat": 48.092,
+    "lon": 11.591,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_ST_QUIRIN_PLATZ", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_SILBERHORNSTRASSE",
+    "name": "Silberhornstraße",
+    "lat": 48.116,
+    "lon": 11.577,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_KOLUMBUSPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_UNTERSBERGSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_UNTERSBERGSTRASSE",
+    "name": "Untersbergstraße",
+    "lat": 48.1098,
+    "lon": 11.574,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_SILBERHORNSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_GIESING", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_GIESING",
+    "name": "Giesing",
+    "lat": 48.1035,
+    "lon": 11.5695,
+    "children": ["U2", "S3", "S7"],
+    "neighbors": [
+      { "to": "U_UNTERSBERGSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_KARL_PREIS_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_KARL_PREIS_PLATZ",
+    "name": "Karl-Preis-Platz",
+    "lat": 48.0955,
+    "lon": 11.565,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_GIESING", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_INNSBRUCKER_RING", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_INNSBRUCKER_RING",
+    "name": "Innsbrucker Ring",
+    "lat": 48.114,
+    "lon": 11.609,
+    "children": ["U2", "U5", "S5"],
+    "neighbors": [
+      { "to": "U_KARL_PREIS_PLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_JOSEFSBURG", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MICHAELIBAD", "distance": 1.1, "time": 3, "price_estimate": 1.5 }
+    ]
+  },
+  {
+    "id": "U_JOSEFSBURG",
+    "name": "Josephsburg",
+    "lat": 48.1195,
+    "lon": 11.618,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_INNSBRUCKER_RING", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_KREILLERSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_KREILLERSTRASSE",
+    "name": "Kreillerstraße",
+    "lat": 48.1245,
+    "lon": 11.626,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_JOSEFSBURG", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_TRUDERING", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_TRUDERING",
+    "name": "Trudering (U-Bahn)",
+    "lat": 48.125,
+    "lon": 11.639,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_KREILLERSTRASSE", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_MOOSFELD", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "S_TRUDERING", "distance": 0.2, "time": 1, "price_estimate": 0.5 }
+    ]
+  },
+  {
+    "id": "U_MOOSFELD",
+    "name": "Moosfeld",
+    "lat": 48.131,
+    "lon": 11.652,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_TRUDERING", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "U_MESSESTADT_WEST", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_MESSESTADT_WEST",
+    "name": "Messestadt West",
+    "lat": 48.135,
+    "lon": 11.663,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_MOOSFELD", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MESSESTADT_OST", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_MESSESTADT_OST",
+    "name": "Messestadt Ost",
+    "lat": 48.134,
+    "lon": 11.672,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_MESSESTADT_WEST", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_MICHAELIBAD",
+    "name": "Michaelibad",
+    "lat": 48.108,
+    "lon": 11.624,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_INNSBRUCKER_RING", "distance": 1.1, "time": 3, "price_estimate": 1.5 },
+      { "to": "U_QUIDDE_STRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_QUIDDE_STRASSE",
+    "name": "Quiddestraße",
+    "lat": 48.101,
+    "lon": 11.633,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_MICHAELIBAD", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_NEUPERLACH_ZENTRUM", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_NEUPERLACH_ZENTRUM",
+    "name": "Neuperlach Zentrum",
+    "lat": 48.093,
+    "lon": 11.642,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_QUIDDE_STRASSE", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_THERESE_GIEHSE_ALLEE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_THERESE_GIEHSE_ALLEE",
+    "name": "Therese-Giehse-Allee",
+    "lat": 48.086,
+    "lon": 11.647,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_NEUPERLACH_ZENTRUM", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_NEUPERLACH_SUED", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_NEUPERLACH_SUED",
+    "name": "Neuperlach Süd",
+    "lat": 48.078,
+    "lon": 11.652,
+    "children": ["U5"],
+    "neighbors": [
+      { "to": "U_THERESE_GIEHSE_ALLEE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_UNIVERSITAET",
+    "name": "Universität",
+    "lat": 48.1501,
+    "lon": 11.5805,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_ODEONSPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.4 },
+      { "to": "U_GISELASTRASSE", "distance": 0.6, "time": 2, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_GISELASTRASSE",
+    "name": "Giselastraße",
+    "lat": 48.1548,
+    "lon": 11.585,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_UNIVERSITAET", "distance": 0.6, "time": 2, "price_estimate": 1.0 },
+      { "to": "U_MUENCHNER_FREIHEIT", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_MUENCHNER_FREIHEIT",
+    "name": "Münchner Freiheit",
+    "lat": 48.1608,
+    "lon": 11.588,
+    "children": ["U3", "U6"],
+    "neighbors": [
+      { "to": "U_GISELASTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_BONNER_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_DIETLINDENSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_BONNER_PLATZ",
+    "name": "Bonner Platz",
+    "lat": 48.168,
+    "lon": 11.593,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_MUENCHNER_FREIHEIT", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_SCHEIDPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_SCHEIDPLATZ",
+    "name": "Scheidplatz",
+    "lat": 48.174,
+    "lon": 11.572,
+    "children": ["U2", "U3"],
+    "neighbors": [
+      { "to": "U_BONNER_PLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_HOHENZOLLERNPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_PETUELRING", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MILBERTSHOFEN", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_HOHENZOLLERNPLATZ",
+    "name": "Hohenzollernplatz",
+    "lat": 48.167,
+    "lon": 11.565,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_SCHEIDPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_JOSEPHSPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_JOSEPHSPLATZ",
+    "name": "Josephsplatz",
+    "lat": 48.1595,
+    "lon": 11.559,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_HOHENZOLLERNPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_THERESIENSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_THERESIENSTRASSE",
+    "name": "Theresienstraße",
+    "lat": 48.1525,
+    "lon": 11.554,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_JOSEPHSPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_KOENIGSPLATZ", "distance": 0.6, "time": 2, "price_estimate": 1.0 }
+    ]
+  },
+  {
+    "id": "U_KOENIGSPLATZ",
+    "name": "Königsplatz",
+    "lat": 48.147,
+    "lon": 11.565,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_THERESIENSTRASSE", "distance": 0.6, "time": 2, "price_estimate": 1.0 },
+      { "to": "US_HAUPTBAHNHOF", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_DIETLINDENSTRASSE",
+    "name": "Dietlindenstraße",
+    "lat": 48.1655,
+    "lon": 11.594,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_MUENCHNER_FREIHEIT", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_NORDFRIEDHOF", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_NORDFRIEDHOF",
+    "name": "Nordfriedhof",
+    "lat": 48.173,
+    "lon": 11.596,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_DIETLINDENSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_ALTE_HEIDE", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_ALTE_HEIDE",
+    "name": "Alte Heide",
+    "lat": 48.18,
+    "lon": 11.599,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_NORDFRIEDHOF", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_STUDENTENSTADT", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_STUDENTENSTADT",
+    "name": "Studentenstadt",
+    "lat": 48.186,
+    "lon": 11.604,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_ALTE_HEIDE", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_FREIMANN", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_FREIMANN",
+    "name": "Freimann",
+    "lat": 48.194,
+    "lon": 11.613,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_STUDENTENSTADT", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_KIEFERNGARTEN", "distance": 1.1, "time": 3, "price_estimate": 1.5 }
+    ]
+  },
+  {
+    "id": "U_KIEFERNGARTEN",
+    "name": "Kieferngarten",
+    "lat": 48.202,
+    "lon": 11.623,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_FREIMANN", "distance": 1.1, "time": 3, "price_estimate": 1.5 },
+      { "to": "U_FROTTMANING", "distance": 1.2, "time": 3, "price_estimate": 1.6 }
+    ]
+  },
+  {
+    "id": "U_FROTTMANING",
+    "name": "Fröttmaning",
+    "lat": 48.212,
+    "lon": 11.619,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_KIEFERNGARTEN", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "U_GARCHING_HOCHBRUECK", "distance": 1.5, "time": 4, "price_estimate": 1.9 }
+    ]
+  },
+  {
+    "id": "U_GARCHING_HOCHBRUECK",
+    "name": "Garching-Hochbrück",
+    "lat": 48.227,
+    "lon": 11.629,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_FROTTMANING", "distance": 1.5, "time": 4, "price_estimate": 1.9 },
+      { "to": "U_GARCHING", "distance": 1.6, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "U_GARCHING",
+    "name": "Garching",
+    "lat": 48.244,
+    "lon": 11.638,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_GARCHING_HOCHBRUECK", "distance": 1.6, "time": 4, "price_estimate": 2.0 },
+      { "to": "U_GARCHING_FORSCHUNGSZENTRUM", "distance": 1.4, "time": 4, "price_estimate": 1.8 }
+    ]
+  },
+  {
+    "id": "U_GARCHING_FORSCHUNGSZENTRUM",
+    "name": "Garching-Forschungszentrum",
+    "lat": 48.259,
+    "lon": 11.646,
+    "children": ["U6"],
+    "neighbors": [
+      { "to": "U_GARCHING", "distance": 1.4, "time": 4, "price_estimate": 1.8 }
+    ]
+  },
+  {
+    "id": "U_PETUELRING",
+    "name": "Petuelring",
+    "lat": 48.177,
+    "lon": 11.563,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_SCHEIDPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_OLYMPIAZENTRUM", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_OLYMPIAZENTRUM",
+    "name": "Olympiazentrum",
+    "lat": 48.174,
+    "lon": 11.551,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_PETUELRING", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_OBERWIESENFELD", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_OBERWIESENFELD",
+    "name": "Oberwiesenfeld",
+    "lat": 48.178,
+    "lon": 11.542,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_OLYMPIAZENTRUM", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_OLYMPIA_EINKAUFSZENTRUM", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_OLYMPIA_EINKAUFSZENTRUM",
+    "name": "Olympia-Einkaufszentrum",
+    "lat": 48.182,
+    "lon": 11.534,
+    "children": ["U1", "U3"],
+    "neighbors": [
+      { "to": "U_OBERWIESENFELD", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_GEORG_BRAUCHLE_RING", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_MOOSACHER_ST_MARTINS_PLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_GEORG_BRAUCHLE_RING",
+    "name": "Georg-Brauchle-Ring",
+    "lat": 48.185,
+    "lon": 11.527,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_OLYMPIA_EINKAUFSZENTRUM", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_WESTFRIEDHOF", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_WESTFRIEDHOF",
+    "name": "Westfriedhof",
+    "lat": 48.181,
+    "lon": 11.517,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_GEORG_BRAUCHLE_RING", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_GERN", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_GERN",
+    "name": "Gern",
+    "lat": 48.177,
+    "lon": 11.509,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_WESTFRIEDHOF", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_ROTKREUZPLATZ", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_ROTKREUZPLATZ",
+    "name": "Rotkreuzplatz",
+    "lat": 48.169,
+    "lon": 11.519,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_GERN", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MAILLINGERSTRASSE", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_MAILLINGERSTRASSE",
+    "name": "Maillingerstraße",
+    "lat": 48.162,
+    "lon": 11.524,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_ROTKREUZPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_STIGLMAIERPLATZ", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_STIGLMAIERPLATZ",
+    "name": "Stiglmaierplatz",
+    "lat": 48.153,
+    "lon": 11.541,
+    "children": ["U1"],
+    "neighbors": [
+      { "to": "U_MAILLINGERSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "US_HAUPTBAHNHOF", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_MOOSACHER_ST_MARTINS_PLATZ",
+    "name": "Moosacher St.-Martins-Platz",
+    "lat": 48.186,
+    "lon": 11.539,
+    "children": ["U3"],
+    "neighbors": [
+      { "to": "U_OLYMPIA_EINKAUFSZENTRUM", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_MOOSACH", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_MOOSACH",
+    "name": "Moosach (U-Bahn)",
+    "lat": 48.186,
+    "lon": 11.515,
+    "children": ["U3", "S1", "S2", "S3", "S4", "S6", "S8"],
+    "neighbors": [
+      { "to": "U_MOOSACHER_ST_MARTINS_PLATZ", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "S_MOOSACH_SBAHN", "distance": 0.2, "time": 1, "price_estimate": 0.5 }
+    ]
+  },
+  {
+    "id": "U_FELDMOCHING",
+    "name": "Feldmoching",
+    "lat": 48.215,
+    "lon": 11.525,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_HASENBERGL", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "U_HASENBERGL",
+    "name": "Hasenbergl",
+    "lat": 48.207,
+    "lon": 11.532,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_FELDMOCHING", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_DUELFERSTRASSE", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_DUELFERSTRASSE",
+    "name": "Dülferstraße",
+    "lat": 48.198,
+    "lon": 11.538,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_HASENBERGL", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_HARTHOF", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_HARTHOF",
+    "name": "Harthof",
+    "lat": 48.19,
+    "lon": 11.545,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_DUELFERSTRASSE", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_AM_HART", "distance": 0.9, "time": 2, "price_estimate": 1.3 }
+    ]
+  },
+  {
+    "id": "U_AM_HART",
+    "name": "Am Hart",
+    "lat": 48.184,
+    "lon": 11.553,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_HARTHOF", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "U_FRANKFURTER_RING", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "U_FRANKFURTER_RING",
+    "name": "Frankfurter Ring",
+    "lat": 48.178,
+    "lon": 11.558,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_AM_HART", "distance": 0.7, "time": 2, "price_estimate": 1.1 },
+      { "to": "U_MILBERTSHOFEN", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "U_MILBERTSHOFEN",
+    "name": "Milbertshofen",
+    "lat": 48.176,
+    "lon": 11.565,
+    "children": ["U2"],
+    "neighbors": [
+      { "to": "U_FRANKFURTER_RING", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "U_SCHEIDPLATZ", "distance": 0.7, "time": 2, "price_estimate": 1.1 }
+    ]
+  },
+  {
+    "id": "S_ROSENHEIMER_PLATZ",
+    "name": "Rosenheimer Platz",
+    "lat": 48.1308,
+    "lon": 11.594,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "S_ISARTOR", "distance": 0.9, "time": 2, "price_estimate": 1.3 },
+      { "to": "S_OSTBAHNHOF", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "S_LEUCHTENBERGRING",
+    "name": "Leuchtenbergring",
+    "lat": 48.127,
+    "lon": 11.615,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "S_OSTBAHNHOF", "distance": 1.1, "time": 3, "price_estimate": 1.5 },
+      { "to": "S_BERGWEG", "distance": 1.2, "time": 3, "price_estimate": 1.6 }
+    ]
+  },
+  {
+    "id": "S_BERGWEG",
+    "name": "Bergweg",
+    "lat": 48.118,
+    "lon": 11.627,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S7", "S8"],
+    "neighbors": [
+      { "to": "S_LEUCHTENBERGRING", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "S_TRUDERING", "distance": 1.0, "time": 3, "price_estimate": 1.4 }
+    ]
+  },
+  {
+    "id": "S_TRUDERING",
+    "name": "Trudering (S-Bahn)",
+    "lat": 48.125,
+    "lon": 11.639,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_BERGWEG", "distance": 1.0, "time": 3, "price_estimate": 1.4 },
+      { "to": "U_TRUDERING", "distance": 0.2, "time": 1, "price_estimate": 0.5 },
+      { "to": "S_GRONSDORF", "distance": 1.8, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "S_GRONSDORF",
+    "name": "Gronsdorf",
+    "lat": 48.128,
+    "lon": 11.674,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_TRUDERING", "distance": 1.8, "time": 4, "price_estimate": 2.0 },
+      { "to": "S_HAAR", "distance": 1.5, "time": 3, "price_estimate": 1.8 }
+    ]
+  },
+  {
+    "id": "S_HAAR",
+    "name": "Haar",
+    "lat": 48.108,
+    "lon": 11.728,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_GRONSDORF", "distance": 1.5, "time": 3, "price_estimate": 1.8 },
+      { "to": "S_VATERSTETTEN", "distance": 2.0, "time": 4, "price_estimate": 2.2 }
+    ]
+  },
+  {
+    "id": "S_VATERSTETTEN",
+    "name": "Vaterstetten",
+    "lat": 48.104,
+    "lon": 11.768,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_HAAR", "distance": 2.0, "time": 4, "price_estimate": 2.2 },
+      { "to": "S_BALDHAM", "distance": 1.8, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "S_BALDHAM",
+    "name": "Baldham",
+    "lat": 48.103,
+    "lon": 11.786,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_VATERSTETTEN", "distance": 1.8, "time": 4, "price_estimate": 2.0 },
+      { "to": "S_ZORNEDING", "distance": 2.2, "time": 5, "price_estimate": 2.5 }
+    ]
+  },
+  {
+    "id": "S_ZORNEDING",
+    "name": "Zorneding",
+    "lat": 48.088,
+    "lon": 11.825,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_BALDHAM", "distance": 2.2, "time": 5, "price_estimate": 2.5 },
+      { "to": "S_EBERSBERG", "distance": 4.0, "time": 8, "price_estimate": 3.8 }
+    ]
+  },
+  {
+    "id": "S_EBERSBERG",
+    "name": "Ebersberg",
+    "lat": 48.076,
+    "lon": 11.967,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_ZORNEDING", "distance": 4.0, "time": 8, "price_estimate": 3.8 }
+    ]
+  },
+  {
+    "id": "S_GRUENWALD",
+    "name": "Grünwald",
+    "lat": 48.092,
+    "lon": 11.523,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_HOLLRIEGELKREUTH", "distance": 1.5, "time": 4, "price_estimate": 1.9 }
+    ]
+  },
+  {
+    "id": "S_HOLLRIEGELKREUTH",
+    "name": "Hollriegelskreuth",
+    "lat": 48.08,
+    "lon": 11.515,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_GRUENWALD", "distance": 1.5, "time": 4, "price_estimate": 1.9 },
+      { "to": "S_PULLACH", "distance": 1.6, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "S_PULLACH",
+    "name": "Pullach",
+    "lat": 48.064,
+    "lon": 11.508,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_HOLLRIEGELKREUTH", "distance": 1.6, "time": 4, "price_estimate": 2.0 },
+      { "to": "S_HOELLRIEGEL", "distance": 1.2, "time": 3, "price_estimate": 1.6 }
+    ]
+  },
+  {
+    "id": "S_HOELLRIEGEL",
+    "name": "Höllriegelskreuth",
+    "lat": 48.053,
+    "lon": 11.502,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_PULLACH", "distance": 1.2, "time": 3, "price_estimate": 1.6 },
+      { "to": "S_BUCHHOF", "distance": 1.4, "time": 4, "price_estimate": 1.8 }
+    ]
+  },
+  {
+    "id": "S_BUCHHOF",
+    "name": "Buchhof",
+    "lat": 48.041,
+    "lon": 11.496,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_HOELLRIEGEL", "distance": 1.4, "time": 4, "price_estimate": 1.8 },
+      { "to": "S_WOLFRATSHAUSEN", "distance": 2.0, "time": 5, "price_estimate": 2.4 }
+    ]
+  },
+  {
+    "id": "S_WOLFRATSHAUSEN",
+    "name": "Wolfratshausen",
+    "lat": 47.913,
+    "lon": 11.425,
+    "children": ["S7"],
+    "neighbors": [
+      { "to": "S_BUCHHOF", "distance": 2.0, "time": 5, "price_estimate": 2.4 }
+    ]
+  },
+  {
+    "id": "S_DAGLFING",
+    "name": "Daglfing",
+    "lat": 48.145,
+    "lon": 11.632,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_ENGLSCHALKING", "distance": 1.7, "time": 4, "price_estimate": 2.1 }
+    ]
+  },
+  {
+    "id": "S_ENGLSCHALKING",
+    "name": "Englschalking",
+    "lat": 48.153,
+    "lon": 11.642,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_DAGLFING", "distance": 1.7, "time": 4, "price_estimate": 2.1 },
+      { "to": "S_JOHANNESKIRCHEN", "distance": 1.5, "time": 4, "price_estimate": 1.9 }
+    ]
+  },
+  {
+    "id": "S_JOHANNESKIRCHEN",
+    "name": "Johanneskirchen",
+    "lat": 48.162,
+    "lon": 11.654,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_ENGLSCHALKING", "distance": 1.5, "time": 4, "price_estimate": 1.9 },
+      { "to": "S_UNTERFOEHRING", "distance": 1.6, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "S_UNTERFOEHRING",
+    "name": "Unterföhring",
+    "lat": 48.175,
+    "lon": 11.665,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_JOHANNESKIRCHEN", "distance": 1.6, "time": 4, "price_estimate": 2.0 },
+      { "to": "S_ISMANING", "distance": 1.8, "time": 4, "price_estimate": 2.2 }
+    ]
+  },
+  {
+    "id": "S_ISMANING",
+    "name": "Ismaning",
+    "lat": 48.191,
+    "lon": 11.681,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_UNTERFOEHRING", "distance": 1.8, "time": 4, "price_estimate": 2.2 },
+      { "to": "S_HALLBERGMOOS", "distance": 1.7, "time": 4, "price_estimate": 2.1 }
+    ]
+  },
+  {
+    "id": "S_HALLBERGMOOS",
+    "name": "Hallbergmoos",
+    "lat": 48.207,
+    "lon": 11.696,
+    "children": ["S4", "S6"],
+    "neighbors": [
+      { "to": "S_ISMANING", "distance": 1.7, "time": 4, "price_estimate": 2.1 },
+      { "to": "S_FLUGHAFEN_BESUCHERPARK", "distance": 2.0, "time": 5, "price_estimate": 2.4 }
+    ]
+  },
+  {
+    "id": "S_FLUGHAFEN_BESUCHERPARK",
+    "name": "Flughafen Besucherpark",
+    "lat": 48.347,
+    "lon": 11.788,
+    "children": ["S1", "S8"],
+    "neighbors": [
+      { "to": "S_HALLBERGMOOS", "distance": 12.0, "time": 20, "price_estimate": 8.0 },
+      { "to": "S_FLUGHAFEN_MUENCHEN", "distance": 0.8, "time": 2, "price_estimate": 1.2 },
+      { "to": "S_NEUFAHRN_BEI_FREISING", "distance": 4.2, "time": 6, "price_estimate": 3.5 }
+    ]
+  },
+  {
+    "id": "S_FLUGHAFEN_MUENCHEN",
+    "name": "Flughafen München",
+    "lat": 48.353,
+    "lon": 11.786,
+    "children": ["S1", "S8"],
+    "neighbors": [
+      { "to": "S_FLUGHAFEN_BESUCHERPARK", "distance": 0.8, "time": 2, "price_estimate": 1.2 }
+    ]
+  },
+  {
+    "id": "S_FREISING",
+    "name": "Freising",
+    "lat": 48.401,
+    "lon": 11.747,
+    "children": ["S1"],
+    "neighbors": [
+      { "to": "S_FLUGHAFEN_BESUCHERPARK", "distance": 6.5, "time": 10, "price_estimate": 4.5 }
+    ]
+  },
+  {
+    "id": "S_PETERSHAUSEN",
+    "name": "Petershausen",
+    "lat": 48.415,
+    "lon": 11.468,
+    "children": ["S2"],
+    "neighbors": []
+  },
+  {
+    "id": "S_DACHAU",
+    "name": "Dachau",
+    "lat": 48.259,
+    "lon": 11.436,
+    "children": ["S2"],
+    "neighbors": [
+      { "to": "S_KARLSFELD", "distance": 2.5, "time": 5, "price_estimate": 2.8 }
+    ]
+  },
+  {
+    "id": "S_KARLSFELD",
+    "name": "Karlsfeld",
+    "lat": 48.227,
+    "lon": 11.471,
+    "children": ["S2"],
+    "neighbors": [
+      { "to": "S_DACHAU", "distance": 2.5, "time": 5, "price_estimate": 2.8 },
+      { "to": "S_ALLACH", "distance": 2.0, "time": 4, "price_estimate": 2.2 }
+    ]
+  },
+  {
+    "id": "S_ALLACH",
+    "name": "Allach",
+    "lat": 48.191,
+    "lon": 11.464,
+    "children": ["S2"],
+    "neighbors": [
+      { "to": "S_KARLSFELD", "distance": 2.0, "time": 4, "price_estimate": 2.2 },
+      { "to": "S_UNTERMENZING", "distance": 1.8, "time": 4, "price_estimate": 2.1 }
+    ]
+  },
+  {
+    "id": "S_UNTERMENZING",
+    "name": "Untermenzing",
+    "lat": 48.173,
+    "lon": 11.453,
+    "children": ["S2"],
+    "neighbors": [
+      { "to": "S_ALLACH", "distance": 1.8, "time": 4, "price_estimate": 2.1 },
+      { "to": "S_OBERMENZING", "distance": 1.5, "time": 3, "price_estimate": 1.8 }
+    ]
+  },
+  {
+    "id": "S_OBERMENZING",
+    "name": "Obermenzing",
+    "lat": 48.16,
+    "lon": 11.442,
+    "children": ["S2"],
+    "neighbors": [
+      { "to": "S_UNTERMENZING", "distance": 1.5, "time": 3, "price_estimate": 1.8 },
+      { "to": "S_LAIM", "distance": 1.6, "time": 4, "price_estimate": 2.0 }
+    ]
+  },
+  {
+    "id": "S_LAIM",
+    "name": "Laim (S-Bahn)",
+    "lat": 48.142,
+    "lon": 11.504,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S8"],
+    "neighbors": [
+      { "to": "S_OBERMENZING", "distance": 1.6, "time": 4, "price_estimate": 2.0 },
+      { "to": "US_HAUPTBAHNHOF", "distance": 2.5, "time": 5, "price_estimate": 2.8 },
+      { "to": "S_MOOSACH_SBAHN", "distance": 2.5, "time": 5, "price_estimate": 2.4 }
+    ]
+  },
+  {
+    "id": "S_PASING",
+    "name": "Pasing",
+    "lat": 48.149,
+    "lon": 11.461,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S8"],
+    "neighbors": [
+      { "to": "S_LAIM", "distance": 2.2, "time": 4, "price_estimate": 2.6 },
+      { "to": "S_LOCHHAM", "distance": 2.0, "time": 4, "price_estimate": 2.4 },
+      { "to": "S_OBERMENZING", "distance": 2.5, "time": 5, "price_estimate": 2.8 }
+    ]
+  },
+  {
+    "id": "S_LOCHHAM",
+    "name": "Lochham",
+    "lat": 48.136,
+    "lon": 11.44,
+    "children": ["S3"],
+    "neighbors": [
+      { "to": "S_PASING", "distance": 2.0, "time": 4, "price_estimate": 2.4 },
+      { "to": "S_GRÄFELFING", "distance": 1.8, "time": 4, "price_estimate": 2.2 }
+    ]
+  },
+  {
+    "id": "S_GRÄFELFING",
+    "name": "Gräfelfing",
+    "lat": 48.122,
+    "lon": 11.428,
+    "children": ["S3"],
+    "neighbors": [
+      { "to": "S_LOCHHAM", "distance": 1.8, "time": 4, "price_estimate": 2.2 },
+      { "to": "S_PLANEGG", "distance": 1.9, "time": 4, "price_estimate": 2.3 }
+    ]
+  },
+  {
+    "id": "S_PLANEGG",
+    "name": "Planegg",
+    "lat": 48.104,
+    "lon": 11.416,
+    "children": ["S3"],
+    "neighbors": [
+      { "to": "S_GRÄFELFING", "distance": 1.9, "time": 4, "price_estimate": 2.3 },
+      { "to": "S_GAUTING", "distance": 2.0, "time": 5, "price_estimate": 2.4 }
+    ]
+  },
+  {
+    "id": "S_GAUTING",
+    "name": "Gauting",
+    "lat": 48.069,
+    "lon": 11.376,
+    "children": ["S3", "S6"],
+    "neighbors": [
+      { "to": "S_PLANEGG", "distance": 2.0, "time": 5, "price_estimate": 2.4 },
+      { "to": "S_STOCKDORF", "distance": 2.2, "time": 5, "price_estimate": 2.6 }
+    ]
+  },
+  {
+    "id": "S_STOCKDORF",
+    "name": "Stockdorf",
+    "lat": 48.074,
+    "lon": 11.359,
+    "children": ["S3", "S6"],
+    "neighbors": [
+      { "to": "S_GAUTING", "distance": 2.2, "time": 5, "price_estimate": 2.6 },
+      { "to": "S_WEßLING", "distance": 2.3, "time": 5, "price_estimate": 2.7 }
+    ]
+  },
+  {
+    "id": "S_WEßLING",
+    "name": "Weßling",
+    "lat": 48.079,
+    "lon": 11.258,
+    "children": ["S3", "S6"],
+    "neighbors": [
+      { "to": "S_STOCKDORF", "distance": 2.3, "time": 5, "price_estimate": 2.7 },
+      { "to": "S_HERRNSCHING", "distance": 3.0, "time": 5, "price_estimate": 2.8 }
+    ]
+  },
+  {
+    "id": "S_HERRNSCHING",
+    "name": "Herrsching",
+    "lat": 48.002,
+    "lon": 11.187,
+    "children": ["S3", "S6", "S8"],
+    "neighbors": [
+      { "to": "S_WEßLING", "distance": 3.0, "time": 5, "price_estimate": 2.8 }
+    ]
+  },
+  {
+    "id": "S_ERDING",
+    "name": "Erding",
+    "lat": 48.307,
+    "lon": 11.907,
+    "children": ["S2"],
+    "neighbors": []
+  },
+  {
+    "id": "S_MARKT_SCHWABEN",
+    "name": "Markt Schwaben",
+    "lat": 48.19,
+    "lon": 11.865,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": [
+      { "to": "S_EBERSBERG", "distance": 8.0, "time": 12, "price_estimate": 5.5 }
+    ]
+  },
+  {
+    "id": "S_POING",
+    "name": "Poing",
+    "lat": 48.171,
+    "lon": 11.819,
+    "children": ["S2", "S4", "S6"],
+    "neighbors": []
+  },
+  {
+    "id": "S_OTTOBRUNN",
+    "name": "Ottobrunn",
+    "lat": 48.068,
+    "lon": 11.663,
+    "children": ["S5", "S7"],
+    "neighbors": []
+  },
+  {
+    "id": "S_HOEBRUGG",
+    "name": "Höhenkirchen-Siegertsbrunn",
+    "lat": 48.031,
+    "lon": 11.721,
+    "children": ["S5"],
+    "neighbors": []
+  },
+  {
+    "id": "S_DEISENHOFEN",
+    "name": "Deisenhofen",
+    "lat": 48.025,
+    "lon": 11.596,
+    "children": ["S3", "S5"],
+    "neighbors": []
+  },
+  {
+    "id": "S_FUERSTENFELDBRUCK",
+    "name": "Fürstenfeldbruck",
+    "lat": 48.181,
+    "lon": 11.254,
+    "children": ["S4"],
+    "neighbors": []
+  },
+  {
+    "id": "S_GERMERING",
+    "name": "Germering",
+    "lat": 48.133,
+    "lon": 11.369,
+    "children": ["S4", "S8"],
+    "neighbors": []
+  },
+  {
+    "id": "S_GILCHING",
+    "name": "Gilching-Argelsried",
+    "lat": 48.111,
+    "lon": 11.365,
+    "children": ["S4", "S8"],
+    "neighbors": []
+  },
+  {
+    "id": "S_STARNBERG",
+    "name": "Starnberg",
+    "lat": 48.001,
+    "lon": 11.348,
+    "children": ["S6"],
+    "neighbors": []
+  },
+  {
+    "id": "S_TUTZING",
+    "name": "Tutzing",
+    "lat": 47.907,
+    "lon": 11.283,
+    "children": ["S6"],
+    "neighbors": []
+  },
+  {
+    "id": "S_HOLZKIRCHEN",
+    "name": "Holzkirchen",
+    "lat": 47.881,
+    "lon": 11.706,
+    "children": ["S3", "S5"],
+    "neighbors": []
+  },
+  {
+    "id": "S_KREUZSTRASSE",
+    "name": "Kreuzstraße",
+    "lat": 47.998,
+    "lon": 11.746,
+    "children": ["S5"],
+    "neighbors": []
+  },
+  {
+    "id": "S_MAISACH",
+    "name": "Maisach",
+    "lat": 48.213,
+    "lon": 11.261,
+    "children": ["S3", "S4"],
+    "neighbors": []
+  },
+  {
+    "id": "S_GELTENDORF",
+    "name": "Geltendorf",
+    "lat": 48.123,
+    "lon": 11.036,
+    "children": ["S4", "S8"],
+    "neighbors": []
+  },
+  {
+    "id": "S_NEUFAHRN_BEI_FREISING",
+    "name": "Neufahrn (bei Freising)",
+    "lat": 48.314,
+    "lon": 11.662,
+    "children": ["S1"],
+    "neighbors": [
+      { "to": "S_FLUGHAFEN_BESUCHERPARK", "distance": 4.2, "time": 6, "price_estimate": 3.5 }
+    ]
+  },
+  {
+    "id": "S_MOOSACH_SBAHN",
+    "name": "Moosach (S-Bahn)",
+    "lat": 48.186,
+    "lon": 11.515,
+    "children": ["S1", "S2", "S3", "S4", "S6", "S8"],
+    "neighbors": [
+      { "to": "S_LAIM", "distance": 2.5, "time": 5, "price_estimate": 2.4 },
+      { "to": "U_MOOSACH", "distance": 0.2, "time": 1, "price_estimate": 0.5 }
+    ]
+  }
+]
