@@ -58,6 +58,5 @@ Dự án `map-search` là một ứng dụng tìm đường tối ưu cho hệ t
 - Nếu truy cập frontend từ địa chỉ khác, cần chỉnh `backend/app.py`
 - `start_app.bat` là lựa chọn khởi động nhanh cho Windows
 
-## 🛠️ Ghi chú nhóm
-- Thành viên nhóm: Nguyễn Đức Thiện, Lê Trần Mạnh Tiến, Nguyễn Hoàng Hải, Nguyễn Đăng Khôi, Nguyễn Bá Bắc, Nguyễn Thành Kiên
+
 
