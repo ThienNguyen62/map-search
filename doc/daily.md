@@ -1,5 +1,8 @@
 ## Quy trình Code hàng ngày cho team:
-
+```bash
+git clone url
+git clone -b branch-name url
+```
 ### Bước 1: Lấy code mới nhất về máy 
 ```bash
 git checkout main

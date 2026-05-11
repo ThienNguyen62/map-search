@@ -1,40 +1,77 @@
-# 🚀 Quick Start - Hệ Thống Tìm Đường Ngắn Nhất
-### 📋 **Yêu cầu hệ thống**
-- Python 3.8 trở lên
-- Git (để clone repository)
-- Trình duyệt web hiện đại
+# 🚀 Quick Start
 
-## 🛠️ **Cài đặt nhanh**
+Hướng dẫn nhanh để cài đặt, chạy và truy cập ứng dụng `map-search` trên máy Windows.
 
-### **Bước 1: Clone repository**
+## 📋 Yêu cầu
+- Python 3.8 hoặc mới hơn
+- Git
+- Trình duyệt web hiện đại (Chrome, Edge, Firefox)
+- (Tuỳ chọn) Live Server hoặc HTTP server để mở frontend tĩnh
+
+## 1. Clone repository
 ```bash
-git clone 
-cd project //( tên folder chính chứa project)
+git clone <repository-url>
+cd map-search
 ```
 
-### **Bước 2: Cài đặt Môi trường**
+## 2. Tạo và kích hoạt môi trường ảo
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
+
+## 3. Cài đặt phụ thuộc
+```bash
 pip install -r requirements.txt
 ```
-### **Bước 3: Chạy**
+
+## 4. Chạy backend
 ```bash
-cd backend python app.py
-
-# Nếu gặp lỗi permission, thử:
-pip install --user -r requirements.txt
+cd backend
+python app.py
 ```
-### **Bước 3: Chuẩn bị dữ liệu**
-.....
-### **Bước 4: Chạy ứng dụng**
-.....
-### **Bước 5: Truy cập ứng dụng**
-.....
-## 🧪 **Test nhanh ứng dụng**
 
-### hỗ trợ nhanh
-...
-### các lỗi thường gặp
-...
-### kiểm tra hoàn tất
+> Mặc định backend sẽ chạy trên `http://127.0.0.1:5000`.
+
+## 5. Chạy frontend
+### Cách A: Dùng trình duyệt tĩnh
+Mở file:
+- `frontend/html/index.html` để vào trang tìm đường
+- `frontend/html/login.html` để đăng nhập admin
+
+### Cách B: Dùng HTTP server tại cổng 5500
+Từ thư mục gốc của repo:
+```bash
+python -m http.server 5500
+```
+Mở trình duyệt tại:
+```text
+http://127.0.0.1:5500/frontend/html/index.html
+```
+
+> Lưu ý: `backend/app.py` hiện tại cho phép CORS từ `http://127.0.0.1:5500`, nên tốt nhất truy cập frontend qua địa chỉ này.
+
+## 6. Truy cập ứng dụng
+- Trang chính: `http://127.0.0.1:5500/frontend/html/index.html`
+- Trang admin: `http://127.0.0.1:5500/frontend/html/login.html`
+
+## 7. Khởi động nhanh trên Windows
+Nếu dùng Windows, bạn có thể chạy `start_app.bat` để:
+- khởi động backend
+- mở trình duyệt đến frontend
+
+## 8. API chính
+- `POST /api/path` — Tìm đường giữa `source` và `target`
+- `GET /api/graph` — Lấy dữ liệu graph hiện tại
+- `POST /api/login` — Đăng nhập admin
+- `GET /api/me` — Kiểm tra session admin
+- `POST /api/logout` — Đăng xuất
+
+## 9. Các lỗi thường gặp
+- Nếu frontend không kết nối được backend: kiểm tra `backend/app.py` và origin CORS
+- Nếu gặp lỗi cài gói: thử `pip install --upgrade pip` rồi cài lại
+- Nếu không chạy được Python: kiểm tra lại Python đã thêm vào PATH
+
+## 10. Dừng ứng dụng
+- Dừng backend bằng `Ctrl + C` trong terminal chạy Flask
+- Dừng HTTP server bằng `Ctrl + C` nếu dùng `python -m http.server`
