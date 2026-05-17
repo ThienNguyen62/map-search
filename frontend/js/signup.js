@@ -120,9 +120,9 @@ function handleSignUp() {
         showError(data.error || "Đăng ký thất bại");
         return;
       }
-      showSuccess("Đăng ký thành công! Đang chuyển hướng tới đăng nhập...");
+      showSuccess("Đăng ký thành công! Đang chuyển hướng tới trang chủ...");
       setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }, 1500);
     })
     .catch(() => {
@@ -139,6 +139,7 @@ function isValidEmail(email) {
 function showError(message) {
   const errorDiv = document.getElementById("errorMessage");
   errorDiv.textContent = message;
+  errorDiv.style.display = "block";
   errorDiv.classList.add("show");
   window.scrollTo(0, 0);
 }
@@ -146,12 +147,17 @@ function showError(message) {
 function showSuccess(message) {
   const successDiv = document.getElementById("successMessage");
   successDiv.textContent = message;
+  successDiv.style.display = "block";
   successDiv.classList.add("show");
 }
 
 function clearMessages() {
-  document.getElementById("errorMessage").classList.remove("show");
-  document.getElementById("successMessage").classList.remove("show");
+  const errorDiv = document.getElementById("errorMessage");
+  const successDiv = document.getElementById("successMessage");
+  errorDiv.classList.remove("show");
+  successDiv.classList.remove("show");
+  errorDiv.style.display = "none";
+  successDiv.style.display = "none";
 }
 
 function showLoading(show) {
@@ -159,10 +165,10 @@ function showLoading(show) {
   const button = document.querySelector(".signup-btn");
 
   if (show) {
-    loading.classList.add("show");
+    loading.style.display = "block";
     button.disabled = true;
   } else {
-    loading.classList.remove("show");
+    loading.style.display = "none";
     button.disabled = false;
   }
 }

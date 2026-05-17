@@ -1,0 +1,573 @@
+/* Copied from style.css for user page */
+
+/* =============================================================================
+ * styles.css
+ * Giao diện ứng dụng bản đồ tìm đường: Sidebar (340px) | Bản đồ (phần còn lại)
+ * ============================================================================= */
+
+/* Reset toàn cục — padding/border tính vào trong width/height */
+
+/*áp dụng border-box cho toàn bộ phần tử */
+* {
+    box-sizing: border-box;
+}
+
+/* Thiết lập chiều cao full cho toàn bộ layout gốc */
+html,
+body,
+.app-shell,
+.map-area {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+}
+
+/* style chung cho toàn trang */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f2f4f8;
+    color: #1f2937;
+}
+
+.admin-mode-btn {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 1200;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(24, 23, 53, 0.82);
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-mode-btn:hover {
+    background: rgba(30, 64, 175, 0.88);
+    transform: translateY(-1px);
+}
+
+.admin-mode-btn:active {
+    transform: translateY(0);
+}
+
+/* đồng bộ font cho button với body*/
+button {
+    font: inherit;
+}
+
+/* =========================
+   LAYOUT CHÍNH
+   ========================= */
+
+/* 
+ * Khối layout tổng của app
+ *  Chia thành 2 cột:
+ *    - Sidebar (340px)
+ *    - Map (phần còn lại)
+ */
+
+
+
+.app-shell {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 100vh;
+}
+
+/* sidebar bên trái, chứa menu, input tìm kiếm, thông tin */
+.sidebar {
+    background: #3f3b6e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 18px;
+}
+
+/*bao gồm title + dropdown ngôn ngữ*/
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+/*title chính của sidebar*/
+
+.sidebar-header strong {
+    display: block;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+}
+
+/*subtitle*/
+.sidebar-header span {
+    display: block;
+    margin-top: 6px;
+    color: #d8d7f2;
+    font-size: 0.95rem;
+}
+
+/* Dropdown chọn ngôn ngữ */
+.lang-select {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    font-weight: 700;
+}
+
+/* =========================
+   TAB ĐIỀU HƯỚNG
+   ========================= */
+
+/* 
+3 tab phía trên, 3 chức năng
+*/
+.sidebar-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* style tab */
+.tab {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 10px;
+    color: #c8c7f8;
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Tab active hoặc hover */
+.tab.active,
+.tab:hover {
+    background: #6d69bb;
+    color: #ffffff;
+}
+
+/* 
+   =========================
+   KHỐI TÌM KIẾM
+   =========================
+*/
+
+/* 
+ * Card tìm đường
+ * Chứa input + button tìm tuyến
+ */
+.search-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-row label {
+    font-size: 0.95rem;
+    color: #d8d7f2;
+}
+
+/* input có icon bên trái */
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 10px 14px;
+    gap: 10px;
+}
+
+/* chọn station trực tiếp từ map */
+.select-btn {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+/* hover chọn station */
+.select-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/*icon trong input*/
+.icon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+/*input tìm kiếm*/
+.search-card input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+/*placeholder */
+.search-card input::placeholder {
+    color: rgba(255, 255, 255, 0.68);
+}
+
+/* nút tìm đường */
+.primary-btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    background: #6d82ff;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+/*hover nút tìm đường*/
+.primary-btn:hover {
+    background: #4e62f6;
+}
+
+/* =========================
+   PROMO CARD (THÔNG TIN/QUẢNG BÁ)
+   ========================= */
+
+/* 
+ * Card hiển thị nội dung phụ (quảng cáo / thông tin thêm)
+ * Layout dọc (flex column)
+ */
+.promo-card {
+    background: #181735;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ảnh banner phía trên card*/
+.promo-image {
+    height: 140px;
+    background: linear-gradient(135deg, #5b5cd6 0%, #2c66bd 100%);
+    background-image: linear-gradient(135deg, #5b5cd6 0%, #2c66bd 100%), url('');
+    background-size: cover;
+    background-position: center;
+}
+
+/* nội dung text bên dưới ảnh */
+.promo-copy {
+    padding: 18px 20px;
+}
+
+/*tiêu đề */
+.promo-copy strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+/*mô tả*/
+.promo-copy p {
+    margin: 0 0 16px;
+    color: #d1d1f3;
+    line-height: 1.5;
+}
+
+/*nhóm nút*/
+.promo-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.promo-buttons button {
+    flex: 1;
+    border: none;
+    border-radius: 14px;
+    padding: 11px 0;
+    color: #1f2a4a;
+    background: #e9e7ff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* =========================
+   DATA & RESULT CARD
+   ========================= 
+*/
+
+/* 
+ * Card hiển thị dữ liệu và kết quả route
+ * Dùng chung style để đồng bộ UI
+ */
+.data-card,
+.result-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 18px 20px;
+    color: #e5e7ff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Title card */
+.data-card h3 {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* =========================
+   FILE INPUT (UPLOAD DATA)
+   ========================= */
+
+/* 
+ * Mỗi dòng input file
+ * label + input
+ */
+.file-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+/* Label */
+.file-row label {
+    font-size: 0.95rem;
+    color: #c8c7f8;
+}
+
+/* Input file */
+.file-row input {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* =========================
+   NÚT PHỤ
+   ========================= 
+*/
+
+/* 
+ * Nút phụ (secondary action)
+ * Ít nổi bật hơn primary
+ */
+.secondary-btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+/* Hover nhẹ */
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 
+ * Text gợi ý / hướng dẫn
+ */
+.hint {
+    margin: 12px 0 0;
+    color: #c8c7f8;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* =========================
+   MAP AREA
+   ========================= */
+
+/* 
+ * Khu vực chứa map
+ * gồm toolbar + bản đồ
+ */
+.map-area {
+    display: flex;
+    flex-direction: column;
+    padding: 76px 20px 20px;
+    gap: 16px;
+    height: 100%;
+}
+
+/* Thanh công cụ phía trên map  */
+.map-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Title */
+.map-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* nhóm chuyển chế độ map*/
+.map-switch {
+    display: flex;
+    gap: 10px;
+}
+
+/* Button switch */
+.map-switch button {
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+/* Button active hiện thị map đang chọn */
+.map-switch button.active {
+    background: #1e40af;
+    border-color: #1e40af;
+    color: #ffffff;
+}
+
+/* 
+ * Container bản đồ (Leaflet)
+ * BẮT BUỘC phải có height → nếu không map không render
+ */
+#map {
+    flex: 1;
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= 
+*/
+
+@media (max-width: 1100px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .map-area {
+        padding: 72px 20px 40px;
+    }
+
+    #map {
+        min-height: 520px;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        padding: 16px;
+    }
+
+    .admin-mode-btn {
+        top: 10px;
+        right: 10px;
+        padding: 9px 12px;
+        font-size: 0.9rem;
+    }
+
+    .search-card {
+        padding: 16px;
+    }
+
+    .sidebar-tabs {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Profile panel styles */
+.profile-panel {
+    position: fixed;
+    top: 64px;
+    right: 20px;
+    width: 360px;
+    max-width: calc(100% - 40px);
+    background: #ffffff;
+    color: #1f2937;
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    z-index: 1300;
+    display: none;
+}
+
+.profile-panel[aria-hidden="false"] {
+    display: block;
+}
+
+.profile-inner {
+    padding: 18px;
+}
+
+.profile-inner h3 {
+    margin: 0 0 12px;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.profile-field input,
+.profile-field textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #e6e7ff;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.profile-actions .primary-btn {
+    flex: 1;
+}
+
+.profile-actions .secondary-btn {
+    flex: 1;
+}

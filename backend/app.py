@@ -39,6 +39,30 @@ def load_admins():
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)['admins']
 
+
+def load_users():
+    path = os.path.join(os.path.dirname(__file__), '..', 'data', 'users.json')
+    path = os.path.abspath(path)
+    # If users file doesn't exist, create an empty structure
+    if not os.path.exists(path):
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump({"users": []}, f, ensure_ascii=False, indent=2)
+
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f).get('users', [])
+
+
+def save_user(user_obj):
+    path = os.path.join(os.path.dirname(__file__), '..', 'data', 'users.json')
+    path = os.path.abspath(path)
+    users = []
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            users = json.load(f).get('users', [])
+    users.append(user_obj)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump({"users": users}, f, ensure_ascii=False, indent=2)
+
 # api login
 #đọc admin.json check username và password, set session
 @app.route('/api/login', methods=['POST'])
@@ -46,22 +70,53 @@ def login():
     data = request.json
     username = data.get('username')
     password = data.get('password')
-    
-    admins = load_admins()
-    for admin in admins:
-        if admin['username'] == username and admin['password'] == password:
-            session['is_admin'] = True
-            session['username'] = username
+    role = data.get('role', 'user')
 
-            return jsonify({
-                "success": True,
-                "redirect": "/admin.html"
-            })
+    if role == 'admin':
+        admins = load_admins()
+        for admin in admins:
+            if admin['username'] == username and admin['password'] == password:
+                session['is_admin'] = True
+                session['username'] = username
+                return jsonify({"success": True, "redirect": "/admin.html"})
+        return jsonify({"success": False, "message": "Sai tài khoản admin"}), 401
+    else:
+        # user login
+        users = load_users()
+        for user in users:
+            if user.get('username') == username and user.get('password') == password:
+                session['is_admin'] = False
+                session['username'] = username
+                return jsonify({"success": True, "redirect": "/user.html"})
+        return jsonify({"success": False, "message": "Sai tài khoản người dùng"}), 401
 
-    return jsonify({
-        "success": False,
-        "message": "Sai tài khoản"
-    }), 401
+
+@app.route('/api/auth/signup', methods=['POST'])
+def signup():
+    data = request.json
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+
+    if not username or not email or not password:
+        return jsonify({"error": "Thiếu thông tin đăng ký"}), 400
+
+    users = load_users()
+    for u in users:
+        if u.get('username') == username or u.get('email') == email:
+            return jsonify({"error": "Tên người dùng hoặc email đã tồn tại"}), 400
+
+    new_user = {
+        "username": username,
+        "email": email,
+        "password": password,
+        "first_name": first_name,
+        "last_name": last_name
+    }
+    save_user(new_user)
+    return jsonify({"success": True}), 201
 
 #api check session
 @app.route('/api/me')

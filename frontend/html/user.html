@@ -4,30 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Munich - Tìm đường tàu điện ngầm</title>
+    <title>Munich - Người dùng</title>
 
     <!-- Import CSS của Leaflet (thư viện bản đồ) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-    <!-- Import CSS của ứng dụng -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/marker-animations.css">
+    <!-- Import CSS của ứng dụng (sao chép từ style.css) -->
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 
 <body>
-    <a href="login.html?role=admin" class="admin-mode-btn">Đăng nhập</a>
-    <!--
-    Layout tổng của ứng dụng:
-    - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, tải dữ liệu bổ sung.
-    - Map area: bản đồ Leaflet và thanh chuyển lớp nền.
--->
+    <button id="profileBtn" class="admin-mode-btn">Hồ sơ</button>
+
     <div class="app-shell">
 
-        <!-- =========================
-         SIDEBAR (ĐIỀU KHIỂN)
-         =========================
-     -->
+        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div>
@@ -38,27 +30,23 @@
                     <span>VI</span>
                 </div>
             </div>
-            <!--tabs điều hướng-->
+
             <div class="sidebar-tabs">
                 <button class="tab active">Bản đồ</button>
                 <button class="tab">Sơ đồ</button>
                 <button class="tab">Thông tin</button>
             </div>
-            <!-- =========================
-             KHỐI NHẬP DỮ LIỆU TÌM ĐƯỜNG
-             ========================= -->
+
             <div class="search-card">
                 <div class="input-row">
                     <label for="fromStation">Từ</label>
-                    <!-- Input có icon -->
                     <div class="input-with-icon">
                         <span class="icon">⇨</span>
                         <input id="fromStation" list="stations" placeholder="Ga đi" autocomplete="off">
                     </div>
-                    <!--chọn ga trực tiếp trên bản đồ-->
                     <button id="selectFromBtn" class="select-btn">Chọn trên bản đồ</button>
                 </div>
-                <!-- Nhập ga đến -->
+
                 <div class="input-row">
                     <label for="toStation">Đến</label>
                     <div class="input-with-icon">
@@ -67,25 +55,14 @@
                     </div>
                     <button id="selectToBtn" class="select-btn">Chọn trên bản đồ</button>
                 </div>
-                <!-- Tìm đường -->
+
                 <button id="findRouteBtn" class="primary-btn">Tìm đường</button>
             </div>
-            <!-- 
-            =========================
-             KẾT QUẢ LỘ TRÌNH
-            =========================
-            -->
 
             <div id="result" class="result-card">
                 <h3>Kết quả lộ trình</h3>
                 <p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>
             </div>
-            <!-- 
-             =========================
-             IMPORT DATA (GTFS / FILE)
-             ========================= 
-             -->
-
 
             <div class="data-card">
                 <h3>Nhập dữ liệu</h3>
@@ -93,7 +70,7 @@
                     <label for="stopsFile">Stops (stops.txt)</label>
                     <input id="stopsFile" type="file" accept=".txt,.csv,.json">
                 </div>
-                <!-- File stop_times -->
+
                 <div class="file-row">
                     <label for="stopTimesFile">Stop times (stop_times.txt)</label>
                     <input id="stopTimesFile" type="file" accept=".txt,.csv">
@@ -102,10 +79,8 @@
                 <p class="hint">Chỉ cần chọn file stops.txt, hệ thống sẽ tạo marker ga trên bản đồ.</p>
             </div>
         </aside>
-        <!-- =========================
-         MAP AREA
-         ========================= -->
 
+        <!-- MAP AREA -->
         <main class="map-area">
             <div class="map-toolbar">
                 <div class="map-title">Bản đồ</div>
@@ -117,16 +92,47 @@
             <div id="map"></div>
         </main>
     </div>
-    <datalist id="stations"></datalist>
-    <!-- =========================
-     SCRIPT
-     ========================= -->
 
-    <!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
+    <datalist id="stations"></datalist>
+
+    <!-- Profile panel (modal/panel) -->
+    <div id="profilePanel" class="profile-panel" aria-hidden="true">
+        <div class="profile-inner">
+            <h3>Hồ sơ người dùng</h3>
+            <div class="profile-field">
+                <label for="profileUsername">Tên đăng nhập</label>
+                <input id="profileUsername" type="text" placeholder="Tên đăng nhập">
+            </div>
+            <div class="profile-field">
+                <label for="profilePassword">Mật khẩu mới</label>
+                <input id="profilePassword" type="password" placeholder="Để trống nếu không đổi">
+            </div>
+            <div class="profile-field">
+                <label for="profilePasswordConfirm">Xác nhận mật khẩu</label>
+                <input id="profilePasswordConfirm" type="password" placeholder="Xác nhận mật khẩu">
+            </div>
+            <div class="profile-field">
+                <label for="favStations">Ga yêu thích (phân tách bằng dấu phẩy)</label>
+                <input id="favStations" type="text" placeholder="VD: Marienplatz, Sendlinger Tor">
+            </div>
+            <div class="profile-field">
+                <label for="favRoutes">Tuyến yêu thích (mỗi tuyến 1 dòng)</label>
+                <textarea id="favRoutes" rows="4" placeholder="VD: U1: Olympiazentrum - Mangfallplatz"></textarea>
+            </div>
+            <div class="profile-actions">
+                <button id="saveProfileBtn" class="primary-btn">Lưu</button>
+                <button id="logoutBtn" class="primary-btn">Đăng xuất</button>
+                <button id="closeProfileBtn" class="secondary-btn">Đóng</button>
+            </div>
+            <div id="profileMessage" class="hint"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
     <script src="../js/script.js"></script>
+    <script src="../js/user.js"></script>
 </body>
 
 </html>

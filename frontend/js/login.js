@@ -1,5 +1,10 @@
 let currentRole = "user"; // 'user' or 'admin'
 
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
 // Handle form submission
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -91,7 +96,7 @@ function handleLogin() {
       }
 
       if (currentRole === "user") {
-        console.log("User login successful, redirecting to index.html");
+        console.log("User login successful, redirecting to user.html");
         const rememberMe = document.getElementById("rememberMe").checked;
         if (rememberMe) {
           localStorage.setItem(
@@ -105,8 +110,8 @@ function handleLogin() {
           localStorage.removeItem("rememberMe");
         }
         showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
-        console.log("Redirecting to index.html now...");
-        window.location.replace("index.html");
+        console.log("Redirecting to user.html now...");
+        window.location.replace("user.html");
       } else {
         console.log("Admin login successful, redirecting to admin.html");
         localStorage.removeItem("rememberMe");
@@ -174,5 +179,10 @@ window.addEventListener("load", function () {
     document.getElementById("username").value = data.username;
     document.getElementById("email").value = data.email;
     document.getElementById("rememberMe").checked = true;
+  }
+  // If a role is provided via query string, preselect it
+  const roleFromQuery = getQueryParam('role');
+  if (roleFromQuery === 'admin' || roleFromQuery === 'user') {
+    switchRole(roleFromQuery);
   }
 });
