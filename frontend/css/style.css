@@ -80,6 +80,9 @@ button {
     flex-direction: column;
     padding: 20px;
     gap: 18px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 /*bao gồm title + dropdown ngôn ngữ*/
 .sidebar-header {
@@ -119,7 +122,7 @@ button {
 */
 .sidebar-tabs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 /* style tab */

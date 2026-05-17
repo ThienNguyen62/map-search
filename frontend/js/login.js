@@ -16,15 +16,11 @@ function switchRole(role) {
   document.querySelector(`[data-role="${role}"]`).classList.add("active");
 
   // Update form fields visibility
-  if (role === "admin") {
-    document.getElementById("emailGroup").style.display = "none";
-    document.getElementById("email").removeAttribute("required");
-    document.querySelector(".signup-link").style.display = "none";
-  } else {
-    document.getElementById("emailGroup").style.display = "block";
-    document.getElementById("email").setAttribute("required", "");
-    document.querySelector(".signup-link").style.display = "block";
-  }
+  // Always show identifier field (username or email)
+  document.getElementById("emailGroup").style.display = "block";
+  document.getElementById("identifier").setAttribute("required", "");
+  // hide signup link for admin
+  document.querySelector(".signup-link").style.display = role === 'admin' ? 'none' : 'block';
 
   // Clear form
   document.getElementById("loginForm").reset();
@@ -33,15 +29,29 @@ function switchRole(role) {
 
 function handleLogin() {
   console.log("handleLogin called, currentRole:", currentRole);
-  const username = document.getElementById("username").value.trim();
+  const identifierEl = document.getElementById('identifier');
+  const identifier = identifierEl ? identifierEl.value.trim() : '';
+  let username = '';
   const password = document.getElementById("password").value;
 
   // Clear messages
   clearMessages();
 
-  if (!username) {
-    showError("Vui lòng nhập tên người dùng");
+  if (!identifier) {
+    showError('Vui lòng nhập tên người dùng hoặc email');
     return;
+  }
+
+  if (currentRole === 'admin') {
+    // use identifier as username for admin
+    username = identifier;
+  } else {
+    // for normal users, if identifier is email use local-part as username, else use identifier as username
+    if (identifier.includes('@')) {
+      username = identifier.split('@')[0];
+    } else {
+      username = identifier;
+    }
   }
 
   if (password.length < 6) {
@@ -49,16 +59,17 @@ function handleLogin() {
     return;
   }
 
-  if (currentRole === "user") {
-    const email = document.getElementById("email").value.trim();
-    if (!email) {
-      showError("Vui lòng nhập email");
-      return;
-    }
+  let email = null;
+  if (identifier && identifier.includes('@')) {
+    email = identifier;
     if (!isValidEmail(email)) {
-      showError("Email không hợp lệ");
+      showError('Email không hợp lệ');
       return;
     }
+  } else if (currentRole !== 'admin') {
+    // non-admin users should provide an email; if they didn't include @, ask them
+    showError('Vui lòng nhập email dưới dạng example@domain');
+    return;
   }
 
   showLoading(true);
@@ -69,9 +80,7 @@ function handleLogin() {
     role: currentRole,
   };
 
-  if (currentRole === "user") {
-    payload.email = document.getElementById("email").value.trim();
-  }
+  if (email) payload.email = email;
 
   fetch("http://127.0.0.1:5000/api/login", {
     method: "POST",
@@ -91,7 +100,7 @@ function handleLogin() {
       }
 
       if (currentRole === "user") {
-        console.log("User login successful, redirecting to index.html");
+        console.log("User login successful, redirecting to user.html");
         const rememberMe = document.getElementById("rememberMe").checked;
         if (rememberMe) {
           localStorage.setItem(
@@ -105,8 +114,8 @@ function handleLogin() {
           localStorage.removeItem("rememberMe");
         }
         showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
-        console.log("Redirecting to index.html now...");
-        window.location.replace("index.html");
+        console.log("Redirecting to user.html now...");
+        window.location.replace("user.html");
       } else {
         console.log("Admin login successful, redirecting to admin.html");
         localStorage.removeItem("rememberMe");
@@ -171,8 +180,10 @@ window.addEventListener("load", function () {
   const saved = localStorage.getItem("rememberMe");
   if (saved) {
     const data = JSON.parse(saved);
-    document.getElementById("username").value = data.username;
-    document.getElementById("email").value = data.email;
+    const idEl = document.getElementById('identifier');
+    if (idEl) idEl.value = data.email || data.username || '';
     document.getElementById("rememberMe").checked = true;
   }
+  // initialize UI according to currentRole
+  try { switchRole(currentRole); } catch (e) { }
 });

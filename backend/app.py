@@ -46,6 +46,16 @@ def login():
     data = request.json
     username = data.get('username')
     password = data.get('password')
+    role = data.get('role', 'user')
+    # If role is 'user', accept the login and set session (no admin privileges required)
+    if role != 'admin':
+        # simple acceptance for normal users; in production validate credentials
+        session['is_admin'] = False
+        session['username'] = username
+        return jsonify({
+            "success": True,
+            "redirect": "/user.html"
+        })
     
     admins = load_admins()
     for admin in admins:

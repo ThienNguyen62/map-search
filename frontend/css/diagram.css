@@ -1,0 +1,267 @@
+/* =============================================================================
+ * diagram.css
+ * Styles for the metro network diagram page
+ * ============================================================================= */
+
+/* ── Navigation ── */
+.diagram-nav {
+    margin-bottom: 4px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #c8c7f8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    transform: translateX(-2px);
+}
+
+/* ── Legend Card ── */
+.legend-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 16px 18px;
+    color: #e5e7ff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.legend-card h3 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #d8d7f2;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.legend-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.legend-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    outline: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.line-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Controls ── */
+.diagram-controls {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 16px 18px;
+    color: #e5e7ff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.diagram-controls h3 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.control-btn {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #e5e7ff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.control-btn.active {
+    background: #6d82ff;
+    border-color: #6d82ff;
+    color: #fff;
+}
+
+/* ── Search Results ── */
+.search-results {
+    max-height: 180px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.search-result-item {
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #d8d7f2;
+    font-size: 0.85rem;
+    transition: background 0.15s;
+}
+
+.search-result-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.search-result-item .station-name {
+    font-weight: 700;
+    color: #fff;
+}
+
+.search-result-item .station-lines {
+    font-size: 0.78rem;
+    color: #a5a4d4;
+    margin-top: 2px;
+}
+
+/* ── Station Info Card ── */
+.station-info-card {
+    background: #2c2a58;
+    border-radius: 22px;
+    padding: 16px 18px;
+    color: #e5e7ff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    animation: fadeInUp 0.25s ease;
+}
+
+.station-info-card h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.station-info-card p {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    color: #c8c7f8;
+    line-height: 1.5;
+}
+
+/* ── Diagram Container ── */
+.diagram-container {
+    flex: 1;
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+    background: #f8f9fc;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+}
+
+.diagram-container:active {
+    cursor: grabbing;
+}
+
+/* ── SVG Diagram ── */
+#diagramSvg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.diagram-edge {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: opacity 0.3s;
+}
+
+.diagram-edge.dimmed {
+    opacity: 0.08;
+}
+
+.diagram-station {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.diagram-station:hover circle {
+    r: 8;
+    stroke-width: 3;
+}
+
+.diagram-station-label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 9px;
+    fill: #333;
+    pointer-events: none;
+    user-select: none;
+}
+
+.diagram-station-label.highlighted {
+    font-size: 12px;
+    font-weight: 700;
+    fill: #1e40af;
+}
+
+.station-highlight-ring {
+    animation: pulseRing 1.5s ease infinite;
+}
+
+@keyframes pulseRing {
+    0% { r: 10; opacity: 0.6; }
+    50% { r: 16; opacity: 0.2; }
+    100% { r: 10; opacity: 0.6; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Image Viewer ── */
+#diagramImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    max-width: none;
+    transition: transform 0.15s ease;
+}

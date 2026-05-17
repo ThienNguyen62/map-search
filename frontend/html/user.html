@@ -20,9 +20,9 @@
     <a id="authLink" href="login.html" class="admin-mode-btn">Đăng nhập</a>
     <!--
     Layout tổng của ứng dụng:
-    - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, tải dữ liệu bổ sung.
+    - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, lịch sử tìm kiếm.
     - Map area: bản đồ Leaflet và thanh chuyển lớp nền.
--->
+    -->
     <div class="app-shell">
 
         <!-- =========================
@@ -35,8 +35,9 @@
                     <strong>München</strong>
                     <span>Tàu điện ngầm</span>
                 </div>
-                <div class="lang-select">
-                    <span>VI</span>
+                <div class="user-badge" id="userBadge">
+                    <span class="user-avatar" id="userAvatar">👤</span>
+                    <span class="user-name" id="userName">Người dùng</span>
                 </div>
             </div>
             <!--tabs điều hướng-->
@@ -78,20 +79,14 @@
                         <button id="resetRoutesBtn" class="secondary-btn">Xóa kết quả</button>
                     </div>
                 </div>
-                <!-- 
-                =========================
-                 KẾT QUẢ LỘ TRÌNH
-                =========================
-                -->
+
+                <!-- KẾT QUẢ LỘ TRÌNH -->
                 <div id="result" class="result-card">
                     <h3>Kết quả lộ trình</h3>
                     <p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>
                 </div>
-                <!-- 
-                 =========================
-                 IMPORT DATA (GTFS / FILE)
-                 ========================= 
-                 -->
+
+                <!-- IMPORT DATA (GTFS / FILE) -->
                 <div class="data-card">
                     <h3>Nhập dữ liệu</h3>
                     <div class="file-row">
@@ -143,14 +138,18 @@
                     <ul>
                         <li>Chọn ga đi và ga đến để tìm lộ trình tối ưu</li>
                         <li>Click trên bản đồ để chọn điểm bất kỳ</li>
-                        <li>Lịch sử tìm kiếm được lưu tự động</li>
+                        <li>Lịch sử tìm kiếm được lưu tự động cho tài khoản của bạn</li>
                         <li>Hỗ trợ nhiều tuyến: U-Bahn và S-Bahn</li>
                     </ul>
+                    <div class="user-info-section" id="userInfoSection">
+                        <h4>Tài khoản</h4>
+                        <p id="userInfoDetail">Đang tải...</p>
+                    </div>
                 </div>
             </div>
 
         </aside>
-         <!-- =========================
+        <!-- =========================
          MAP AREA
          ========================= -->
 
@@ -173,10 +172,10 @@
     <!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
     <script src="../js/auth_link.js"></script>
-    <!-- user history hook: wraps findRoute to auto-save search history -->
+    <!-- user history hook must be loaded before main script so it can wrap findRoute -->
     <script src="../js/user_history.js"></script>
+    <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
     <script src="../js/script.js"></script>
 </body>
 

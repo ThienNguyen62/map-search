@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munich - Sơ đồ mạng lưới Metro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/diagram.css">
+</head>
+
+<body>
+    <a id="authLink" href="login.html" class="admin-mode-btn">Đăng nhập</a>
+
+    <div class="app-shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <strong>München</strong>
+                    <span>Sơ đồ mạng lưới</span>
+                </div>
+                <div class="lang-select">
+                    <span>VI</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="diagram-nav">
+                <a href="index.html" class="nav-link">← Quay lại Bản đồ</a>
+            </div>
+
+            <!-- Line Legend -->
+            <div class="legend-card">
+                <h3>🚇 Tuyến U-Bahn</h3>
+                <div class="legend-grid">
+                    <div class="legend-item"><span class="line-dot" style="background:#417AB4"></span>U1</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#D4311E"></span>U2</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#F5821F"></span>U3</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#00A76D"></span>U4</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#BF7F50"></span>U5</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#0065A3"></span>U6</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#8246AF"></span>U7</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#C4071C"></span>U8</div>
+                </div>
+            </div>
+
+            <div class="legend-card">
+                <h3>🚈 Tuyến S-Bahn</h3>
+                <div class="legend-grid">
+                    <div class="legend-item"><span class="line-dot" style="background:#1A9BD7"></span>S1</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#76B82A"></span>S2</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#951B81"></span>S3</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#E2001A"></span>S4</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#00A550"></span>S6</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#964B00"></span>S7</div>
+                    <div class="legend-item"><span class="line-dot" style="background:#000000"></span>S8</div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="diagram-controls">
+                <h3>🔧 Điều khiển</h3>
+                <div class="control-buttons">
+                    <button id="zoomInBtn" class="control-btn">➕ Phóng to</button>
+                    <button id="zoomOutBtn" class="control-btn">➖ Thu nhỏ</button>
+                    <button id="resetViewBtn" class="control-btn">🔄 Đặt lại</button>
+                    <button id="toggleModeBtn" class="control-btn active">📊 Sơ đồ tương tác</button>
+                </div>
+                <p class="hint">Kéo thả để di chuyển, cuộn chuột để phóng to/thu nhỏ.</p>
+            </div>
+
+            <!-- Station Search -->
+            <div class="search-card">
+                <div class="input-row">
+                    <label for="searchStation">Tìm ga</label>
+                    <div class="input-with-icon">
+                        <span class="icon">🔍</span>
+                        <input id="searchStation" placeholder="Nhập tên ga..." autocomplete="off">
+                    </div>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+
+            <!-- Station Info -->
+            <div class="station-info-card" id="stationInfoCard" style="display:none">
+                <h3 id="stationInfoName">—</h3>
+                <p id="stationInfoLines">—</p>
+                <p id="stationInfoConnections">—</p>
+            </div>
+
+        </aside>
+
+        <!-- MAIN: DIAGRAM VIEW -->
+        <main class="map-area">
+            <div class="map-toolbar">
+                <div class="map-title">Sơ đồ mạng lưới Metro Munich</div>
+                <div class="map-switch">
+                    <button id="viewInteractive" class="active">Tương tác</button>
+                    <button id="viewImage">Hình ảnh</button>
+                </div>
+            </div>
+            <!-- Interactive SVG diagram -->
+            <div id="diagramContainer" class="diagram-container">
+                <svg id="diagramSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <!-- Static image viewer (hidden by default) -->
+            <div id="imageContainer" class="diagram-container" style="display:none">
+                <img id="diagramImage" src="../images/munich_metro_map.png" alt="Munich Metro Map" draggable="false">
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/auth_link.js"></script>
+    <script src="../js/diagram.js"></script>
+</body>
+
+</html>
