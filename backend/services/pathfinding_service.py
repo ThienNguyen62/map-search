@@ -92,18 +92,21 @@ graph.edges = []
 seen_edges = set()
 
 for e in edges_list:
-    # Hỗ trợ cả 2 định dạng: station1/station2 và from_id/to_id
+    # Hỗ trợ các định dạng edge khác nhau: station1/station2, from_id/to_id, from/to
     if 'station1' in e and 'station2' in e:
         from_id = e['station1']
         to_id = e['station2']
     elif 'from_id' in e and 'to_id' in e:
         from_id = e['from_id']
         to_id = e['to_id']
+    elif 'from' in e and 'to' in e:
+        from_id = e['from']
+        to_id = e['to']
     else:
         print(f"⚠️ Bỏ qua edge không rõ định dạng: {list(e.keys())}")
         continue
 
-    time_min = e.get('time_min', 1)
+    time_min = e.get('time_min', e.get('time', 1))
     distance_km = e.get('distance_km', 0.0)
     line = e.get('line', '')
 

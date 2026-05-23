@@ -2,11 +2,17 @@ from flask import Flask, request, session, jsonify
 from functools import wraps
 from flask_cors import CORS
 from api.routes import api_blueprint
+from flask import send_from_directory
 import json
 import os
 
 # khởi tạo Flask
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="../frontend",
+    static_url_path=""
+)
+# cấu hình session
 app.secret_key = "secret123"  # key bí mật cho session
 
 # Enable CORS for all routes
@@ -18,11 +24,7 @@ app.secret_key = "secret123"  # key bí mật cho session
 #         "allow_headers": ["Content-Type"]
 #     }
 # })
-CORS(app, supports_credentials=True, resources={
-    r"/api/*": {
-        "origins": "http://127.0.0.1:5500"
-    }
-})
+CORS(app, supports_credentials=True)
 # cấu hình session cookie để frontend có thể nhận diện được session từ backend
 app.config.update(
     SESSION_COOKIE_SAMESITE="None",
@@ -88,7 +90,8 @@ def admin_required(f):
 
 @app.route("/")
 def home():
-    return "Flask is running"
+    return send_from_directory("../frontend/html", "index.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

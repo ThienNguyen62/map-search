@@ -361,7 +361,7 @@ function drawStations() {
             color: '#005b96',
             fillColor: '#ffffff',
             fillOpacity: 0.9,
-            weight: 2
+            weight: 3
         }).addTo(stationLayerGroup);
         marker.bindPopup(`<strong>${station.name}</strong><br/>${station.id}<br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`);
         marker.on('click', () => selectStation(station));
@@ -469,7 +469,7 @@ function drawNetwork() {
         const color = lineColors[edge.line] || '#7589a0';
         L.polyline(
             [[from.lat, from.lon], [to.lat, to.lon]],
-            { color, weight: 2, opacity: 0.4 }
+            { color, weight: 3, opacity: 0.4 }
         ).addTo(networkLayer);
         drawnCount++;
     });
