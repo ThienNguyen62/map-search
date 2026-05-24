@@ -46,9 +46,9 @@ function handleLogin() {
     // use identifier as username for admin
     username = identifier;
   } else {
-    // for normal users, if identifier is email use local-part as username, else use identifier as username
+    // normal users may login with username directly or email if they provided one
     if (identifier.includes('@')) {
-      username = identifier.split('@')[0];
+      username = '';
     } else {
       username = identifier;
     }
@@ -66,10 +66,6 @@ function handleLogin() {
       showError('Email không hợp lệ');
       return;
     }
-  } else if (currentRole !== 'admin') {
-    // non-admin users should provide an email; if they didn't include @, ask them
-    showError('Vui lòng nhập email dưới dạng example@domain');
-    return;
   }
 
   showLoading(true);
@@ -113,12 +109,16 @@ function handleLogin() {
         } else {
           localStorage.removeItem("rememberMe");
         }
+        localStorage.setItem("loggedInUser", username || email || "user");
+        localStorage.setItem("isAdmin", "0");
         showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
         console.log("Redirecting to user.html now...");
         window.location.replace("user.html");
       } else {
         console.log("Admin login successful, redirecting to admin.html");
         localStorage.removeItem("rememberMe");
+        localStorage.setItem("loggedInUser", username || email || "admin");
+        localStorage.setItem("isAdmin", "1");
         showSuccess("Đăng nhập thành công (Admin)! Đang chuyển hướng...");
         console.log("Redirecting to admin.html now...");
         window.location.replace("admin.html");

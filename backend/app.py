@@ -2,8 +2,17 @@ from flask import Flask, request, session, jsonify
 from functools import wraps
 from flask_cors import CORS
 from api.routes import api_blueprint
+from services.user import (
+    init_db,
+    create_user,
+    hash_password,
+    verify_password,
+    get_user_by_username,
+    get_user_by_email,
+)
 import json
 import os
+import sqlite3
 
 # khởi tạo Flask
 app = Flask(__name__)
@@ -31,6 +40,10 @@ app.config.update(
 
 # đăng ký API
 app.register_blueprint(api_blueprint, url_prefix="/api")
+
+# chuẩn bị cơ sở dữ liệu người dùng
+init_db()
+
 # load admin data
 def load_admins():
     path = os.path.join(os.path.dirname(__file__), '..', 'data', 'admin.json')
@@ -39,24 +52,66 @@ def load_admins():
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)['admins']
 
+@app.route('/api/auth/signup', methods=['POST'])
+def signup():
+    data = request.json or {}
+    username = (data.get('username') or '').strip()
+    password = data.get('password') or ''
+    first_name = (data.get('first_name') or '').strip()
+    last_name = (data.get('last_name') or '').strip()
+    email = data.get('email')
+    phone = data.get('phone')
+
+    if not first_name or not last_name:
+        return jsonify({"error": "Vui lòng nhập họ và tên"}), 400
+    if not username or len(username) < 3:
+        return jsonify({"error": "Tên người dùng phải có ít nhất 3 ký tự"}), 400
+    if not password or len(password) < 6:
+        return jsonify({"error": "Mật khẩu phải có ít nhất 6 ký tự"}), 400
+    if get_user_by_username(username):
+        return jsonify({"error": "Tên người dùng đã tồn tại"}), 400
+    if email:
+        if get_user_by_email(email):
+            return jsonify({"error": "Email đã tồn tại"}), 400
+
+    password_hash = hash_password(password)
+    try:
+        create_user(username=username, email=email, password_hash=password_hash,
+                    first_name=first_name, last_name=last_name, phone=phone or '')
+    except sqlite3.IntegrityError:
+        return jsonify({"error": "Không thể tạo tài khoản, vui lòng thử lại"}), 500
+
+    return jsonify({"success": True, "message": "Đăng ký thành công"})
+
+
 # api login
-#đọc admin.json check username và password, set session
+# đọc admin.json check username và password, set session
 @app.route('/api/login', methods=['POST'])
 def login():
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
+    data = request.json or {}
+    username = (data.get('username') or '').strip()
+    password = data.get('password') or ''
+    email = (data.get('email') or '').strip()
     role = data.get('role', 'user')
-    # If role is 'user', accept the login and set session (no admin privileges required)
+
     if role != 'admin':
-        # simple acceptance for normal users; in production validate credentials
+        # Validate normal user credentials from the database
+        user = None
+        if username:
+            user = get_user_by_username(username)
+        if not user and email:
+            user = get_user_by_email(email)
+
+        if not user or not verify_password(user['password_hash'], password):
+            return jsonify({"success": False, "error": "Tên người dùng hoặc mật khẩu không đúng"}), 401
+
         session['is_admin'] = False
-        session['username'] = username
+        session['username'] = user['username']
         return jsonify({
             "success": True,
             "redirect": "/user.html"
         })
-    
+
     admins = load_admins()
     for admin in admins:
         if admin['username'] == username and admin['password'] == password:

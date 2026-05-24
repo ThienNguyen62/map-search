@@ -47,8 +47,6 @@ function handleSignUp() {
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
   const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
   const agreeTerms = document.getElementById("agreeTerms").checked;
@@ -74,11 +72,6 @@ function handleSignUp() {
 
   if (!/^[a-zA-Z0-9_]+$/.test(username)) {
     showError("Tên người dùng chỉ được chứa chữ cái, số và dấu gạch dưới");
-    return;
-  }
-
-  if (!email || !isValidEmail(email)) {
-    showError("Vui lòng nhập email hợp lệ");
     return;
   }
 
@@ -108,8 +101,6 @@ function handleSignUp() {
       first_name: firstName,
       last_name: lastName,
       username: username,
-      email: email,
-      phone: phone,
       password: password,
     }),
   })
@@ -117,7 +108,7 @@ function handleSignUp() {
       const data = await response.json();
       showLoading(false);
       if (!response.ok) {
-        showError(data.error || "Đăng ký thất bại");
+        showError("Đăng ký thất bại: " + (data.error || "Vui lòng thử lại."));
         return;
       }
       showSuccess("Đăng ký thành công! Đang chuyển hướng tới đăng nhập...");
@@ -127,13 +118,8 @@ function handleSignUp() {
     })
     .catch(() => {
       showLoading(false);
-      showError("Không thể kết nối tới server. Hãy kiểm tra backend.");
+      showError("Đăng ký thất bại: Không thể kết nối tới server. Hãy kiểm tra backend.");
     });
-}
-
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
 }
 
 function showError(message) {
