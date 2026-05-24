@@ -44,7 +44,7 @@ async function updateAuthLink() {
       (pathname.endsWith("index.html") || pathname.endsWith("user.html"))
     ) {
       link.textContent = "Trang chủ";
-      link.href = "index.html";
+      link.href = "admin.html";
       link.onclick = null;
       clearFromAdminFlag();
       return;
