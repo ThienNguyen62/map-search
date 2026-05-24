@@ -2,6 +2,8 @@ from flask import Flask, request, session, jsonify
 from functools import wraps
 from flask_cors import CORS
 from api.routes import api_blueprint
+# quản lý người dùng, bao gồm khởi tạo cơ sở dữ liệu, tạo người dùng mới, hash mật khẩu, xác nhận mật khẩu
+#lấy thông tin người dùng theo usename và ghi lại lịch sử đăng nhập
 from services.user import (
     init_db,
     create_user,
@@ -51,7 +53,7 @@ def load_admins():
 
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)['admins']
-
+# thêm route ngày 24/5
 @app.route('/api/auth/signup', methods=['POST'])
 def signup():
     data = request.json or {}

@@ -1,72 +1,103 @@
 <!doctype html>
 <html lang="vi">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đăng Ký - Munich Tàu Điện Ngầm</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/login.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="login-container">
-        <div class="login-header">
-            <h1>Munich Metro</h1>
-            <p>Đăng ký tài khoản mới</p>
+      <div class="login-header">
+        <h1>Munich Metro</h1>
+        <p>Đăng ký tài khoản mới</p>
+      </div>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="firstName">Họ</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="Nhập họ"
+            required
+          />
         </div>
 
-        <div class="error-message" id="errorMessage"></div>
-        <div class="success-message" id="successMessage"></div>
-
-        <form id="signupForm">
-            <div class="form-group">
-                <label for="firstName">Họ</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Nhập họ" required />
-            </div>
-
-            <div class="form-group">
-                <label for="lastName">Tên</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Nhập tên" required />
-            </div>
-
-            <div class="form-group">
-                <label for="username">Tên người dùng</label>
-                <input type="text" id="username" name="username" placeholder="Tên người dùng" required />
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required />
-                <div id="passwordStrength" class="password-strength"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="confirmPassword">Xác nhận mật khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required />
-            </div>
-
-            <div class="checkbox-group" style="justify-content: flex-start; gap: 10px;">
-                <label>
-                    <input type="checkbox" id="agreeTerms" name="agreeTerms" />
-                    <span>Tôi đồng ý với Điều khoản dịch vụ</span>
-                </label>
-            </div>
-
-            <div class="loading" id="loading">
-                <span>Đang xử lý...</span>
-            </div>
-
-            <button type="submit" class="login-btn signup-btn">Đăng Ký</button>
-        </form>
-
-        <div class="signup-link">
-            Đã có tài khoản?
-            <a href="login.html">Đăng nhập ngay</a>
+        <div class="form-group">
+          <label for="lastName">Tên</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Nhập tên"
+            required
+          />
         </div>
+
+        <div class="form-group">
+          <label for="username">Tên người dùng</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Tên người dùng"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mật khẩu</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Nhập mật khẩu"
+            required
+          />
+          <div id="passwordStrength" class="password-strength"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Xác nhận mật khẩu</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Nhập lại mật khẩu"
+            required
+          />
+        </div>
+
+        <div
+          class="checkbox-group"
+          style="justify-content: flex-start; gap: 10px"
+        >
+          <label>
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" />
+            <span>Tôi đồng ý với Điều khoản dịch vụ</span>
+          </label>
+        </div>
+
+        <div class="loading" id="loading">
+          <span>Đang xử lý...</span>
+        </div>
+
+        <button type="submit" class="login-btn signup-btn">Đăng Ký</button>
+      </form>
+
+      <div class="signup-link">
+        Đã có tài khoản?
+        <a href="login.html">Đăng nhập ngay</a>
+      </div>
     </div>
 
     <script src="../js/signup.js"></script>
-</body>
-
+  </body>
 </html>

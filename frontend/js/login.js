@@ -20,7 +20,8 @@ function switchRole(role) {
   document.getElementById("emailGroup").style.display = "block";
   document.getElementById("identifier").setAttribute("required", "");
   // hide signup link for admin
-  document.querySelector(".signup-link").style.display = role === 'admin' ? 'none' : 'block';
+  document.querySelector(".signup-link").style.display =
+    role === "admin" ? "none" : "block";
 
   // Clear form
   document.getElementById("loginForm").reset();
@@ -29,26 +30,26 @@ function switchRole(role) {
 
 function handleLogin() {
   console.log("handleLogin called, currentRole:", currentRole);
-  const identifierEl = document.getElementById('identifier');
-  const identifier = identifierEl ? identifierEl.value.trim() : '';
-  let username = '';
+  const identifierEl = document.getElementById("identifier");
+  const identifier = identifierEl ? identifierEl.value.trim() : "";
+  let username = "";
   const password = document.getElementById("password").value;
 
   // Clear messages
   clearMessages();
 
   if (!identifier) {
-    showError('Vui lòng nhập tên người dùng hoặc email');
+    showError("Vui lòng nhập tên người dùng hoặc email");
     return;
   }
 
-  if (currentRole === 'admin') {
+  if (currentRole === "admin") {
     // use identifier as username for admin
     username = identifier;
   } else {
     // normal users may login with username directly or email if they provided one
-    if (identifier.includes('@')) {
-      username = '';
+    if (identifier.includes("@")) {
+      username = "";
     } else {
       username = identifier;
     }
@@ -60,10 +61,10 @@ function handleLogin() {
   }
 
   let email = null;
-  if (identifier && identifier.includes('@')) {
+  if (identifier && identifier.includes("@")) {
     email = identifier;
     if (!isValidEmail(email)) {
-      showError('Email không hợp lệ');
+      showError("Email không hợp lệ");
       return;
     }
   }
@@ -180,10 +181,12 @@ window.addEventListener("load", function () {
   const saved = localStorage.getItem("rememberMe");
   if (saved) {
     const data = JSON.parse(saved);
-    const idEl = document.getElementById('identifier');
-    if (idEl) idEl.value = data.email || data.username || '';
+    const idEl = document.getElementById("identifier");
+    if (idEl) idEl.value = data.email || data.username || "";
     document.getElementById("rememberMe").checked = true;
   }
   // initialize UI according to currentRole
-  try { switchRole(currentRole); } catch (e) { }
+  try {
+    switchRole(currentRole);
+  } catch (e) {}
 });

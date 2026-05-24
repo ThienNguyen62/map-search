@@ -118,7 +118,9 @@ function handleSignUp() {
     })
     .catch(() => {
       showLoading(false);
-      showError("Đăng ký thất bại: Không thể kết nối tới server. Hãy kiểm tra backend.");
+      showError(
+        "Đăng ký thất bại: Không thể kết nối tới server. Hãy kiểm tra backend.",
+      );
     });
 }
 
