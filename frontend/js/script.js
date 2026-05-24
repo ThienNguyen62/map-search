@@ -65,6 +65,9 @@ let lastWalkingFrom = null;
 let lastWalkingTo = null;
 let lastFromDisplay = '';
 let lastToDisplay = '';
+let lastFromStationId = null;
+let lastToStationId = null;
+let favoriteRoutesFeature = null;
 const lineColors = {
     // U-Bahn (màu chính thức MVV)
     U1: '#417AB4', // xanh dương
@@ -301,17 +304,26 @@ async function computeAndShowFullRoute() {
 
     if (!fromStationId || !toStationId) {
         document.getElementById('result').innerHTML = '<p>Vui lòng chọn điểm đi và điểm đến (ga hoặc vị trí trên bản đồ).</p>';
+        syncFavoriteCurrentRoute();
         return;
     }
+
+    lastFromStationId = fromStationId;
+    lastToStationId = toStationId;
 
     // if both are stations -> run metro path
     let metroRoute = null;
     try {
+        const payload = { source: fromStationId, target: toStationId };
+        console.log('[DEBUG] POST /api/path payload:', JSON.stringify(payload));
         const resp = await fetch('http://127.0.0.1:5000/api/path', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ source: fromStationId, target: toStationId })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            credentials: 'include'
         });
         const json = await resp.json();
+        console.log('[DEBUG] POST /api/path response:', resp.status, json);
         if (resp.ok && !json.error) {
             metroRoute = json;
         } else {
@@ -319,6 +331,7 @@ async function computeAndShowFullRoute() {
         }
     } catch (err) {
         // fallback to local Dijkstra
+        console.warn('[DEBUG] Backend failed, falling back to local Dijkstra:', err.message);
         const route = dijkstra(fromStationId, toStationId);
         metroRoute = route;
     }
@@ -337,6 +350,7 @@ async function computeAndShowFullRoute() {
 
     if (!routesList.length) {
         document.getElementById('result').innerHTML = '<p>Không tìm thấy lộ trình metro.</p>';
+        syncFavoriteCurrentRoute();
         return;
     }
 
@@ -354,6 +368,7 @@ async function computeAndShowFullRoute() {
     updateRoutesUI();
     // default select best (index 0)
     selectRoute(0);
+    syncFavoriteCurrentRoute();
 
     // draw walking segments using road network where possible
     const allBounds = [];
@@ -737,6 +752,8 @@ function resetFoundRoutes() {
     lastWalkingTo = null;
     lastFromDisplay = '';
     lastToDisplay = '';
+    lastFromStationId = null;
+    lastToStationId = null;
     // reset selected index
     selectedRouteIndex = 0;
     // reset result panel content to default message
@@ -744,6 +761,7 @@ function resetFoundRoutes() {
     if (result) {
         result.innerHTML = `<h3>Kết quả lộ trình</h3><p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>`;
     }
+    syncFavoriteCurrentRoute();
 }
 
 function updateRoutesUI() {
@@ -807,25 +825,47 @@ async function fetchAndDrawWalkingLeg(point, station, opts = {}) {
     const layer = walkingLayer;
     const from = point; const to = station;
     const color = opts.color || '#2f4f4f';
-    // OSRM expects lon,lat
+    // Router expects lon,lat
     const coords = `${from.lon},${from.lat};${to.lon},${to.lat}`;
-    // try walking profile, then foot, then driving as fallback
-    const profiles = ['walking','foot','driving'];
+
+    // Ưu tiên engine có profile đi bộ thật; không dùng driving để tránh đường vòng theo luật xe.
+    const routerCandidates = [
+        {
+            name: 'osmde-foot',
+            url: `https://routing.openstreetmap.de/routed-foot/route/v1/driving/${coords}?overview=full&geometries=geojson&alternatives=true&steps=false`
+        },
+        {
+            name: 'osrm-walking',
+            url: `https://router.project-osrm.org/route/v1/walking/${coords}?overview=full&geometries=geojson&alternatives=true&steps=false`
+        }
+    ];
+
     let routeGeo = null;
     let routeInfo = null;
-    for (const profile of profiles) {
+    for (const router of routerCandidates) {
         try {
-            const url = `https://router.project-osrm.org/route/v1/${profile}/${coords}?overview=full&geometries=geojson`;
-            const resp = await fetch(url);
+            const resp = await fetch(router.url);
             if (!resp.ok) throw new Error('no route');
             const j = await resp.json();
             if (j && j.routes && j.routes.length) {
-                routeGeo = j.routes[0].geometry;
-                routeInfo = { distance: j.routes[0].distance, duration: j.routes[0].duration };
+                const shortestRoute = j.routes.reduce((best, current) => {
+                    if (!best) return current;
+                    return (Number(current.distance) || Number.POSITIVE_INFINITY) < (Number(best.distance) || Number.POSITIVE_INFINITY)
+                        ? current
+                        : best;
+                }, null);
+
+                if (!shortestRoute || !shortestRoute.geometry || !shortestRoute.geometry.coordinates || !shortestRoute.geometry.coordinates.length) {
+                    throw new Error('invalid route geometry');
+                }
+
+                routeGeo = shortestRoute.geometry;
+                routeInfo = { distance: shortestRoute.distance, duration: shortestRoute.duration };
+                console.debug('Walking route provider used:', router.name, routeInfo);
                 break;
             }
         } catch (err) {
-            // try next profile
+            console.debug('Walking route provider failed:', router.name, err);
         }
     }
 
@@ -840,7 +880,7 @@ async function fetchAndDrawWalkingLeg(point, station, opts = {}) {
     // fallback: straight line
     const straight = L.polyline([[from.lat, from.lon], [to.lat, to.lon]], { color, weight: 4, dashArray: '6,8', opacity: 0.9 });
     straight.addTo(layer);
-    const distKm = haversine_km(from.lat, from.lon, to.lat, to.lon);
+    const distKm = haversineKm(from.lat, from.lon, to.lat, to.lon);
     const timeMin = Math.round(distKm * 12);
     return { bounds: straight.getBounds(), distance: distKm, timeMin };
 }
@@ -862,6 +902,141 @@ function selectRoute(idx) {
     const routeMeta = sel.meta;
     const edges = buildEdgeDetailsFromPath(routeMeta.path);
     showResult({ path: routeMeta.path, cost: routeMeta.metro_time, edges }, lastFromDisplay, lastToDisplay, lastWalkingFrom, lastWalkingTo);
+    syncFavoriteCurrentRoute();
+}
+
+// Build snapshot for FavoriteRoutesFeature.
+function getCurrentRouteSnapshot() {
+    if (!routeLayers.length) return null;
+    const current = routeLayers[selectedRouteIndex];
+    if (!current || !current.meta || !Array.isArray(current.meta.path) || !current.meta.path.length) return null;
+
+    const routeMeta = current.meta;
+    const edges = buildEdgeDetailsFromPath(routeMeta.path);
+    const transferCount = routeMeta.transfers != null
+        ? Number(routeMeta.transfers)
+        : Math.max(0, edges.reduce((count, edge, index) => {
+            if (index === 0) return 0;
+            return count + (edge.line !== edges[index - 1].line ? 1 : 0);
+        }, 0));
+
+    return {
+        sourceId: lastFromStationId,
+        targetId: lastToStationId,
+        sourceName: lastFromDisplay || (graphById[lastFromStationId] ? graphById[lastFromStationId].name : ''),
+        targetName: lastToDisplay || (graphById[lastToStationId] ? graphById[lastToStationId].name : ''),
+        // Keep exact user-picked points so favorites can restore walking legs.
+        sourceCoord: (customPoints.from ? { lat: customPoints.from.lat, lon: customPoints.from.lon } : null),
+        targetCoord: (customPoints.to ? { lat: customPoints.to.lat, lon: customPoints.to.lon } : null),
+        path: routeMeta.path.slice(),
+        metroTime: Number(routeMeta.metro_time || routeMeta.cost || 0),
+        transferCount,
+        stations: routeMeta.path.map(id => ({ id, name: graphById[id] ? graphById[id].name : id })),
+    };
+}
+
+function syncFavoriteCurrentRoute() {
+    if (!favoriteRoutesFeature) return;
+    favoriteRoutesFeature.setCurrentRoute(getCurrentRouteSnapshot());
+}
+
+async function openFavoriteRoute(favoriteRoute) {
+
+    if (!favoriteRoute) return;
+
+    if (typeof window.switchToTab === 'function') {
+        window.switchToTab('map');
+    }
+
+    // Backward compatibility: old favorites may store point labels but not coord fields.
+    const parsePointLabel = (text) => {
+        const m = String(text || '').match(/Điểm\s*\(\s*([-+]?\d+(?:\.\d+)?)\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)/i);
+        if (!m) return null;
+        const lat = Number(m[1]);
+        const lon = Number(m[2]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+        return { lat, lon };
+    };
+
+    const sourceCoord = favoriteRoute.sourceCoord || parsePointLabel(favoriteRoute.sourceName);
+    const targetCoord = favoriteRoute.targetCoord || parsePointLabel(favoriteRoute.targetName);
+
+    // If favorite has exact coordinates, prioritize restoring custom points first.
+    if (sourceCoord && targetCoord) {
+        selectedStationIds.from = null;
+        selectedStationIds.to = null;
+        clearCustomPoint('from');
+        clearCustomPoint('to');
+        const sf = sourceCoord;
+        const st = targetCoord;
+        customPoints.from = { lat: Number(sf.lat), lon: Number(sf.lon) };
+        customPoints.to = { lat: Number(st.lat), lon: Number(st.lon) };
+        if (customPointMarkers.from) try { customPointMarkers.from.remove(); } catch (e) {}
+        if (customPointMarkers.to) try { customPointMarkers.to.remove(); } catch (e) {}
+        customPointMarkers.from = createPointMarker(customPoints.from.lat, customPoints.from.lon, 'from');
+        customPointMarkers.to = createPointMarker(customPoints.to.lat, customPoints.to.lon, 'to');
+        document.getElementById('fromStation').value = favoriteRoute.sourceName || `Điểm (${customPoints.from.lat.toFixed(5)}, ${customPoints.from.lon.toFixed(5)})`;
+        document.getElementById('toStation').value = favoriteRoute.targetName || `Điểm (${customPoints.to.lat.toFixed(5)}, ${customPoints.to.lon.toFixed(5)})`;
+
+        await computeAndShowFullRoute();
+    }
+    // Otherwise restore by station ids.
+    else if (favoriteRoute.sourceId && favoriteRoute.targetId) {
+        const fromStation = graphById[favoriteRoute.sourceId];
+        const toStation = graphById[favoriteRoute.targetId];
+        if (!fromStation || !toStation) {
+            const result = document.getElementById('result');
+            if (result) {
+                result.innerHTML = '<p>Không thể tìm lại tuyến yêu thích vì dữ liệu ga đã thay đổi.</p>';
+            }
+            return;
+        }
+
+        selectedStationIds.from = fromStation.id;
+        selectedStationIds.to = toStation.id;
+        clearCustomPoint('from');
+        clearCustomPoint('to');
+        markStationOnMap(fromStation.id, 'from');
+        markStationOnMap(toStation.id, 'to');
+        document.getElementById('fromStation').value = fromStation.name;
+        document.getElementById('toStation').value = toStation.name;
+
+        await computeAndShowFullRoute();
+    } else {
+        const result = document.getElementById('result');
+        if (result) {
+            result.innerHTML = '<p>Không thể tìm lại tuyến yêu thích vì dữ liệu không hợp lệ.</p>';
+        }
+        return;
+    }
+
+    // Nếu path cũ còn tồn tại trong kết quả mới thì tự chọn đúng tuyến đó.
+    if (Array.isArray(favoriteRoute.path) && favoriteRoute.path.length) {
+        const targetSignature = favoriteRoute.path.join('>');
+        let idx = routeLayers.findIndex(r => Array.isArray(r.meta.path) && r.meta.path.join('>') === targetSignature);
+        if (idx >= 0) {
+            selectRoute(idx);
+        } else {
+            // nếu không có khớp chính xác, chọn tuyến có nhiều ga trùng nhất
+            const savedSet = new Set(favoriteRoute.path);
+            let bestIdx = -1;
+            let bestScore = 0;
+            for (let i = 0; i < routeLayers.length; i++) {
+                const cand = Array.isArray(routeLayers[i].meta.path) ? routeLayers[i].meta.path : [];
+                if (!cand.length) continue;
+                let inter = 0;
+                for (const s of cand) if (savedSet.has(s)) inter++;
+                const score = inter / favoriteRoute.path.length; // 0..1
+                if (score > bestScore) { bestScore = score; bestIdx = i; }
+            }
+            if (bestIdx >= 0 && bestScore > 0) {
+                selectRoute(bestIdx);
+            } else if (routeLayers.length) {
+                // fallback: chọn tuyến nhanh nhất (index 0)
+                selectRoute(0);
+            }
+        }
+    }
 }
 
 function renderAllRoutes(routes, walkingFrom, walkingTo) {
@@ -1286,3 +1461,22 @@ if (swapBtn) {
 
 // update selection status initial text
 updateSelectionStatusText();
+
+// Favorites feature only mounts on user.html.
+window.addEventListener('load', async () => {
+    const favoriteButtonMount = document.getElementById('favoriteButtonMount');
+    const favoritePanelMount = document.getElementById('favoriteRoutesPanelMount');
+    if (!favoriteButtonMount || !favoritePanelMount || typeof window.FavoriteRoutesFeature !== 'function') {
+        return;
+    }
+
+    favoriteRoutesFeature = new window.FavoriteRoutesFeature({
+        buttonMount: favoriteButtonMount,
+        panelMount: favoritePanelMount,
+        getCurrentRoute: getCurrentRouteSnapshot,
+        onOpenRoute: openFavoriteRoute,
+    });
+
+    await favoriteRoutesFeature.init();
+    syncFavoriteCurrentRoute();
+});

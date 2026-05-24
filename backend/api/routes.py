@@ -8,11 +8,9 @@ api_blueprint = Blueprint("api", __name__)
 def get_path():
     # Read raw body and headers for robust parsing and debugging
     raw = request.get_data(as_text=True)
-    # Try normal JSON parsing first, fall back to manual parse of raw body
-    try:
-        data = request.get_json()
-    except Exception:
-        data = None
+    # Try robust JSON parsing: force=True ignores Content-Type,
+    # silent=True returns None instead of raising on parse failure
+    data = request.get_json(force=True, silent=True)
 
     if not data and raw:
         try:
@@ -23,11 +21,12 @@ def get_path():
     if not data or 'source' not in data or 'target' not in data:
         # log details to help debug frontend payload issues
         try:
-            print('\n--- /api/path BAD REQUEST ---')
-            print('Headers:', dict(request.headers))
-            print('Raw body:', raw)
-            print('Parsed json:', data)
-            print('-----------------------------\n')
+            print('\n--- /api/path BAD REQUEST ---', flush=True)
+            print('Content-Type:', request.content_type, flush=True)
+            print('Headers:', dict(request.headers), flush=True)
+            print('Raw body repr:', repr(raw), flush=True)
+            print('Parsed json:', data, flush=True)
+            print('-----------------------------\n', flush=True)
         except Exception:
             pass
         return jsonify({"error": "Missing source or target"}), 400

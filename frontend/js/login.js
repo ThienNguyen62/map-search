@@ -66,10 +66,6 @@ function handleLogin() {
       showError('Email không hợp lệ');
       return;
     }
-  } else if (currentRole !== 'admin') {
-    // non-admin users should provide an email; if they didn't include @, ask them
-    showError('Vui lòng nhập email dưới dạng example@domain');
-    return;
   }
 
   showLoading(true);
@@ -101,6 +97,7 @@ function handleLogin() {
 
       if (currentRole === "user") {
         console.log("User login successful, redirecting to user.html");
+        localStorage.setItem("user_name", username);
         const rememberMe = document.getElementById("rememberMe").checked;
         if (rememberMe) {
           localStorage.setItem(
@@ -118,6 +115,7 @@ function handleLogin() {
         window.location.replace("user.html");
       } else {
         console.log("Admin login successful, redirecting to admin.html");
+        localStorage.setItem("user_name", username);
         localStorage.removeItem("rememberMe");
         showSuccess("Đăng nhập thành công (Admin)! Đang chuyển hướng...");
         console.log("Redirecting to admin.html now...");

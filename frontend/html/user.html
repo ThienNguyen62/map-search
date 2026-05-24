@@ -45,7 +45,7 @@
                 <button class="tab active" data-tab="map">Bản đồ</button>
                 <button class="tab" data-tab="history">Lịch sử</button>
                 <button class="tab" data-tab="diagram">Sơ đồ</button>
-                <button class="tab" data-tab="info">Thông tin</button>
+                <button class="tab" data-tab="favorites">Yêu thích</button>
             </div>
 
             <!-- =========================
@@ -78,6 +78,10 @@
                         <button id="swapBtn" class="secondary-btn">Hoán đổi</button>
                         <button id="resetRoutesBtn" class="secondary-btn">Xóa kết quả</button>
                     </div>
+                </div>
+
+                <div class="favorite-controls-bar">
+                    <div id="favoriteButtonMount"></div>
                 </div>
 
                 <!-- KẾT QUẢ LỘ TRÌNH -->
@@ -129,23 +133,10 @@
             </div>
 
             <!-- =========================
-             TAB: THÔNG TIN
+             TAB: TUYẾN YÊU THÍCH
              ========================= -->
-            <div class="tab-content" id="tabInfo">
-                <div class="info-card">
-                    <h3>ℹ️ Thông tin ứng dụng</h3>
-                    <p>Ứng dụng tìm đường tàu điện ngầm Munich (München).</p>
-                    <ul>
-                        <li>Chọn ga đi và ga đến để tìm lộ trình tối ưu</li>
-                        <li>Click trên bản đồ để chọn điểm bất kỳ</li>
-                        <li>Lịch sử tìm kiếm được lưu tự động cho tài khoản của bạn</li>
-                        <li>Hỗ trợ nhiều tuyến: U-Bahn và S-Bahn</li>
-                    </ul>
-                    <div class="user-info-section" id="userInfoSection">
-                        <h4>Tài khoản</h4>
-                        <p id="userInfoDetail">Đang tải...</p>
-                    </div>
-                </div>
+            <div class="tab-content" id="tabFavorites">
+                <div id="favoriteRoutesPanelMount" class="favorite-routes-card"></div>
             </div>
 
         </aside>
@@ -175,6 +166,7 @@
     <script src="../js/auth_link.js"></script>
     <!-- user history hook must be loaded before main script so it can wrap findRoute -->
     <script src="../js/user_history.js"></script>
+    <script src="../js/favorites.js"></script>
     <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
     <script src="../js/script.js"></script>
 </body>

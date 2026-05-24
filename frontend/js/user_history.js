@@ -168,7 +168,7 @@
             btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
         });
         // Show the corresponding content
-        const tabMap = { map: 'tabMap', history: 'tabHistory', diagram: 'tabDiagram', info: 'tabInfo' };
+        const tabMap = { map: 'tabMap', history: 'tabHistory', diagram: 'tabDiagram', favorites: 'tabFavorites' };
         Object.entries(tabMap).forEach(([key, id]) => {
             const el = document.getElementById(id);
             if (el) {
