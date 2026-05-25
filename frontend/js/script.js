@@ -60,7 +60,6 @@ const lineColors = {
 };
 
 function loadGraph() {
-    // Thu tu fallback: API backend -> file local frontend -> file local root data.
     const stationsSources = [
         'http://127.0.0.1:5000/api/stations',
         './stations.json',
@@ -82,25 +81,57 @@ function loadGraph() {
 
     const tryLoadStations = index => {
         if (index >= stationsSources.length) {
-            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu stations.json. Hãy chạy backend hoặc đặt file stations.json trong thư mục frontend.</p>';
+            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu stations.json.</p>';
             return;
         }
 
         const url = stationsSources[index];
-        console.log('Loading stations from:', url);
+        console.log('📡 Loading stations from:', url);
+        
         fetch(url)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.status);
-                }
+                if (!response.ok) throw new Error('Status: ' + response.status);
                 return response.json();
             })
             .then(data => {
-                if (!data || !Array.isArray(data)) {
+                console.log('📦 Raw stations data keys:', typeof data === 'object' && !Array.isArray(data) ? Object.keys(data) : 'Array');
+                
+                // ===== CHUẨN HÓA DỮ LIỆU STATIONS =====
+                let stationsArray = null;
+                
+                if (Array.isArray(data)) {
+                    stationsArray = data;
+                } else if (data && typeof data === 'object') {
+                    if (Array.isArray(data.stations)) {
+                        stationsArray = data.stations;
+                    } else if (Array.isArray(data.data)) {
+                        stationsArray = data.data;
+                    } else {
+                        // Tìm key đầu tiên chứa array
+                        for (const key of Object.keys(data)) {
+                            if (Array.isArray(data[key]) && data[key].length > 0) {
+                                stationsArray = data[key];
+                                console.log('🔍 Found stations in key:', key);
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (!stationsArray || stationsArray.length === 0) {
                     throw new Error('Invalid stations payload');
                 }
-                console.log('Stations loaded:', data.length, 'stations');
-                stationsData = data;
+                
+                // Chuẩn hóa từng station (hỗ trợ cả ID/id và Name/name)
+                stationsData = stationsArray.map(s => ({
+                    id: s.ID || s.id || s.station_id || '',
+                    name: s.Name || s.name || s.station_name || '',
+                    lat: parseFloat(s.lat) || 0,
+                    lon: parseFloat(s.lon) || 0,
+                    children: s.Nearby || s.nearby || s.children || []
+                }));
+                
+                console.log('✅ Stations loaded:', stationsData.length);
                 stationsDone = true;
                 if (stationsDone && edgesDone) {
                     graph = { stations: stationsData, edges: edgesData };
@@ -108,105 +139,103 @@ function loadGraph() {
                 }
             })
             .catch(error => {
-                console.warn('Load failed from source:', url, error);
+                console.warn('⚠️ Load stations failed:', url, error.message);
                 tryLoadStations(index + 1);
             });
     };
 
-const tryLoadEdges = index => {
-    if (index >= edgesSources.length) {
-        document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu edges.json. Hãy chạy backend hoặc đặt file edges.json trong thư mục frontend.</p>';
-        return;
-    }
+    const tryLoadEdges = index => {
+        if (index >= edgesSources.length) {
+            document.getElementById('result').innerHTML = '<p>Không thể tải dữ liệu edges.json.</p>';
+            return;
+        }
 
-    const url = edgesSources[index];
-    console.log('Loading edges from:', url);
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Raw edges data:', data);
-            
-            // Kiểm tra nhiều cấu trúc dữ liệu khác nhau
-            let edgesArray = null;
-            
-            if (Array.isArray(data)) {
-                edgesArray = data;
-                console.log('Data is array, length:', edgesArray.length);
-            } 
-            else if (data && typeof data === 'object') {
-                if (Array.isArray(data.connections)) {
-                    edgesArray = data.connections;
-                    console.log('Found connections array, length:', edgesArray.length);
+        const url = edgesSources[index];
+        console.log('📡 Loading edges from:', url);
+        
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Status: ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('📦 Raw edges data keys:', typeof data === 'object' && !Array.isArray(data) ? Object.keys(data) : 'Array');
+                
+                // ===== CHUẨN HÓA DỮ LIỆU EDGES =====
+                let edgesArray = null;
+                
+                if (Array.isArray(data)) {
+                    edgesArray = data;
+                } else if (data && typeof data === 'object') {
+                    if (Array.isArray(data.edges)) {
+                        edgesArray = data.edges;
+                    } else if (Array.isArray(data.connections)) {
+                        edgesArray = data.connections;
+                    } else if (Array.isArray(data.data)) {
+                        edgesArray = data.data;
+                    } else {
+                        for (const key of Object.keys(data)) {
+                            if (Array.isArray(data[key]) && data[key].length > 0) {
+                                edgesArray = data[key];
+                                console.log('🔍 Found edges in key:', key);
+                                break;
+                            }
+                        }
+                    }
                 }
-                else if (Array.isArray(data.edges)) {
-                    edgesArray = data.edges;
-                    console.log('Found edges array, length:', edgesArray.length);
+                
+                if (!edgesArray || edgesArray.length === 0) {
+                    throw new Error('Invalid edges payload');
                 }
-                else if (data.data && Array.isArray(data.data)) {
-                    edgesArray = data.data;
-                    console.log('Found data array, length:', edgesArray.length);
+                
+                // ===== TRANSFORM EDGES =====
+                // Hỗ trợ: station1/station2, from_id/to_id, from/to
+                edgesData = edgesArray.map(edge => {
+                    const fromId = edge.station1 || edge.from_id || edge.from || '';
+                    const toId = edge.station2 || edge.to_id || edge.to || '';
+                    
+                    // Suy ra line từ prefix
+                    const inferLine = (fromId, toId) => {
+                        const fromPrefix = (fromId || '').split('_')[0];
+                        const toPrefix = (toId || '').split('_')[0];
+                        if (fromPrefix === 'U') return 'U';
+                        if (fromPrefix === 'S') return 'S';
+                        if (fromPrefix === 'US') {
+                            if (toPrefix === 'U') return 'U';
+                            if (toPrefix === 'S') return 'S';
+                            return 'US';
+                        }
+                        return fromPrefix || 'U';
+                    };
+                    
+                    return {
+                        from: fromId,
+                        to: toId,
+                        time: edge.time_min || edge.time || 1,
+                        line: edge.line || inferLine(fromId, toId)
+                    };
+                });
+                
+                console.log('✅ Edges loaded:', edgesData.length);
+                console.log('📋 First edge:', edgesData[0]);
+                
+                edgesDone = true;
+                if (stationsDone && edgesDone) {
+                    graph = { stations: stationsData, edges: edgesData };
+                    initGraph();
                 }
-            }
-            
-            if (!edgesArray || edgesArray.length === 0) {
-                console.error('Invalid edges payload:', data);
-                throw new Error('Invalid edges payload: no connections/edges array found');
-            }
-            
-            // Suy ra line từ prefix của station ID vì edges.json không có trường line.
-            // US_ = ga dùng chung U+S, ưu tiên theo đầu kia.
-            // U_ → U-Bahn, S_ → S-Bahn, US_ → xét đầu còn lại.
-            const inferLine = (fromId, toId) => {
-                const fromPrefix = (fromId || '').split('_')[0];
-                const toPrefix = (toId || '').split('_')[0];
-                if (fromPrefix === 'U') return 'U';
-                if (fromPrefix === 'S') return 'S';
-                if (fromPrefix === 'US') {
-                    if (toPrefix === 'U') return 'U';
-                    if (toPrefix === 'S') return 'S';
-                    return 'US';
-                }
-                return fromPrefix || 'U';
-            };
-
-            // Transform dữ liệu
-            edgesData = edgesArray.map(edge => {
-                const fromId = edge.from_id || edge.from;
-                const toId = edge.to_id || edge.to;
-                return {
-                    from: fromId,
-                    to: toId,
-                    time: edge.time_min || edge.time || 1,
-                    line: edge.line || inferLine(fromId, toId)
-                };
+            })
+            .catch(error => {
+                console.warn('⚠️ Load edges failed:', url, error.message);
+                tryLoadEdges(index + 1);
             });
-            
-            console.log('Transformed edges:', edgesData.length, 'edges');
-            console.log('First edge sample:', edgesData[0]);
-            
-            edgesDone = true;
-            if (stationsDone && edgesDone) {
-                graph = { stations: stationsData, edges: edgesData };
-                initGraph();
-            }
-        })
-        .catch(error => {
-            console.warn('Load failed from source:', url, error);
-            tryLoadEdges(index + 1);
-        });
-};
+    };
 
     tryLoadStations(0);
     tryLoadEdges(0);
 }
 
 function initGraph() {
-    // Tao cac index de tra cuu nhanh khi tim duong va ve ban do.
     graphById = {};
     stationIdByName = {};
     graph.stations.forEach(station => {
@@ -215,8 +244,13 @@ function initGraph() {
     });
     buildAdjacency();
     seedStationOptions();
-    drawNetwork();
+    
+    // VẼ STATIONS TRƯỚC
     drawStations();
+    
+    // VẼ EDGES SAU (sẽ nằm dưới stations)
+    drawNetwork();
+    
     const markers = Object.values(stationMarkers);
     if (markers.length > 0) {
         const bounds = L.featureGroup(markers).getBounds();
@@ -327,7 +361,7 @@ function drawStations() {
             color: '#005b96',
             fillColor: '#ffffff',
             fillOpacity: 0.9,
-            weight: 2
+            weight: 3
         }).addTo(stationLayerGroup);
         marker.bindPopup(`<strong>${station.name}</strong><br/>${station.id}<br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`);
         marker.on('click', () => selectStation(station));
@@ -393,16 +427,57 @@ function clearStationMarker(markerType = 'from') {
 
 function drawNetwork() {
     networkLayer.clearLayers();
+    
+    console.log('🔍 drawNetwork: total edges =', graph.edges.length);
+    
+    let drawnCount = 0;
+    let missingFromCount = 0;
+    let missingToCount = 0;
+    let bothMissingCount = 0;
+    
+    // Debug: in ra 5 edge đầu tiên
+    if (graph.edges.length > 0) {
+        console.log('📋 Sample edges:');
+        graph.edges.slice(0, 5).forEach((edge, i) => {
+            console.log(`  [${i}] from="${edge.from}" → to="${edge.to}"`);
+            console.log(`      from exists: ${!!graphById[edge.from]}, to exists: ${!!graphById[edge.to]}`);
+        });
+    }
+    
+    // Debug: in ra danh sách ID trong graphById
+    const graphByIdKeys = Object.keys(graphById);
+    console.log('📋 graphById has', graphByIdKeys.length, 'keys');
+    console.log('  Sample keys:', graphByIdKeys.slice(0, 10));
+    
     graph.edges.forEach(edge => {
         const from = graphById[edge.from];
         const to = graphById[edge.to];
-        if (!from || !to) return;
+        
+        if (!from && !to) {
+            bothMissingCount++;
+            return;
+        }
+        if (!from) {
+            missingFromCount++;
+            return;
+        }
+        if (!to) {
+            missingToCount++;
+            return;
+        }
+        
         const color = lineColors[edge.line] || '#7589a0';
         L.polyline(
             [[from.lat, from.lon], [to.lat, to.lon]],
-            { color, weight: 2, opacity: 0.4 }
+            { color, weight: 3, opacity: 0.4 }
         ).addTo(networkLayer);
+        drawnCount++;
     });
+    
+    console.log('✅ Drawn edges:', drawnCount);
+    console.log('⚠️ Missing from:', missingFromCount);
+    console.log('⚠️ Missing to:', missingToCount);
+    console.log('❌ Both missing:', bothMissingCount);
 }
 
 function selectStation(station) {
