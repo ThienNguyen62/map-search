@@ -662,66 +662,82 @@
       })();
 
       // Listen for auth changes from other tabs (login/logout)
-      window.addEventListener('storage', (e) => {
+      window.addEventListener("storage", (e) => {
         if (!e) return;
-        if (e.key === 'auth_update') {
+        if (e.key === "auth_update") {
           try {
             checkAuthAndReload();
           } catch (err) {
-            console.warn('auth_update handler failed', err);
+            console.warn("auth_update handler failed", err);
           }
         }
       });
 
       // BroadcastChannel fallback for real-time cross-tab messages
       try {
-        if ('BroadcastChannel' in window) {
-          const _authBC = new BroadcastChannel('auth_channel');
-          _authBC.addEventListener('message', (ev) => {
+        if ("BroadcastChannel" in window) {
+          const _authBC = new BroadcastChannel("auth_channel");
+          _authBC.addEventListener("message", (ev) => {
             if (!ev || !ev.data) return;
-            if (ev.data === 'auth_update') {
-              try { checkAuthAndReload(); } catch (err) { console.warn('BC auth handler failed', err); }
+            if (ev.data === "auth_update") {
+              try {
+                checkAuthAndReload();
+              } catch (err) {
+                console.warn("BC auth handler failed", err);
+              }
             }
           });
-          window.addEventListener('unload', () => { try { _authBC.close(); } catch(e) {} });
+          window.addEventListener("unload", () => {
+            try {
+              _authBC.close();
+            } catch (e) {}
+          });
         }
       } catch (e) {
-        console.warn('BroadcastChannel not available', e);
+        console.warn("BroadcastChannel not available", e);
       }
 
       // Also check when tab regains focus (in case storage event was missed)
-      window.addEventListener('focus', () => {
-        try { checkAuthAndReload(); updateDebugPanel(); } catch (e) { /* ignore */ }
+      window.addEventListener("focus", () => {
+        try {
+          checkAuthAndReload();
+          updateDebugPanel();
+        } catch (e) {
+          /* ignore */
+        }
       });
 
       async function checkAuthAndReload() {
         try {
-          const res = await fetch(`${API_BASE}/api/me`, { credentials: 'include' });
+          const res = await fetch(`${API_BASE}/api/me`, {
+            credentials: "include",
+          });
           if (!res.ok) {
             showAuthError(
-              'Phiên admin đã thay đổi hoặc hết hạn. Vui lòng đăng nhập lại.',
+              "Phiên admin đã thay đổi hoặc hết hạn. Vui lòng đăng nhập lại.",
             );
             return;
           }
           const data = await res.json();
           if (data && data.is_admin) {
             // if users section is open, refresh it
-            const usersContent = document.getElementById('usersContent');
+            const usersContent = document.getElementById("usersContent");
             if (usersContent) {
               loadUserData();
             }
             // optionally update admin name
-            const adminName = document.getElementById('admin-name');
-            if (adminName && data.username) adminName.textContent = `Xin chào, ${data.username}`;
+            const adminName = document.getElementById("admin-name");
+            if (adminName && data.username)
+              adminName.textContent = `Xin chào, ${data.username}`;
           } else {
             showAuthError(
-              'Phiên hiện tại không phải admin. Vui lòng đăng nhập lại bằng tài khoản admin.',
+              "Phiên hiện tại không phải admin. Vui lòng đăng nhập lại bằng tài khoản admin.",
             );
           }
         } catch (err) {
-          console.warn('checkAuthAndReload error', err);
+          console.warn("checkAuthAndReload error", err);
           showAuthError(
-            'Không thể xác thực phiên hiện tại. Vui lòng tải lại trang hoặc đăng nhập lại.',
+            "Không thể xác thực phiên hiện tại. Vui lòng tải lại trang hoặc đăng nhập lại.",
           );
         }
       }
@@ -729,19 +745,19 @@
       // --- Debug panel for quick diagnostics ---
       function createDebugPanel() {
         try {
-          const panel = document.createElement('div');
-          panel.id = 'debugPanel';
-          panel.style.position = 'fixed';
-          panel.style.right = '12px';
-          panel.style.bottom = '12px';
-          panel.style.background = 'rgba(0,0,0,0.75)';
-          panel.style.color = '#fff';
-          panel.style.padding = '8px 10px';
-          panel.style.borderRadius = '8px';
-          panel.style.fontSize = '12px';
-          panel.style.zIndex = '9999';
-          panel.style.maxWidth = '320px';
-          panel.style.boxShadow = '0 6px 18px rgba(0,0,0,0.2)';
+          const panel = document.createElement("div");
+          panel.id = "debugPanel";
+          panel.style.position = "fixed";
+          panel.style.right = "12px";
+          panel.style.bottom = "12px";
+          panel.style.background = "rgba(0,0,0,0.75)";
+          panel.style.color = "#fff";
+          panel.style.padding = "8px 10px";
+          panel.style.borderRadius = "8px";
+          panel.style.fontSize = "12px";
+          panel.style.zIndex = "9999";
+          panel.style.maxWidth = "320px";
+          panel.style.boxShadow = "0 6px 18px rgba(0,0,0,0.2)";
           panel.innerHTML = `
             <div style="display:flex; gap:8px; align-items:center;">
               <strong style="font-size:12px;">Debug</strong>
@@ -750,42 +766,53 @@
             <div id="debugContent" style="margin-top:8px; white-space:pre-wrap; max-height:220px; overflow:auto;"></div>
           `;
           document.body.appendChild(panel);
-          document.getElementById('debugRefreshBtn').addEventListener('click', updateDebugPanel);
+          document
+            .getElementById("debugRefreshBtn")
+            .addEventListener("click", updateDebugPanel);
           updateDebugPanel();
         } catch (e) {
-          console.warn('createDebugPanel failed', e);
+          console.warn("createDebugPanel failed", e);
         }
       }
 
       async function updateDebugPanel() {
         try {
-          const contentEl = document.getElementById('debugContent');
+          const contentEl = document.getElementById("debugContent");
           if (!contentEl) return;
-          const cookieInfo = document.cookie || '<no document.cookie>';
-          let me = { error: 'fetch failed' };
+          const cookieInfo = document.cookie || "<no document.cookie>";
+          let me = { error: "fetch failed" };
           try {
-            const r = await fetch(`${API_BASE}/api/me`, { credentials: 'include' });
+            const r = await fetch(`${API_BASE}/api/me`, {
+              credentials: "include",
+            });
             me = await r.json();
           } catch (err) {
             me = { error: String(err) };
           }
-          contentEl.textContent = `navigator.cookieEnabled: ${navigator.cookieEnabled}\n` +
+          contentEl.textContent =
+            `navigator.cookieEnabled: ${navigator.cookieEnabled}\n` +
             `document.cookie: ${cookieInfo}\n\n` +
             `/api/me: ${JSON.stringify(me, null, 2)}`;
         } catch (e) {
-          console.warn('updateDebugPanel failed', e);
+          console.warn("updateDebugPanel failed", e);
         }
       }
 
       // create debug panel after a short delay so DOM is ready
-      setTimeout(() => { try { createDebugPanel(); } catch (e) {} }, 600);
+      setTimeout(() => {
+        try {
+          createDebugPanel();
+        } catch (e) {}
+      }, 600);
 
       async function verifyAdminSession() {
         try {
-          const res = await fetch(`${API_BASE}/api/me`, { credentials: 'include' });
+          const res = await fetch(`${API_BASE}/api/me`, {
+            credentials: "include",
+          });
           if (!res.ok) {
             showAuthError(
-              'Bạn chưa đăng nhập admin hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.',
+              "Bạn chưa đăng nhập admin hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.",
             );
             return false;
           }
@@ -793,27 +820,27 @@
           const data = await res.json();
           if (!data || !data.is_admin) {
             showAuthError(
-              'Phiên hiện tại không phải admin. Vui lòng đăng nhập bằng tài khoản admin.',
+              "Phiên hiện tại không phải admin. Vui lòng đăng nhập bằng tài khoản admin.",
             );
             return false;
           }
 
           if (data.username) {
-            const adminName = document.getElementById('admin-name');
+            const adminName = document.getElementById("admin-name");
             if (adminName) adminName.textContent = `Xin chào, ${data.username}`;
           }
           return true;
         } catch (err) {
-          console.warn('verifyAdminSession failed', err);
+          console.warn("verifyAdminSession failed", err);
           showAuthError(
-            'Không thể kiểm tra phiên đăng nhập. Vui lòng thử lại hoặc tải lại trang.',
+            "Không thể kiểm tra phiên đăng nhập. Vui lòng thử lại hoặc tải lại trang.",
           );
           return false;
         }
       }
 
       function showAuthError(message) {
-        const contentArea = document.getElementById('content-area');
+        const contentArea = document.getElementById("content-area");
         if (!contentArea) return;
         contentArea.innerHTML = `
           <div class="error-box" style="padding:24px; background:#fee2e2; border:1px solid #fca5a5; border-radius:12px; color:#b91c1c;">
