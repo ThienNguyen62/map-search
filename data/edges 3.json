@@ -1,0 +1,2628 @@
+[
+  {
+    "from": "S_Allach",
+    "to": "S_Karlsfeld",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 4.1,
+    "time_min": 6.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Allach",
+    "to": "S_Untermenzing",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 1.08,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Altenerding",
+    "to": "S_Aufhausen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 3.48,
+    "time_min": 3.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Altenerding",
+    "to": "S_Erding",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 7.9,
+    "time_min": 7.3,
+    "price_eur": 7.8
+  },
+  {
+    "from": "S_Altomunster",
+    "to": "S_Kleinberghofen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.51,
+    "time_min": 2.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Arnbach",
+    "to": "S_Erdweg",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.52,
+    "time_min": 2.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Arnbach",
+    "to": "S_MarktIndersdorf",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 5.33,
+    "time_min": 4.9,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Aubing",
+    "to": "S_Leienfelsstrasse",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 1.9,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Aubing",
+    "to": "S_Puchheim",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 4.39,
+    "time_min": 6.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Aufhausen",
+    "to": "S_StKolomann",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.87,
+    "time_min": 2.6,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Aying",
+    "to": "S_Durrnhaar",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.87,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Aying",
+    "to": "S_Peis",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.47,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Bachern",
+    "to": "S_DachauStadt",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 1.39,
+    "time_min": 2.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Bachern",
+    "to": "S_Schwabhausen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.88,
+    "time_min": 2.7,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Baierbrunn",
+    "to": "S_Buchenhain",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.88,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Baierbrunn",
+    "to": "S_Hohenschaftlarn",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.41,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Baldham",
+    "to": "S_Vaterstetten",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 2.27,
+    "time_min": 2.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Baldham",
+    "to": "S_Zorneding",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 2.22,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_BergAmLaim",
+    "to": "S_Leuchtenbergring",
+    "lines": [
+      "S2",
+      "S4",
+      "S6"
+    ],
+    "distance_km": 0.97,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_BergAmLaim",
+    "to": "S_Riem",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 1.91,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_BergAmLaim",
+    "to": "US_Trudering",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 1.47,
+    "time_min": 2.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Besucherpark",
+    "to": "S_Hallbergmoos",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.91,
+    "time_min": 3.6,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Besucherpark",
+    "to": "S_MunichAirport",
+    "lines": [
+      "S1",
+      "S8"
+    ],
+    "distance_km": 0.91,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Besucherpark",
+    "to": "S_Neufahrn",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 8.86,
+    "time_min": 8.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Buchenau",
+    "to": "S_Furstenfeldbruck",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 7.06,
+    "time_min": 6.5,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Buchenau",
+    "to": "S_Schongeising",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 1.95,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Buchenhain",
+    "to": "S_Hoellriegelskreuth",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.77,
+    "time_min": 2.7,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Dachau",
+    "to": "S_DachauStadt",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 0.23,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Dachau",
+    "to": "S_Hebertshausen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 8.02,
+    "time_min": 7.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Dachau",
+    "to": "S_Karlsfeld",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 6.38,
+    "time_min": 9.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Daglfing",
+    "to": "S_Englschalking",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 1.49,
+    "time_min": 2.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Daglfing",
+    "to": "S_Leuchtenbergring",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 2.72,
+    "time_min": 4.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Deisenhofen",
+    "to": "S_Furth",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 4.03,
+    "time_min": 6.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Deisenhofen",
+    "to": "S_Sauerlach",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 3.11,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Donnersbergerbrucke",
+    "to": "S_Hackerbrucke",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 0.89,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Donnersbergerbrucke",
+    "to": "S_Hirschgarten",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S8"
+    ],
+    "distance_km": 1.53,
+    "time_min": 2.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Donnersbergerbrucke",
+    "to": "US_Heimeranplatz",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.07,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Durrnhaar",
+    "to": "S_HohenkirchemSiegertsbrunn",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 2.33,
+    "time_min": 2.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_EbenhausenSchaftlarn",
+    "to": "S_Hohenschaftlarn",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.51,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_EbenhausenSchaftlarn",
+    "to": "S_Icking",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 3.08,
+    "time_min": 2.8,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Ebersberg",
+    "to": "S_GrafingStadt",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 3.69,
+    "time_min": 3.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Eching",
+    "to": "S_Lohhof",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 2.83,
+    "time_min": 2.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Eching",
+    "to": "S_Neufahrn",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 2.97,
+    "time_min": 2.7,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Eglharting",
+    "to": "S_Kirchseeon",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 3.0,
+    "time_min": 2.8,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Eglharting",
+    "to": "S_Zorneding",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 2.58,
+    "time_min": 2.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Eichenau",
+    "to": "S_Furstenfeldbruck",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 3.46,
+    "time_min": 3.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Eichenau",
+    "to": "S_Puchheim",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 5.39,
+    "time_min": 5.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Englschalking",
+    "to": "S_Johanneskirchen",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 1.21,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Erdweg",
+    "to": "S_Kleinberghofen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.5,
+    "time_min": 2.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Esting",
+    "to": "S_Gernlinden",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 2.88,
+    "time_min": 2.7,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Esting",
+    "to": "S_Olching",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 3.92,
+    "time_min": 3.6,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Fasanenpark",
+    "to": "S_Fasangarten",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 0.82,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Fasanenpark",
+    "to": "S_Unterhaching",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 3.63,
+    "time_min": 5.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Fasanerie",
+    "to": "US_Feldmoching",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 2.1,
+    "time_min": 3.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Fasanerie",
+    "to": "US_Moosach",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 1.63,
+    "time_min": 2.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Fasangarten",
+    "to": "US_Giesing",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 1.66,
+    "time_min": 2.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Feldafing",
+    "to": "S_Possenhofen",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 2.09,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Feldafing",
+    "to": "S_Tutzing",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 4.31,
+    "time_min": 4.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Feldkirchen",
+    "to": "S_Heimstetten",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.09,
+    "time_min": 3.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Feldkirchen",
+    "to": "S_Riem",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 1.84,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Freiham",
+    "to": "S_Harthaus",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 1.84,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Freiham",
+    "to": "S_Neuaubing",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 1.04,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Freising",
+    "to": "S_Pulling",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 5.93,
+    "time_min": 5.5,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Furth",
+    "to": "S_Taufkirchen",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 1.31,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Gauting",
+    "to": "S_StarnbergNord",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 7.34,
+    "time_min": 6.8,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Gauting",
+    "to": "S_Stockdorf",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 2.4,
+    "time_min": 3.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Geisenbrunn",
+    "to": "S_GermeringUnterpfaffenhofen",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.28,
+    "time_min": 4.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Geisenbrunn",
+    "to": "S_GilchingArgelsried",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 2.65,
+    "time_min": 2.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Geltendorf",
+    "to": "S_Turkenfeld",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 2.98,
+    "time_min": 2.8,
+    "price_eur": 7.8
+  },
+  {
+    "from": "S_GermeringUnterpfaffenhofen",
+    "to": "S_Harthaus",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.5,
+    "time_min": 5.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Gernlinden",
+    "to": "S_Maisach",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 2.57,
+    "time_min": 2.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_GilchingArgelsried",
+    "to": "S_Neugilching",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 4.3,
+    "time_min": 4.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grafelfing",
+    "to": "S_Lochham",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 1.18,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grafelfing",
+    "to": "S_Planegg",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 1.73,
+    "time_min": 2.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grafing",
+    "to": "S_GrafingStadt",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 1.53,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grafing",
+    "to": "S_Kirchseeon",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 6.74,
+    "time_min": 6.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grafrath",
+    "to": "S_Schongeising",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 3.38,
+    "time_min": 3.1,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grafrath",
+    "to": "S_Turkenfeld",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 2.66,
+    "time_min": 2.5,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grobenzell",
+    "to": "S_Lochhausen",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 4.82,
+    "time_min": 7.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grobenzell",
+    "to": "S_Olching",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 3.12,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Gronsdorf",
+    "to": "S_Haar",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 5.92,
+    "time_min": 8.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Gronsdorf",
+    "to": "US_Trudering",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 1.35,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grosshelfendorf",
+    "to": "S_Kreuzstrasse",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.53,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grosshelfendorf",
+    "to": "S_Peis",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.51,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Grosshesselohe",
+    "to": "S_Pullach",
+    "lines": [
+      "S7",
+      "S20"
+    ],
+    "distance_km": 1.89,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grosshesselohe",
+    "to": "S_Solln",
+    "lines": [
+      "S7",
+      "S20"
+    ],
+    "distance_km": 1.54,
+    "time_min": 2.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grub",
+    "to": "S_Heimstetten",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 1.49,
+    "time_min": 2.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Grub",
+    "to": "S_Poing",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.6,
+    "time_min": 3.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Haar",
+    "to": "S_Vaterstetten",
+    "lines": [
+      "S4",
+      "S6"
+    ],
+    "distance_km": 3.02,
+    "time_min": 4.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Hackerbrucke",
+    "to": "US_Hauptbahnhof",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 0.99,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Hallbergmoos",
+    "to": "S_Ismaning",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 10.85,
+    "time_min": 10.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Hebertshausen",
+    "to": "S_Rohrmoos",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 3.72,
+    "time_min": 3.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Herrsching",
+    "to": "S_Seefeld",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.29,
+    "time_min": 3.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Hirschgarten",
+    "to": "S_Laim",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S8"
+    ],
+    "distance_km": 1.3,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Hoellriegelskreuth",
+    "to": "S_Pullach",
+    "lines": [
+      "S7",
+      "S20"
+    ],
+    "distance_km": 3.65,
+    "time_min": 5.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Hohenbrunn",
+    "to": "S_Ottobrunn",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 2.66,
+    "time_min": 4.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Hohenbrunn",
+    "to": "S_Wachterhof",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 2.88,
+    "time_min": 4.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_HohenkirchemSiegertsbrunn",
+    "to": "S_Wachterhof",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 2.5,
+    "time_min": 2.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Holzkirchen",
+    "to": "S_Otterfing",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 8.48,
+    "time_min": 7.8,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Icking",
+    "to": "S_Wolfratshausen",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 4.04,
+    "time_min": 3.7,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Isartor",
+    "to": "S_RosenheimeRPlatz",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 0.63,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Isartor",
+    "to": "US_Marienplatz",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 0.61,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Ismaning",
+    "to": "S_Unterfohhring",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.89,
+    "time_min": 5.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Johanneskirchen",
+    "to": "S_Unterfohhring",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 4.61,
+    "time_min": 6.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Laim",
+    "to": "S_Obermenzing",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 3.74,
+    "time_min": 5.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Laim",
+    "to": "S_Pasing",
+    "lines": [
+      "S3",
+      "S4",
+      "S6",
+      "S8"
+    ],
+    "distance_km": 2.72,
+    "time_min": 4.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Laim",
+    "to": "US_Moosach",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 3.34,
+    "time_min": 5.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Langwied",
+    "to": "S_Lochhausen",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 2.29,
+    "time_min": 3.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Langwied",
+    "to": "S_Pasing",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 2.65,
+    "time_min": 4.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Leienfelsstrasse",
+    "to": "S_Pasing",
+    "lines": [
+      "S4"
+    ],
+    "distance_km": 1.98,
+    "time_min": 3.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Leuchtenbergring",
+    "to": "US_Ostbahnhof",
+    "lines": [
+      "S2",
+      "S4",
+      "S6",
+      "S8"
+    ],
+    "distance_km": 1.08,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Lochham",
+    "to": "S_Westkreuz",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 3.53,
+    "time_min": 5.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Lohhof",
+    "to": "S_Unterschleisheim",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 1.55,
+    "time_min": 2.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Maisach",
+    "to": "S_Malching",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 3.52,
+    "time_min": 3.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Malching",
+    "to": "S_Mammendorf",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 1.98,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_MarktIndersdorf",
+    "to": "S_Niederroth",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 3.16,
+    "time_min": 2.9,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_MarktSchwaben",
+    "to": "S_Ottenhofen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 4.64,
+    "time_min": 4.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_MarktSchwaben",
+    "to": "S_Poing",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 9.24,
+    "time_min": 8.5,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Mittersendling",
+    "to": "S_Siemenswerke",
+    "lines": [
+      "S7",
+      "S20"
+    ],
+    "distance_km": 0.93,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Mittersendling",
+    "to": "US_Harras",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.38,
+    "time_min": 2.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Mittersendling",
+    "to": "US_Heimeranplatz",
+    "lines": [
+      "S20"
+    ],
+    "distance_km": 3.59,
+    "time_min": 5.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Neuaubing",
+    "to": "S_Westkreuz",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 2.86,
+    "time_min": 4.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Neubiberg",
+    "to": "S_Ottobrunn",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.17,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Neubiberg",
+    "to": "US_NeuperlachSud",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.91,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Neufahrn",
+    "to": "S_Pulling",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 6.53,
+    "time_min": 6.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Neugilching",
+    "to": "S_Wessling",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 2.89,
+    "time_min": 2.7,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Niederroth",
+    "to": "S_Schwabhausen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 4.87,
+    "time_min": 4.5,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Obermenzing",
+    "to": "S_Untermenzing",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 0.96,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Oberschleisheim",
+    "to": "S_Unterschleisheim",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 2.79,
+    "time_min": 4.2,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Oberschleisheim",
+    "to": "US_Feldmoching",
+    "lines": [
+      "S1"
+    ],
+    "distance_km": 6.22,
+    "time_min": 9.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Ottenhofen",
+    "to": "S_StKolomann",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.6,
+    "time_min": 2.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Otterfing",
+    "to": "S_Sauerlach",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 2.98,
+    "time_min": 2.8,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Pasing",
+    "to": "S_Westkreuz",
+    "lines": [
+      "S6",
+      "S8"
+    ],
+    "distance_km": 1.92,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Pasing",
+    "to": "US_Heimeranplatz",
+    "lines": [
+      "S20"
+    ],
+    "distance_km": 5.2,
+    "time_min": 7.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Perlach",
+    "to": "US_Giesing",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 3.06,
+    "time_min": 4.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Perlach",
+    "to": "US_NeuperlachSud",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 1.86,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Petershausen",
+    "to": "S_Vierkirchen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.49,
+    "time_min": 2.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Planegg",
+    "to": "S_Stockdorf",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 3.4,
+    "time_min": 5.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Possenhofen",
+    "to": "S_Starnberg",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 4.75,
+    "time_min": 4.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Rohrmoos",
+    "to": "S_Vierkirchen",
+    "lines": [
+      "S2"
+    ],
+    "distance_km": 2.36,
+    "time_min": 2.2,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_RosenheimeRPlatz",
+    "to": "US_Ostbahnhof",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 1.08,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Seefeld",
+    "to": "S_Steinebach",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 2.56,
+    "time_min": 2.4,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Siemenswerke",
+    "to": "S_Solln",
+    "lines": [
+      "S7",
+      "S20"
+    ],
+    "distance_km": 1.29,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_StMartinStrasse",
+    "to": "US_Giesing",
+    "lines": [
+      "S3",
+      "S7"
+    ],
+    "distance_km": 1.04,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_StMartinStrasse",
+    "to": "US_Ostbahnhof",
+    "lines": [
+      "S3",
+      "S7"
+    ],
+    "distance_km": 0.96,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "S_Starnberg",
+    "to": "S_StarnbergNord",
+    "lines": [
+      "S6"
+    ],
+    "distance_km": 1.01,
+    "time_min": 2.0,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Steinebach",
+    "to": "S_Wessling",
+    "lines": [
+      "S8"
+    ],
+    "distance_km": 3.6,
+    "time_min": 3.3,
+    "price_eur": 5.6
+  },
+  {
+    "from": "S_Taufkirchen",
+    "to": "S_Unterhaching",
+    "lines": [
+      "S3"
+    ],
+    "distance_km": 1.65,
+    "time_min": 2.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Feldmoching",
+    "to": "U_Hasenbergl",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 1.0,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Giesing",
+    "to": "U_KarlPreisPlatz",
+    "lines": [
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.72,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Giesing",
+    "to": "U_Untersbergstrasse",
+    "lines": [
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.66,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Harras",
+    "to": "US_Heimeranplatz",
+    "lines": [
+      "S7"
+    ],
+    "distance_km": 2.25,
+    "time_min": 3.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Harras",
+    "to": "U_Implerstrasse",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.5,
+    "time_min": 2.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Harras",
+    "to": "U_Partnachplatz",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.92,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Hauptbahnhof",
+    "to": "US_Karlsplatz",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8",
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.47,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Hauptbahnhof",
+    "to": "U_Konigsplatz",
+    "lines": [
+      "U2",
+      "U8"
+    ],
+    "distance_km": 0.91,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Hauptbahnhof",
+    "to": "U_SendlingerTor",
+    "lines": [
+      "U1",
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Hauptbahnhof",
+    "to": "U_Stiglmaierplatz",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 1.66,
+    "time_min": 2.8,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Hauptbahnhof",
+    "to": "U_Theresienwiese",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.63,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Heimeranplatz",
+    "to": "U_Schwanthalhohe",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 1.48,
+    "time_min": 2.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Heimeranplatz",
+    "to": "U_Westendstrasse",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.75,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Karlsplatz",
+    "to": "US_Marienplatz",
+    "lines": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "distance_km": 0.72,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Karlsplatz",
+    "to": "U_Odeonsplatz",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.89,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Marienplatz",
+    "to": "U_Odeonsplatz",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.6,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Marienplatz",
+    "to": "U_SendlingerTor",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.72,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Moosach",
+    "to": "U_MoosacherStMartinsPlatz",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.99,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_NeuperlachSud",
+    "to": "U_ThereseGiehseAllee",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 0.81,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Ostbahnhof",
+    "to": "U_InnsbRuckerRing",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 2.0,
+    "time_min": 3.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Ostbahnhof",
+    "to": "U_MaxWeberPlatz",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 1.14,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Trudering",
+    "to": "U_Kreillerstrasse",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 1.4,
+    "time_min": 2.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "US_Trudering",
+    "to": "U_Moosfeld",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 1.25,
+    "time_min": 2.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Aidenbachstrasse",
+    "to": "U_Machtlfingerstrasse",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.09,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Aidenbachstrasse",
+    "to": "U_Obersendling",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.32,
+    "time_min": 2.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_AlteHeide",
+    "to": "U_Nordfriedhof",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.71,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_AlteHeide",
+    "to": "U_Studentenstadt",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.72,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_AmHart",
+    "to": "U_FrankfurterRing",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.71,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_AmHart",
+    "to": "U_Harthof",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.55,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Arabellapark",
+    "to": "U_RichardStraussStrasse",
+    "lines": [
+      "U4"
+    ],
+    "distance_km": 0.89,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_BaslerStrasse",
+    "to": "U_ForstenriederAllee",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.52,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_BaslerStrasse",
+    "to": "U_FurstenriedWest",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.02,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Bohmerwaldplatz",
+    "to": "U_Prinzregentenplatz",
+    "lines": [
+      "U4"
+    ],
+    "distance_km": 0.71,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Bohmerwaldplatz",
+    "to": "U_RichardStraussStrasse",
+    "lines": [
+      "U4"
+    ],
+    "distance_km": 0.79,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_BonnerPlatz",
+    "to": "U_MunchnerFreiheit",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.91,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_BonnerPlatz",
+    "to": "U_Scheidplatz",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.77,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Brudermuhlstrasse",
+    "to": "U_Implerstrasse",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.74,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Brudermuhlstrasse",
+    "to": "U_Thalkirchen",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.75,
+    "time_min": 3.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Candidplatz",
+    "to": "U_Kolumbusplatz",
+    "lines": [
+      "U1"
+    ],
+    "distance_km": 0.5,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Candidplatz",
+    "to": "U_Wettersteinplatz",
+    "lines": [
+      "U1"
+    ],
+    "distance_km": 0.56,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Dietlindenstrasse",
+    "to": "U_MunchnerFreiheit",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.77,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Dietlindenstrasse",
+    "to": "U_Nordfriedhof",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.62,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Dulferstrasse",
+    "to": "U_Harthof",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.65,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Dulferstrasse",
+    "to": "U_Hasenbergl",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_ForstenriederAllee",
+    "to": "U_Machtlfingerstrasse",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.81,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_FrankfurterRing",
+    "to": "U_Milbertshofen",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.59,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Fraunhoferstrasse",
+    "to": "U_Kolumbusplatz",
+    "lines": [
+      "U1",
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.59,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Fraunhoferstrasse",
+    "to": "U_SendlingerTor",
+    "lines": [
+      "U1",
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.4,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Freimann",
+    "to": "U_Kieferngarten",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Freimann",
+    "to": "U_Studentenstadt",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.89,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_FriedenheimStrasse",
+    "to": "U_LaimerPlatz",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 1.41,
+    "time_min": 2.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_FriedenheimStrasse",
+    "to": "U_Westendstrasse",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 0.6,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Frottmaning",
+    "to": "U_GarchingHochbruck",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 2.93,
+    "time_min": 5.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Frottmaning",
+    "to": "U_Kieferngarten",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.08,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Garching",
+    "to": "U_GarchingForschungszentrum",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.92,
+    "time_min": 3.3,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Garching",
+    "to": "U_GarchingHochbruck",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 3.19,
+    "time_min": 5.5,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_GeorgBrauchleRing",
+    "to": "U_OlympiaEinkaufszentrum",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.48,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_GeorgBrauchleRing",
+    "to": "U_Westfriedhof",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.39,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Gern",
+    "to": "U_Rotkreuzplatz",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.48,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Gern",
+    "to": "U_Westfriedhof",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.4,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Giselastrasse",
+    "to": "U_MunchnerFreiheit",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.52,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Giselastrasse",
+    "to": "U_Universitat",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.93,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Goetheplatz",
+    "to": "U_Poccistrasse",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.91,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Goetheplatz",
+    "to": "U_SendlingerTor",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.49,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Grosshadern",
+    "to": "U_HadernerStern",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.91,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Grosshadern",
+    "to": "U_KlinikumGrosshadern",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 0.99,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_HadernerStern",
+    "to": "U_Holzapfelkreuth",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.15,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Hohenzollernplatz",
+    "to": "U_Josephsplatz",
+    "lines": [
+      "U2",
+      "U8"
+    ],
+    "distance_km": 0.55,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Hohenzollernplatz",
+    "to": "U_Scheidplatz",
+    "lines": [
+      "U2",
+      "U8"
+    ],
+    "distance_km": 1.0,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Holzapfelkreuth",
+    "to": "U_Westpark",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.24,
+    "time_min": 2.1,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Implerstrasse",
+    "to": "U_Poccistrasse",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.48,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_InnsbRuckerRing",
+    "to": "U_Josephsburg",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.89,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_InnsbRuckerRing",
+    "to": "U_KarlPreisPlatz",
+    "lines": [
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.8,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_InnsbRuckerRing",
+    "to": "U_Michaelibad",
+    "lines": [
+      "U5",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 1.19,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Josephsburg",
+    "to": "U_Kreillerstrasse",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Josephsplatz",
+    "to": "U_Theresienstrasse",
+    "lines": [
+      "U2",
+      "U8"
+    ],
+    "distance_km": 0.63,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Kolumbusplatz",
+    "to": "U_Silberhornstrasse",
+    "lines": [
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.57,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Konigsplatz",
+    "to": "U_Theresienstrasse",
+    "lines": [
+      "U2",
+      "U8"
+    ],
+    "distance_km": 0.81,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Lehel",
+    "to": "U_MaxWeberPlatz",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.65,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Lehel",
+    "to": "U_Odeonsplatz",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Maillingerstrasse",
+    "to": "U_Rotkreuzplatz",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.84,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Maillingerstrasse",
+    "to": "U_Stiglmaierplatz",
+    "lines": [
+      "U1",
+      "U7"
+    ],
+    "distance_km": 0.57,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Mangfallplatz",
+    "to": "U_StQuirinPlatz",
+    "lines": [
+      "U1"
+    ],
+    "distance_km": 1.0,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_MaxWeberPlatz",
+    "to": "U_Prinzregentenplatz",
+    "lines": [
+      "U4"
+    ],
+    "distance_km": 0.93,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_MessestadtOst",
+    "to": "U_MessestadtWest",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.72,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_MessestadtWest",
+    "to": "U_Moosfeld",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.87,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Michaelibad",
+    "to": "U_Quiddestrasse",
+    "lines": [
+      "U5",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.84,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Milbertshofen",
+    "to": "U_Scheidplatz",
+    "lines": [
+      "U2"
+    ],
+    "distance_km": 0.65,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_MoosacherStMartinsPlatz",
+    "to": "U_OlympiaEinkaufszentrum",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.41,
+    "time_min": 2.4,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_NeuperlachZentrum",
+    "to": "U_Quiddestrasse",
+    "lines": [
+      "U5",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.97,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_NeuperlachZentrum",
+    "to": "U_ThereseGiehseAllee",
+    "lines": [
+      "U5"
+    ],
+    "distance_km": 0.56,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Obersendling",
+    "to": "U_Thalkirchen",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 1.67,
+    "time_min": 2.9,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Oberwiesenfeld",
+    "to": "U_OlympiaEinkaufszentrum",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.73,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Oberwiesenfeld",
+    "to": "U_Olympiazentrum",
+    "lines": [
+      "U3"
+    ],
+    "distance_km": 0.65,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Odeonsplatz",
+    "to": "U_Universitat",
+    "lines": [
+      "U3",
+      "U6"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Olympiazentrum",
+    "to": "U_Petuelring",
+    "lines": [
+      "U3",
+      "U8"
+    ],
+    "distance_km": 0.68,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Partnachplatz",
+    "to": "U_Westpark",
+    "lines": [
+      "U6"
+    ],
+    "distance_km": 1.5,
+    "time_min": 2.6,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Petuelring",
+    "to": "U_Scheidplatz",
+    "lines": [
+      "U3",
+      "U8"
+    ],
+    "distance_km": 0.5,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Schwanthalhohe",
+    "to": "U_Theresienwiese",
+    "lines": [
+      "U4",
+      "U5"
+    ],
+    "distance_km": 0.59,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_Silberhornstrasse",
+    "to": "U_Untersbergstrasse",
+    "lines": [
+      "U2",
+      "U7",
+      "U8"
+    ],
+    "distance_km": 0.86,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  },
+  {
+    "from": "U_StQuirinPlatz",
+    "to": "U_Wettersteinplatz",
+    "lines": [
+      "U1"
+    ],
+    "distance_km": 0.81,
+    "time_min": 2.0,
+    "price_eur": 3.7
+  }
+]
