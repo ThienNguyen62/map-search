@@ -120,6 +120,17 @@ function handleLogin() {
         localStorage.removeItem("rememberMe");
         localStorage.setItem("loggedInUser", username || email || "admin");
         localStorage.setItem("isAdmin", "1");
+        // notify other tabs that auth state changed
+        try { localStorage.setItem('auth_update', String(Date.now())); } catch (e) { }
+        try {
+          if ('BroadcastChannel' in window) {
+            try {
+              const bc = new BroadcastChannel('auth_channel');
+              bc.postMessage('auth_update');
+              bc.close();
+            } catch (err) { console.warn('broadcast send failed', err); }
+          }
+        } catch (err) { /* ignore */ }
         showSuccess("Đăng nhập thành công (Admin)! Đang chuyển hướng...");
         console.log("Redirecting to admin.html now...");
         window.location.replace("admin.html");
