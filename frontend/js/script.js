@@ -304,6 +304,24 @@ async function computeAndShowFullRoute() {
         return;
     }
 
+    if (isStationClosed(fromStationId) || isStationClosed(toStationId)) {
+        const messages = [];
+        if (isStationClosed(fromStationId)) {
+            messages.push(`Ga đi ${graphById[fromStationId]?.name || fromStationId} đang đóng.`);
+            selectedStationIds.from = null;
+            document.getElementById('fromStation').value = '';
+            clearStationMarker('from');
+        }
+        if (isStationClosed(toStationId)) {
+            messages.push(`Ga đến ${graphById[toStationId]?.name || toStationId} đang đóng.`);
+            selectedStationIds.to = null;
+            document.getElementById('toStation').value = '';
+            clearStationMarker('to');
+        }
+        document.getElementById('result').innerHTML = `<p style="color:#b42318"><strong>${messages.join(' ')}</strong></p>`;
+        return;
+    }
+
     // if both are stations -> run metro path
     let metroRoute = null;
     try {
@@ -423,6 +441,7 @@ function initGraph() {
     seedStationOptions();
     drawNetwork();
     drawStations();
+    syncSelectedStationSelections();
     const markers = Object.values(stationMarkers);
     if (markers.length > 0) {
         const bounds = L.featureGroup(markers).getBounds();
@@ -524,19 +543,28 @@ function drawStations() {
     graph.stations.forEach(station => {
         console.log('Drawing station:', station.name, station.lat, station.lon);
         const operationStatus = getStationOperationStatus(station.id);
-        const statusColor = operationStatus.statusLabel === 'Đóng' ? '#b42318' : '#027a48';
-        const statusText = operationStatus.statusLabel === 'Đóng'
+        const isClosed = operationStatus.statusLabel === 'Đóng';
+        const statusColor = isClosed ? '#b42318' : '#027a48';
+        const statusText = isClosed
             ? `Đóng${operationStatus.reason ? ` - ${operationStatus.reason}` : ''}`
             : 'Mở';
         const marker = L.circleMarker([station.lat, station.lon], {
-            radius: 6,
-            color: '#005b96',
-            fillColor: '#ffffff',
-            fillOpacity: 0.9,
-            weight: 2
+            radius: 7,
+            color: isClosed ? '#b42318' : '#005b96',
+            fillColor: isClosed ? '#f8d7da' : '#ffffff',
+            fillOpacity: 0.95,
+            weight: 2,
+            opacity: isClosed ? 0.9 : 0.8
         }).addTo(stationLayerGroup);
         marker.bindPopup(`<strong>${station.name}</strong><br/>${station.id}<br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`);
-        marker.on('click', () => selectStation(station));
+        if (isClosed) {
+            marker.on('click', () => {
+                marker.openPopup();
+                alert(`${station.name} đang đóng. Không thể chọn ga này làm điểm đi hoặc điểm đến.`);
+            });
+        } else {
+            marker.on('click', () => selectStation(station));
+        }
         stationMarkers[station.id] = marker;
     });
     console.log('Stations drawn, markers count:', Object.keys(stationMarkers).length);
@@ -597,25 +625,43 @@ function clearStationMarker(markerType = 'from') {
     }
 }
 
+function syncSelectedStationSelections() {
+    ['from', 'to'].forEach(markerType => {
+        const stationId = selectedStationIds[markerType];
+        if (stationId && isStationClosed(stationId)) {
+            selectedStationIds[markerType] = null;
+            clearStationMarker(markerType);
+            const input = document.getElementById(`${markerType}Station`);
+            if (input) input.value = '';
+        }
+    });
+}
+
 function drawNetwork() {
     networkLayer.clearLayers();
+    const blockedLines = getBlockedLinesFromAdminState();
     graph.edges.forEach(edge => {
         const from = graphById[edge.from];
         const to = graphById[edge.to];
         if (!from || !to) return;
-        const color = lineColors[edge.line] || '#7589a0';
+        const isBlocked = blockedLines.has(edge.line);
+        const color = isBlocked ? '#d00000' : (lineColors[edge.line] || '#7589a0');
         L.polyline(
             [[from.lat, from.lon], [to.lat, to.lon]],
-            { color, weight: 2, opacity: 0.4 }
+            { color, weight: isBlocked ? 4 : 2, opacity: isBlocked ? 0.9 : 0.4, dashArray: isBlocked ? '8,4' : null }
         ).addTo(networkLayer);
     });
 }
 
 function selectStation(station) {
+    if (isStationClosed(station.id)) {
+        alert(`${station.name} đang đóng. Không thể chọn ga này.`);
+        return;
+    }
+
     if (selectingFrom) {
         document.getElementById('fromStation').value = station.name;
         markStationOnMap(station.id, 'from');
-        // mark as station selection and clear any custom point
         selectedStationIds.from = station.id;
         if (customPointMarkers.from) {
             customPointMarkers.from.remove();
@@ -676,11 +722,13 @@ function renderRoute(edges) {
         try { map.removeLayer(currentRouteLayer); } catch (e) {}
     }
     currentRouteLayer = L.layerGroup().addTo(map);
+    const blockedLines = getBlockedLinesFromAdminState();
     edges.forEach(edge => {
         const from = graphById[edge.from];
         const to = graphById[edge.to];
         if (!from || !to) return;
-        const polyline = L.polyline([[from.lat, from.lon], [to.lat, to.lon]], { color: lineColors[edge.line] || '#d90429', weight: 6, opacity: 0.85 });
+        const edgeColor = blockedLines.has(edge.line) ? '#d00000' : (lineColors[edge.line] || '#d90429');
+        const polyline = L.polyline([[from.lat, from.lon], [to.lat, to.lon]], { color: edgeColor, weight: 6, opacity: 0.85 });
         polyline.addTo(currentRouteLayer);
     });
 }
@@ -759,8 +807,13 @@ function updateRoutesUI() {
         const walkTime = (walkingFrom ? walkingFrom.time : 0) + (walkingTo ? walkingTo.time : 0);
         const totalTime = (r.metro_time || 0) + walkTime;
         const label = `${i+1}. ${formatMinutes(totalTime)} — ${i===0? 'Nhanh nhất' : i===1? 'Ít đi bộ' : 'Ít chuyển tuyến'}`;
-        return `<li data-idx="${i}" class="route-item" style="cursor:pointer;padding:6px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">` +
-            `<div><strong>${label}</strong><br/><small>Metro: ${formatMinutes(r.metro_time || 0)}, Đi bộ: ${formatMinutes(walkTime)}, Chuyển: ${r.transfers}</small></div>` +
+        const edges = buildEdgeDetailsFromPath(r.path);
+        const routeStatus = getRouteOperationStatus({ edges });
+        const blocked = routeStatus.blockedRouteLines.length > 0;
+        const note = blocked ? ' <span style="color:#d00000;font-weight:700;">[Tuyến bị cấm]</span>' : '';
+        const style = blocked ? 'cursor:not-allowed;opacity:0.6;background:#fff0f0;padding:6px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;' : 'cursor:pointer;padding:6px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;';
+        return `<li data-idx="${i}" class="route-item" style="${style}">` +
+            `<div><strong>${label}</strong>${note}<br/><small>Metro: ${formatMinutes(r.metro_time || 0)}, Đi bộ: ${formatMinutes(walkTime)}, Chuyển: ${r.transfers}</small></div>` +
             `<div><button class="route-delete" data-idx="${i}" style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;margin-left:8px">Xóa</button></div>` +
             `</li>`;
     }).join('');
@@ -769,13 +822,18 @@ function updateRoutesUI() {
     // attach listeners
     document.querySelectorAll('.route-item').forEach(item => {
         item.addEventListener('click', () => {
+            if (item.style.cursor === 'not-allowed') return;
             const idx = Number(item.getAttribute('data-idx'));
             selectRoute(idx);
             document.querySelectorAll('.route-item').forEach(it => it.style.background = '');
             item.style.background = '#f3f9ff';
         });
-        item.addEventListener('mouseenter', () => { item.style.background = '#f9f9f9'; });
-        item.addEventListener('mouseleave', () => { item.style.background = ''; });
+        item.addEventListener('mouseenter', () => {
+            if (item.style.cursor !== 'not-allowed') item.style.background = '#f9f9f9';
+        });
+        item.addEventListener('mouseleave', () => {
+            if (item.style.cursor !== 'not-allowed') item.style.background = '';
+        });
     });
 
     document.querySelectorAll('.route-delete').forEach(btn => {
@@ -848,6 +906,12 @@ async function fetchAndDrawWalkingLeg(point, station, opts = {}) {
 function selectRoute(idx) {
     if (!routeLayers || !routeLayers.length) return;
     selectedRouteIndex = idx;
+    const sel = routeLayers[idx];
+    if (!sel) return;
+    if (sel.blocked) {
+        alert('Lộ trình này chứa tuyến bị cấm, vui lòng chọn tuyến khác.');
+        return;
+    }
     // update styling for each route layer
     routeLayers.forEach((r, i) => {
         const opacity = (i === idx) ? 0.95 : 0.25;
@@ -856,9 +920,6 @@ function selectRoute(idx) {
             if (layer.setStyle) layer.setStyle({ opacity, weight });
         });
     });
-    // show detailed result for this route
-    const sel = routeLayers[idx];
-    if (!sel) return;
     const routeMeta = sel.meta;
     const edges = buildEdgeDetailsFromPath(routeMeta.path);
     showResult({ path: routeMeta.path, cost: routeMeta.metro_time, edges }, lastFromDisplay, lastToDisplay, lastWalkingFrom, lastWalkingTo);
@@ -869,24 +930,28 @@ function renderAllRoutes(routes, walkingFrom, walkingTo) {
     clearAllRouteLayers();
 
     routes.forEach((r, idx) => {
-        const color = routeColors[idx % routeColors.length];
-        const layerGroup = L.layerGroup().addTo(map);
         const edges = buildEdgeDetailsFromPath(r.path);
+        const routeStatus = getRouteOperationStatus({ edges });
+        const routeBlocked = routeStatus.blockedRouteLines.length > 0;
+        const defaultColor = routeBlocked ? '#d00000' : routeColors[idx % routeColors.length];
+        const layerGroup = L.layerGroup().addTo(map);
         // draw each edge polyline
         edges.forEach(seg => {
             const from = graphById[seg.from];
             const to = graphById[seg.to];
             if (!from || !to) return;
+            const edgeColor = getBlockedLinesFromAdminState().has(seg.line)
+                ? '#d00000'
+                : (lineColors[seg.line] || defaultColor);
             const poly = L.polyline([[from.lat, from.lon], [to.lat, to.lon]], {
-                color: color,
+                color: edgeColor,
                 weight: (idx === selectedRouteIndex) ? 8 : 4,
                 opacity: (idx === selectedRouteIndex) ? 0.95 : 0.35
             }).addTo(layerGroup);
         });
         // add small markers for transfer stations
         const metrics = { transfers: r.transfers };
-        // store meta
-        routeLayers.push({ layerGroup, meta: r, color });
+        routeLayers.push({ layerGroup, meta: r, color: defaultColor, blocked: routeBlocked });
     });
 
     // draw walking segments on separate walkingLayer (keep unchanged)
@@ -1013,6 +1078,41 @@ function getStationOperationStatus(stationId) {
         return { statusLabel: 'Mở', reason: '' };
     }
 }
+
+function getClosedStationIdsFromAdminState() {
+    try {
+        const raw = localStorage.getItem('metroAdminStateV1');
+        if (!raw) return new Set();
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.stations)) return new Set();
+        return new Set(parsed.stations.filter(st => st && st.closed).map(st => st.id));
+    } catch (error) {
+        console.warn('Cannot parse station admin state from localStorage:', error);
+        return new Set();
+    }
+}
+
+function isStationClosed(stationId) {
+    if (!stationId) return false;
+    return getClosedStationIdsFromAdminState().has(stationId);
+}
+
+function applyAdminStateEffects() {
+    drawNetwork();
+    drawStations();
+    syncSelectedStationSelections();
+    if (lastRoutesList.length) {
+        renderAllRoutes(lastRoutesList, lastWalkingFrom, lastWalkingTo);
+        updateRoutesUI();
+        selectRoute(selectedRouteIndex);
+    }
+}
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'metroAdminStateV1') {
+        applyAdminStateEffects();
+    }
+});
 
 function centerMapToStation(stationId) {
     // Định tâm bản đồ đến vị trí ga và phóng to để xem rõ.
