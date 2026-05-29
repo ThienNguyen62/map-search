@@ -99,6 +99,59 @@ const lineColors = {
   US: "#888888",
 };
 
+function normalizeStationsPayload(data) {
+  const arr = Array.isArray(data)
+    ? data
+    : data && Array.isArray(data.stations)
+      ? data.stations
+      : null;
+  if (!arr) return null;
+  return arr.map((station) => ({
+    id: station.id || station.ID,
+    name: station.name || station.Name,
+    lat: station.lat,
+    lon: station.lon,
+    children: station.children || station.Nearby || [],
+    line: station.line || station.Line || [],
+  }));
+}
+
+function normalizeEdgesPayload(data) {
+  let arr = null;
+  if (Array.isArray(data)) {
+    arr = data;
+  } else if (data && typeof data === "object") {
+    if (Array.isArray(data.edges)) arr = data.edges;
+    else if (Array.isArray(data.connections)) arr = data.connections;
+    else if (Array.isArray(data.data)) arr = data.data;
+  }
+  if (!arr) return null;
+
+  const inferLine = (fromId, toId) => {
+    const fromPrefix = (fromId || "").split("_")[0];
+    const toPrefix = (toId || "").split("_")[0];
+    if (fromPrefix === "U") return "U";
+    if (fromPrefix === "S") return "S";
+    if (fromPrefix === "US") {
+      if (toPrefix === "U") return "U";
+      if (toPrefix === "S") return "S";
+      return "US";
+    }
+    return fromPrefix || "U";
+  };
+
+  return arr.map((edge) => {
+    const fromId = edge.from || edge.from_id || edge.station1;
+    const toId = edge.to || edge.to_id || edge.station2;
+    return {
+      from: fromId,
+      to: toId,
+      time: edge.time_min || edge.time || 1,
+      line: edge.line || inferLine(fromId, toId),
+    };
+  });
+}
+
 function loadGraph() {
   // Thu tu fallback: API backend -> file local frontend -> file local root data.
   const stationsSources = [
@@ -139,11 +192,11 @@ function loadGraph() {
         return response.json();
       })
       .then((data) => {
-        if (!data || !Array.isArray(data)) {
+        stationsData = normalizeStationsPayload(data);
+        if (!stationsData || stationsData.length === 0) {
           throw new Error("Invalid stations payload");
         }
-        console.log("Stations loaded:", data.length, "stations");
-        stationsData = data;
+        console.log("Stations loaded:", stationsData.length, "stations");
         stationsDone = true;
         if (stationsDone && edgesDone) {
           graph = { stations: stationsData, edges: edgesData };
@@ -174,61 +227,13 @@ function loadGraph() {
       })
       .then((data) => {
         console.log("Raw edges data:", data);
-
-        // Kiểm tra nhiều cấu trúc dữ liệu khác nhau
-        let edgesArray = null;
-
-        if (Array.isArray(data)) {
-          edgesArray = data;
-          console.log("Data is array, length:", edgesArray.length);
-        } else if (data && typeof data === "object") {
-          if (Array.isArray(data.connections)) {
-            edgesArray = data.connections;
-            console.log("Found connections array, length:", edgesArray.length);
-          } else if (Array.isArray(data.edges)) {
-            edgesArray = data.edges;
-            console.log("Found edges array, length:", edgesArray.length);
-          } else if (data.data && Array.isArray(data.data)) {
-            edgesArray = data.data;
-            console.log("Found data array, length:", edgesArray.length);
-          }
-        }
-
-        if (!edgesArray || edgesArray.length === 0) {
+        edgesData = normalizeEdgesPayload(data);
+        if (!edgesData || edgesData.length === 0) {
           console.error("Invalid edges payload:", data);
           throw new Error(
             "Invalid edges payload: no connections/edges array found",
           );
         }
-
-        // Suy ra line từ prefix của station ID vì edges.json không có trường line.
-        // US_ = ga dùng chung U+S, ưu tiên theo đầu kia.
-        // U_ → U-Bahn, S_ → S-Bahn, US_ → xét đầu còn lại.
-        const inferLine = (fromId, toId) => {
-          const fromPrefix = (fromId || "").split("_")[0];
-          const toPrefix = (toId || "").split("_")[0];
-          if (fromPrefix === "U") return "U";
-          if (fromPrefix === "S") return "S";
-          if (fromPrefix === "US") {
-            if (toPrefix === "U") return "U";
-            if (toPrefix === "S") return "S";
-            return "US";
-          }
-          return fromPrefix || "U";
-        };
-
-        // Transform dữ liệu
-        edgesData = edgesArray.map((edge) => {
-          const fromId = edge.from_id || edge.from;
-          const toId = edge.to_id || edge.to;
-          return {
-            from: fromId,
-            to: toId,
-            time: edge.time_min || edge.time || 1,
-            line: edge.line || inferLine(fromId, toId),
-          };
-        });
-
 
         console.log("Transformed edges:", edgesData.length, "edges");
         console.log("First edge sample:", edgesData[0]);

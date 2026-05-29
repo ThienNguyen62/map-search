@@ -66,11 +66,19 @@
             return;
         }
 
-        stations = Array.isArray(stationsData) ? stationsData : [];
+        const stationsArray = Array.isArray(stationsData)
+            ? stationsData
+            : (stationsData && Array.isArray(stationsData.stations) ? stationsData.stations : []);
+        stations = stationsArray.map(s => ({
+            id: s.id || s.ID,
+            name: s.name || s.Name,
+            lat: s.lat,
+            lon: s.lon
+        }));
 
-        // Normalize edges
-        let edgesArray = Array.isArray(edgesRaw) ? edgesRaw
-            : (edgesRaw.connections || edgesRaw.edges || edgesRaw.data || []);
+        const edgesArray = Array.isArray(edgesRaw)
+            ? edgesRaw
+            : (edgesRaw && (edgesRaw.edges || edgesRaw.connections || edgesRaw.data)) || [];
 
         const inferLine = (fromId, toId) => {
             const fp = (fromId || '').split('_')[0];
@@ -81,12 +89,16 @@
             return fp || 'U';
         };
 
-        edges = edgesArray.map(e => ({
-            from: e.from_id || e.from,
-            to: e.to_id || e.to,
-            time: e.time_min || e.time || 1,
-            line: e.line || inferLine(e.from_id || e.from, e.to_id || e.to)
-        }));
+        edges = edgesArray.map(e => {
+            const from = e.from || e.from_id || e.station1;
+            const to = e.to || e.to_id || e.station2;
+            return {
+                from,
+                to,
+                time: e.time_min || e.time || 1,
+                line: e.line || inferLine(from, to)
+            };
+        });
 
         // Build indexes
         stationById = {};

@@ -89,16 +89,7 @@ def get_path():
 @api_blueprint.route("/stations", methods=["GET"])
 def get_stations():
     """Trả về danh sách ga cho frontend"""
-    stations = []
-    for s in graph.stations:
-        stations.append({
-            "ID": s.id,
-            "Name": s.name,
-            "lat": s.lat,
-            "lon": s.lon,
-            "Nearby": s.children
-        })
-    return jsonify({"stations": stations})
+    return jsonify({"stations": [s.to_dict() for s in graph.stations]})
 
 
 # ============================================================
@@ -113,12 +104,7 @@ def get_edges():
     for e in graph.edges:
         key = tuple(sorted([e.from_station, e.to_station]))
         if key not in seen:
-            edges.append({
-                "station1": e.from_station,
-                "station2": e.to_station,
-                "time_min": e.time,
-                "line": e.line
-            })
+            edges.append(e.to_dict())
             seen.add(key)
     
     return jsonify({"edges": edges})
