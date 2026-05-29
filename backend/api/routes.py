@@ -4,6 +4,10 @@ from services.pathfinding_service import find_path, graph
 
 api_blueprint = Blueprint("api", __name__)
 
+
+# ============================================================
+# API: Tìm đường
+# ============================================================
 @api_blueprint.route("/path", methods=["POST"])
 def get_path():
     # Read raw body and headers for robust parsing and debugging
@@ -51,6 +55,7 @@ def get_path():
                 return station.id
         return None
 
+<<<<<<< kien2
     # Build candidate lists
     if source_candidates and isinstance(source_candidates, list):
         src_list = [resolve_to_id(s) for s in source_candidates]
@@ -60,6 +65,16 @@ def get_path():
         if not sid:
             return jsonify({"error": "Invalid source"}), 400
         src_list = [sid]
+=======
+    # Convert name to ID (hỗ trợ cả nhập tên hoặc ID)
+    source_id = None
+    target_id = None
+    for station in graph.stations:
+        if station.name.strip().lower() == source_name or station.id.strip().lower() == source_name:
+            source_id = station.id
+        if station.name.strip().lower() == target_name or station.id.strip().lower() == target_name:
+            target_id = station.id
+>>>>>>> main
 
     if target_candidates and isinstance(target_candidates, list):
         tgt_list = [resolve_to_id(t) for t in target_candidates]
@@ -76,11 +91,57 @@ def get_path():
 
     return jsonify(result)
 
+
+# ============================================================
+# API: Lấy danh sách tất cả ga
+# ============================================================
+@api_blueprint.route("/stations", methods=["GET"])
+def get_stations():
+    """Trả về danh sách ga cho frontend"""
+    stations = []
+    for s in graph.stations:
+        stations.append({
+            "ID": s.id,
+            "Name": s.name,
+            "lat": s.lat,
+            "lon": s.lon,
+            "Nearby": s.children
+        })
+    return jsonify({"stations": stations})
+
+
+# ============================================================
+# API: Lấy danh sách tất cả kết nối (edges)
+# ============================================================
+@api_blueprint.route("/edges", methods=["GET"])
+def get_edges():
+    """Trả về danh sách edges cho frontend"""
+    edges = []
+    seen = set()  # Tránh trùng lặp cạnh vô hướng
+    
+    for e in graph.edges:
+        key = tuple(sorted([e.from_station, e.to_station]))
+        if key not in seen:
+            edges.append({
+                "station1": e.from_station,
+                "station2": e.to_station,
+                "time_min": e.time,
+                "line": e.line
+            })
+            seen.add(key)
+    
+    return jsonify({"edges": edges})
+
+
+# ============================================================
+# API: Lấy toàn bộ graph (fallback)
+# ============================================================
 @api_blueprint.route("/graph", methods=["GET"])
 def get_graph():
     return jsonify(graph.to_dict())
 
 
+<<<<<<< kien2
 @api_blueprint.route("/stations", methods=["GET"])
 def get_stations():
     try:
@@ -96,3 +157,26 @@ def get_edges():
         return jsonify([e.to_dict() for e in graph.edges])
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+=======
+# ============================================================
+# API: Tìm kiếm ga (autocomplete)
+# ============================================================
+@api_blueprint.route("/stations/search", methods=["GET"])
+def search_stations():
+    """Tìm kiếm ga theo từ khóa"""
+    query = request.args.get('q', '').strip().lower()
+    if not query:
+        return jsonify([])
+    
+    results = []
+    for s in graph.stations:
+        if query in s.name.lower() or query in s.id.lower():
+            results.append({
+                "ID": s.id,
+                "Name": s.name,
+                "lat": s.lat,
+                "lon": s.lon
+            })
+    
+    return jsonify(results[:20])  # Giới hạn 20 kết quả
+>>>>>>> main

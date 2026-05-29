@@ -229,6 +229,7 @@ function loadGraph() {
           };
         });
 
+
         console.log("Transformed edges:", edgesData.length, "edges");
         console.log("First edge sample:", edgesData[0]);
 
@@ -247,6 +248,7 @@ function loadGraph() {
   tryLoadStations(0);
   tryLoadEdges(0);
 }
+
 
 async function computeAndShowFullRoute() {
   // clear previous layers
@@ -486,6 +488,7 @@ async function computeAndShowFullRoute() {
       for (let i = 1; i < validBounds.length; i++)
         merged = merged.extend(validBounds[i]);
       map.fitBounds(merged, { padding: [40, 40] });
+
     }
   } catch (err) {
     console.warn("Failed to fit bounds for full route", err);
@@ -660,6 +663,7 @@ function drawStations() {
     "Stations drawn, markers count:",
     Object.keys(stationMarkers).length,
   );
+
 }
 
 function createCustomPinIcon(markerType) {
@@ -730,6 +734,7 @@ function syncSelectedStationSelections() {
 }
 
 function drawNetwork() {
+
   networkLayer.clearLayers();
   const blockedLines = getBlockedLinesFromAdminState();
   graph.edges.forEach((edge) => {
@@ -751,6 +756,7 @@ function drawNetwork() {
       },
     ).addTo(networkLayer);
   });
+
 }
 
 function selectStation(station) {
