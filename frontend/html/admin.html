@@ -1,650 +1,2047 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Munich Metro - Admin</title>
-	<link rel="stylesheet" href="../css/admin.css">
-</head>
-
-<body>
-	<div class="admin-shell">
-		<aside class="sidebar">
-			<h1>Admin Metro</h1>
-			<p>Bảng điều khiển vận hành nội bộ: khóa tuyến, mở tuyến, đóng ga và phát thông báo gián đoạn dịch vụ.</p>
-			<a class="nav-btn" href="index.html">Quay lại trang người dùng</a>
-			<ul class="summary-list">
-				<li>
-					<strong id="summaryLines">0</strong>
-					Tổng số tuyến
-				</li>
-				<li>
-					<strong id="summaryBlocked">0</strong>
-					Tuyến đang bị cấm
-				</li>
-				<li>
-					<strong id="summaryStations">0</strong>
-					Ga đang tạm đóng
-				</li>
-			</ul>
-		</aside>
-
-		<main class="main">
-			<section class="header">
-				<div>
-					<h2>Điều hành hệ thống tuyến Munich</h2>
-					<p id="lastUpdate">Chưa có thao tác gần đây.</p>
-				</div>
-				<div class="header-actions">
-					<button id="exportBtn" class="btn btn-ghost" type="button">Xuất cấu hình JSON</button>
-					<button id="resetBtn" class="btn btn-danger" type="button">Khôi phục mặc định</button>
-				</div>
-			</section>
-
-			<section class="grid">
-				<article class="card span-7">
-					<h3>Quản lý tuyến metro</h3>
-					<p>Khóa tuyến khi bảo trì hoặc sự cố. Mỗi thay đổi sẽ được ghi vào lịch sử thao tác.</p>
-					<table class="line-table" id="lineTable">
-						<thead>
-							<tr>
-								<th>Tuyến</th>
-								<th>Trạng thái</th>
-								<th>Lý do / ghi chú</th>
-								<th>Hành động</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-				</article>
-
-				<article class="card span-5">
-					<h3>Đóng / mở ga</h3>
-					<p>Áp dụng khi ga quá tải, bảo trì thang máy hoặc xử lý an ninh.</p>
-					<div>
-						<label for="stationSelect">Chọn ga</label>
-						<select id="stationSelect"></select>
-					</div>
-					<div style="margin-top:10px;">
-						<label for="stationReason">Lý do</label>
-						<input id="stationReason" placeholder="Ví dụ: Bảo trì thang cuốn">
-					</div>
-					<div style="margin-top:12px;" class="row-actions">
-						<button id="closeStationBtn" class="btn btn-danger" type="button">Đóng ga</button>
-						<button id="openStationBtn" class="btn btn-primary" type="button">Mở lại ga</button>
-					</div>
-					<p id="stationStatus" class="status-msg"></p>
-				</article>
-
-				<article class="card span-5">
-					<h3>Tạo thông báo vận hành</h3>
-					<p>Thông báo nội bộ cho trực ban và quản lý ca.</p>
-					<div class="field-grid">
-						<div>
-							<label for="noticeLevel">Mức độ</label>
-							<select id="noticeLevel">
-								<option value="low">Thấp</option>
-								<option value="medium">Trung bình</option>
-								<option value="high">Khẩn cấp</option>
-							</select>
-						</div>
-						<div>
-							<label for="noticeLine">Tuyến liên quan</label>
-							<select id="noticeLine"></select>
-						</div>
-					</div>
-					<div style="margin-top:10px;">
-						<label for="noticeTitle">Tiêu đề</label>
-						<input id="noticeTitle" placeholder="Ví dụ: Chậm 10 phút do kỹ thuật">
-					</div>
-					<div style="margin-top:10px;">
-						<label for="noticeBody">Nội dung</label>
-						<textarea id="noticeBody" placeholder="Mô tả chi tiết và hướng xử lý"></textarea>
-					</div>
-					<div style="margin-top:12px;" class="row-actions">
-						<button id="createNoticeBtn" class="btn btn-primary" type="button">Tạo thông báo</button>
-					</div>
-				</article>
-
-				<article class="card span-7">
-					<h3>Danh sách thông báo</h3>
-					<p>Các thông báo mới nhất hiển thị ở trên cùng.</p>
-					<ul id="noticeList" class="notice-list"></ul>
-				</article>
-
-				<article class="card span-12">
-					<div class="history-head">
-						<h3>Lịch sử thao tác admin</h3>
-						<div class="history-tools">
-							<input id="historyDate" type="date" aria-label="Lọc ngày để xóa lịch sử">
-							<button id="deleteByDateBtn" class="btn btn-ghost" type="button">Xóa theo ngày</button>
-							<button id="deleteSelectedHistoryBtn" class="btn btn-ghost" type="button">Xóa mục đã
-								chọn</button>
-							<button id="clearHistoryBtn" class="btn btn-ghost" type="button">Xóa tất cả</button>
-						</div>
-					</div>
-					<p>Theo dõi toàn bộ thao tác cấm/mở tuyến, đóng/mở ga và tạo thông báo.</p>
-					<ul id="historyList" class="history-list"></ul>
-				</article>
-			</section>
-		</main>
-	</div>
-
-	<script>
-		const STORAGE_KEY = "metroAdminStateV1";
-
-		const defaultState = {
-			lines: [
-				{ id: "U1", blocked: false, reason: "" },
-				{ id: "U2", blocked: false, reason: "" },
-				{ id: "U3", blocked: false, reason: "" },
-				{ id: "U4", blocked: false, reason: "" },
-				{ id: "U5", blocked: false, reason: "" },
-				{ id: "U6", blocked: false, reason: "" },
-				{ id: "U7", blocked: false, reason: "" },
-				{ id: "U8", blocked: false, reason: "" }
-			],
-			stations: [],
-			notices: [],
-			history: []
-		};
-
-		const state = loadState();
-		const selectedHistoryIds = new Set();
-		ensureHistoryIds();
-		hydrateStationData().finally(() => {
-			renderAll();
-		});
-
-		document.getElementById("exportBtn").addEventListener("click", exportConfig);
-		document.getElementById("resetBtn").addEventListener("click", resetState);
-		document.getElementById("closeStationBtn").addEventListener("click", () => setStationStatus(true));
-		document.getElementById("openStationBtn").addEventListener("click", () => setStationStatus(false));
-		document.getElementById("createNoticeBtn").addEventListener("click", createNotice);
-		document.getElementById("clearHistoryBtn").addEventListener("click", clearHistory);
-		document.getElementById("deleteByDateBtn").addEventListener("click", deleteHistoryByDate);
-		document.getElementById("deleteSelectedHistoryBtn").addEventListener("click", deleteSelectedHistory);
-
-		function loadState() {
-			try {
-				const raw = localStorage.getItem(STORAGE_KEY);
-				if (!raw) return JSON.parse(JSON.stringify(defaultState));
-				const parsed = JSON.parse(raw);
-				return {
-					lines: Array.isArray(parsed.lines) ? parsed.lines : JSON.parse(JSON.stringify(defaultState.lines)),
-					stations: Array.isArray(parsed.stations) ? parsed.stations : [],
-					notices: Array.isArray(parsed.notices) ? parsed.notices : [],
-					history: Array.isArray(parsed.history) ? parsed.history : []
-				};
-			} catch {
-				return JSON.parse(JSON.stringify(defaultState));
-			}
-		}
-
-		function saveState() {
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-		}
-
-		function createHistoryId() {
-			if (window.crypto && crypto.randomUUID) {
-				return crypto.randomUUID();
-			}
-			return `history-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-		}
-
-		function ensureHistoryIds() {
-			let changed = false;
-			state.history = state.history.map(item => {
-				if (item && item.id) return item;
-				changed = true;
-				return {
-					...item,
-					id: createHistoryId()
-				};
-			});
-			if (changed) {
-				saveState();
-			}
-		}
-
-		async function hydrateStationData() {
-			if (state.stations.length > 0) return;
-
-			const sources = [
-				"../data/metro_graph.json",
-				"./metro_graph.json",
-				"/data/metro_graph.json",
-				"http://127.0.0.1:5000/api/graph"
-			];
-
-			for (const source of sources) {
-				try {
-					const response = await fetch(source);
-					if (!response.ok) continue;
-					const data = await response.json();
-					if (!data || !Array.isArray(data.stations)) continue;
-					state.stations = data.stations
-						.map(st => ({
-							id: st.id || st.name,
-							name: st.name || st.id,
-							closed: false,
-							reason: ""
-						}))
-						.sort((a, b) => a.name.localeCompare(b.name, "vi"));
-					saveState();
-					return;
-				} catch {
-					// try next source
-				}
-			}
-
-			// fallback nếu không tải được dữ liệu ga
-			state.stations = [
-				{ id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
-				{ id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
-				{ id: "sample-3", name: "Munchner Freiheit", closed: false, reason: "" }
-			];
-			saveState();
-		}
-
-		function renderAll() {
-			renderSummary();
-			renderLines();
-			renderStationSelect();
-			renderNoticeLineOptions();
-			renderNotices();
-			renderHistory();
-			updateLastAction();
-		}
-
-		function renderSummary() {
-			const blockedLines = state.lines.filter(line => line.blocked).length;
-			const closedStations = state.stations.filter(st => st.closed).length;
-			document.getElementById("summaryLines").textContent = String(state.lines.length);
-			document.getElementById("summaryBlocked").textContent = String(blockedLines);
-			document.getElementById("summaryStations").textContent = String(closedStations);
-		}
-
-		function renderLines() {
-			const tbody = document.querySelector("#lineTable tbody");
-			tbody.innerHTML = "";
-
-			state.lines.forEach(line => {
-				const tr = document.createElement("tr");
-
-				const nameCell = document.createElement("td");
-				nameCell.textContent = line.id;
-
-				const statusCell = document.createElement("td");
-				const badge = document.createElement("span");
-				badge.className = `badge ${line.blocked ? "badge-banned" : "badge-ok"}`;
-				badge.textContent = line.blocked ? "Dang cam" : "Hoat dong";
-				statusCell.appendChild(badge);
-
-				const reasonCell = document.createElement("td");
-				reasonCell.textContent = line.reason || "-";
-
-				const actionCell = document.createElement("td");
-				const wrap = document.createElement("div");
-				wrap.className = "row-actions";
-
-				const banBtn = document.createElement("button");
-				banBtn.type = "button";
-				banBtn.className = "btn btn-danger";
-				banBtn.textContent = "Cam";
-				banBtn.addEventListener("click", () => {
-					const reason = window.prompt(`Nhap ly do cam tuyen ${line.id}:`, line.reason || "Bao tri dinh ky");
-					if (reason === null) return;
-					line.blocked = true;
-					line.reason = reason.trim();
-					addHistory(`Cam tuyen ${line.id}`, line.reason || "Khong co ghi chu");
-					saveState();
-					renderAll();
-				});
-
-				const openBtn = document.createElement("button");
-				openBtn.type = "button";
-				openBtn.className = "btn btn-primary";
-				openBtn.textContent = "Mo";
-				openBtn.addEventListener("click", () => {
-					line.blocked = false;
-					line.reason = "";
-					addHistory(`Mo lai tuyen ${line.id}`, "Tuyen da hoat dong binh thuong");
-					saveState();
-					renderAll();
-				});
-
-				wrap.appendChild(banBtn);
-				wrap.appendChild(openBtn);
-				actionCell.appendChild(wrap);
-
-				tr.appendChild(nameCell);
-				tr.appendChild(statusCell);
-				tr.appendChild(reasonCell);
-				tr.appendChild(actionCell);
-				tbody.appendChild(tr);
-			});
-		}
-
-		function renderStationSelect() {
-			const select = document.getElementById("stationSelect");
-			select.innerHTML = "";
-
-			state.stations.forEach(station => {
-				const option = document.createElement("option");
-				option.value = station.id;
-				option.textContent = station.closed ? `${station.name} (tam dong)` : station.name;
-				select.appendChild(option);
-			});
-
-			updateStationStatusMessage();
-		}
-
-		function updateStationStatusMessage() {
-			const select = document.getElementById("stationSelect");
-			const station = state.stations.find(st => st.id === select.value) || state.stations[0];
-			const msg = document.getElementById("stationStatus");
-			if (!station) {
-				msg.textContent = "Khong co du lieu ga.";
-				return;
-			}
-			msg.textContent = station.closed
-				? `Ga dang tam dong. Ly do: ${station.reason || "Khong ro"}`
-				: "Ga dang mo binh thuong.";
-		}
-
-		function setStationStatus(closed) {
-			const select = document.getElementById("stationSelect");
-			const reasonInput = document.getElementById("stationReason");
-			const station = state.stations.find(st => st.id === select.value);
-			if (!station) return;
-
-			if (closed) {
-				const reason = reasonInput.value.trim() || "Tam dong de xu ly van hanh";
-				station.closed = true;
-				station.reason = reason;
-				addHistory(`Dong ga ${station.name}`, reason);
-			} else {
-				station.closed = false;
-				station.reason = "";
-				addHistory(`Mo lai ga ${station.name}`, "Ga hoat dong tro lai");
-			}
-
-			reasonInput.value = "";
-			saveState();
-			renderAll();
-		}
-
-		function renderNoticeLineOptions() {
-			const lineSelect = document.getElementById("noticeLine");
-			const current = lineSelect.value;
-			lineSelect.innerHTML = "";
-
-			const allOption = document.createElement("option");
-			allOption.value = "ALL";
-			allOption.textContent = "Toan mang";
-			lineSelect.appendChild(allOption);
-
-			state.lines.forEach(line => {
-				const option = document.createElement("option");
-				option.value = line.id;
-				option.textContent = line.id;
-				lineSelect.appendChild(option);
-			});
-
-			lineSelect.value = current || "ALL";
-		}
-
-		function createNotice() {
-			const level = document.getElementById("noticeLevel").value;
-			const line = document.getElementById("noticeLine").value;
-			const title = document.getElementById("noticeTitle").value.trim();
-			const body = document.getElementById("noticeBody").value.trim();
-
-			if (!title || !body) {
-				window.alert("Vui long nhap day du tieu de va noi dung thong bao.");
-				return;
-			}
-
-			const notice = {
-				id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-				level,
-				line,
-				title,
-				body,
-				createdAt: new Date().toISOString()
-			};
-
-			state.notices.unshift(notice);
-			addHistory("Tao thong bao", `${title} (${line === "ALL" ? "Toan mang" : line})`);
-			saveState();
-
-			document.getElementById("noticeTitle").value = "";
-			document.getElementById("noticeBody").value = "";
-			renderAll();
-		}
-
-		function renderNotices() {
-			const list = document.getElementById("noticeList");
-			list.innerHTML = "";
-
-			if (state.notices.length === 0) {
-				const li = document.createElement("li");
-				li.className = "notice-item";
-				li.innerHTML = "<p>Chua co thong bao nao.</p>";
-				list.appendChild(li);
-				return;
-			}
-
-			state.notices.forEach(notice => {
-				const li = document.createElement("li");
-				li.className = `notice-item alert-${notice.level}`;
-				li.innerHTML = `
-					<h4>${escapeHtml(notice.title)}</h4>
-					<p>${escapeHtml(notice.body)}</p>
-					<div class="meta">${formatLineLabel(notice.line)} | ${formatTime(notice.createdAt)}</div>
-				`;
-				list.appendChild(li);
-			});
-		}
-
-		function renderHistory() {
-			const list = document.getElementById("historyList");
-			list.innerHTML = "";
-
-			if (state.history.length === 0) {
-				selectedHistoryIds.clear();
-				const li = document.createElement("li");
-				li.className = "history-item";
-				li.innerHTML = "<p>Chua co thao tac nao.</p>";
-				list.appendChild(li);
-				return;
-			}
-
-			const activeIds = new Set(state.history.map(item => item.id));
-			Array.from(selectedHistoryIds).forEach(id => {
-				if (!activeIds.has(id)) {
-					selectedHistoryIds.delete(id);
-				}
-			});
-
-			state.history.forEach(item => {
-				const li = document.createElement("li");
-				li.className = "history-item";
-				const checked = selectedHistoryIds.has(item.id) ? "checked" : "";
-				li.innerHTML = `
-					<div class="history-row">
-						<input class="history-check" type="checkbox" data-history-id="${item.id}" ${checked}>
-						<div class="history-content">
-							<strong>${escapeHtml(item.action)}</strong>
-							<p>${escapeHtml(item.note)}</p>
-							<div class="meta">${formatTime(item.at)}</div>
-						</div>
-					</div>
-				`;
-				const checkbox = li.querySelector(".history-check");
-				checkbox.addEventListener("change", event => {
-					const id = event.target.getAttribute("data-history-id");
-					if (!id) return;
-					if (event.target.checked) {
-						selectedHistoryIds.add(id);
-					} else {
-						selectedHistoryIds.delete(id);
-					}
-				});
-				list.appendChild(li);
-			});
-		}
-
-		function addHistory(action, note) {
-			state.history.unshift({
-				id: createHistoryId(),
-				action,
-				note,
-				at: new Date().toISOString()
-			});
-
-			if (state.history.length > 120) {
-				state.history.length = 120;
-			}
-		}
-
-		function updateLastAction() {
-			const el = document.getElementById("lastUpdate");
-			if (!state.history.length) {
-				el.textContent = "Chua co thao tac gan day.";
-				return;
-			}
-			const last = state.history[0];
-			el.textContent = `Lan cuoi: ${last.action} (${formatTime(last.at)})`;
-		}
-
-		function exportConfig() {
-			const payload = {
-				exportedAt: new Date().toISOString(),
-				lines: state.lines,
-				stations: state.stations,
-				notices: state.notices
-			};
-
-			const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-			const url = URL.createObjectURL(blob);
-			const anchor = document.createElement("a");
-			anchor.href = url;
-			anchor.download = "metro-admin-config.json";
-			anchor.click();
-			URL.revokeObjectURL(url);
-
-			addHistory("Xuat cau hinh", "Da tai file metro-admin-config.json");
-			saveState();
-			renderAll();
-		}
-
-		function resetState() {
-			const ok = window.confirm("Ban chac chan muon khoi phuc trang thai mac dinh?");
-			if (!ok) return;
-
-			const fresh = JSON.parse(JSON.stringify(defaultState));
-			state.lines = fresh.lines;
-			state.stations = fresh.stations;
-			state.notices = fresh.notices;
-			state.history = fresh.history;
-			localStorage.removeItem(STORAGE_KEY);
-
-			hydrateStationData().finally(() => {
-				addHistory("Khoi phuc mac dinh", "Du lieu admin da duoc reset");
-				saveState();
-				renderAll();
-			});
-		}
-
-		function clearHistory() {
-			if (!state.history.length) {
-				window.alert("Lich su hien dang rong.");
-				return;
-			}
-
-			const ok = window.confirm("Ban co chac chan muon xoa toan bo lich su thao tac admin?");
-			if (!ok) return;
-
-			state.history = [];
-			selectedHistoryIds.clear();
-			saveState();
-			renderAll();
-		}
-
-		function getLocalDateKey(iso) {
-			const date = new Date(iso);
-			const y = date.getFullYear();
-			const m = String(date.getMonth() + 1).padStart(2, "0");
-			const d = String(date.getDate()).padStart(2, "0");
-			return `${y}-${m}-${d}`;
-		}
-
-		function deleteHistoryByDate() {
-			const input = document.getElementById("historyDate");
-			const selectedDate = input.value;
-			if (!selectedDate) {
-				window.alert("Vui long chon ngay can xoa.");
-				return;
-			}
-
-			const before = state.history.length;
-			state.history = state.history.filter(item => getLocalDateKey(item.at) !== selectedDate);
-			const removed = before - state.history.length;
-			if (removed <= 0) {
-				window.alert("Khong co lich su nao trong ngay da chon.");
-				return;
-			}
-
-			selectedHistoryIds.clear();
-			saveState();
-			renderAll();
-			window.alert(`Da xoa ${removed} muc lich su trong ngay ${selectedDate}.`);
-		}
-
-		function deleteSelectedHistory() {
-			if (!selectedHistoryIds.size) {
-				window.alert("Vui long tich chon it nhat 1 muc lich su de xoa.");
-				return;
-			}
-
-			const selectedIds = new Set(selectedHistoryIds);
-			const before = state.history.length;
-			state.history = state.history.filter(item => !selectedIds.has(item.id));
-			const removed = before - state.history.length;
-			selectedHistoryIds.clear();
-			saveState();
-			renderAll();
-			window.alert(`Da xoa ${removed} muc lich su da chon.`);
-		}
-
-		function formatLineLabel(line) {
-			return line === "ALL" ? "Toan mang" : line;
-		}
-
-		function formatTime(iso) {
-			return new Date(iso).toLocaleString("vi-VN", {
-				day: "2-digit",
-				month: "2-digit",
-				year: "numeric",
-				hour: "2-digit",
-				minute: "2-digit"
-			});
-		}
-
-		function escapeHtml(value) {
-			return String(value)
-				.replace(/&/g, "&amp;")
-				.replace(/</g, "&lt;")
-				.replace(/>/g, "&gt;")
-				.replace(/\"/g, "&quot;")
-				.replace(/'/g, "&#039;");
-		}
-
-		document.getElementById("stationSelect").addEventListener("change", updateStationStatusMessage);
-	</script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Munich Metro - Admin</title>
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #64748b;
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --danger: #dc2626;
+        --danger-soft: #fee2e2;
+        --ok: #047857;
+        --ok-soft: #d1fae5;
+        --warn: #f59e0b;
+        --warn-soft: #fef3c7;
+        --shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(79, 70, 229, 0.14),
+            transparent 42%
+          ),
+          radial-gradient(
+            circle at 90% 8%,
+            rgba(34, 197, 94, 0.1),
+            transparent 35%
+          ),
+          var(--bg);
+        color: var(--text);
+      }
+
+      .admin-layout {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 280px;
+        background: #111827;
+        color: #f8fafc;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar-header {
+        padding: 30px 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .sidebar-header h2 {
+        margin: 0;
+        font-size: 1.55rem;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 24px 0;
+      }
+
+      .sidebar-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sidebar-nav li {
+        padding: 14px 24px;
+        transition: background 0.25s;
+      }
+
+      .sidebar-nav li.active,
+      .sidebar-nav li:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .sidebar-nav a {
+        color: #d1d5db;
+        text-decoration: none;
+        font-weight: 600;
+        display: block;
+      }
+
+      .sidebar-footer {
+        padding: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .logout-btn {
+        width: 100%;
+        background: var(--danger);
+        color: white;
+        border: none;
+        padding: 14px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .logout-btn:hover {
+        background: #b91c1c;
+      }
+
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .top-bar {
+        background: white;
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+      }
+
+      .top-bar h1 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .admin-profile {
+        color: #475569;
+        font-weight: 600;
+      }
+
+      .content-area {
+        padding: 30px;
+        background: transparent;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .stat-card,
+      .operation-card,
+      .users-section,
+      .operations-sidebar,
+      .header-panel {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .stat-card,
+      .operation-card {
+        padding: 24px;
+      }
+
+      .stat-card h3,
+      .operation-card h4 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+      }
+
+      .stat-number {
+        font-size: 34px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-top: 12px;
+      }
+
+      .operations-shell {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 24px;
+      }
+
+      .operations-sidebar {
+        padding: 24px;
+        color: #f8fafc;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+      }
+
+      .operations-sidebar h2 {
+        margin: 0 0 14px;
+      }
+
+      .operations-sidebar p {
+        margin: 0 0 20px;
+        color: #cbd5e1;
+        line-height: 1.65;
+      }
+
+      .operations-actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .header-panel {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .header-panel h3 {
+        margin: 0;
+      }
+
+      .header-panel p {
+        margin: 6px 0 0;
+        color: #64748b;
+      }
+
+      .operation-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(12, 1fr);
+      }
+
+      .span-7 {
+        grid-column: span 7;
+      }
+
+      .span-5 {
+        grid-column: span 5;
+      }
+
+      .span-12 {
+        grid-column: span 12;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .field-group {
+        margin-bottom: 16px;
+      }
+
+      .field-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        color: #475569;
+        font-weight: 600;
+      }
+
+      .field-group input,
+      .field-group textarea,
+      .field-group select,
+      .operations-sidebar input,
+      .operations-sidebar select {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        color: #0f172a;
+        background: white;
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 12px;
+        padding: 11px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 0.16s ease,
+          opacity 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #ffffff;
+      }
+
+      .btn-danger {
+        background: var(--danger);
+        color: #ffffff;
+      }
+
+      .btn-ghost {
+        background: #f8fafc;
+        color: #1f2937;
+        border: 1px solid #e2e8f0;
+      }
+
+      .line-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.94rem;
+      }
+
+      .line-table th,
+      .line-table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 88px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.82rem;
+      }
+
+      .badge-ok {
+        background: var(--ok-soft);
+        color: var(--ok);
+      }
+
+      .badge-banned {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .notice-list,
+      .history-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+        max-height: 320px;
+        overflow: auto;
+      }
+
+      .notice-item,
+      .history-item {
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 16px;
+        background: white;
+      }
+
+      .notice-item h4 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .notice-item p,
+      .history-item p {
+        margin: 0;
+        color: #475569;
+        font-size: 0.94rem;
+        line-height: 1.6;
+      }
+
+      .history-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .history-head h4 {
+        margin: 0;
+      }
+
+      .history-tools {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .history-tools input[type="date"] {
+        min-width: 180px;
+      }
+
+      .history-row {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .history-check {
+        margin-top: 6px;
+      }
+
+      .history-content {
+        flex: 1;
+      }
+
+      .meta {
+        margin-top: 10px;
+        color: #64748b;
+        font-size: 0.85rem;
+      }
+
+      .status-msg {
+        margin-top: 12px;
+        color: #475569;
+        font-size: 0.95rem;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status.user {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+
+      .status.admin,
+      .status.success {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 16px;
+        width: 92%;
+        max-width: 840px;
+        max-height: 80vh;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f8fafc;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+      }
+
+      .close-modal {
+        font-size: 28px;
+        cursor: pointer;
+        color: #6b7280;
+        transition: color 0.25s;
+      }
+
+      .close-modal:hover {
+        color: #374151;
+      }
+
+      .modal-body {
+        padding: 24px;
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+
+      .history-table-container {
+        overflow-x: auto;
+      }
+
+      .history-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .history-table th,
+      .history-table td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 14px;
+      }
+
+      .history-table th {
+        background: #f8fafc;
+        color: #475569;
+        font-weight: 600;
+      }
+
+      .history-table tbody tr:hover {
+        background: #f8fafc;
+      }
+
+      .loading,
+      .error-message {
+        display: none;
+        text-align: center;
+        font-size: 15px;
+        padding: 18px;
+        border-radius: 14px;
+      }
+
+      .loading {
+        color: var(--primary);
+      }
+
+      .error-message {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .loading.show,
+      .error-message.show {
+        display: block;
+      }
+
+      @media (max-width: 1200px) {
+        .admin-layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: relative;
+        }
+
+        .operations-shell {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .operation-grid,
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar-nav li {
+          padding: 12px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Metro Admin</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="active">
+              <a
+                href="#"
+                data-section="overview"
+                onclick="showSection('overview', event)"
+                >📊 Tổng quan</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                data-section="routes"
+                onclick="showSection('routes', event)"
+                >🛣️ Vận hành hệ thống</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                data-section="users"
+                onclick="showSection('users', event)"
+                >👥 Người dùng</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="handleLogout()">
+            🚪 Đăng xuất
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar">
+          <h1 id="section-title">Tổng quan hệ thống</h1>
+          <div class="admin-profile">
+            <span id="admin-name">Xin chào, Admin</span>
+          </div>
+        </header>
+
+        <section id="content-area" class="content-area">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3>Tổng ga tàu</h3>
+              <p class="stat-number">150</p>
+            </div>
+            <div class="stat-card">
+              <h3>Tuyến đang chạy</h3>
+              <p class="stat-number">8</p>
+            </div>
+            <div class="stat-card">
+              <h3>Người dùng mới</h3>
+              <p class="stat-number">+12</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const API_BASE = (() => {
+        if (window.location.protocol === "file:") {
+          return "http://127.0.0.1:5000";
+        }
+        if (window.location.port === "5500") {
+          return `${window.location.protocol}//${window.location.hostname}:5000`;
+        }
+        return window.location.origin;
+      })();
+
+      // Listen for auth changes from other tabs (login/logout)
+      window.addEventListener("storage", (e) => {
+        if (!e) return;
+        if (e.key === "auth_update") {
+          try {
+            checkAuthAndReload();
+          } catch (err) {
+            console.warn("auth_update handler failed", err);
+          }
+        }
+      });
+
+      // BroadcastChannel fallback for real-time cross-tab messages
+      try {
+        if ("BroadcastChannel" in window) {
+          const _authBC = new BroadcastChannel("auth_channel");
+          _authBC.addEventListener("message", (ev) => {
+            if (!ev || !ev.data) return;
+            if (ev.data === "auth_update") {
+              try {
+                checkAuthAndReload();
+              } catch (err) {
+                console.warn("BC auth handler failed", err);
+              }
+            }
+          });
+          window.addEventListener("unload", () => {
+            try {
+              _authBC.close();
+            } catch (e) {}
+          });
+        }
+      } catch (e) {
+        console.warn("BroadcastChannel not available", e);
+      }
+
+      // Also check when tab regains focus (in case storage event was missed)
+      window.addEventListener("focus", () => {
+        try {
+          checkAuthAndReload();
+          updateDebugPanel();
+        } catch (e) {
+          /* ignore */
+        }
+      });
+
+      async function checkAuthAndReload() {
+        try {
+          const res = await fetch(`${API_BASE}/api/me`, {
+            credentials: "include",
+          });
+          if (!res.ok) {
+            showAuthError(
+              "Phiên admin đã thay đổi hoặc hết hạn. Vui lòng đăng nhập lại.",
+            );
+            return;
+          }
+          const data = await res.json();
+          if (data && data.is_admin) {
+            // if users section is open, refresh it
+            const usersContent = document.getElementById("usersContent");
+            if (usersContent) {
+              loadUserData();
+            }
+            // optionally update admin name
+            const adminName = document.getElementById("admin-name");
+            if (adminName && data.username)
+              adminName.textContent = `Xin chào, ${data.username}`;
+          } else {
+            showAuthError(
+              "Phiên hiện tại không phải admin. Vui lòng đăng nhập lại bằng tài khoản admin.",
+            );
+          }
+        } catch (err) {
+          console.warn("checkAuthAndReload error", err);
+          showAuthError(
+            "Không thể xác thực phiên hiện tại. Vui lòng tải lại trang hoặc đăng nhập lại.",
+          );
+        }
+      }
+
+      // --- Debug panel for quick diagnostics ---
+      function createDebugPanel() {
+        try {
+          const panel = document.createElement("div");
+          panel.id = "debugPanel";
+          panel.style.position = "fixed";
+          panel.style.right = "12px";
+          panel.style.bottom = "12px";
+          panel.style.background = "rgba(0,0,0,0.75)";
+          panel.style.color = "#fff";
+          panel.style.padding = "8px 10px";
+          panel.style.borderRadius = "8px";
+          panel.style.fontSize = "12px";
+          panel.style.zIndex = "9999";
+          panel.style.maxWidth = "320px";
+          panel.style.boxShadow = "0 6px 18px rgba(0,0,0,0.2)";
+          panel.innerHTML = `
+            <div style="display:flex; gap:8px; align-items:center;">
+              <strong style="font-size:12px;">Debug</strong>
+              <button id="debugRefreshBtn" style="margin-left:auto; padding:4px 6px; font-size:11px;">Refresh</button>
+            </div>
+            <div id="debugContent" style="margin-top:8px; white-space:pre-wrap; max-height:220px; overflow:auto;"></div>
+          `;
+          document.body.appendChild(panel);
+          document
+            .getElementById("debugRefreshBtn")
+            .addEventListener("click", updateDebugPanel);
+          updateDebugPanel();
+        } catch (e) {
+          console.warn("createDebugPanel failed", e);
+        }
+      }
+
+      async function updateDebugPanel() {
+        try {
+          const contentEl = document.getElementById("debugContent");
+          if (!contentEl) return;
+          const cookieInfo = document.cookie || "<no document.cookie>";
+          let me = { error: "fetch failed" };
+          try {
+            const r = await fetch(`${API_BASE}/api/me`, {
+              credentials: "include",
+            });
+            me = await r.json();
+          } catch (err) {
+            me = { error: String(err) };
+          }
+          contentEl.textContent =
+            `navigator.cookieEnabled: ${navigator.cookieEnabled}\n` +
+            `document.cookie: ${cookieInfo}\n\n` +
+            `/api/me: ${JSON.stringify(me, null, 2)}`;
+        } catch (e) {
+          console.warn("updateDebugPanel failed", e);
+        }
+      }
+
+      // create debug panel after a short delay so DOM is ready
+      setTimeout(() => {
+        try {
+          createDebugPanel();
+        } catch (e) {}
+      }, 600);
+
+      async function verifyAdminSession() {
+        try {
+          const res = await fetch(`${API_BASE}/api/me`, {
+            credentials: "include",
+          });
+          if (!res.ok) {
+            showAuthError(
+              "Bạn chưa đăng nhập admin hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.",
+            );
+            return false;
+          }
+
+          const data = await res.json();
+          if (!data || !data.is_admin) {
+            showAuthError(
+              "Phiên hiện tại không phải admin. Vui lòng đăng nhập bằng tài khoản admin.",
+            );
+            return false;
+          }
+
+          if (data.username) {
+            const adminName = document.getElementById("admin-name");
+            if (adminName) adminName.textContent = `Xin chào, ${data.username}`;
+          }
+          return true;
+        } catch (err) {
+          console.warn("verifyAdminSession failed", err);
+          showAuthError(
+            "Không thể kiểm tra phiên đăng nhập. Vui lòng thử lại hoặc tải lại trang.",
+          );
+          return false;
+        }
+      }
+
+      function showAuthError(message) {
+        const contentArea = document.getElementById("content-area");
+        if (!contentArea) return;
+        contentArea.innerHTML = `
+          <div class="error-box" style="padding:24px; background:#fee2e2; border:1px solid #fca5a5; border-radius:12px; color:#b91c1c;">
+            <h2 style="margin-top:0;">Không có quyền truy cập</h2>
+            <p style="margin:0 0 16px;">${escapeHtmlString(message)}</p>
+            <button class="btn btn-primary" onclick="window.location.href='login.html'">Đăng nhập lại</button>
+          </div>
+        `;
+      }
+
+      function showSection(section, event) {
+        const contentArea = document.getElementById("content-area");
+        const sectionTitle = document.getElementById("section-title");
+        document
+          .querySelectorAll(".sidebar-nav li")
+          .forEach((li) => li.classList.remove("active"));
+        if (event && event.currentTarget) {
+          const listItem = event.currentTarget.closest("li");
+          if (listItem) listItem.classList.add("active");
+        }
+
+        switch (section) {
+          case "overview":
+            sectionTitle.innerText = "Tổng quan hệ thống";
+            contentArea.innerHTML = `
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <h3>Tổng ga tàu</h3>
+                  <p class="stat-number">150</p>
+                </div>
+                <div class="stat-card">
+                  <h3>Tuyến đang chạy</h3>
+                  <p class="stat-number">8</p>
+                </div>
+                <div class="stat-card">
+                  <h3>Yêu cầu hỗ trợ</h3>
+                  <p class="stat-number">2</p>
+                </div>
+              </div>
+            `;
+            break;
+          case "routes":
+            sectionTitle.innerText = "Vận hành hệ thống";
+            contentArea.innerHTML = `
+              <div class="operations-shell">
+                <aside class="operations-sidebar">
+                  <h2>Vận hành Metro</h2>
+                  <p>Quản lý trạng thái tuyến, ga tạm đóng, thông báo vận hành và lịch sử thao tác.</p>
+                  <ul class="summary-list">
+                    <li><strong id="summaryLines">0</strong> Tổng số tuyến</li>
+                    <li><strong id="summaryBlocked">0</strong> Tuyến đang bị cấm</li>
+                    <li><strong id="summaryStations">0</strong> Ga đang tạm đóng</li>
+                  </ul>
+                  <div class="operations-actions">
+                    <button id="exportBtn" class="btn btn-ghost" type="button">Xuất cấu hình JSON</button>
+                    <button id="resetBtn" class="btn btn-danger" type="button">Khôi phục mặc định</button>
+                  </div>
+                </aside>
+                <main class="operations-main">
+                  <section class="header-panel">
+                    <div>
+                      <h3>Điều hành tuyến Munich</h3>
+                      <p id="lastUpdate">Chưa có thao tác gần đây.</p>
+                    </div>
+                  </section>
+                  <section class="operation-grid">
+                    <article class="operation-card span-7">
+                      <h4>Quản lý tuyến metro</h4>
+                      <p>Khóa hoặc mở tuyến khi bảo trì hoặc sự cố.</p>
+                      <table class="line-table" id="lineTable">
+                        <thead>
+                          <tr>
+                            <th>Tuyến</th>
+                            <th>Trạng thái</th>
+                            <th>Lý do / ghi chú</th>
+                            <th>Hành động</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </article>
+                    <article class="operation-card span-5">
+                      <h4>Đóng / mở ga</h4>
+                      <p>Áp dụng khi ga quá tải, bảo trì hoặc an ninh.</p>
+                      <div class="field-group">
+                        <label for="stationSelect">Chọn ga</label>
+                        <select id="stationSelect"></select>
+                      </div>
+                      <div class="field-group">
+                        <label for="stationReason">Lý do</label>
+                        <input id="stationReason" placeholder="Ví dụ: Bảo trì thang cuốn" />
+                      </div>
+                      <div class="row-actions">
+                        <button id="closeStationBtn" class="btn btn-danger" type="button">Đóng ga</button>
+                        <button id="openStationBtn" class="btn btn-primary" type="button">Mở lại ga</button>
+                      </div>
+                      <p id="stationStatus" class="status-msg"></p>
+                    </article>
+                    <article class="operation-card span-5">
+                      <h4>Tạo thông báo vận hành</h4>
+                      <p>Thông báo nội bộ cho trực ban và quản lý ca.</p>
+                      <div class="field-grid">
+                        <div>
+                          <label for="noticeLevel">Mức độ</label>
+                          <select id="noticeLevel">
+                            <option value="low">Thấp</option>
+                            <option value="medium">Trung bình</option>
+                            <option value="high">Khẩn cấp</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label for="noticeLine">Tuyến liên quan</label>
+                          <select id="noticeLine"></select>
+                        </div>
+                      </div>
+                      <div class="field-group">
+                        <label for="noticeTitle">Tiêu đề</label>
+                        <input id="noticeTitle" placeholder="Ví dụ: Chậm 10 phút do kỹ thuật" />
+                      </div>
+                      <div class="field-group">
+                        <label for="noticeBody">Nội dung</label>
+                        <textarea id="noticeBody" placeholder="Mô tả chi tiết và hướng xử lý"></textarea>
+                      </div>
+                      <div class="row-actions">
+                        <button id="createNoticeBtn" class="btn btn-primary" type="button">Tạo thông báo</button>
+                      </div>
+                    </article>
+                    <article class="operation-card span-7">
+                      <h4>Danh sách thông báo</h4>
+                      <p>Các thông báo mới nhất hiển thị ở trên cùng.</p>
+                      <ul id="noticeList" class="notice-list"></ul>
+                    </article>
+                    <article class="operation-card span-12">
+                      <div class="history-head">
+                        <h4>Lịch sử thao tác admin</h4>
+                        <div class="history-tools">
+                          <input id="historyDate" type="date" aria-label="Lọc ngày để xóa lịch sử" />
+                          <button id="deleteByDateBtn" class="btn btn-ghost" type="button">Xóa theo ngày</button>
+                          <button id="deleteSelectedHistoryBtn" class="btn btn-ghost" type="button">Xóa mục đã chọn</button>
+                          <button id="clearHistoryBtn" class="btn btn-ghost" type="button">Xóa tất cả</button>
+                        </div>
+                      </div>
+                      <p>Theo dõi toàn bộ thao tác cấm/mở tuyến, đóng/mở ga và tạo thông báo.</p>
+                      <ul id="historyList" class="history-list"></ul>
+                    </article>
+                  </section>
+                </main>
+              </div>
+            `;
+            initializeAdminOperations();
+            break;
+          case "users":
+            sectionTitle.innerText = "Quản lý người dùng";
+            contentArea.innerHTML = `
+              <div class="users-section">
+                <div class="section-header" style="display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px;">
+                  <div>
+                    <h3>Danh sách người dùng và lịch sử hoạt động</h3>
+                    <p style="color:#64748b; margin:8px 0 0;">Xem trạng thái tài khoản, số lần đăng nhập và lịch sử.</p>
+                  </div>
+                  <button class="btn btn-primary" onclick="loadUserData()">🔄 Làm mới</button>
+                </div>
+                <div class="loading" id="usersLoading">Đang tải dữ liệu...</div>
+                <div class="error-message" id="usersError"></div>
+                <div id="usersContent"></div>
+              </div>
+            `;
+            loadUserData();
+            break;
+          default:
+            showSection("overview", event);
+        }
+      }
+
+      async function handleLogout() {
+        if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+          try {
+            await fetch(`${API_BASE}/api/logout`, {
+              method: "POST",
+              credentials: "include",
+            });
+          } catch (err) {
+            console.warn("Logout failed:", err);
+          }
+          localStorage.removeItem("adminToken");
+          localStorage.removeItem("loggedInUser");
+          localStorage.removeItem("isAdmin");
+          window.location.href = "login.html";
+        }
+      }
+
+      async function loadUserData() {
+        const loading = document.getElementById("usersLoading");
+        const error = document.getElementById("usersError");
+        const content = document.getElementById("usersContent");
+
+        if (!loading || !error || !content) return;
+        loading.style.display = "block";
+        error.style.display = "none";
+        content.innerHTML = "";
+
+        try {
+          const usersResponse = await fetch(`${API_BASE}/api/auth/users`, {
+            credentials: "include",
+          });
+          const usersText = await usersResponse.text();
+          let usersData;
+          try {
+            usersData = JSON.parse(usersText);
+          } catch {
+            usersData = null;
+          }
+          if (!usersResponse.ok) {
+            throw new Error(
+              (usersData && usersData.error) ||
+                `Không thể tải danh sách người dùng (${usersResponse.status})`,
+            );
+          }
+          if (!usersData || !Array.isArray(usersData.users)) {
+            throw new Error("Dữ liệu người dùng không hợp lệ.");
+          }
+
+          const historyResponse = await fetch(
+            `${API_BASE}/api/auth/login-history`,
+            {
+              credentials: "include",
+            },
+          );
+          const historyText = await historyResponse.text();
+          let historyData;
+          try {
+            historyData = JSON.parse(historyText);
+          } catch {
+            historyData = null;
+          }
+          if (!historyResponse.ok) {
+            throw new Error(
+              (historyData && historyData.error) ||
+                `Không thể tải lịch sử đăng nhập (${historyResponse.status})`,
+            );
+          }
+          if (!historyData || !Array.isArray(historyData.history)) {
+            throw new Error("Dữ liệu lịch sử đăng nhập không hợp lệ.");
+          }
+
+          loading.style.display = "none";
+          adminUserCache.users = usersData.users;
+          adminUserCache.loginHistory = historyData.history;
+          renderUsersSection(usersData.users, historyData.history);
+        } catch (err) {
+          loading.style.display = "none";
+          error.textContent = err.message || "Không thể kết nối tới server";
+          error.style.display = "block";
+        }
+      }
+
+      function renderUsersSection(users, loginHistory) {
+        const content = document.getElementById("usersContent");
+        if (!content) return;
+        const userActivity = {};
+        loginHistory.forEach((entry) => {
+          if (!userActivity[entry.username]) {
+            userActivity[entry.username] = [];
+          }
+          userActivity[entry.username].push(entry);
+        });
+
+        const sortedHistory = [...loginHistory].sort(
+          (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
+        );
+        const recentHistory = sortedHistory.slice(0, 10);
+        const uniqueUsers = new Set(loginHistory.map((entry) => entry.username))
+          .size;
+        const totalLogins = loginHistory.length;
+        const successfulLogins = loginHistory.filter(
+          (entry) => entry.success !== false,
+        ).length;
+        const failedLogins = totalLogins - successfulLogins;
+
+        const userRows = users
+          .map((user) => {
+            const userLogins = userActivity[user.username] || [];
+            const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
+            const totalLoginsForUser = userLogins.length;
+            return `
+              <tr>
+                <td>${user.id}</td>
+                <td>${getSafeValue(user.username)}</td>
+                <td>${getSafeValue(user.email)}</td>
+                <td>${getSafeValue(user.first_name)} ${getSafeValue(user.last_name)}</td>
+                <td>${getSafeValue(user.phone, "-")}</td>
+                <td><span class="status ${user.role}">${getSafeValue(user.role)}</span></td>
+                <td>${totalLoginsForUser}</td>
+                <td>${lastLogin ? new Date(lastLogin.timestamp).toLocaleString("vi-VN") : "Chưa đăng nhập"}</td>
+                <td>${new Date(user.created_at).toLocaleString("vi-VN")}</td>
+                <td><button class="btn btn-ghost" onclick="showUserHistory('${escapeHtmlString(user.username)}')">📋 Xem lịch sử</button></td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        const userOptions = users
+          .map(
+            (user) => `
+            <option value="${escapeHtmlString(user.username)}">${escapeHtmlString(user.username)}</option>
+          `,
+          )
+          .join("");
+
+        const historyRows = recentHistory
+          .map(
+            (entry) => `
+            <tr>
+              <td>${getSafeValue(entry.username)}</td>
+              <td>${new Date(entry.timestamp).toLocaleString("vi-VN")}</td>
+              <td>${getSafeValue(entry.ip_address, "N/A")}</td>
+              <td>${getSafeValue(entry.user_agent, "N/A")}</td>
+              <td><span class="status ${entry.success !== false ? "success" : "danger"}">${entry.success !== false ? "Thành công" : "Thất bại"}</span></td>
+            </tr>
+          `,
+          )
+          .join("");
+
+        content.innerHTML = `
+          <section class="users-summary-grid" style="display:grid; gap:16px; margin-bottom:24px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+            <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+              <h4>Tổng người dùng</h4>
+              <p class="stat-number">${users.length}</p>
+            </div>
+            <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+              <h4>Tổng lượt đăng nhập</h4>
+              <p class="stat-number">${totalLogins}</p>
+            </div>
+            <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+              <h4>Người dùng đã đăng nhập</h4>
+              <p class="stat-number">${uniqueUsers}</p>
+            </div>
+            <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+              <h4>Đăng nhập thất bại</h4>
+              <p class="stat-number">${failedLogins}</p>
+            </div>
+          </section>
+          <section class="login-history-filter" style="display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-bottom:20px;">
+            <div>
+              <label for="filterUserSelect">Lọc theo user</label>
+              <select id="filterUserSelect" onchange="updateLoginHistoryTable()">
+                <option value="">Tất cả</option>
+                ${userOptions}
+              </select>
+            </div>
+            <div>
+              <label for="filterFromDate">Từ ngày</label>
+              <input id="filterFromDate" type="date" onchange="updateLoginHistoryTable()" />
+            </div>
+            <div>
+              <label for="filterToDate">Đến ngày</label>
+              <input id="filterToDate" type="date" onchange="updateLoginHistoryTable()" />
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:flex-end;">
+              <button class="btn btn-ghost" type="button" onclick="resetLoginHistoryFilters()">Đặt lại</button>
+              <button class="btn btn-primary" type="button" onclick="exportLoginHistoryCsv()">Xuất CSV</button>
+            </div>
+          </section>
+          <section class="login-history-section" style="margin-bottom:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:12px;">
+              <div>
+                <h4>Lịch sử đăng nhập</h4>
+                <p style="margin:4px 0 0; color:#64748b;">Hiển thị <span id="historyCount">${recentHistory.length}</span> mục.</p>
+              </div>
+            </div>
+            <div style="overflow-x:auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+              <table class="users-table" style="width:100%; border-collapse:collapse;">
+                <thead>
+                  <tr>
+                    <th>Người dùng</th>
+                    <th>Thời gian</th>
+                    <th>IP</th>
+                    <th>Thiết bị</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody id="loginHistoryTableBody">${historyRows}</tbody>
+              </table>
+            </div>
+          </section>
+          <div class="users-table-container" style="overflow-x:auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
+            <table class="users-table" style="width:100%; border-collapse:collapse;">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên người dùng</th>
+                  <th>Email</th>
+                  <th>Họ tên</th>
+                  <th>Điện thoại</th>
+                  <th>Vai trò</th>
+                  <th>Tổng đăng nhập</th>
+                  <th>Đăng nhập cuối</th>
+                  <th>Ngày tạo</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>${userRows}</tbody>
+            </table>
+          </div>
+          <div id="userHistoryModal" class="modal" style="display:none;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 id="modalTitle">Lịch sử hoạt động</h3>
+                <span class="close-modal" onclick="closeUserHistoryModal()">&times;</span>
+              </div>
+              <div id="modalBody" class="modal-body"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      function showUserHistory(username) {
+        const modal = document.getElementById("userHistoryModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalBody = document.getElementById("modalBody");
+        if (!modal || !modalTitle || !modalBody) return;
+        modalTitle.textContent = `Lịch sử đăng nhập - ${username}`;
+        modalBody.innerHTML = `<div class="loading show">Đang tải lịch sử...</div>`;
+        modal.style.display = "flex";
+
+        fetch(
+          `${API_BASE}/api/auth/user-history/${encodeURIComponent(username)}`,
+          {
+            credentials: "include",
+          },
+        )
+          .then(async (response) => {
+            const data = await response.json();
+            if (!response.ok) {
+              throw new Error(data.error || `Lỗi ${response.status}`);
+            }
+            return data;
+          })
+          .then((data) => {
+            if (data.history && data.history.length > 0) {
+              const historyRows = data.history
+                .map(
+                  (entry) => `
+                    <tr>
+                      <td>${new Date(entry.timestamp).toLocaleString("vi-VN")}</td>
+                      <td>${getSafeValue(entry.ip_address, "N/A")}</td>
+                      <td>${getSafeValue(entry.user_agent ? entry.user_agent.substring(0, 50) + "..." : "N/A")}</td>
+                      <td><span class="status success">Thành công</span></td>
+                    </tr>
+                  `,
+                )
+                .join("");
+              modalBody.innerHTML = `
+                <div class="history-table-container">
+                  <table class="history-table">
+                    <thead>
+                      <tr>
+                        <th>Thời gian</th>
+                        <th>IP Address</th>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                      </tr>
+                    </thead>
+                    <tbody>${historyRows}</tbody>
+                  </table>
+                </div>
+              `;
+            } else {
+              modalBody.innerHTML = `<p>Không có lịch sử đăng nhập nào cho người dùng này.</p>`;
+            }
+          })
+          .catch((err) => {
+            modalBody.innerHTML = `<div class="error-message show">Không thể tải lịch sử: ${escapeHtmlString(err.message)}</div>`;
+          });
+      }
+
+      function closeUserHistoryModal() {
+        const modal = document.getElementById("userHistoryModal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      function parseDateInput(value) {
+        if (!value) return null;
+        const date = new Date(`${value}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? null : date;
+      }
+
+      function getFilteredLoginHistory() {
+        const userSelect = document.getElementById("filterUserSelect");
+        const fromDate = parseDateInput(
+          document.getElementById("filterFromDate")?.value,
+        );
+        const toDateRaw = parseDateInput(
+          document.getElementById("filterToDate")?.value,
+        );
+        const toDate = toDateRaw
+          ? new Date(toDateRaw.getTime() + 24 * 60 * 60 * 1000 - 1)
+          : null;
+        const selectedUser = userSelect ? userSelect.value : "";
+
+        return adminUserCache.loginHistory.filter((entry) => {
+          if (selectedUser && entry.username !== selectedUser) {
+            return false;
+          }
+          const timestamp = new Date(entry.timestamp);
+          if (Number.isNaN(timestamp.getTime())) return false;
+          if (fromDate && timestamp < fromDate) return false;
+          if (toDate && timestamp > toDate) return false;
+          return true;
+        });
+      }
+
+      function updateLoginHistoryTable() {
+        const tableBody = document.getElementById("loginHistoryTableBody");
+        const historyCount = document.getElementById("historyCount");
+        if (!tableBody || !historyCount) return;
+        const filtered = getFilteredLoginHistory();
+        const rows = filtered
+          .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+          .map(
+            (entry) => `
+            <tr>
+              <td>${getSafeValue(entry.username)}</td>
+              <td>${new Date(entry.timestamp).toLocaleString("vi-VN")}</td>
+              <td>${getSafeValue(entry.ip_address, "N/A")}</td>
+              <td>${getSafeValue(entry.user_agent, "N/A")}</td>
+              <td><span class="status ${entry.success !== false ? "success" : "danger"}">${entry.success !== false ? "Thành công" : "Thất bại"}</span></td>
+            </tr>
+          `,
+          )
+          .join("");
+        tableBody.innerHTML =
+          rows ||
+          `
+          <tr>
+            <td colspan="5" style="text-align:center; padding:18px; color:#475569;">Không có bản ghi nào.</td>
+          </tr>
+        `;
+        historyCount.textContent = filtered.length;
+      }
+
+      function resetLoginHistoryFilters() {
+        const userSelect = document.getElementById("filterUserSelect");
+        const fromDate = document.getElementById("filterFromDate");
+        const toDate = document.getElementById("filterToDate");
+        if (userSelect) userSelect.value = "";
+        if (fromDate) fromDate.value = "";
+        if (toDate) toDate.value = "";
+        updateLoginHistoryTable();
+      }
+
+      function escapeCsvValue(value) {
+        const text = String(value === undefined || value === null ? "" : value);
+        if (/[",\r\n]/.test(text)) {
+          return `"${text.replace(/"/g, '""')}"`;
+        }
+        return text;
+      }
+
+      function exportLoginHistoryCsv() {
+        const filtered = getFilteredLoginHistory();
+        if (!filtered.length) {
+          window.alert("Không có dữ liệu để xuất.");
+          return;
+        }
+        const header = [
+          "username",
+          "timestamp",
+          "ip_address",
+          "user_agent",
+          "status",
+        ];
+        const lines = [header.join(",")];
+        filtered
+          .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+          .forEach((entry) => {
+            lines.push(
+              [
+                escapeCsvValue(entry.username),
+                escapeCsvValue(
+                  new Date(entry.timestamp).toLocaleString("vi-VN"),
+                ),
+                escapeCsvValue(entry.ip_address),
+                escapeCsvValue(entry.user_agent),
+                escapeCsvValue(
+                  entry.success !== false ? "Thành công" : "Thất bại",
+                ),
+              ].join(","),
+            );
+          });
+        const blob = new Blob([lines.join("\r\n")], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "login-history.csv";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+        URL.revokeObjectURL(url);
+      }
+
+      const STORAGE_KEY = "metroAdminStateV1";
+      const defaultAdminState = {
+        lines: [
+          { id: "U1", blocked: false, reason: "" },
+          { id: "U2", blocked: false, reason: "" },
+          { id: "U3", blocked: false, reason: "" },
+          { id: "U4", blocked: false, reason: "" },
+          { id: "U5", blocked: false, reason: "" },
+          { id: "U6", blocked: false, reason: "" },
+          { id: "U7", blocked: false, reason: "" },
+          { id: "U8", blocked: false, reason: "" },
+        ],
+        stations: [],
+        notices: [],
+        history: [],
+      };
+      let adminOperationsState = null;
+      let selectedHistoryIds = new Set();
+      let adminUserCache = {
+        users: [],
+        loginHistory: [],
+      };
+
+      function initializeAdminOperations() {
+        adminOperationsState = loadAdminState();
+        ensureHistoryIds();
+        hydrateStationData().finally(() => renderAll());
+
+        document
+          .getElementById("exportBtn")
+          ?.addEventListener("click", exportConfig);
+        document
+          .getElementById("resetBtn")
+          ?.addEventListener("click", resetState);
+        document
+          .getElementById("closeStationBtn")
+          ?.addEventListener("click", () => setStationStatus(true));
+        document
+          .getElementById("openStationBtn")
+          ?.addEventListener("click", () => setStationStatus(false));
+        document
+          .getElementById("createNoticeBtn")
+          ?.addEventListener("click", createNotice);
+        document
+          .getElementById("clearHistoryBtn")
+          ?.addEventListener("click", clearHistory);
+        document
+          .getElementById("deleteByDateBtn")
+          ?.addEventListener("click", deleteHistoryByDate);
+        document
+          .getElementById("deleteSelectedHistoryBtn")
+          ?.addEventListener("click", deleteSelectedHistory);
+        document
+          .getElementById("stationSelect")
+          ?.addEventListener("change", updateStationStatusMessage);
+      }
+
+      function loadAdminState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return JSON.parse(JSON.stringify(defaultAdminState));
+          const parsed = JSON.parse(raw);
+          return {
+            lines: Array.isArray(parsed.lines)
+              ? parsed.lines
+              : JSON.parse(JSON.stringify(defaultAdminState.lines)),
+            stations: Array.isArray(parsed.stations) ? parsed.stations : [],
+            notices: Array.isArray(parsed.notices) ? parsed.notices : [],
+            history: Array.isArray(parsed.history) ? parsed.history : [],
+          };
+        } catch {
+          return JSON.parse(JSON.stringify(defaultAdminState));
+        }
+      }
+
+      function saveAdminState() {
+        if (!adminOperationsState) return;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(adminOperationsState));
+      }
+
+      function createHistoryId() {
+        if (window.crypto && crypto.randomUUID) {
+          return crypto.randomUUID();
+        }
+        return `history-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+      }
+
+      function ensureHistoryIds() {
+        if (!adminOperationsState) return;
+        let changed = false;
+        adminOperationsState.history = adminOperationsState.history.map(
+          (item) => {
+            if (item && item.id) return item;
+            changed = true;
+            return { ...item, id: createHistoryId() };
+          },
+        );
+        if (changed) saveAdminState();
+      }
+
+      async function hydrateStationData() {
+        if (!adminOperationsState || adminOperationsState.stations.length > 0)
+          return;
+        const sources = [
+          "../data/metro_graph.json",
+          "./metro_graph.json",
+          "/data/metro_graph.json",
+          `${API_BASE}/api/graph`,
+        ];
+        for (const source of sources) {
+          try {
+            const response = await fetch(source);
+            if (!response.ok) continue;
+            const data = await response.json();
+            if (!data || !Array.isArray(data.stations)) continue;
+            adminOperationsState.stations = data.stations
+              .map((st) => ({
+                id: st.id || st.name,
+                name: st.name || st.id,
+                closed: false,
+                reason: "",
+              }))
+              .sort((a, b) => a.name.localeCompare(b.name, "vi"));
+            saveAdminState();
+            return;
+          } catch {
+            continue;
+          }
+        }
+        adminOperationsState.stations = [
+          { id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
+          { id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
+          {
+            id: "sample-3",
+            name: "Munchner Freiheit",
+            closed: false,
+            reason: "",
+          },
+        ];
+        saveAdminState();
+      }
+
+      function renderAll() {
+        if (!adminOperationsState) return;
+        renderSummary();
+        renderLines();
+        renderStationSelect();
+        renderNoticeLineOptions();
+        renderNotices();
+        renderHistory();
+        updateLastAction();
+      }
+
+      function renderSummary() {
+        if (!adminOperationsState) return;
+        const blockedLines = adminOperationsState.lines.filter(
+          (line) => line.blocked,
+        ).length;
+        const closedStations = adminOperationsState.stations.filter(
+          (st) => st.closed,
+        ).length;
+        const summaryLines = document.getElementById("summaryLines");
+        const summaryBlocked = document.getElementById("summaryBlocked");
+        const summaryStations = document.getElementById("summaryStations");
+        if (summaryLines) {
+          summaryLines.textContent = String(adminOperationsState.lines.length);
+        }
+        if (summaryBlocked) {
+          summaryBlocked.textContent = String(blockedLines);
+        }
+        if (summaryStations) {
+          summaryStations.textContent = String(closedStations);
+        }
+      }
+
+      function renderLines() {
+        if (!adminOperationsState) return;
+        const tbody = document.querySelector("#lineTable tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        adminOperationsState.lines.forEach((line) => {
+          const tr = document.createElement("tr");
+          const nameCell = document.createElement("td");
+          nameCell.textContent = line.id;
+          const statusCell = document.createElement("td");
+          const badge = document.createElement("span");
+          badge.className = `badge ${line.blocked ? "badge-banned" : "badge-ok"}`;
+          badge.textContent = line.blocked ? "Đang cấm" : "Hoạt động";
+          statusCell.appendChild(badge);
+          const reasonCell = document.createElement("td");
+          reasonCell.textContent = line.reason || "-";
+          const actionCell = document.createElement("td");
+          const wrap = document.createElement("div");
+          wrap.className = "row-actions";
+          const banBtn = document.createElement("button");
+          banBtn.type = "button";
+          banBtn.className = "btn btn-danger";
+          banBtn.textContent = "Cấm";
+          banBtn.addEventListener("click", () => {
+            const reason = window.prompt(
+              `Nhập lý do cấm tuyến ${line.id}:`,
+              line.reason || "Bảo trì định kỳ",
+            );
+            if (reason === null) return;
+            line.blocked = true;
+            line.reason = reason.trim();
+            addHistory(
+              `Cấm tuyến ${line.id}`,
+              line.reason || "Không có ghi chú",
+            );
+            saveAdminState();
+            renderAll();
+          });
+          const openBtn = document.createElement("button");
+          openBtn.type = "button";
+          openBtn.className = "btn btn-primary";
+          openBtn.textContent = "Mở";
+          openBtn.addEventListener("click", () => {
+            line.blocked = false;
+            line.reason = "";
+            addHistory(
+              `Mở lại tuyến ${line.id}`,
+              "Tuyến đã hoạt động bình thường",
+            );
+            saveAdminState();
+            renderAll();
+          });
+          wrap.appendChild(banBtn);
+          wrap.appendChild(openBtn);
+          actionCell.appendChild(wrap);
+          tr.appendChild(nameCell);
+          tr.appendChild(statusCell);
+          tr.appendChild(reasonCell);
+          tr.appendChild(actionCell);
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderStationSelect() {
+        if (!adminOperationsState) return;
+        const select = document.getElementById("stationSelect");
+        if (!select) return;
+        select.innerHTML = "";
+        adminOperationsState.stations.forEach((station) => {
+          const option = document.createElement("option");
+          option.value = station.id;
+          option.textContent = station.closed
+            ? `${station.name} (tạm đóng)`
+            : station.name;
+          select.appendChild(option);
+        });
+        updateStationStatusMessage();
+      }
+
+      function updateStationStatusMessage() {
+        if (!adminOperationsState) return;
+        const select = document.getElementById("stationSelect");
+        const msg = document.getElementById("stationStatus");
+        if (!select || !msg) return;
+        const station =
+          adminOperationsState.stations.find((st) => st.id === select.value) ||
+          adminOperationsState.stations[0];
+        if (!station) {
+          msg.textContent = "Không có dữ liệu ga.";
+          return;
+        }
+        msg.textContent = station.closed
+          ? `Ga đang tạm đóng. Lý do: ${station.reason || "Không rõ"}`
+          : "Ga đang mở bình thường.";
+      }
+
+      function setStationStatus(closed) {
+        if (!adminOperationsState) return;
+        const select = document.getElementById("stationSelect");
+        const reasonInput = document.getElementById("stationReason");
+        if (!select || !reasonInput) return;
+        const station = adminOperationsState.stations.find(
+          (st) => st.id === select.value,
+        );
+        if (!station) return;
+        if (closed) {
+          const reason =
+            reasonInput.value.trim() || "Tạm đóng để xử lý vận hành";
+          station.closed = true;
+          station.reason = reason;
+          addHistory(`Đóng ga ${station.name}`, reason);
+        } else {
+          station.closed = false;
+          station.reason = "";
+          addHistory(`Mở lại ga ${station.name}`, "Ga hoạt động trở lại");
+        }
+        reasonInput.value = "";
+        saveAdminState();
+        renderAll();
+      }
+
+      function renderNoticeLineOptions() {
+        if (!adminOperationsState) return;
+        const lineSelect = document.getElementById("noticeLine");
+        if (!lineSelect) return;
+        const current = lineSelect.value;
+        lineSelect.innerHTML = "";
+        const allOption = document.createElement("option");
+        allOption.value = "ALL";
+        allOption.textContent = "Toàn mạng";
+        lineSelect.appendChild(allOption);
+        adminOperationsState.lines.forEach((line) => {
+          const option = document.createElement("option");
+          option.value = line.id;
+          option.textContent = line.id;
+          lineSelect.appendChild(option);
+        });
+        lineSelect.value = current || "ALL";
+      }
+
+      function createNotice() {
+        if (!adminOperationsState) return;
+        const levelEl = document.getElementById("noticeLevel");
+        const lineEl = document.getElementById("noticeLine");
+        const titleEl = document.getElementById("noticeTitle");
+        const bodyEl = document.getElementById("noticeBody");
+        if (!levelEl || !lineEl || !titleEl || !bodyEl) return;
+        const level = levelEl.value;
+        const line = lineEl.value;
+        const title = titleEl.value.trim();
+        const body = bodyEl.value.trim();
+        if (!title || !body) {
+          window.alert("Vui lòng nhập đầy đủ tiêu đề và nội dung thông báo.");
+          return;
+        }
+        const notice = {
+          id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+          level,
+          line,
+          title,
+          body,
+          createdAt: new Date().toISOString(),
+        };
+        adminOperationsState.notices.unshift(notice);
+        addHistory(
+          "Tạo thông báo",
+          `${title} (${line === "ALL" ? "Toàn mạng" : line})`,
+        );
+        saveAdminState();
+        titleEl.value = "";
+        bodyEl.value = "";
+        renderAll();
+      }
+
+      function renderNotices() {
+        if (!adminOperationsState) return;
+        const list = document.getElementById("noticeList");
+        if (!list) return;
+        list.innerHTML = "";
+        if (adminOperationsState.notices.length === 0) {
+          const li = document.createElement("li");
+          li.className = "notice-item";
+          li.innerHTML = "<p>Chưa có thông báo nào.</p>";
+          list.appendChild(li);
+          return;
+        }
+        adminOperationsState.notices.forEach((notice) => {
+          const li = document.createElement("li");
+          li.className = `notice-item alert-${notice.level}`;
+          li.innerHTML = `
+            <h4>${escapeHtml(notice.title)}</h4>
+            <p>${escapeHtml(notice.body)}</p>
+            <div class="meta">${formatLineLabel(notice.line)} | ${formatTime(notice.createdAt)}</div>
+          `;
+          list.appendChild(li);
+        });
+      }
+
+      function renderHistory() {
+        if (!adminOperationsState) return;
+        const list = document.getElementById("historyList");
+        if (!list) return;
+        list.innerHTML = "";
+        if (adminOperationsState.history.length === 0) {
+          selectedHistoryIds.clear();
+          const li = document.createElement("li");
+          li.className = "history-item";
+          li.innerHTML = "<p>Chưa có thao tác nào.</p>";
+          list.appendChild(li);
+          return;
+        }
+        const activeIds = new Set(
+          adminOperationsState.history.map((item) => item.id),
+        );
+        Array.from(selectedHistoryIds).forEach((id) => {
+          if (!activeIds.has(id)) selectedHistoryIds.delete(id);
+        });
+        adminOperationsState.history.forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "history-item";
+          const checked = selectedHistoryIds.has(item.id) ? "checked" : "";
+          li.innerHTML = `
+            <div class="history-row">
+              <input class="history-check" type="checkbox" data-history-id="${item.id}" ${checked} />
+              <div class="history-content">
+                <strong>${escapeHtml(item.action)}</strong>
+                <p>${escapeHtml(item.note)}</p>
+                <div class="meta">${formatTime(item.at)}</div>
+              </div>
+            </div>
+          `;
+          const checkbox = li.querySelector(".history-check");
+          if (checkbox) {
+            checkbox.addEventListener("change", (event) => {
+              const id = event.target.getAttribute("data-history-id");
+              if (!id) return;
+              if (event.target.checked) {
+                selectedHistoryIds.add(id);
+              } else {
+                selectedHistoryIds.delete(id);
+              }
+            });
+          }
+          list.appendChild(li);
+        });
+      }
+
+      function addHistory(action, note) {
+        if (!adminOperationsState) return;
+        adminOperationsState.history.unshift({
+          id: createHistoryId(),
+          action,
+          note,
+          at: new Date().toISOString(),
+        });
+        if (adminOperationsState.history.length > 120)
+          adminOperationsState.history.length = 120;
+      }
+
+      function updateLastAction() {
+        if (!adminOperationsState) return;
+        const el = document.getElementById("lastUpdate");
+        if (!el) return;
+        if (!adminOperationsState.history.length) {
+          el.textContent = "Chưa có thao tác gần đây.";
+          return;
+        }
+        const last = adminOperationsState.history[0];
+        el.textContent = `Lần cuối: ${last.action} (${formatTime(last.at)})`;
+      }
+
+      function exportConfig() {
+        if (!adminOperationsState) return;
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          lines: adminOperationsState.lines,
+          stations: adminOperationsState.stations,
+          notices: adminOperationsState.notices,
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "metro-admin-config.json";
+        anchor.click();
+        URL.revokeObjectURL(url);
+        addHistory("Xuất cấu hình", "Đã tải file metro-admin-config.json");
+        saveAdminState();
+        renderAll();
+      }
+
+      function resetState() {
+        if (!adminOperationsState) return;
+        const ok = window.confirm(
+          "Bạn chắc chắn muốn khôi phục trạng thái mặc định?",
+        );
+        if (!ok) return;
+        const fresh = JSON.parse(JSON.stringify(defaultAdminState));
+        adminOperationsState.lines = fresh.lines;
+        adminOperationsState.stations = fresh.stations;
+        adminOperationsState.notices = fresh.notices;
+        adminOperationsState.history = fresh.history;
+        localStorage.removeItem(STORAGE_KEY);
+        hydrateStationData().finally(() => {
+          addHistory("Khôi phục mặc định", "Dữ liệu admin đã được reset");
+          saveAdminState();
+          renderAll();
+        });
+      }
+
+      function clearHistory() {
+        if (!adminOperationsState) return;
+        if (!adminOperationsState.history.length) {
+          window.alert("Lịch sử hiện đang trống.");
+          return;
+        }
+        const ok = window.confirm(
+          "Bạn có chắc chắn muốn xóa toàn bộ lịch sử thao tác admin?",
+        );
+        if (!ok) return;
+        adminOperationsState.history = [];
+        selectedHistoryIds.clear();
+        saveAdminState();
+        renderAll();
+      }
+
+      function getLocalDateKey(iso) {
+        const date = new Date(iso);
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        const d = String(date.getDate()).padStart(2, "0");
+        return `${y}-${m}-${d}`;
+      }
+
+      function deleteHistoryByDate() {
+        if (!adminOperationsState) return;
+        const input = document.getElementById("historyDate");
+        if (!input || !input.value) {
+          window.alert("Vui lòng chọn ngày cần xóa.");
+          return;
+        }
+        const selectedDate = input.value;
+        const before = adminOperationsState.history.length;
+        adminOperationsState.history = adminOperationsState.history.filter(
+          (item) => getLocalDateKey(item.at) !== selectedDate,
+        );
+        const removed = before - adminOperationsState.history.length;
+        if (removed <= 0) {
+          window.alert("Không có lịch sử nào trong ngày đã chọn.");
+          return;
+        }
+        selectedHistoryIds.clear();
+        saveAdminState();
+        renderAll();
+        window.alert(
+          `Đã xóa ${removed} mục lịch sử trong ngày ${selectedDate}.`,
+        );
+      }
+
+      function deleteSelectedHistory() {
+        if (!adminOperationsState) return;
+        if (!selectedHistoryIds.size) {
+          window.alert("Vui lòng tích chọn ít nhất 1 mục lịch sử để xóa.");
+          return;
+        }
+        const selectedIds = new Set(selectedHistoryIds);
+        const before = adminOperationsState.history.length;
+        adminOperationsState.history = adminOperationsState.history.filter(
+          (item) => !selectedIds.has(item.id),
+        );
+        const removed = before - adminOperationsState.history.length;
+        selectedHistoryIds.clear();
+        saveAdminState();
+        renderAll();
+        window.alert(`Đã xóa ${removed} mục lịch sử đã chọn.`);
+      }
+
+      function formatLineLabel(line) {
+        return line === "ALL" ? "Toàn mạng" : line;
+      }
+
+      function formatTime(iso) {
+        return new Date(iso).toLocaleString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function escapeHtmlString(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function getSafeValue(value, fallback = "") {
+        return value === undefined || value === null || value === ""
+          ? fallback
+          : escapeHtmlString(value);
+      }
+
+      document.addEventListener("DOMContentLoaded", async function () {
+        showSection("overview");
+        await verifyAdminSession();
+      });
+    </script>
+  </body>
 </html>

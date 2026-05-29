@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munich - Tìm đường tàu điện ngầm</title>
+
+    <!-- Import CSS của Leaflet (thư viện bản đồ) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Import CSS của ứng dụng -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/marker-animations.css">
+    <link rel="stylesheet" href="../css/user-history.css">
+</head>
+
+<body>
+    <a id="authLink" href="login.html" class="admin-mode-btn">Đăng nhập</a>
+    <!--
+    Layout tổng của ứng dụng:
+    - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, lịch sử tìm kiếm.
+    - Map area: bản đồ Leaflet và thanh chuyển lớp nền.
+    -->
+    <div class="app-shell">
+
+        <!-- =========================
+         SIDEBAR (ĐIỀU KHIỂN)
+         =========================
+     -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <strong>München</strong>
+                    <span>Tàu điện ngầm</span>
+                </div>
+                <div class="user-badge" id="userBadge">
+                    <span class="user-avatar" id="userAvatar">👤</span>
+                    <span class="user-name" id="userName">Người dùng</span>
+                </div>
+            </div>
+            <!--tabs điều hướng-->
+            <div class="sidebar-tabs">
+                <button class="tab active" data-tab="map">Bản đồ</button>
+                <button class="tab" data-tab="history">Lịch sử</button>
+                <button class="tab" data-tab="diagram">Sơ đồ</button>
+                <button class="tab" data-tab="info">Thông tin</button>
+            </div>
+
+            <!-- =========================
+             TAB: BẢN ĐỒ - TÌM ĐƯỜNG
+             ========================= -->
+            <div class="tab-content active" id="tabMap">
+                <!-- KHỐI NHẬP DỮ LIỆU TÌM ĐƯỜNG -->
+                <div class="search-card">
+                    <div class="input-row">
+                        <label for="fromStation">Từ</label>
+                        <!-- Input có icon -->
+                        <div class="input-with-icon">
+                            <span class="icon">⇨</span>
+                            <input id="fromStation" list="stations" placeholder="Ga đi" autocomplete="off">
+                        </div>
+                        <!--chọn ga trực tiếp trên bản đồ-->
+                        <button id="selectFromBtn" class="select-btn">Chọn trên bản đồ</button>
+                    </div>
+                    <!-- Nhập ga đến -->
+                    <div class="input-row">
+                        <label for="toStation">Đến</label>
+                        <div class="input-with-icon">
+                            <span class="icon">⌖</span>
+                            <input id="toStation" list="stations" placeholder="Ga đến" autocomplete="off">
+                        </div>
+                        <button id="selectToBtn" class="select-btn">Chọn trên bản đồ</button>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+                        <button id="findRouteBtn" class="primary-btn">Tìm đường</button>
+                        <button id="swapBtn" class="secondary-btn">Hoán đổi</button>
+                        <button id="resetRoutesBtn" class="secondary-btn">Xóa kết quả</button>
+                    </div>
+                </div>
+
+                <!-- KẾT QUẢ LỘ TRÌNH -->
+                <div id="result" class="result-card">
+                    <h3>Kết quả lộ trình</h3>
+                    <p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>
+                </div>
+
+                <!-- IMPORT DATA (GTFS / FILE) -->
+                <div class="data-card">
+                    <h3>Nhập dữ liệu</h3>
+                    <div class="file-row">
+                        <label for="stopsFile">Stops (stops.txt)</label>
+                        <input id="stopsFile" type="file" accept=".txt,.csv,.json">
+                    </div>
+                    <!-- File stop_times -->
+                    <div class="file-row">
+                        <label for="stopTimesFile">Stop times (stop_times.txt)</label>
+                        <input id="stopTimesFile" type="file" accept=".txt,.csv">
+                    </div>
+                    <button id="loadDataBtn" class="secondary-btn">Tải dữ liệu và vẽ ga</button>
+                    <p class="hint">Chỉ cần chọn file stops.txt, hệ thống sẽ tạo marker ga trên bản đồ.</p>
+                </div>
+            </div>
+
+            <!-- =========================
+             TAB: LỊCH SỬ TÌM KIẾM
+             ========================= -->
+            <div class="tab-content" id="tabHistory">
+                <div class="history-card">
+                    <div class="history-header">
+                        <h3>📋 Lịch sử tìm đường</h3>
+                        <button id="clearHistoryBtn" class="clear-history-btn" title="Xóa toàn bộ lịch sử">🗑️ Xóa tất cả</button>
+                    </div>
+                    <div class="history-stats" id="historyStats"></div>
+                    <div id="historyList" class="history-list"></div>
+                </div>
+            </div>
+
+            <!-- =========================
+             TAB: SƠ ĐỒ
+             ========================= -->
+            <div class="tab-content" id="tabDiagram">
+                <div class="info-card">
+                    <h3>🗺️ Sơ đồ mạng lưới</h3>
+                    <p>Xem sơ đồ toàn bộ mạng lưới tàu điện ngầm Munich với các tuyến U-Bahn và S-Bahn.</p>
+                    <a href="diagram.html" class="primary-btn" style="display:block;text-align:center;text-decoration:none;margin-top:12px;">Mở sơ đồ mạng lưới →</a>
+                </div>
+            </div>
+
+            <!-- =========================
+             TAB: THÔNG TIN
+             ========================= -->
+            <div class="tab-content" id="tabInfo">
+                <div class="info-card">
+                    <h3>ℹ️ Thông tin ứng dụng</h3>
+                    <p>Ứng dụng tìm đường tàu điện ngầm Munich (München).</p>
+                    <ul>
+                        <li>Chọn ga đi và ga đến để tìm lộ trình tối ưu</li>
+                        <li>Click trên bản đồ để chọn điểm bất kỳ</li>
+                        <li>Lịch sử tìm kiếm được lưu tự động cho tài khoản của bạn</li>
+                        <li>Hỗ trợ nhiều tuyến: U-Bahn và S-Bahn</li>
+                    </ul>
+                    <div class="user-info-section" id="userInfoSection">
+                        <h4>Tài khoản</h4>
+                        <p id="userInfoDetail">Đang tải...</p>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+        <!-- =========================
+         MAP AREA
+         ========================= -->
+
+        <main class="map-area">
+            <div class="map-toolbar">
+                <div class="map-title">Bản đồ</div>
+                <div class="map-switch">
+                    <button class="active">Bản đồ</button>
+                    <button>Vệ tinh</button>
+                </div>
+            </div>
+            <div id="map"></div>
+        </main>
+    </div>
+    <datalist id="stations"></datalist>
+    <!-- =========================
+     SCRIPT
+     ========================= -->
+
+    <!-- Leaflet: thư viện hiển thị bản đồ tương tác. -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../js/auth_link.js"></script>
+    <!-- user history hook must be loaded before main script so it can wrap findRoute -->
+    <script src="../js/user_history.js"></script>
+    <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

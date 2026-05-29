@@ -33,16 +33,10 @@
 
         <!-- Form -->
         <form id="loginForm">
-            <!-- Username -->
-            <div class="form-group">
-                <label for="username">Tên người dùng</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tên người dùng" required />
-            </div>
-
-            <!-- Email (Optional for user, hidden for admin) -->
+            <!-- Identifier: Tên người dùng hoặc Email (single field) -->
             <div class="form-group" id="emailGroup">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required />
+                <label for="identifier">Tên người dùng / Email</label>
+                <input type="text" id="identifier" name="identifier" placeholder="Tên người dùng hoặc email" required />
             </div>
 
             <!-- Password -->

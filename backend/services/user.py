@@ -12,7 +12,7 @@ SQL_CREATE_USERS = """
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
-    email TEXT NOT NULL UNIQUE,
+    email TEXT UNIQUE,
     password_hash TEXT NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
@@ -88,7 +88,7 @@ def _ensure_default_admin():
     )
 
 
-def create_user(username: str, email: str, password_hash: str, first_name: str, last_name: str, phone: str = '', role: str = 'user') -> int:
+def create_user(username: str, email: str | None, password_hash: str, first_name: str, last_name: str, phone: str = '', role: str = 'user') -> int:
     conn = get_db_connection()
     cursor = conn.cursor()
     created_at = datetime.utcnow().isoformat()

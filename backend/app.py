@@ -1,12 +1,28 @@
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, session, jsonify, send_from_directory
 from functools import wraps
 from flask_cors import CORS
 from api.routes import api_blueprint
+# quản lý người dùng, bao gồm khởi tạo cơ sở dữ liệu, tạo người dùng mới, hash mật khẩu, xác nhận mật khẩu
+#lấy thông tin người dùng theo usename và ghi lại lịch sử đăng nhập
+from services.user import (
+    init_db,
+    create_user,
+    hash_password,
+    verify_password,
+    get_user_by_username,
+    get_user_by_email,
+    list_users,
+    record_login_attempt,
+    get_login_history,
+    get_user_login_history,
+)
 import json
 import os
+import sqlite3
 
 # khởi tạo Flask
-app = Flask(__name__)
+frontend_folder = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+app = Flask(__name__, static_folder=frontend_folder, static_url_path='')
 app.secret_key = "secret123"  # key bí mật cho session
 
 # Enable CORS for all routes
@@ -20,17 +36,46 @@ app.secret_key = "secret123"  # key bí mật cho session
 # })
 CORS(app, supports_credentials=True, resources={
     r"/api/*": {
-        "origins": "http://127.0.0.1:5500"
+        "origins": [
+            "http://127.0.0.1:5500",
+            "http://localhost:5500",
+            "http://127.0.0.1:5000",
+            "http://localhost:5000"
+        ]
     }
 })
 # cấu hình session cookie để frontend có thể nhận diện được session từ backend
 app.config.update(
-    SESSION_COOKIE_SAMESITE="None",
-    SESSION_COOKIE_SECURE=False  # vì đang dùng http
+    # Use Lax so cookies are accepted for same-site navigations during development
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=False  # vì đang dùng http (not secure)
 )
 
 # đăng ký API
 app.register_blueprint(api_blueprint, url_prefix="/api")
+
+@app.route('/admin.html')
+def admin_html():
+    return send_from_directory(frontend_folder, 'html/admin.html')
+
+@app.route('/login.html')
+def login_html():
+    return send_from_directory(frontend_folder, 'html/login.html')
+
+@app.route('/user.html')
+def user_html():
+    return send_from_directory(frontend_folder, 'html/user.html')
+
+@app.route('/', defaults={'path': 'html/login.html'})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    if path.startswith('api/'):
+        return jsonify({"error": "Not found"}), 404
+    return send_from_directory(frontend_folder, path)
+
+# chuẩn bị cơ sở dữ liệu người dùng
+init_db()
+
 # load admin data
 def load_admins():
     path = os.path.join(os.path.dirname(__file__), '..', 'data', 'admin.json')
@@ -38,20 +83,75 @@ def load_admins():
 
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)['admins']
+# thêm route ngày 24/5
+@app.route('/api/auth/signup', methods=['POST'])
+def signup():
+    data = request.json or {}
+    username = (data.get('username') or '').strip()
+    password = data.get('password') or ''
+    first_name = (data.get('first_name') or '').strip()
+    last_name = (data.get('last_name') or '').strip()
+    email = data.get('email')
+    phone = data.get('phone')
+
+    if not first_name or not last_name:
+        return jsonify({"error": "Vui lòng nhập họ và tên"}), 400
+    if not username or len(username) < 3:
+        return jsonify({"error": "Tên người dùng phải có ít nhất 3 ký tự"}), 400
+    if not password or len(password) < 6:
+        return jsonify({"error": "Mật khẩu phải có ít nhất 6 ký tự"}), 400
+    if get_user_by_username(username):
+        return jsonify({"error": "Tên người dùng đã tồn tại"}), 400
+    if email:
+        if get_user_by_email(email):
+            return jsonify({"error": "Email đã tồn tại"}), 400
+
+    password_hash = hash_password(password)
+    try:
+        create_user(username=username, email=email, password_hash=password_hash,
+                    first_name=first_name, last_name=last_name, phone=phone or '')
+    except sqlite3.IntegrityError:
+        return jsonify({"error": "Không thể tạo tài khoản, vui lòng thử lại"}), 500
+
+    return jsonify({"success": True, "message": "Đăng ký thành công"})
+
 
 # api login
-#đọc admin.json check username và password, set session
+# đọc admin.json check username và password, set session
 @app.route('/api/login', methods=['POST'])
 def login():
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
-    
+    data = request.json or {}
+    username = (data.get('username') or '').strip()
+    password = data.get('password') or ''
+    email = (data.get('email') or '').strip()
+    role = data.get('role', 'user')
+
+    if role != 'admin':
+        # Validate normal user credentials from the database
+        user = None
+        if username:
+            user = get_user_by_username(username)
+        if not user and email:
+            user = get_user_by_email(email)
+
+        if not user or not verify_password(user['password_hash'], password):
+            record_login_attempt(username or email, request.remote_addr, request.headers.get('User-Agent'), success=False)
+            return jsonify({"success": False, "error": "Tên người dùng hoặc mật khẩu không đúng"}), 401
+
+        session['is_admin'] = False
+        session['username'] = user['username']
+        record_login_attempt(user['username'], request.remote_addr, request.headers.get('User-Agent'), success=True)
+        return jsonify({
+            "success": True,
+            "redirect": "/user.html"
+        })
+
     admins = load_admins()
     for admin in admins:
         if admin['username'] == username and admin['password'] == password:
             session['is_admin'] = True
             session['username'] = username
+            record_login_attempt(username, request.remote_addr, request.headers.get('User-Agent'), success=True)
 
             return jsonify({
                 "success": True,
@@ -85,6 +185,21 @@ def admin_required(f):
             return jsonify({"error": "Unauthorized"}), 403
         return f(*args, **kwargs)
     return wrapper
+
+@app.route('/api/auth/users', methods=['GET'])
+@admin_required
+def auth_users():
+    return jsonify({"users": list_users()})
+
+@app.route('/api/auth/login-history', methods=['GET'])
+@admin_required
+def auth_login_history():
+    return jsonify({"history": get_login_history()})
+
+@app.route('/api/auth/user-history/<username>', methods=['GET'])
+@admin_required
+def auth_user_history(username):
+    return jsonify({"history": get_user_login_history(username)})
 
 @app.route("/")
 def home():
