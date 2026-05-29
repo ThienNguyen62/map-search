@@ -120,6 +120,43 @@ def get_user_by_email(email: str):
     return dict(row) if row else None
 
 
+def get_user_by_id(user_id: int):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, username, email, first_name, last_name, phone, role, created_at FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+
+def update_user_full_name(user_id: int, first_name: str, last_name: str) -> bool:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?",
+        (first_name, last_name, user_id),
+    )
+    conn.commit()
+    updated = cursor.rowcount > 0
+    conn.close()
+    return updated
+
+
+def delete_user(user_id: int) -> bool:
+    user = get_user_by_id(user_id)
+    if not user:
+        return False
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM login_history WHERE username = ?", (user['username'],))
+    cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+    conn.commit()
+    deleted = cursor.rowcount > 0
+    conn.close()
+    return deleted
+
+
 def list_users():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -127,6 +164,49 @@ def list_users():
     rows = cursor.fetchall()
     conn.close()
     return [dict(row) for row in rows]
+
+
+def search_users(username: str = '', full_name: str = '', role: str = '', from_date: str = None, to_date: str = None):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = """
+        SELECT id, username, email, first_name, last_name, phone, role, created_at
+        FROM users
+        WHERE 1=1
+    """
+    params = []
+
+    if username:
+        query += " AND username LIKE ?"
+        params.append(f"%{username}%")
+
+    if full_name:
+        query += " AND (first_name || ' ' || last_name) LIKE ?"
+        params.append(f"%{full_name}%")
+
+    if role:
+        query += " AND role = ?"
+        params.append(role)
+
+    # from_date / to_date reserved for future use on created_at
+    query += " ORDER BY id DESC"
+    cursor.execute(query, params)
+    rows = cursor.fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+def create_user_admin(username: str, first_name: str, last_name: str, role: str = 'user', password: str | None = None) -> int:
+    password_hash = hash_password(password or 'User@123')
+    return create_user(
+        username=username,
+        email=None,
+        password_hash=password_hash,
+        first_name=first_name,
+        last_name=last_name,
+        phone='',
+        role=role,
+    )
 
 
 def record_login_attempt(username: str, ip_address: str = None, user_agent: str = None, success: bool = True):

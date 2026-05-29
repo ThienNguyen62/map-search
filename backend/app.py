@@ -11,7 +11,12 @@ from services.user import (
     verify_password,
     get_user_by_username,
     get_user_by_email,
+    get_user_by_id,
+    update_user_full_name,
+    delete_user,
     list_users,
+    search_users,
+    create_user_admin,
     record_login_attempt,
     get_login_history,
     get_user_login_history,
@@ -186,10 +191,103 @@ def admin_required(f):
         return f(*args, **kwargs)
     return wrapper
 
-@app.route('/api/auth/users', methods=['GET'])
+@app.route('/api/auth/users', methods=['GET', 'POST'])
 @admin_required
 def auth_users():
-    return jsonify({"users": list_users()})
+    if request.method == 'GET':
+        return jsonify({"users": list_users()})
+
+    data = request.json or {}
+    username = (data.get('username') or '').strip()
+    first_name = (data.get('first_name') or '').strip()
+    last_name = (data.get('last_name') or '').strip()
+    role = (data.get('role') or 'user').strip()
+
+    if not username or len(username) < 3:
+        return jsonify({"error": "Tên người dùng phải có ít nhất 3 ký tự"}), 400
+    if not first_name:
+        return jsonify({"error": "Vui lòng nhập họ"}), 400
+    if not last_name:
+        return jsonify({"error": "Vui lòng nhập tên"}), 400
+    if role not in ('user', 'admin'):
+        return jsonify({"error": "Vai trò không hợp lệ"}), 400
+    if get_user_by_username(username):
+        return jsonify({"error": "Tên người dùng đã tồn tại"}), 400
+
+    try:
+        user_id = create_user_admin(username, first_name, last_name, role)
+    except sqlite3.IntegrityError:
+        return jsonify({"error": "Không thể tạo tài khoản, vui lòng thử lại"}), 500
+
+    user = get_user_by_id(user_id)
+    return jsonify({
+        "success": True,
+        "message": "Thêm tài khoản thành công. Mật khẩu mặc định: User@123",
+        "user": user,
+    }), 201
+
+
+@app.route('/api/auth/users/search', methods=['POST'])
+@admin_required
+def auth_search_users():
+    data = request.json or {}
+    users = search_users(
+        username=(data.get('username') or '').strip(),
+        full_name=(data.get('full_name') or '').strip(),
+        role=(data.get('role') or '').strip(),
+        from_date=(data.get('from_date') or '').strip() or None,
+        to_date=(data.get('to_date') or '').strip() or None,
+    )
+    return jsonify({"users": users})
+
+
+@app.route('/api/auth/users/<int:user_id>', methods=['PUT'])
+@admin_required
+def auth_update_user(user_id):
+    data = request.json or {}
+    full_name = (data.get('full_name') or '').strip()
+
+    if not full_name:
+        return jsonify({"error": "Họ tên không được để trống"}), 400
+    if len(full_name) < 2:
+        return jsonify({"error": "Họ tên phải có ít nhất 2 ký tự"}), 400
+
+    user = get_user_by_id(user_id)
+    if not user:
+        return jsonify({"error": "Không tìm thấy người dùng"}), 404
+
+    parts = full_name.split(None, 1)
+    first_name = parts[0]
+    last_name = parts[1] if len(parts) > 1 else ''
+
+    if not update_user_full_name(user_id, first_name, last_name):
+        return jsonify({"error": "Không thể cập nhật người dùng"}), 500
+
+    updated = get_user_by_id(user_id)
+    return jsonify({
+        "success": True,
+        "message": "Cập nhật người dùng thành công",
+        "user": updated,
+    })
+
+
+@app.route('/api/auth/users/<int:user_id>', methods=['DELETE'])
+@admin_required
+def auth_delete_user(user_id):
+    user = get_user_by_id(user_id)
+    if not user:
+        return jsonify({"error": "Không tìm thấy người dùng"}), 404
+    if user.get('role') == 'admin' or user.get('username') == 'admin':
+        return jsonify({"error": "Không thể xóa tài khoản admin"}), 400
+
+    if not delete_user(user_id):
+        return jsonify({"error": "Không thể xóa người dùng"}), 500
+
+    return jsonify({
+        "success": True,
+        "message": "Xóa người dùng thành công",
+    })
+
 
 @app.route('/api/auth/login-history', methods=['GET'])
 @admin_required

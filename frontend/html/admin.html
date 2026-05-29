@@ -42,15 +42,25 @@
           ),
           var(--bg);
         color: var(--text);
+        overflow-x: hidden;
+      }
+
+      html {
+        overflow-x: hidden;
       }
 
       .admin-layout {
         display: flex;
         min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
       }
 
       .sidebar {
         width: 280px;
+        min-width: 280px;
+        flex-shrink: 0;
         background: #111827;
         color: #f8fafc;
         display: flex;
@@ -118,6 +128,8 @@
 
       .main-content {
         flex: 1;
+        min-width: 0;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
       }
@@ -145,6 +157,11 @@
       .content-area {
         padding: 30px;
         background: transparent;
+        flex: 1;
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
       .stats-grid {
@@ -161,6 +178,12 @@
         background: white;
         border-radius: 20px;
         box-shadow: var(--shadow);
+      }
+
+      .users-section {
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       .stat-card,
@@ -528,6 +551,338 @@
         background: #f8fafc;
       }
 
+      /* ── Quản lý người dùng: bảng & modal ── */
+      .table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        background: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .users-mgmt-table {
+        min-width: 1600px;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #d9d9d9;
+        font-size: 0.94rem;
+        table-layout: auto;
+      }
+
+      .users-mgmt-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #bfefff;
+        font-weight: 700;
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #d9d9d9;
+        padding: 12px 14px;
+        white-space: nowrap;
+      }
+
+      .users-mgmt-table tbody td {
+        border: 1px solid #d9d9d9;
+        padding: 10px 14px;
+        white-space: nowrap;
+        vertical-align: middle;
+        background: #fff;
+      }
+
+      .users-mgmt-table tbody tr:hover td {
+        background: #f8fafc;
+      }
+
+      .login-history-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        background: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .login-history-table {
+        min-width: 900px;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #d9d9d9;
+        font-size: 0.94rem;
+      }
+
+      .login-history-table thead th {
+        background: #bfefff;
+        font-weight: 700;
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #d9d9d9;
+        padding: 12px 14px;
+        white-space: nowrap;
+      }
+
+      .login-history-table tbody td {
+        border: 1px solid #d9d9d9;
+        padding: 10px 14px;
+        white-space: nowrap;
+        vertical-align: middle;
+        background: #fff;
+      }
+
+      .login-history-table tbody tr:hover td {
+        background: #f8fafc;
+      }
+
+      .accounts-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 12px;
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .accounts-title {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .accounts-toolbar-actions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      .user-mgmt-field {
+        margin-bottom: 14px;
+      }
+
+      .user-mgmt-field:last-child {
+        margin-bottom: 0;
+      }
+
+      .user-mgmt-modal.wide {
+        max-width: 520px;
+      }
+
+      .user-mgmt-modal-body select {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        color: #0f172a;
+        box-sizing: border-box;
+        background: #fff;
+      }
+
+      .user-mgmt-date-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .user-mgmt-hint {
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: #94a3b8;
+      }
+
+      .user-action-cell {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+      }
+
+      .btn-user-edit,
+      .btn-user-delete {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 7px 12px;
+        font-weight: 600;
+        font-size: 0.88rem;
+        cursor: pointer;
+        background: #f8fafc;
+        color: #1f2937;
+        transition:
+          transform 0.16s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .btn-user-edit:hover {
+        background: #e0f2fe;
+        border-color: #7dd3fc;
+        transform: translateY(-1px);
+      }
+
+      .btn-user-delete:hover {
+        background: #fee2e2;
+        border-color: #fca5a5;
+        color: #b91c1c;
+        transform: translateY(-1px);
+      }
+
+      .user-mgmt-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1100;
+        animation: userModalFadeIn 0.25s ease;
+      }
+
+      .user-mgmt-modal-overlay.show {
+        display: flex;
+      }
+
+      .user-mgmt-modal {
+        background: #fff;
+        border-radius: 12px;
+        width: 92%;
+        max-width: 460px;
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.22);
+        animation: userModalScaleIn 0.25s ease;
+        overflow: hidden;
+      }
+
+      @keyframes userModalFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes userModalScaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .user-mgmt-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f8fafc;
+      }
+
+      .user-mgmt-modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .user-mgmt-modal-close {
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 0 4px;
+      }
+
+      .user-mgmt-modal-close:hover {
+        color: #111827;
+      }
+
+      .user-mgmt-modal-body {
+        padding: 22px;
+      }
+
+      .user-mgmt-modal-body label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #475569;
+      }
+
+      .user-mgmt-modal-body input {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        color: #0f172a;
+        box-sizing: border-box;
+      }
+
+      .user-mgmt-modal-body p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+      }
+
+      .user-mgmt-modal-error {
+        margin-top: 10px;
+        color: #b91c1c;
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .user-mgmt-modal-error.show {
+        display: block;
+      }
+
+      .user-mgmt-modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 0 22px 22px;
+      }
+
+      .user-mgmt-toast {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 1200;
+        min-width: 260px;
+        max-width: 420px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+        font-weight: 600;
+        animation: userModalFadeIn 0.25s ease;
+      }
+
+      .user-mgmt-toast.success {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+      }
+
+      .user-mgmt-toast.error {
+        background: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fca5a5;
+      }
+
+      .status.danger {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
       .loading,
       .error-message {
         display: none;
@@ -558,6 +913,8 @@
 
         .sidebar {
           width: 100%;
+          min-width: 0;
+          flex-shrink: 0;
           position: relative;
         }
 
@@ -1089,6 +1446,8 @@
           loading.style.display = "none";
           adminUserCache.users = usersData.users;
           adminUserCache.loginHistory = historyData.history;
+          adminUserCache.userActivity = buildUserActivityMap(historyData.history);
+          adminUserCache.displayedUsers = usersData.users;
           renderUsersSection(usersData.users, historyData.history);
         } catch (err) {
           loading.style.display = "none";
@@ -1097,9 +1456,7 @@
         }
       }
 
-      function renderUsersSection(users, loginHistory) {
-        const content = document.getElementById("usersContent");
-        if (!content) return;
+      function buildUserActivityMap(loginHistory) {
         const userActivity = {};
         loginHistory.forEach((entry) => {
           if (!userActivity[entry.username]) {
@@ -1107,6 +1464,65 @@
           }
           userActivity[entry.username].push(entry);
         });
+        Object.keys(userActivity).forEach((username) => {
+          userActivity[username].sort(
+            (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
+          );
+        });
+        return userActivity;
+      }
+
+      function buildUserTableRowsHtml(users, userActivity) {
+        if (!users.length) {
+          return `
+            <tr>
+              <td colspan="11" style="text-align:center; padding:18px; color:#475569;">Không có tài khoản nào.</td>
+            </tr>
+          `;
+        }
+
+        return users
+          .map((user) => {
+            const userLogins = userActivity[user.username] || [];
+            const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
+            const totalLoginsForUser = userLogins.length;
+            const fullName = `${user.first_name || ""} ${user.last_name || ""}`.trim();
+            return `
+              <tr>
+                <td>${user.id}</td>
+                <td>${getSafeValue(user.username)}</td>
+                <td>${getSafeValue(user.email)}</td>
+                <td>${getSafeValue(fullName)}</td>
+                <td>${getSafeValue(user.phone, "-")}</td>
+                <td><span class="status ${user.role}">${getSafeValue(user.role)}</span></td>
+                <td>${totalLoginsForUser}</td>
+                <td>${lastLogin ? new Date(lastLogin.timestamp).toLocaleString("vi-VN") : "Chưa đăng nhập"}</td>
+                <td>${new Date(user.created_at).toLocaleString("vi-VN")}</td>
+                <td><button class="btn btn-ghost" onclick="showUserHistory('${escapeHtmlString(user.username)}')">📋 Xem lịch sử</button></td>
+                <td>
+                  <div class="user-action-cell">
+                    <button type="button" class="btn-user-edit" onclick='openEditUserModal(${user.id}, ${JSON.stringify(fullName)})'>✏️ Sửa</button>
+                    <button type="button" class="btn-user-delete" onclick='openDeleteUserModal(${user.id}, ${JSON.stringify(user.username)})'>🗑️ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function refreshDisplayedUsersTable() {
+        const tbody = document.getElementById("usersTableBody");
+        if (!tbody) return;
+        const users = adminUserCache.displayedUsers || [];
+        const userActivity = adminUserCache.userActivity || {};
+        tbody.innerHTML = buildUserTableRowsHtml(users, userActivity);
+      }
+
+      function renderUsersSection(users, loginHistory) {
+        const content = document.getElementById("usersContent");
+        if (!content) return;
+        const userActivity = adminUserCache.userActivity || buildUserActivityMap(loginHistory);
 
         const sortedHistory = [...loginHistory].sort(
           (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
@@ -1115,34 +1531,13 @@
         const uniqueUsers = new Set(loginHistory.map((entry) => entry.username))
           .size;
         const totalLogins = loginHistory.length;
-        const successfulLogins = loginHistory.filter(
-          (entry) => entry.success !== false,
-        ).length;
-        const failedLogins = totalLogins - successfulLogins;
+        const failedLogins =
+          loginHistory.filter((entry) => entry.success === false).length;
 
-        const userRows = users
-          .map((user) => {
-            const userLogins = userActivity[user.username] || [];
-            const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
-            const totalLoginsForUser = userLogins.length;
-            return `
-              <tr>
-                <td>${user.id}</td>
-                <td>${getSafeValue(user.username)}</td>
-                <td>${getSafeValue(user.email)}</td>
-                <td>${getSafeValue(user.first_name)} ${getSafeValue(user.last_name)}</td>
-                <td>${getSafeValue(user.phone, "-")}</td>
-                <td><span class="status ${user.role}">${getSafeValue(user.role)}</span></td>
-                <td>${totalLoginsForUser}</td>
-                <td>${lastLogin ? new Date(lastLogin.timestamp).toLocaleString("vi-VN") : "Chưa đăng nhập"}</td>
-                <td>${new Date(user.created_at).toLocaleString("vi-VN")}</td>
-                <td><button class="btn btn-ghost" onclick="showUserHistory('${escapeHtmlString(user.username)}')">📋 Xem lịch sử</button></td>
-              </tr>
-            `;
-          })
-          .join("");
+        const allUsers = adminUserCache.users || users;
+        const userRows = buildUserTableRowsHtml(users, userActivity);
 
-        const userOptions = users
+        const userOptions = allUsers
           .map(
             (user) => `
             <option value="${escapeHtmlString(user.username)}">${escapeHtmlString(user.username)}</option>
@@ -1168,7 +1563,7 @@
           <section class="users-summary-grid" style="display:grid; gap:16px; margin-bottom:24px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
             <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
               <h4>Tổng người dùng</h4>
-              <p class="stat-number">${users.length}</p>
+              <p class="stat-number">${allUsers.length}</p>
             </div>
             <div class="stat-card" style="padding:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
               <h4>Tổng lượt đăng nhập</h4>
@@ -1211,8 +1606,8 @@
                 <p style="margin:4px 0 0; color:#64748b;">Hiển thị <span id="historyCount">${recentHistory.length}</span> mục.</p>
               </div>
             </div>
-            <div style="overflow-x:auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
-              <table class="users-table" style="width:100%; border-collapse:collapse;">
+            <div class="login-history-table-wrapper">
+              <table class="login-history-table">
                 <thead>
                   <tr>
                     <th>Người dùng</th>
@@ -1226,8 +1621,16 @@
               </table>
             </div>
           </section>
-          <div class="users-table-container" style="overflow-x:auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px;">
-            <table class="users-table" style="width:100%; border-collapse:collapse;">
+          <section class="accounts-list-section" style="margin-bottom:24px; min-width:0; max-width:100%;">
+            <div class="accounts-toolbar">
+              <h4 class="accounts-title">Danh sách các tài khoản</h4>
+              <div class="accounts-toolbar-actions">
+                <button type="button" class="btn btn-primary" onclick="openAddUserModal()">Thêm</button>
+                <button type="button" class="btn btn-ghost" onclick="openSearchUserModal()">Tìm kiếm</button>
+              </div>
+            </div>
+          <div class="table-wrapper">
+            <table class="users-mgmt-table">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -1240,11 +1643,13 @@
                   <th>Đăng nhập cuối</th>
                   <th>Ngày tạo</th>
                   <th>Thao tác</th>
+                  <th>Hoạt Động</th>
                 </tr>
               </thead>
-              <tbody>${userRows}</tbody>
+              <tbody id="usersTableBody">${userRows}</tbody>
             </table>
           </div>
+          </section>
           <div id="userHistoryModal" class="modal" style="display:none;">
             <div class="modal-content">
               <div class="modal-header">
@@ -1252,6 +1657,118 @@
                 <span class="close-modal" onclick="closeUserHistoryModal()">&times;</span>
               </div>
               <div id="modalBody" class="modal-body"></div>
+            </div>
+          </div>
+          <div id="editUserModal" class="user-mgmt-modal-overlay" onclick="handleEditModalOverlayClick(event)">
+            <div class="user-mgmt-modal" role="dialog" aria-modal="true" aria-labelledby="editUserModalTitle">
+              <div class="user-mgmt-modal-header">
+                <h3 id="editUserModalTitle">Chỉnh sửa người dùng</h3>
+                <button type="button" class="user-mgmt-modal-close" onclick="closeEditUserModal()" aria-label="Đóng">&times;</button>
+              </div>
+              <div class="user-mgmt-modal-body">
+                <label for="editUserFullName">Họ tên:</label>
+                <input id="editUserFullName" type="text" placeholder="Nhập họ tên" />
+                <div id="editUserError" class="user-mgmt-modal-error"></div>
+              </div>
+              <div class="user-mgmt-modal-footer">
+                <button type="button" class="btn btn-ghost" onclick="closeEditUserModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitEditUser()">OK</button>
+              </div>
+            </div>
+          </div>
+          <div id="deleteUserModal" class="user-mgmt-modal-overlay" onclick="handleDeleteModalOverlayClick(event)">
+            <div class="user-mgmt-modal" role="dialog" aria-modal="true" aria-labelledby="deleteUserModalTitle">
+              <div class="user-mgmt-modal-header">
+                <h3 id="deleteUserModalTitle">Xác nhận xóa</h3>
+                <button type="button" class="user-mgmt-modal-close" onclick="closeDeleteUserModal()" aria-label="Đóng">&times;</button>
+              </div>
+              <div class="user-mgmt-modal-body">
+                <p id="deleteUserMessage">Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+                <div id="deleteUserError" class="user-mgmt-modal-error"></div>
+              </div>
+              <div class="user-mgmt-modal-footer">
+                <button type="button" class="btn btn-ghost" onclick="closeDeleteUserModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="submitDeleteUser()">OK</button>
+              </div>
+            </div>
+          </div>
+          <div id="addUserModal" class="user-mgmt-modal-overlay" onclick="handleAddModalOverlayClick(event)">
+            <div class="user-mgmt-modal" role="dialog" aria-modal="true" aria-labelledby="addUserModalTitle">
+              <div class="user-mgmt-modal-header">
+                <h3 id="addUserModalTitle">Thêm tài khoản</h3>
+                <button type="button" class="user-mgmt-modal-close" onclick="closeAddUserModal()" aria-label="Đóng">&times;</button>
+              </div>
+              <div class="user-mgmt-modal-body">
+                <div class="user-mgmt-field">
+                  <label for="addUserUsername">Tên người dùng</label>
+                  <input id="addUserUsername" type="text" placeholder="Nhập tên người dùng" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="addUserFirstName">Họ</label>
+                  <input id="addUserFirstName" type="text" placeholder="Nhập họ" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="addUserLastName">Tên</label>
+                  <input id="addUserLastName" type="text" placeholder="Nhập tên" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="addUserRole">Vai trò</label>
+                  <select id="addUserRole">
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                  </select>
+                </div>
+                <div id="addUserError" class="user-mgmt-modal-error"></div>
+              </div>
+              <div class="user-mgmt-modal-footer">
+                <button type="button" class="btn btn-ghost" onclick="closeAddUserModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitAddUser()">OK</button>
+              </div>
+            </div>
+          </div>
+          <div id="searchUserModal" class="user-mgmt-modal-overlay" onclick="handleSearchModalOverlayClick(event)">
+            <div class="user-mgmt-modal wide" role="dialog" aria-modal="true" aria-labelledby="searchUserModalTitle">
+              <div class="user-mgmt-modal-header">
+                <h3 id="searchUserModalTitle">Tìm kiếm tài khoản</h3>
+                <button type="button" class="user-mgmt-modal-close" onclick="closeSearchUserModal()" aria-label="Đóng">&times;</button>
+              </div>
+              <div class="user-mgmt-modal-body">
+                <div class="user-mgmt-field">
+                  <label for="searchUserFullName">Họ tên</label>
+                  <input id="searchUserFullName" type="text" placeholder="Nhập họ tên" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="searchUserUsername">Tên người dùng</label>
+                  <input id="searchUserUsername" type="text" placeholder="Nhập tên người dùng" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="searchUserRole">Vai trò</label>
+                  <select id="searchUserRole">
+                    <option value="">Tất cả</option>
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                  </select>
+                </div>
+                <div class="user-mgmt-field">
+                  <label>Thời gian</label>
+                  <div class="user-mgmt-date-row">
+                    <div>
+                      <label for="searchUserFromDate" style="font-weight:500; font-size:0.9rem;">Từ ngày</label>
+                      <input id="searchUserFromDate" type="date" disabled />
+                    </div>
+                    <div>
+                      <label for="searchUserToDate" style="font-weight:500; font-size:0.9rem;">Đến ngày</label>
+                      <input id="searchUserToDate" type="date" disabled />
+                    </div>
+                  </div>
+                  <p class="user-mgmt-hint">Lọc theo thời gian sẽ được bổ sung sau.</p>
+                </div>
+                <div id="searchUserError" class="user-mgmt-modal-error"></div>
+              </div>
+              <div class="user-mgmt-modal-footer">
+                <button type="button" class="btn btn-ghost" onclick="closeSearchUserModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitSearchUser()">OK</button>
+              </div>
             </div>
           </div>
         `;
@@ -1321,6 +1838,300 @@
         const modal = document.getElementById("userHistoryModal");
         if (modal) {
           modal.style.display = "none";
+        }
+      }
+
+      let editingUserId = null;
+      let deletingUserId = null;
+
+      function showUserToast(message, type = "success") {
+        const existing = document.getElementById("userMgmtToast");
+        if (existing) existing.remove();
+
+        const toast = document.createElement("div");
+        toast.id = "userMgmtToast";
+        toast.className = `user-mgmt-toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        window.setTimeout(() => {
+          toast.remove();
+        }, 3200);
+      }
+
+      function setModalError(elementId, message) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        if (message) {
+          el.textContent = message;
+          el.classList.add("show");
+        } else {
+          el.textContent = "";
+          el.classList.remove("show");
+        }
+      }
+
+      function openEditUserModal(userId, fullName) {
+        editingUserId = userId;
+        const modal = document.getElementById("editUserModal");
+        const input = document.getElementById("editUserFullName");
+        if (!modal || !input) return;
+
+        input.value = fullName || "";
+        setModalError("editUserError", "");
+        modal.classList.add("show");
+        window.setTimeout(() => input.focus(), 50);
+      }
+
+      function closeEditUserModal() {
+        editingUserId = null;
+        const modal = document.getElementById("editUserModal");
+        const input = document.getElementById("editUserFullName");
+        if (modal) modal.classList.remove("show");
+        if (input) input.value = "";
+        setModalError("editUserError", "");
+      }
+
+      function handleEditModalOverlayClick(event) {
+        if (event.target && event.target.id === "editUserModal") {
+          closeEditUserModal();
+        }
+      }
+
+      async function submitEditUser() {
+        const input = document.getElementById("editUserFullName");
+        if (!input || editingUserId === null) return;
+
+        const fullName = input.value.trim();
+        if (!fullName) {
+          setModalError("editUserError", "Họ tên không được để trống.");
+          return;
+        }
+        if (fullName.length < 2) {
+          setModalError("editUserError", "Họ tên phải có ít nhất 2 ký tự.");
+          return;
+        }
+
+        setModalError("editUserError", "");
+
+        try {
+          const response = await fetch(
+            `${API_BASE}/api/auth/users/${editingUserId}`,
+            {
+              method: "PUT",
+              credentials: "include",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ full_name: fullName }),
+            },
+          );
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || `Lỗi ${response.status}`);
+          }
+
+          closeEditUserModal();
+          showUserToast(data.message || "Cập nhật người dùng thành công", "success");
+          await loadUserData();
+        } catch (err) {
+          setModalError("editUserError", err.message || "Không thể cập nhật người dùng.");
+        }
+      }
+
+      function openDeleteUserModal(userId, username) {
+        deletingUserId = userId;
+        const modal = document.getElementById("deleteUserModal");
+        const message = document.getElementById("deleteUserMessage");
+        if (!modal) return;
+
+        if (message) {
+          message.textContent = username
+            ? `Bạn có chắc chắn muốn xóa tài khoản "${username}" không?`
+            : "Bạn có chắc chắn muốn xóa tài khoản này không?";
+        }
+        setModalError("deleteUserError", "");
+        modal.classList.add("show");
+      }
+
+      function closeDeleteUserModal() {
+        deletingUserId = null;
+        const modal = document.getElementById("deleteUserModal");
+        if (modal) modal.classList.remove("show");
+        setModalError("deleteUserError", "");
+      }
+
+      function handleDeleteModalOverlayClick(event) {
+        if (event.target && event.target.id === "deleteUserModal") {
+          closeDeleteUserModal();
+        }
+      }
+
+      async function submitDeleteUser() {
+        if (deletingUserId === null) return;
+        setModalError("deleteUserError", "");
+
+        try {
+          const response = await fetch(
+            `${API_BASE}/api/auth/users/${deletingUserId}`,
+            {
+              method: "DELETE",
+              credentials: "include",
+            },
+          );
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || `Lỗi ${response.status}`);
+          }
+
+          closeDeleteUserModal();
+          showUserToast(data.message || "Xóa người dùng thành công", "success");
+          await loadUserData();
+        } catch (err) {
+          setModalError("deleteUserError", err.message || "Không thể xóa người dùng.");
+        }
+      }
+
+      function openAddUserModal() {
+        const modal = document.getElementById("addUserModal");
+        if (!modal) return;
+        ["addUserUsername", "addUserFirstName", "addUserLastName"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.value = "";
+        });
+        const role = document.getElementById("addUserRole");
+        if (role) role.value = "user";
+        setModalError("addUserError", "");
+        modal.classList.add("show");
+        window.setTimeout(() => document.getElementById("addUserUsername")?.focus(), 50);
+      }
+
+      function closeAddUserModal() {
+        const modal = document.getElementById("addUserModal");
+        if (modal) modal.classList.remove("show");
+        setModalError("addUserError", "");
+      }
+
+      function handleAddModalOverlayClick(event) {
+        if (event.target && event.target.id === "addUserModal") {
+          closeAddUserModal();
+        }
+      }
+
+      async function submitAddUser() {
+        const username = document.getElementById("addUserUsername")?.value.trim() || "";
+        const firstName = document.getElementById("addUserFirstName")?.value.trim() || "";
+        const lastName = document.getElementById("addUserLastName")?.value.trim() || "";
+        const role = document.getElementById("addUserRole")?.value || "user";
+
+        if (!username || username.length < 3) {
+          setModalError("addUserError", "Tên người dùng phải có ít nhất 3 ký tự.");
+          return;
+        }
+        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+          setModalError("addUserError", "Tên người dùng chỉ được chứa chữ, số và dấu gạch dưới.");
+          return;
+        }
+        if (!firstName) {
+          setModalError("addUserError", "Vui lòng nhập họ.");
+          return;
+        }
+        if (!lastName) {
+          setModalError("addUserError", "Vui lòng nhập tên.");
+          return;
+        }
+
+        setModalError("addUserError", "");
+
+        try {
+          const response = await fetch(`${API_BASE}/api/auth/users`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              first_name: firstName,
+              last_name: lastName,
+              role,
+            }),
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || `Lỗi ${response.status}`);
+          }
+
+          closeAddUserModal();
+          showUserToast(data.message || "Thêm tài khoản thành công", "success");
+          await loadUserData();
+        } catch (err) {
+          setModalError("addUserError", err.message || "Không thể thêm tài khoản.");
+        }
+      }
+
+      function openSearchUserModal() {
+        const modal = document.getElementById("searchUserModal");
+        if (!modal) return;
+        ["searchUserFullName", "searchUserUsername"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.value = "";
+        });
+        const role = document.getElementById("searchUserRole");
+        if (role) role.value = "";
+        setModalError("searchUserError", "");
+        modal.classList.add("show");
+        window.setTimeout(() => document.getElementById("searchUserFullName")?.focus(), 50);
+      }
+
+      function closeSearchUserModal() {
+        const modal = document.getElementById("searchUserModal");
+        if (modal) modal.classList.remove("show");
+        setModalError("searchUserError", "");
+      }
+
+      function handleSearchModalOverlayClick(event) {
+        if (event.target && event.target.id === "searchUserModal") {
+          closeSearchUserModal();
+        }
+      }
+
+      async function submitSearchUser() {
+        const fullName = document.getElementById("searchUserFullName")?.value.trim() || "";
+        const username = document.getElementById("searchUserUsername")?.value.trim() || "";
+        const role = document.getElementById("searchUserRole")?.value.trim() || "";
+
+        setModalError("searchUserError", "");
+
+        try {
+          const response = await fetch(`${API_BASE}/api/auth/users/search`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              full_name: fullName,
+              username,
+              role,
+            }),
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || `Lỗi ${response.status}`);
+          }
+
+          if (!data.users || !Array.isArray(data.users)) {
+            throw new Error("Dữ liệu tìm kiếm không hợp lệ.");
+          }
+
+          adminUserCache.displayedUsers = data.users;
+          refreshDisplayedUsersTable();
+          closeSearchUserModal();
+          showUserToast(
+            `Tìm thấy ${data.users.length} tài khoản phù hợp`,
+            "success",
+          );
+        } catch (err) {
+          setModalError("searchUserError", err.message || "Không thể tìm kiếm.");
         }
       }
 
@@ -1467,6 +2278,8 @@
       let adminUserCache = {
         users: [],
         loginHistory: [],
+        userActivity: {},
+        displayedUsers: [],
       };
 
       function initializeAdminOperations() {
