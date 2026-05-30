@@ -93,6 +93,10 @@ const lineColors = {
   S6: "#00A550", // xanh lá đậm
   S7: "#964B00", // nâu đậm
   S8: "#000000", // đen (Flughafen)
+  // S20
+  S20: "#ED6B9B",
+  // Transfer (interchange between lines)
+  T: "#999999",
   // Fallback
   U: "#417AB4",
   S: "#1A9BD7",
@@ -270,6 +274,7 @@ async function computeAndShowFullRoute() {
 
   // resolve from station id
   let fromStationId = null;
+  let fromStationCandidates = null;  // all IDs when resolved by name
   let walkingFrom = null;
   let fromLabel = fromInputVal || "";
 
@@ -297,16 +302,19 @@ async function computeAndShowFullRoute() {
     };
     fromLabel = `Điểm (${customPoints.from.lat.toFixed(5)}, ${customPoints.from.lon.toFixed(5)})`;
   } else {
-    // try parse input as station name
-    const sid = findStationIdByName(fromInputVal || "");
-    if (sid) {
-      fromStationId = sid;
-      selectedStationIds.from = sid;
+    // try parse input as station name -> get ALL candidates
+    const allIds = findAllStationIdsByName(fromInputVal || "");
+    if (allIds.length > 0) {
+      fromStationId = allIds[0];
+      fromStationCandidates = allIds;
+      selectedStationIds.from = allIds[0];
+      fromLabel = graphById[allIds[0]] ? graphById[allIds[0]].name : fromLabel;
     }
   }
 
   // resolve to station id
   let toStationId = null;
+  let toStationCandidates = null;  // all IDs when resolved by name
   let walkingTo = null;
   let toLabel = toInputVal || "";
 
@@ -329,10 +337,13 @@ async function computeAndShowFullRoute() {
     };
     toLabel = `Điểm (${customPoints.to.lat.toFixed(5)}, ${customPoints.to.lon.toFixed(5)})`;
   } else {
-    const sid = findStationIdByName(toInputVal || "");
-    if (sid) {
-      toStationId = sid;
-      selectedStationIds.to = sid;
+    // try parse input as station name -> get ALL candidates
+    const allIds = findAllStationIdsByName(toInputVal || "");
+    if (allIds.length > 0) {
+      toStationId = allIds[0];
+      toStationCandidates = allIds;
+      selectedStationIds.to = allIds[0];
+      toLabel = graphById[allIds[0]] ? graphById[allIds[0]].name : toLabel;
     }
   }
 
@@ -368,10 +379,21 @@ async function computeAndShowFullRoute() {
   // if both are stations -> run metro path
   let metroRoute = null;
   try {
+    // Build request body — send candidates when available for multi-line stations
+    const reqBody = {
+      source: fromStationId,
+      target: toStationId,
+    };
+    if (fromStationCandidates && fromStationCandidates.length > 1) {
+      reqBody.source_candidates = fromStationCandidates;
+    }
+    if (toStationCandidates && toStationCandidates.length > 1) {
+      reqBody.target_candidates = toStationCandidates;
+    }
     const resp = await fetch("http://127.0.0.1:5000/api/path", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ source: fromStationId, target: toStationId }),
+      body: JSON.stringify(reqBody),
     });
     const json = await resp.json();
     if (resp.ok && !json.error) {
@@ -505,15 +527,19 @@ async function computeAndShowFullRoute() {
 function initGraph() {
   // Tao cac index de tra cuu nhanh khi tim duong va ve ban do.
   graphById = {};
-  stationIdByName = {};
+  stationIdByName = {};  // name (lowercase) -> array of IDs
   graph.stations.forEach((station) => {
     graphById[station.id] = station;
-    stationIdByName[station.name.trim().toLowerCase()] = station.id;
+    const nameKey = station.name.trim().toLowerCase();
+    if (!stationIdByName[nameKey]) {
+      stationIdByName[nameKey] = [];
+    }
+    stationIdByName[nameKey].push(station.id);
   });
   buildAdjacency();
   seedStationOptions();
+  drawStations(); // Must run before drawNetwork to set displayLat/displayLon
   drawNetwork();
-  drawStations();
   syncSelectedStationSelections();
   const markers = Object.values(stationMarkers);
   if (markers.length > 0) {
@@ -546,12 +572,17 @@ function buildAdjacency() {
 
 function seedStationOptions() {
   // Do danh sach ga vao datalist de ho tro goi y ten ga.
+  // Deduplicate names — only show each station name once.
   const datalist = document.getElementById("stations");
   datalist.innerHTML = "";
+  const seenNames = new Set();
   graph.stations
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, "de"))
     .forEach((station) => {
+      const nameKey = station.name.trim().toLowerCase();
+      if (seenNames.has(nameKey)) return;
+      seenNames.add(nameKey);
       const option = document.createElement("option");
       option.value = station.name;
       datalist.appendChild(option);
@@ -559,10 +590,11 @@ function seedStationOptions() {
 }
 
 function findStationIdByName(name) {
-  // Uu tien tim exact match, fallback sang partial match de de su dung.
+  // Return the first matching station ID for backward compatibility.
+  // For getting ALL candidates, use findAllStationIdsByName().
   const key = name.trim().toLowerCase();
   if (!key) return null;
-  if (stationIdByName[key]) return stationIdByName[key];
+  if (stationIdByName[key] && stationIdByName[key].length > 0) return stationIdByName[key][0];
   const exact = graph.stations.find(
     (st) => st.name.trim().toLowerCase() === key,
   );
@@ -571,6 +603,22 @@ function findStationIdByName(name) {
     st.name.trim().toLowerCase().includes(key),
   );
   return partial ? partial.id : null;
+}
+
+function findAllStationIdsByName(name) {
+  // Return ALL station IDs matching the given name (for multi-line stations).
+  const key = name.trim().toLowerCase();
+  if (!key) return [];
+  if (stationIdByName[key] && stationIdByName[key].length > 0) return stationIdByName[key].slice();
+  // Fallback: exact match
+  const results = graph.stations.filter(
+    (st) => st.name.trim().toLowerCase() === key,
+  ).map(st => st.id);
+  if (results.length > 0) return results;
+  // Fallback: partial match (return all matches)
+  return graph.stations.filter((st) =>
+    st.name.trim().toLowerCase().includes(key),
+  ).map(st => st.id);
 }
 
 function dijkstra(startId, endId) {
@@ -628,47 +676,157 @@ function dijkstra(startId, endId) {
   return { path, cost: costs[endId], edges: edgeDetails };
 }
 
+function createStationSVGIcon(pinColor, isClosed) {
+  const circleColor = isClosed ? "#b42318" : "#2672b5";
+  const pColor = isClosed ? "#b42318" : pinColor;
+  
+  const svg = `
+    <svg width="32" height="48" viewBox="0 0 32 48" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pin shadow -->
+      <ellipse cx="16" cy="42" rx="8" ry="3" fill="rgba(0,0,0,0.3)"/>
+      <!-- Pin shape (tail) -->
+      <path d="M16 42 C16 42 2 26 2 16 C2 7.2 8.3 1 16 1 C23.7 1 30 7.2 30 16 C30 26 16 42 16 42 Z" fill="${pColor}" stroke="#ffffff" stroke-width="2"/>
+      <!-- Inner Circle -->
+      <circle cx="16" cy="15" r="11" fill="${circleColor}"/>
+      <!-- Train Icon -->
+      <path d="M11 9 H21 C22 9 23 9.9 23 11 V17 C23 18.1 22 19 21 19 H11 C10 19 9 18.1 9 17 V11 C9 9.9 10 9 11 9 Z M11 11 V14 H21 V11 H11 Z M12.5 18 A1 1 0 1 0 12.5 16 A1 1 0 0 0 12.5 18 Z M19.5 18 A1 1 0 1 0 19.5 16 A1 1 0 0 0 19.5 18 Z" fill="#ffffff"/>
+      <!-- Anchor Dot -->
+      <circle cx="16" cy="42" r="3.5" fill="#ffffff" stroke="${pColor}" stroke-width="1.5"/>
+    </svg>
+  `;
+
+  return L.icon({
+    iconUrl: "data:image/svg+xml;base64," + btoa(svg),
+    iconSize: [32, 48],
+    iconAnchor: [16, 42],
+    popupAnchor: [0, -42]
+  });
+}
+
 function drawStations() {
   // Ve marker cho tung ga va cho phep click de gan ga di/den.
+  // Group stations sharing the same coordinates into a single physical marker.
   console.log("Drawing stations, count:", graph.stations.length);
   stationLayerGroup.clearLayers();
   stationMarkers = {};
+
+  // Group stations by coordinate AND system (U or S)
+  const baseGroups = {};
+  const coordGroups = {};
+  
   graph.stations.forEach((station) => {
-    console.log("Drawing station:", station.name, station.lat, station.lon);
+    let system = 'U';
+    if (station.line && station.line.length > 0) {
+      if (station.line.some(l => l.startsWith('S'))) system = 'S';
+      if (station.line.some(l => l.startsWith('U'))) system = 'U';
+    } else {
+      system = station.id.split('_')[0].charAt(0) === 'S' ? 'S' : 'U';
+    }
+
+    const baseKey = `${station.lat.toFixed(4)}_${station.lon.toFixed(4)}`;
+    const coordKey = `${baseKey}_${system}`;
+    
+    if (!coordGroups[coordKey]) {
+      coordGroups[coordKey] = {
+        lat: station.lat,
+        lon: station.lon,
+        name: station.name,
+        system: system,
+        ids: [],
+        lines: new Set(),
+        closedCount: 0,
+        totalCount: 0,
+        representativeId: station.id, // ID to use when clicked
+        reasons: new Set()
+      };
+      if (!baseGroups[baseKey]) baseGroups[baseKey] = [];
+      baseGroups[baseKey].push(coordGroups[coordKey]);
+    }
+    
+    coordGroups[coordKey].ids.push(station.id);
+    coordGroups[coordKey].totalCount++;
+    
+    // Aggregate lines
+    if (station.line && station.line.length > 0) {
+      station.line.forEach(l => coordGroups[coordKey].lines.add(l));
+    } else {
+      coordGroups[coordKey].lines.add(station.id.split('_')[0]);
+    }
+    
+    // Check if closed
     const operationStatus = getStationOperationStatus(station.id);
-    const isClosed = operationStatus.statusLabel === "Đóng";
+    if (operationStatus.statusLabel === "Đóng") {
+      coordGroups[coordKey].closedCount++;
+      if (operationStatus.reason) coordGroups[coordKey].reasons.add(operationStatus.reason);
+    }
+  });
+
+  // Apply a small visual offset if a U-Bahn and S-Bahn marker share the exact same coordinate
+  Object.values(baseGroups).forEach(groups => {
+    if (groups.length > 1) {
+      const offsetStep = 0.00015; // ~15 meters
+      groups.forEach((group, i) => {
+        // Offset horizontally to sit side-by-side
+        const angle = (2 * Math.PI * i) / groups.length;
+        group.lat += offsetStep * Math.sin(angle);
+        group.lon += offsetStep * Math.cos(angle);
+      });
+    }
+  });
+
+  Object.values(coordGroups).forEach((group) => {
+    const isClosed = group.closedCount === group.totalCount; // Mark as closed only if ALL nodes are closed
     const statusColor = isClosed ? "#b42318" : "#027a48";
+    const reasonsStr = Array.from(group.reasons).join(", ");
     const statusText = isClosed
-      ? `Đóng${operationStatus.reason ? ` - ${operationStatus.reason}` : ""}`
+      ? `Đóng${reasonsStr ? ` - ${reasonsStr}` : ""}`
       : "Mở";
-    const marker = L.circleMarker([station.lat, station.lon], {
-      radius: 7,
-      color: isClosed ? "#b42318" : "#005b96",
-      fillColor: isClosed ? "#f8d7da" : "#ffffff",
-      fillOpacity: 0.95,
-      weight: 2,
-      opacity: isClosed ? 0.9 : 0.8,
+
+    // Build line label for popup
+    const sortedLines = Array.from(group.lines).sort();
+    const lineLabels = sortedLines.join(', ');
+    const displayName = `${group.name} (${lineLabels})`;
+
+    // Use the color of the first line for the marker outline
+    const primaryLine = sortedLines[0] || 'U';
+    const pinColor = lineColors[primaryLine] || "#005b96";
+
+    const marker = L.marker([group.lat, group.lon], {
+      icon: createStationSVGIcon(pinColor, isClosed),
+      opacity: isClosed ? 0.8 : 1.0,
+      zIndexOffset: isClosed ? -100 : 0
     }).addTo(stationLayerGroup);
+    
     marker.bindPopup(
-      `<strong>${station.name}</strong><br/>${station.id}<br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`,
+      `<strong>${displayName}</strong><br/><small>${group.ids.length > 1 ? 'Ga đa tuyến' : group.representativeId}</small><br/><span style="color:${statusColor};font-weight:700;">Trạng thái: ${statusText}</span>`,
     );
+    
     if (isClosed) {
       marker.on("click", () => {
         marker.openPopup();
         alert(
-          `${station.name} đang đóng. Không thể chọn ga này làm điểm đi hoặc điểm đến.`,
+          `${group.name} đang đóng. Không thể chọn ga này làm điểm đi hoặc điểm đến.`,
         );
       });
     } else {
-      marker.on("click", () => selectStation(station));
+      // Pass the representative station object. Pathfinding will resolve all candidates via name.
+      marker.on("click", () => selectStation(graphById[group.representativeId]));
     }
-    stationMarkers[station.id] = marker;
+    
+    // Map all node IDs to this single marker so findRoute can open its popup
+    // Also save displayLat and displayLon to draw edges perfectly
+    group.ids.forEach(id => {
+      stationMarkers[id] = marker;
+      if (graphById[id]) {
+        graphById[id].displayLat = group.lat;
+        graphById[id].displayLon = group.lon;
+      }
+    });
   });
   console.log(
     "Stations drawn, markers count:",
     Object.keys(stationMarkers).length,
   );
-
 }
 
 function createCustomPinIcon(markerType) {
@@ -746,19 +904,46 @@ function drawNetwork() {
     const from = graphById[edge.from];
     const to = graphById[edge.to];
     if (!from || !to) return;
+    
+    const isTransfer = edge.line === 'T';
+    const fromLat = from.displayLat || from.lat;
+    const fromLon = from.displayLon || from.lon;
+    const toLat = to.displayLat || to.lat;
+    const toLon = to.displayLon || to.lon;
+    
+    // Internal transfers between nodes at the exact same physical position
+    // are not drawn because we only render one physical marker per position.
+    if (isTransfer && Math.abs(fromLat - toLat) < 0.0001 && Math.abs(fromLon - toLon) < 0.0001) {
+      return;
+    }
+
     const isBlocked = blockedLines.has(edge.line);
-    const color = isBlocked ? "#d00000" : lineColors[edge.line] || "#7589a0";
+
+    let color, weight, opacity, dashArray;
+    if (isBlocked) {
+      color = "#d00000";
+      weight = 4;
+      opacity = 0.9;
+      dashArray = "8,4";
+    } else if (isTransfer) {
+      // Transfer edges: gray dashed line connecting different physical stations
+      color = "#888888";
+      weight = 2;
+      opacity = 0.6;
+      dashArray = "5,7";
+    } else {
+      color = lineColors[edge.line] || "#7589a0";
+      weight = 3;
+      opacity = 0.8;
+      dashArray = null;
+    }
+
     L.polyline(
       [
-        [from.lat, from.lon],
-        [to.lat, to.lon],
+        [fromLat, fromLon],
+        [toLat, toLon],
       ],
-      {
-        color,
-        weight: isBlocked ? 4 : 2,
-        opacity: isBlocked ? 0.9 : 0.4,
-        dashArray: isBlocked ? "8,4" : null,
-      },
+      { color, weight, opacity, dashArray },
     ).addTo(networkLayer);
   });
 
@@ -941,6 +1126,18 @@ function resetFoundRoutes() {
   if (result) {
     result.innerHTML = `<h3>Kết quả lộ trình</h3><p><strong>Thời gian và chi tiết lộ trình sẽ hiển thị ở đây sau khi bạn bấm Tìm đường.</strong></p>`;
   }
+  
+  // Restore all station markers
+  if (typeof stationMarkers !== 'undefined') {
+    Object.keys(stationMarkers).forEach(id => {
+      const marker = stationMarkers[id];
+      if (marker) {
+        const closed = isStationClosed(id);
+        marker.setOpacity(closed ? 0.8 : 1);
+        marker.setZIndexOffset(closed ? -100 : 0);
+      }
+    });
+  }
 }
 
 function updateRoutesUI() {
@@ -1106,6 +1303,30 @@ function selectRoute(idx) {
     });
   });
   const routeMeta = sel.meta;
+  
+  // Hide non-route station markers
+  const pathSet = new Set(routeMeta.path);
+  if (typeof stationMarkers !== 'undefined') {
+    // First, hide all unique markers
+    const uniqueMarkers = new Set(Object.values(stationMarkers));
+    uniqueMarkers.forEach(marker => {
+      if (marker) {
+        marker.setOpacity(0);
+        marker.setZIndexOffset(0);
+      }
+    });
+
+    // Then, show only the markers that belong to the path
+    pathSet.forEach(id => {
+      const marker = stationMarkers[id];
+      if (marker) {
+        const closed = isStationClosed(id);
+        marker.setOpacity(closed ? 0.8 : 1);
+        marker.setZIndexOffset(closed ? -100 : 1000);
+      }
+    });
+  }
+
   const edges = buildEdgeDetailsFromPath(routeMeta.path);
   showResult(
     { path: routeMeta.path, cost: routeMeta.metro_time, edges },
@@ -1412,22 +1633,33 @@ function showResult(
     .map((seg, index) => {
       const from = graphById[seg.from];
       const to = graphById[seg.to];
+      if (seg.line === 'T') {
+        // Transfer segment: display as interchange info
+        return `<li style="color:#666;font-style:italic;"><strong>🔄 Chuyển tuyến tại ${from ? from.name : seg.from}</strong> (${formatMinutes(seg.time)} đi bộ giữa các platform)</li>`;
+      }
       const stops = route.path.slice(
         route.path.indexOf(seg.from),
         route.path.indexOf(seg.to) + 1,
       ).length;
-      return `<li><strong>Đoạn ${index + 1} - Tuyến ${seg.line}</strong>: ${from.name} → ${to.name} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
+      const lineColor = lineColors[seg.line] || '#666';
+      return `<li><strong>Đoạn ${index + 1} - <span style="color:${lineColor}">Tuyến ${seg.line}</span></strong>: ${from ? from.name : seg.from} → ${to ? to.name : seg.to} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
     })
     .join("");
 
   const listItems = route.path
     .map((id, index) => {
       const station = graphById[id];
-      return `<li><span class="station-link" data-station-id="${id}" style="cursor: pointer; color: #0066cc; text-decoration: underline;">${index + 1}. ${station.name}</span></li>`;
+      if (!station) return `<li>${index + 1}. ${id}</li>`;
+      const lineLabel = (station.line && station.line.length > 0)
+        ? ` (${station.line.join(', ')})`
+        : '';
+      return `<li><span class="station-link" data-station-id="${id}" style="cursor: pointer; color: #0066cc; text-decoration: underline;">${index + 1}. ${station.name}${lineLabel}</span></li>`;
     })
     .join("");
 
-  const transferCount = Math.max(0, segments.length - 1);
+  // Count real transfers (exclude T-line segments)
+  const realSegments = segments.filter(s => s.line !== 'T');
+  const transferCount = Math.max(0, realSegments.length - 1);
   // include walking times into total calculation
   const walkingTotal =
     (walkingFrom ? walkingFrom.time : 0) + (walkingTo ? walkingTo.time : 0);

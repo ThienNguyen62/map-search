@@ -45,7 +45,7 @@ def compute_route_metrics(path):
     total = 0
     lines = []
     transfers = 0
-    prev_line = None
+    prev_real_line = None  # track last non-transfer line
     for i in range(len(path)-1):
         a = path[i]
         b = path[i+1]
@@ -56,13 +56,20 @@ def compute_route_metrics(path):
         weight = data.get('weight', 0)
         line = data.get('line') or ''
         total += weight
+        # Transfer edges (line "T") connect same-name stations on different lines.
+        # Don't count them as a regular line — only track real transit lines.
+        if line == 'T':
+            lines.append(line)
+            continue
         lines.append(line)
-        if prev_line is not None and line != prev_line:
+        if prev_real_line is not None and line != prev_real_line:
             transfers += 1
-        prev_line = line
-    # dedupe lines
+        prev_real_line = line
+    # dedupe lines, filtering out transfer markers
     unique_lines = []
     for l in lines:
+        if l == 'T':
+            continue
         if not unique_lines or unique_lines[-1] != l:
             unique_lines.append(l)
     return {
