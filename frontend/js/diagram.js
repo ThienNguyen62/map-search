@@ -431,39 +431,123 @@
         const input = document.getElementById('searchStation');
         const results = document.getElementById('searchResults');
         if (!input || !results) return;
+        let selectedIndex = -1;
 
-        input.addEventListener('input', () => {
-            const query = input.value.trim().toLowerCase();
+        function renderResults(matches) {
             results.innerHTML = '';
-            if (!query || query.length < 1) return;
-
-            const matches = stations.filter(s => s.name.toLowerCase().includes(query)).slice(0, 10);
-            matches.forEach(s => {
+            selectedIndex = -1;
+            matches.forEach((s, idx) => {
                 const lines = new Set();
                 (adjacency[s.id] || []).forEach(e => lines.add(e.line));
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
+                div.setAttribute('data-idx', idx);
                 div.innerHTML = `<div class="station-name">${s.name}</div><div class="station-lines">${Array.from(lines).join(', ')}</div>`;
-                div.addEventListener('click', () => {
-                    highlightStation(s.id);
-                    input.value = s.name;
-                    results.innerHTML = '';
-
-                    // Center SVG on this station if in interactive mode
-                    if (currentView === 'interactive') {
-                        const positions = computeSchematicPositions();
-                        const pos = positions[s.id];
-                        if (pos) {
-                            svgViewBox.x = pos.x - svgViewBox.w / 2;
-                            svgViewBox.y = pos.y - svgViewBox.h / 2;
-                            const svg = document.getElementById('diagramSvg');
-                            svg.setAttribute('viewBox', `${svgViewBox.x} ${svgViewBox.y} ${svgViewBox.w} ${svgViewBox.h}`);
-                        }
-                    }
-                });
+                div.addEventListener('click', () => selectStationFromResult(s));
                 results.appendChild(div);
             });
+        }
+
+        function selectStationFromResult(s) {
+            highlightStation(s.id);
+            input.value = s.name;
+            results.innerHTML = '';
+            if (currentView === 'interactive') {
+                const positions = computeSchematicPositions();
+                const pos = positions[s.id];
+                if (pos) {
+                    svgViewBox.x = pos.x - svgViewBox.w / 2;
+                    svgViewBox.y = pos.y - svgViewBox.h / 2;
+                    const svg = document.getElementById('diagramSvg');
+                    svg.setAttribute('viewBox', `${svgViewBox.x} ${svgViewBox.y} ${svgViewBox.w} ${svgViewBox.h}`);
+                }
+            }
+        }
+
+        function updateSelectionVisual() {
+            const items = results.querySelectorAll('.search-result-item');
+            items.forEach((it, i) => {
+                it.classList.toggle('active', i === selectedIndex);
+            });
+        }
+
+        function buildMatches(query) {
+            const q = (query || '').trim().toLowerCase();
+            let matches = [];
+            if (!q) {
+                matches = stations.slice().sort((a, b) => a.name.localeCompare(b.name)).slice(0, 50);
+            } else {
+                matches = stations.filter(s => s.name.toLowerCase().includes(q)).slice(0, 50);
+            }
+            return matches;
+        }
+
+        input.addEventListener('input', () => {
+            const query = input.value;
+            const matches = buildMatches(query);
+            if (!matches.length) {
+                results.innerHTML = '';
+                return;
+            }
+            renderResults(matches);
         });
+
+        // Show full list on focus
+        input.addEventListener('focus', () => {
+            const matches = buildMatches('');
+            renderResults(matches);
+        });
+
+        // Keyboard navigation
+        input.addEventListener('keydown', (ev) => {
+            const items = results.querySelectorAll('.search-result-item');
+            if (!items.length) return;
+            if (ev.key === 'ArrowDown') {
+                ev.preventDefault();
+                selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+                updateSelectionVisual();
+                items[selectedIndex].scrollIntoView({ block: 'nearest' });
+            } else if (ev.key === 'ArrowUp') {
+                ev.preventDefault();
+                selectedIndex = Math.max(0, selectedIndex - 1);
+                updateSelectionVisual();
+                items[selectedIndex].scrollIntoView({ block: 'nearest' });
+            } else if (ev.key === 'Enter') {
+                ev.preventDefault();
+                if (selectedIndex >= 0 && items[selectedIndex]) {
+                    const idx = parseInt(items[selectedIndex].getAttribute('data-idx') || '0', 10);
+                    const matches = buildMatches(input.value);
+                    const s = matches[idx];
+                    if (s) selectStationFromResult(s);
+                }
+            } else if (ev.key === 'Escape') {
+                results.innerHTML = '';
+            }
+        });
+
+        // Click outside to close
+        document.addEventListener('click', (ev) => {
+            if (!ev.target.closest('#searchStation') && !ev.target.closest('#searchResults')) {
+                results.innerHTML = '';
+            }
+        });
+    }
+
+    // ── Toast / Small notifications ──
+    function showToast(message, timeout = 3000) {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const el = document.createElement('div');
+        el.className = 'toast';
+        el.textContent = message;
+        container.appendChild(el);
+        // Force reflow then show
+        void el.offsetWidth;
+        el.classList.add('show');
+        setTimeout(() => {
+            el.classList.remove('show');
+            setTimeout(() => el.remove(), 250);
+        }, timeout);
     }
 
     // ── Legend Click ──
@@ -537,6 +621,16 @@
         setupLegendClicks();
         setupControls();
         setupImagePanZoom();
+
+        // language button (VI) click -> toast
+        const langBtn = document.querySelector('.lang-select span');
+        if (langBtn) {
+            langBtn.style.cursor = 'pointer';
+            langBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Tính năng sẽ được cập nhật sau');
+            });
+        }
     }
 
     window.addEventListener('load', init);

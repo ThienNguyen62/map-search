@@ -171,9 +171,15 @@ def login():
 #api check session
 @app.route('/api/me')
 def me():
+    username = session.get('username')
+    user = get_user_by_username(username) if username else None
     return jsonify({
         "is_admin": session.get('is_admin', False),
-        "username": session.get('username')
+        "username": username,
+        "email": user.get('email') if user else None,
+        "first_name": user.get('first_name') if user else None,
+        "last_name": user.get('last_name') if user else None,
+        "role": user.get('role') if user else ('admin' if session.get('is_admin') else 'user')
     })
 #api logout
 #xóa session khi đăng xuất

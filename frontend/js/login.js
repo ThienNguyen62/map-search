@@ -111,6 +111,14 @@ function handleLogin() {
           localStorage.removeItem("rememberMe");
         }
         localStorage.setItem("loggedInUser", username || email || "user");
+        localStorage.setItem(
+          "currentUserProfile",
+          JSON.stringify({
+            username: username || email || "user",
+            email: payload.email || "",
+            password: password,
+          }),
+        );
         localStorage.setItem("isAdmin", "0");
         showSuccess("Đăng nhập thành công (Người dùng)! Đang chuyển hướng...");
         console.log("Redirecting to user.html now...");
@@ -119,6 +127,7 @@ function handleLogin() {
         console.log("Admin login successful, redirecting to admin.html");
         localStorage.removeItem("rememberMe");
         localStorage.setItem("loggedInUser", username || email || "admin");
+        localStorage.removeItem("currentUserProfile");
         localStorage.setItem("isAdmin", "1");
         // notify other tabs that auth state changed
         try {

@@ -18,6 +18,38 @@
 
 <body>
     <a id="authLink" href="login.html" class="admin-mode-btn">Đăng nhập</a>
+    <div id="settingsBackdrop" class="settings-backdrop" hidden></div>
+    <div id="settingsMenu" class="settings-menu" hidden>
+        <button type="button" class="settings-menu-item" data-action="info">ℹ️ Xem thông tin</button>
+        <button type="button" class="settings-menu-item" data-action="logout">🚪 Đăng xuất</button>
+    </div>
+    <div id="accountModal" class="account-modal" hidden>
+        <div class="account-modal-panel" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle">
+            <button type="button" class="modal-close" id="closeAccountModal" aria-label="Đóng">×</button>
+            <h2 id="accountModalTitle">Thông tin tài khoản</h2>
+            <p class="account-modal-subtitle">Thông tin đăng nhập hiện tại của bạn.</p>
+
+            <div class="account-info-grid">
+                <div class="account-info-item">
+                    <span class="account-info-label">Tài khoản</span>
+                    <span class="account-info-value" id="accountUsername">—</span>
+                </div>
+                <div class="account-info-item">
+                    <span class="account-info-label">Mật khẩu</span>
+                    <span class="account-info-value account-secret" id="accountPassword">—</span>
+                </div>
+                <div class="account-info-item">
+                    <span class="account-info-label">Email</span>
+                    <span class="account-info-value" id="accountEmail">—</span>
+                </div>
+            </div>
+
+            <div class="account-actions">
+                <button type="button" class="secondary-btn account-action-btn" id="changeEmailBtn">Đổi email</button>
+                <button type="button" class="secondary-btn account-action-btn" id="changePasswordBtn">Đổi mật khẩu</button>
+            </div>
+        </div>
+    </div>
     <!--
     Layout tổng của ứng dụng:
     - Sidebar: nhập ga đi/ga đến, hiển thị kết quả, lịch sử tìm kiếm.
@@ -173,6 +205,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="../js/auth_link.js"></script>
+    <script src="../js/user.js"></script>
     <!-- user history hook must be loaded before main script so it can wrap findRoute -->
     <script src="../js/user_history.js"></script>
     <!-- script.js chứa toàn bộ logic tải graph, tìm đường, vẽ tuyến. -->

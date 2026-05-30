@@ -238,6 +238,17 @@
         justify-content: space-between;
         align-items: center;
         gap: 18px;
+        margin-bottom: 20px;
+      }
+
+      .operations-main {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .operation-grid {
+        margin-top: 0;
       }
 
       .header-panel h3 {
@@ -273,6 +284,13 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .row-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
       .field-group {
         margin-bottom: 16px;
       }
@@ -297,6 +315,57 @@
         font: inherit;
         color: #0f172a;
         background: white;
+      }
+
+      .notice-composer {
+        padding: 20px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+        border: 1px solid #e2e8f0;
+      }
+
+      .notice-composer-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+
+      .notice-composer-title {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .notice-composer-subtitle {
+        margin: 6px 0 0;
+        color: #64748b;
+        line-height: 1.55;
+        font-size: 0.94rem;
+      }
+
+      .notice-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #4338ca;
+        font-size: 0.82rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .notice-actions {
+        margin-top: 6px;
+      }
+
+      .notice-actions .btn {
+        min-width: 160px;
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.18);
       }
 
       textarea {
@@ -933,6 +1002,14 @@
           grid-template-columns: 1fr;
         }
 
+        .notice-composer-header {
+          flex-direction: column;
+        }
+
+        .notice-actions .btn {
+          width: 100%;
+        }
+
         .sidebar-nav li {
           padding: 12px 18px;
         }
@@ -992,11 +1069,11 @@
           <div class="stats-grid">
             <div class="stat-card">
               <h3>Tổng ga tàu</h3>
-              <p class="stat-number">150</p>
+              <p class="stat-number">234</p>
             </div>
             <div class="stat-card">
               <h3>Tuyến đang chạy</h3>
-              <p class="stat-number">8</p>
+              <p class="stat-number">16</p>
             </div>
             <div class="stat-card">
               <h3>Người dùng mới</h3>
@@ -1226,18 +1303,19 @@
               <div class="stats-grid">
                 <div class="stat-card">
                   <h3>Tổng ga tàu</h3>
-                  <p class="stat-number">150</p>
+                  <p class="stat-number" id="overviewStationsCount">0</p>
                 </div>
                 <div class="stat-card">
                   <h3>Tuyến đang chạy</h3>
-                  <p class="stat-number">8</p>
+                  <p class="stat-number" id="overviewLinesCount">0</p>
                 </div>
                 <div class="stat-card">
                   <h3>Yêu cầu hỗ trợ</h3>
-                  <p class="stat-number">2</p>
+                  <p class="stat-number" id="overviewSupportCount">0</p>
                 </div>
               </div>
             `;
+            renderOverviewStats();
             break;
           case "routes":
             sectionTitle.innerText = "Vận hành hệ thống";
@@ -1297,32 +1375,39 @@
                       <p id="stationStatus" class="status-msg"></p>
                     </article>
                     <article class="operation-card span-5">
-                      <h4>Tạo thông báo vận hành</h4>
-                      <p>Thông báo nội bộ cho trực ban và quản lý ca.</p>
-                      <div class="field-grid">
-                        <div>
-                          <label for="noticeLevel">Mức độ</label>
-                          <select id="noticeLevel">
-                            <option value="low">Thấp</option>
-                            <option value="medium">Trung bình</option>
-                            <option value="high">Khẩn cấp</option>
-                          </select>
+                      <div class="notice-composer">
+                        <div class="notice-composer-header">
+                          <div>
+                            <h4 class="notice-composer-title">Tạo thông báo vận hành</h4>
+                            <p class="notice-composer-subtitle">Gửi nhanh thông báo nội bộ cho trực ban và quản lý ca.</p>
+                          </div>
+                          <span class="notice-chip">Nội bộ</span>
                         </div>
-                        <div>
-                          <label for="noticeLine">Tuyến liên quan</label>
-                          <select id="noticeLine"></select>
+                        <div class="field-grid">
+                          <div>
+                            <label for="noticeLevel">Mức độ</label>
+                            <select id="noticeLevel">
+                              <option value="low">Thấp</option>
+                              <option value="medium">Trung bình</option>
+                              <option value="high">Khẩn cấp</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label for="noticeLine">Tuyến liên quan</label>
+                            <select id="noticeLine"></select>
+                          </div>
                         </div>
-                      </div>
-                      <div class="field-group">
-                        <label for="noticeTitle">Tiêu đề</label>
-                        <input id="noticeTitle" placeholder="Ví dụ: Chậm 10 phút do kỹ thuật" />
-                      </div>
-                      <div class="field-group">
-                        <label for="noticeBody">Nội dung</label>
-                        <textarea id="noticeBody" placeholder="Mô tả chi tiết và hướng xử lý"></textarea>
-                      </div>
-                      <div class="row-actions">
-                        <button id="createNoticeBtn" class="btn btn-primary" type="button">Tạo thông báo</button>
+                        <div class="field-group">
+                          <label for="noticeTitle">Tiêu đề</label>
+                          <input id="noticeTitle" placeholder="Ví dụ: Chậm 10 phút do kỹ thuật" />
+                        </div>
+                        <div class="field-group">
+                          <label for="noticeBody">Nội dung</label>
+                          <textarea id="noticeBody" placeholder="Mô tả chi tiết và hướng xử lý"></textarea>
+                        </div>
+                        <div class="row-actions notice-actions">
+                          <button id="createNoticeBtn" class="btn btn-primary" type="button">Tạo thông báo</button>
+                        </div>
                       </div>
                     </article>
                     <article class="operation-card span-7">
@@ -2260,6 +2345,14 @@
       const STORAGE_KEY = "metroAdminStateV1";
       const defaultAdminState = {
         lines: [
+          { id: "S1", blocked: false, reason: "" },
+          { id: "S2", blocked: false, reason: "" },
+          { id: "S3", blocked: false, reason: "" },
+          { id: "S4", blocked: false, reason: "" },
+          { id: "S6", blocked: false, reason: "" },
+          { id: "S7", blocked: false, reason: "" },
+          { id: "S8", blocked: false, reason: "" },
+          { id: "S20", blocked: false, reason: "" },
           { id: "U1", blocked: false, reason: "" },
           { id: "U2", blocked: false, reason: "" },
           { id: "U3", blocked: false, reason: "" },
@@ -2323,9 +2416,9 @@
           const parsed = JSON.parse(raw);
           return {
             lines: Array.isArray(parsed.lines)
-              ? parsed.lines
+              ? parsed.lines.filter((line) => isAdminRailLineId(line && line.id))
               : JSON.parse(JSON.stringify(defaultAdminState.lines)),
-            stations: Array.isArray(parsed.stations) ? parsed.stations : [],
+            stations: dedupePhysicalStations(parsed.stations),
             notices: Array.isArray(parsed.notices) ? parsed.notices : [],
             history: Array.isArray(parsed.history) ? parsed.history : [],
           };
@@ -2359,45 +2452,159 @@
         if (changed) saveAdminState();
       }
 
+      function inferLineIdFromEdge(edge) {
+        const fromId = (edge && (edge.from || edge.from_id || edge.station1)) || "";
+        const toId = (edge && (edge.to || edge.to_id || edge.station2)) || "";
+        const fromPrefix = String(fromId).split("_")[0];
+        const toPrefix = String(toId).split("_")[0];
+        if (fromPrefix === "US") {
+          if (toPrefix === "U") return "U";
+          if (toPrefix === "S") return "S";
+          return "US";
+        }
+        if (fromPrefix === "U" || fromPrefix === "S") return fromPrefix;
+        return fromPrefix || toPrefix || "";
+      }
+
+      function isAdminRailLineId(lineId) {
+        return /^[US]/.test(String(lineId || ""));
+      }
+
+      function normalizePhysicalStationName(name) {
+        return String(name || "")
+          .trim()
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function getPhysicalStationKey(station) {
+        const name = normalizePhysicalStationName(
+          station && (station.name || station.Name || station.id || station.ID),
+        );
+        const lat =
+          station && station.lat !== undefined && station.lat !== null
+            ? Number(station.lat).toFixed(5)
+            : "";
+        const lon =
+          station && station.lon !== undefined && station.lon !== null
+            ? Number(station.lon).toFixed(5)
+            : "";
+        return `${name}|${lat}|${lon}`;
+      }
+
+      function dedupePhysicalStations(stations) {
+        const byKey = new Map();
+        (Array.isArray(stations) ? stations : []).forEach((station) => {
+          const key = getPhysicalStationKey(station);
+          if (!key) return;
+          const existing = byKey.get(key);
+          if (existing) {
+            existing.closed = !!existing.closed || !!station.closed;
+            if (!existing.reason && station.reason) existing.reason = station.reason;
+            return;
+          }
+          byKey.set(key, { ...station });
+        });
+        return Array.from(byKey.values());
+      }
+
+      function buildGraphSummary(data) {
+        const stations = [];
+        const seenStations = new Set();
+        const rawStations = Array.isArray(data && data.stations) ? data.stations : [];
+        rawStations.forEach((st) => {
+          const id = st.id || st.ID || st.name || st.Name;
+          const physicalKey = getPhysicalStationKey(st);
+          if (!id || !physicalKey || seenStations.has(physicalKey)) return;
+          seenStations.add(physicalKey);
+          stations.push({
+            id: physicalKey,
+            name: st.name || st.Name || id,
+            lat: st.lat,
+            lon: st.lon,
+            closed: false,
+            reason: "",
+          });
+        });
+
+        const lines = [];
+        const seenLines = new Set();
+        const rawEdges = Array.isArray(data && data.edges) ? data.edges : [];
+        rawEdges.forEach((edge) => {
+          const lineId = String(edge.line || edge.Line || inferLineIdFromEdge(edge) || "").trim();
+          if (!lineId || !isAdminRailLineId(lineId) || seenLines.has(lineId)) return;
+          seenLines.add(lineId);
+          lines.push({
+            id: lineId,
+            blocked: false,
+            reason: "",
+          });
+        });
+
+        lines.sort((a, b) => a.id.localeCompare(b.id, "en", { numeric: true }));
+        stations.sort((a, b) => a.name.localeCompare(b.name, "vi"));
+        return { lines, stations };
+      }
+
       async function hydrateStationData() {
-        if (!adminOperationsState || adminOperationsState.stations.length > 0)
-          return;
         const sources = [
           "../data/metro_graph.json",
           "./metro_graph.json",
           "/data/metro_graph.json",
           `${API_BASE}/api/graph`,
         ];
+        let graphData = null;
         for (const source of sources) {
           try {
             const response = await fetch(source);
             if (!response.ok) continue;
             const data = await response.json();
             if (!data || !Array.isArray(data.stations)) continue;
-            adminOperationsState.stations = data.stations
-              .map((st) => ({
-                id: st.id || st.name,
-                name: st.name || st.id,
-                closed: false,
-                reason: "",
-              }))
-              .sort((a, b) => a.name.localeCompare(b.name, "vi"));
-            saveAdminState();
-            return;
+            graphData = data;
+            break;
           } catch {
             continue;
           }
         }
-        adminOperationsState.stations = [
-          { id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
-          { id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
-          {
-            id: "sample-3",
-            name: "Munchner Freiheit",
-            closed: false,
-            reason: "",
-          },
-        ];
+
+        const nextState = graphData
+          ? buildGraphSummary(graphData)
+          : {
+              lines: JSON.parse(JSON.stringify(defaultAdminState.lines)).filter((line) => isAdminRailLineId(line.id)),
+              stations: [
+                { id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
+                { id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
+                {
+                  id: "sample-3",
+                  name: "Munchner Freiheit",
+                  closed: false,
+                  reason: "",
+                },
+              ],
+            };
+
+        const lineStateById = new Map(
+          (adminOperationsState.lines || []).map((line) => [line.id, line]),
+        );
+        adminOperationsState.lines = nextState.lines.map((line) => {
+          const existing = lineStateById.get(line.id);
+          return existing
+            ? { ...line, blocked: !!existing.blocked, reason: existing.reason || "" }
+            : line;
+        });
+
+        const stationStateById = new Map(
+          dedupePhysicalStations(adminOperationsState.stations || []).map((station) => [getPhysicalStationKey(station), station]),
+        );
+        adminOperationsState.stations = nextState.stations.map((station) => {
+          const existing = stationStateById.get(getPhysicalStationKey(station));
+          return existing
+            ? { ...station, closed: !!existing.closed, reason: existing.reason || "" }
+            : station;
+        });
+
         saveAdminState();
       }
 
@@ -2417,7 +2624,7 @@
         const blockedLines = adminOperationsState.lines.filter(
           (line) => line.blocked,
         ).length;
-        const closedStations = adminOperationsState.stations.filter(
+        const closedStations = dedupePhysicalStations(adminOperationsState.stations).filter(
           (st) => st.closed,
         ).length;
         const summaryLines = document.getElementById("summaryLines");
@@ -2432,6 +2639,52 @@
         if (summaryStations) {
           summaryStations.textContent = String(closedStations);
         }
+      }
+
+      async function renderOverviewStats() {
+        const stationsCount = document.getElementById("overviewStationsCount");
+        const linesCount = document.getElementById("overviewLinesCount");
+        const supportCount = document.getElementById("overviewSupportCount");
+
+        let stationTotal = dedupePhysicalStations(adminOperationsState?.stations || []).length;
+        let lineTotal = adminOperationsState?.lines?.length ?? 0;
+        let supportTotal = adminOperationsState?.notices?.length ?? 0;
+
+        if (!adminOperationsState) {
+          const sources = [
+            "../data/metro_graph.json",
+            "./metro_graph.json",
+            "/data/metro_graph.json",
+            `${API_BASE}/api/graph`,
+          ];
+          for (const source of sources) {
+            try {
+              const response = await fetch(source);
+              if (!response.ok) continue;
+              const data = await response.json();
+              if (!data || !Array.isArray(data.stations)) continue;
+              stationTotal = dedupePhysicalStations(data.stations).length;
+              const edges = Array.isArray(data.edges) ? data.edges : [];
+              const lineIds = new Set();
+              edges.forEach((edge) => {
+                const lineId = String(edge.line || edge.Line || inferLineIdFromEdge(edge) || "").trim();
+                if (lineId && isAdminRailLineId(lineId)) lineIds.add(lineId);
+              });
+              lineTotal = lineIds.size || defaultAdminState.lines.length;
+              break;
+            } catch {
+              continue;
+            }
+          }
+        } else {
+          stationTotal = adminOperationsState.stations.length;
+          lineTotal = adminOperationsState.lines.length;
+          supportTotal = adminOperationsState.notices.length;
+        }
+
+        if (stationsCount) stationsCount.textContent = String(stationTotal);
+        if (linesCount) linesCount.textContent = String(lineTotal);
+        if (supportCount) supportCount.textContent = String(supportTotal);
       }
 
       function renderLines() {
