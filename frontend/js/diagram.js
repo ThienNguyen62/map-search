@@ -18,9 +18,24 @@
         U1: '#417AB4', U2: '#D4311E', U3: '#F5821F', U4: '#00A76D',
         U5: '#BF7F50', U6: '#0065A3', U7: '#8246AF', U8: '#C4071C',
         S1: '#1A9BD7', S2: '#76B82A', S3: '#951B81', S4: '#E2001A',
-        S6: '#00A550', S7: '#964B00', S8: '#000000',
+        S6: '#00A550', S7: '#964B00', S8: '#000000', S20: '#ED6B9B',
+        T: '#999999',
         U: '#417AB4', S: '#1A9BD7', US: '#888888'
     };
+
+    // Darken a hex color by a factor between 0 and 1 (smaller => darker)
+    function darkenColor(hex, factor = 0.9) {
+        if (!hex || hex[0] !== '#') return hex;
+        const h = hex.slice(1);
+        const bigint = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+        r = Math.max(0, Math.min(255, Math.round(r * factor)));
+        g = Math.max(0, Math.min(255, Math.round(g * factor)));
+        b = Math.max(0, Math.min(255, Math.round(b * factor)));
+        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
 
     let stations = [];
     let edges = [];
@@ -133,11 +148,50 @@
         const height = 1200;
         const positions = {};
 
+        // Group by coordinates AND system (U/S) to handle overlaps
+        const baseGroups = {};
+        const coordGroups = {};
         stations.forEach(s => {
-            // Map lat/lon to x/y (lon→x, lat→y inverted)
-            const x = padding + ((s.lon - minLon) / (maxLon - minLon || 1)) * (width - 2 * padding);
-            const y = padding + ((maxLat - s.lat) / (maxLat - minLat || 1)) * (height - 2 * padding);
-            positions[s.id] = { x, y };
+            let system = 'U';
+            if (s.line && s.line.length > 0) {
+                if (s.line.some(l => l.startsWith('S'))) system = 'S';
+                if (s.line.some(l => l.startsWith('U'))) system = 'U';
+            } else {
+                system = s.id.split('_')[0].charAt(0) === 'S' ? 'S' : 'U';
+            }
+
+            const baseKey = `${s.lat.toFixed(4)}_${s.lon.toFixed(4)}`;
+            const coordKey = `${baseKey}_${system}`;
+            
+            if (!coordGroups[coordKey]) {
+                coordGroups[coordKey] = {
+                    groupStations: [],
+                    baseKey: baseKey
+                };
+                if (!baseGroups[baseKey]) baseGroups[baseKey] = [];
+                baseGroups[baseKey].push(coordGroups[coordKey]);
+            }
+            coordGroups[coordKey].groupStations.push(s);
+        });
+
+        Object.values(baseGroups).forEach(groups => {
+            groups.forEach((group, i) => {
+                const representative = group.groupStations[0];
+                let x = padding + ((representative.lon - minLon) / (maxLon - minLon || 1)) * (width - 2 * padding);
+                let y = padding + ((maxLat - representative.lat) / (maxLat - minLat || 1)) * (height - 2 * padding);
+                
+                // Offset horizontally to sit side-by-side if they share the exact base coordinate
+                if (groups.length > 1) {
+                    const offsetStep = 10; // SVG pixels
+                    const angle = (2 * Math.PI * i) / groups.length;
+                    x += offsetStep * Math.cos(angle);
+                    y += offsetStep * Math.sin(angle);
+                }
+
+                group.groupStations.forEach(s => {
+                    positions[s.id] = { x, y, representativeId: representative.id };
+                });
+            });
         });
 
         return positions;
@@ -170,12 +224,23 @@
         });
 
         Object.entries(lineGroups).forEach(([line, lineEdges]) => {
-            const color = LINE_COLORS[line] || '#999';
+            const color = darkenColor(LINE_COLORS[line] || '#999', 0.88);
+            const isTransfer = line === 'T';
+            const dashArray = isTransfer ? 'stroke-dasharray="4,6"' : '';
+            const width = isTransfer ? '2' : '4';
+            const opacity = isTransfer ? '0.4' : '0.85';
+
             lineEdges.forEach(e => {
                 const from = positions[e.from];
                 const to = positions[e.to];
                 if (!from || !to) return;
-                html += `<line class="diagram-edge" data-line="${line}" x1="${from.x}" y1="${from.y}" x2="${to.x}" y2="${to.y}" stroke="${color}" stroke-width="4" opacity="0.85"/>`;
+                
+                // Hide transfer edges between nodes of the same physical station
+                if (isTransfer && Math.abs(from.x - to.x) < 0.1 && Math.abs(from.y - to.y) < 0.1) {
+                    return;
+                }
+                
+                html += `<line class="diagram-edge" data-line="${line}" x1="${from.x}" y1="${from.y}" x2="${to.x}" y2="${to.y}" stroke="${color}" stroke-width="${width}" opacity="${opacity}" ${dashArray}/>`;
             });
         });
 
@@ -189,23 +254,36 @@
             });
         });
 
+        // Draw stations (one DOM node per physical coordinate)
+        const drawnCoords = new Set();
         stations.forEach(s => {
             const pos = positions[s.id];
             if (!pos) return;
-            const lines = stationLines[s.id] || new Set();
+            const coordKey = `${pos.x.toFixed(2)}_${pos.y.toFixed(2)}`;
+            if (drawnCoords.has(coordKey)) return;
+            drawnCoords.add(coordKey);
+
+            // Gather all lines for all nodes at this physical location
+            const lines = new Set();
+            stations.filter(st => positions[st.id] && positions[st.id].representativeId === pos.representativeId)
+                    .forEach(st => {
+                        const lns = stationLines[st.id] || new Set();
+                        lns.forEach(l => lines.add(l));
+                    });
+
             const isInterchange = lines.size > 1;
             const radius = isInterchange ? 6 : 4;
             const strokeWidth = isInterchange ? 2.5 : 1.5;
             const fillColor = isInterchange ? '#ffffff' : '#ffffff';
-            const strokeColor = isInterchange ? '#333' : (LINE_COLORS[Array.from(lines)[0]] || '#666');
+            const strokeColor = isInterchange ? '#333' : darkenColor(LINE_COLORS[Array.from(lines)[0]] || '#666', 0.9);
 
-            html += `<g class="diagram-station" data-id="${s.id}" data-lines="${Array.from(lines).join(',')}">`;
+            html += `<g class="diagram-station" data-id="${pos.representativeId}" data-lines="${Array.from(lines).join(',')}">`;
             html += `<circle cx="${pos.x}" cy="${pos.y}" r="${radius}" fill="${fillColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}"/>`;
 
             // Label - offset based on position to avoid overlap
             const labelX = pos.x + 8;
             const labelY = pos.y - 8;
-            html += `<text class="diagram-station-label" x="${labelX}" y="${labelY}" data-id="${s.id}">${escapeXml(s.name)}</text>`;
+            html += `<text class="diagram-station-label" x="${labelX}" y="${labelY}" data-id="${pos.representativeId}">${escapeXml(s.name)}</text>`;
             html += `</g>`;
         });
 
@@ -221,7 +299,7 @@
             const row = i < 8 ? i : i - 8;
             const lx = legendX + col * 130;
             const ly = legendY + 20 + row * 28;
-            html += `<circle cx="${lx + 8}" cy="${ly}" r="7" fill="${LINE_COLORS[line]}"/>`;
+            html += `<circle cx="${lx + 8}" cy="${ly}" r="7" fill="${darkenColor(LINE_COLORS[line]||'#999',0.88)}"/>`;
             html += `<text x="${lx + 22}" y="${ly + 4}" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333" font-weight="600">Linie ${line}</text>`;
         });
 
@@ -263,7 +341,7 @@
             const stLines = new Set();
             (adjacency[stationId] || []).forEach(e => stLines.add(e.line));
             linesEl.innerHTML = `<strong>Tuyến:</strong> ${Array.from(stLines).map(l =>
-                `<span style="display:inline-block;padding:2px 8px;border-radius:6px;background:${LINE_COLORS[l] || '#999'};color:#fff;font-weight:700;font-size:0.8rem;margin:2px">${l}</span>`
+                `<span style="display:inline-block;padding:2px 8px;border-radius:6px;background:${darkenColor(LINE_COLORS[l] || '#999',0.88)};color:#fff;font-weight:700;font-size:0.8rem;margin:2px">${l}</span>`
             ).join(' ')}`;
 
             // Find connected stations
@@ -431,39 +509,123 @@
         const input = document.getElementById('searchStation');
         const results = document.getElementById('searchResults');
         if (!input || !results) return;
+        let selectedIndex = -1;
 
-        input.addEventListener('input', () => {
-            const query = input.value.trim().toLowerCase();
+        function renderResults(matches) {
             results.innerHTML = '';
-            if (!query || query.length < 1) return;
-
-            const matches = stations.filter(s => s.name.toLowerCase().includes(query)).slice(0, 10);
-            matches.forEach(s => {
+            selectedIndex = -1;
+            matches.forEach((s, idx) => {
                 const lines = new Set();
                 (adjacency[s.id] || []).forEach(e => lines.add(e.line));
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
+                div.setAttribute('data-idx', idx);
                 div.innerHTML = `<div class="station-name">${s.name}</div><div class="station-lines">${Array.from(lines).join(', ')}</div>`;
-                div.addEventListener('click', () => {
-                    highlightStation(s.id);
-                    input.value = s.name;
-                    results.innerHTML = '';
-
-                    // Center SVG on this station if in interactive mode
-                    if (currentView === 'interactive') {
-                        const positions = computeSchematicPositions();
-                        const pos = positions[s.id];
-                        if (pos) {
-                            svgViewBox.x = pos.x - svgViewBox.w / 2;
-                            svgViewBox.y = pos.y - svgViewBox.h / 2;
-                            const svg = document.getElementById('diagramSvg');
-                            svg.setAttribute('viewBox', `${svgViewBox.x} ${svgViewBox.y} ${svgViewBox.w} ${svgViewBox.h}`);
-                        }
-                    }
-                });
+                div.addEventListener('click', () => selectStationFromResult(s));
                 results.appendChild(div);
             });
+        }
+
+        function selectStationFromResult(s) {
+            highlightStation(s.id);
+            input.value = s.name;
+            results.innerHTML = '';
+            if (currentView === 'interactive') {
+                const positions = computeSchematicPositions();
+                const pos = positions[s.id];
+                if (pos) {
+                    svgViewBox.x = pos.x - svgViewBox.w / 2;
+                    svgViewBox.y = pos.y - svgViewBox.h / 2;
+                    const svg = document.getElementById('diagramSvg');
+                    svg.setAttribute('viewBox', `${svgViewBox.x} ${svgViewBox.y} ${svgViewBox.w} ${svgViewBox.h}`);
+                }
+            }
+        }
+
+        function updateSelectionVisual() {
+            const items = results.querySelectorAll('.search-result-item');
+            items.forEach((it, i) => {
+                it.classList.toggle('active', i === selectedIndex);
+            });
+        }
+
+        function buildMatches(query) {
+            const q = (query || '').trim().toLowerCase();
+            let matches = [];
+            if (!q) {
+                matches = stations.slice().sort((a, b) => a.name.localeCompare(b.name)).slice(0, 50);
+            } else {
+                matches = stations.filter(s => s.name.toLowerCase().includes(q)).slice(0, 50);
+            }
+            return matches;
+        }
+
+        input.addEventListener('input', () => {
+            const query = input.value;
+            const matches = buildMatches(query);
+            if (!matches.length) {
+                results.innerHTML = '';
+                return;
+            }
+            renderResults(matches);
         });
+
+        // Show full list on focus
+        input.addEventListener('focus', () => {
+            const matches = buildMatches('');
+            renderResults(matches);
+        });
+
+        // Keyboard navigation
+        input.addEventListener('keydown', (ev) => {
+            const items = results.querySelectorAll('.search-result-item');
+            if (!items.length) return;
+            if (ev.key === 'ArrowDown') {
+                ev.preventDefault();
+                selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+                updateSelectionVisual();
+                items[selectedIndex].scrollIntoView({ block: 'nearest' });
+            } else if (ev.key === 'ArrowUp') {
+                ev.preventDefault();
+                selectedIndex = Math.max(0, selectedIndex - 1);
+                updateSelectionVisual();
+                items[selectedIndex].scrollIntoView({ block: 'nearest' });
+            } else if (ev.key === 'Enter') {
+                ev.preventDefault();
+                if (selectedIndex >= 0 && items[selectedIndex]) {
+                    const idx = parseInt(items[selectedIndex].getAttribute('data-idx') || '0', 10);
+                    const matches = buildMatches(input.value);
+                    const s = matches[idx];
+                    if (s) selectStationFromResult(s);
+                }
+            } else if (ev.key === 'Escape') {
+                results.innerHTML = '';
+            }
+        });
+
+        // Click outside to close
+        document.addEventListener('click', (ev) => {
+            if (!ev.target.closest('#searchStation') && !ev.target.closest('#searchResults')) {
+                results.innerHTML = '';
+            }
+        });
+    }
+
+    // ── Toast / Small notifications ──
+    function showToast(message, timeout = 3000) {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const el = document.createElement('div');
+        el.className = 'toast';
+        el.textContent = message;
+        container.appendChild(el);
+        // Force reflow then show
+        void el.offsetWidth;
+        el.classList.add('show');
+        setTimeout(() => {
+            el.classList.remove('show');
+            setTimeout(() => el.remove(), 250);
+        }, timeout);
     }
 
     // ── Legend Click ──
@@ -537,6 +699,16 @@
         setupLegendClicks();
         setupControls();
         setupImagePanZoom();
+
+        // language button (VI) click -> toast
+        const langBtn = document.querySelector('.lang-select span');
+        if (langBtn) {
+            langBtn.style.cursor = 'pointer';
+            langBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Tính năng sẽ được cập nhật sau');
+            });
+        }
     }
 
     window.addEventListener('load', init);

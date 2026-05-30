@@ -145,6 +145,11 @@
     background: rgba(255, 255, 255, 0.08);
 }
 
+.search-result-item.active {
+    background: rgba(109,130,255,0.18);
+    outline: 1px solid rgba(109,130,255,0.28);
+}
+
 .search-result-item .station-name {
     font-weight: 700;
     color: #fff;
@@ -264,4 +269,30 @@
     transform-origin: center center;
     max-width: none;
     transition: transform 0.15s ease;
+}
+
+/* Toast notification */
+.toast-container {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    pointer-events: none;
+}
+.toast {
+    pointer-events: auto;
+    background: rgba(33,37,41,0.95);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(15,23,42,0.35);
+    font-size: 0.95rem;
+    margin-top: 8px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }

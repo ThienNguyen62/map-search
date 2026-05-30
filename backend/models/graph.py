@@ -7,6 +7,7 @@ class Graph:
         self.stations = []
         self.edges = []
         self.station_by_id = {}
+        self.stations_by_name = {}  # name (lowercase) -> list of Station
 
     def load_from_json(self, stations_file: str, edges_file: str):
         # Load stations
@@ -21,13 +22,20 @@ class Graph:
                 station_lat = s.get('lat') or s.get('latitude')
                 station_lon = s.get('lon') or s.get('longitude')
                 station_children = s.get('children') or s.get('Nearby') or []
+                station_line = s.get('line') or s.get('Line') or []
 
                 if station_id is None or station_lat is None or station_lon is None:
                     continue
 
-                station = Station(station_id, station_name, station_lat, station_lon, station_children)
+                station = Station(station_id, station_name, station_lat, station_lon, station_children, station_line)
                 self.stations.append(station)
                 self.station_by_id[station_id] = station
+
+                # Build name -> [stations] lookup for resolving duplicate names
+                name_key = station_name.strip().lower()
+                if name_key not in self.stations_by_name:
+                    self.stations_by_name[name_key] = []
+                self.stations_by_name[name_key].append(station)
 
         # Load edges
         with open(edges_file, 'r', encoding='utf-8') as f:
@@ -47,6 +55,10 @@ class Graph:
 
     def get_station_by_id(self, station_id: str):
         return self.station_by_id.get(station_id)
+
+    def get_stations_by_name(self, name: str):
+        """Return all stations matching the given name (case-insensitive)."""
+        return self.stations_by_name.get(name.strip().lower(), [])
 
     def to_dict(self):
         return {

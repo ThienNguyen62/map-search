@@ -3188,7 +3188,7 @@
       "from": "S4_Baldham",
       "to": "S6_Baldham",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3196,7 +3196,7 @@
       "from": "S2_BergAmLaim",
       "to": "S4_BergAmLaim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3204,7 +3204,7 @@
       "from": "S2_BergAmLaim",
       "to": "S6_BergAmLaim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3212,7 +3212,7 @@
       "from": "S4_BergAmLaim",
       "to": "S6_BergAmLaim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3220,7 +3220,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S2_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3228,7 +3228,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S3_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3236,7 +3236,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S4_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3244,7 +3244,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S6_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3252,7 +3252,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S7_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3260,7 +3260,7 @@
       "from": "S1_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3268,7 +3268,7 @@
       "from": "S2_Donnersbergerbrucke",
       "to": "S3_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3276,7 +3276,7 @@
       "from": "S2_Donnersbergerbrucke",
       "to": "S4_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3284,7 +3284,7 @@
       "from": "S2_Donnersbergerbrucke",
       "to": "S6_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3292,7 +3292,7 @@
       "from": "S2_Donnersbergerbrucke",
       "to": "S7_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3300,7 +3300,7 @@
       "from": "S2_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3308,7 +3308,7 @@
       "from": "S3_Donnersbergerbrucke",
       "to": "S4_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3316,7 +3316,7 @@
       "from": "S3_Donnersbergerbrucke",
       "to": "S6_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3324,7 +3324,7 @@
       "from": "S3_Donnersbergerbrucke",
       "to": "S7_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3332,7 +3332,7 @@
       "from": "S3_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3340,7 +3340,7 @@
       "from": "S4_Donnersbergerbrucke",
       "to": "S6_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3348,7 +3348,7 @@
       "from": "S4_Donnersbergerbrucke",
       "to": "S7_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3356,7 +3356,7 @@
       "from": "S4_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3364,7 +3364,7 @@
       "from": "S6_Donnersbergerbrucke",
       "to": "S7_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3372,7 +3372,7 @@
       "from": "S6_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3380,7 +3380,7 @@
       "from": "S7_Donnersbergerbrucke",
       "to": "S8_Donnersbergerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3388,7 +3388,7 @@
       "from": "S4_Ebersberg",
       "to": "S6_Ebersberg",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3396,7 +3396,7 @@
       "from": "S4_Eglharting",
       "to": "S6_Eglharting",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3404,7 +3404,7 @@
       "from": "S4_Grafing",
       "to": "S6_Grafing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3412,7 +3412,7 @@
       "from": "S4_GrafingStadt",
       "to": "S6_GrafingStadt",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3420,7 +3420,7 @@
       "from": "S4_Gronsdorf",
       "to": "S6_Gronsdorf",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3428,7 +3428,7 @@
       "from": "S7_Grosshesselohe",
       "to": "S20_Grosshesselohe",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3436,7 +3436,7 @@
       "from": "S4_Haar",
       "to": "S6_Haar",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3444,7 +3444,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S2_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3452,7 +3452,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S3_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3460,7 +3460,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S4_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3468,7 +3468,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S6_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3476,7 +3476,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S7_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3484,7 +3484,7 @@
       "from": "S1_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3492,7 +3492,7 @@
       "from": "S2_Hackerbrucke",
       "to": "S3_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3500,7 +3500,7 @@
       "from": "S2_Hackerbrucke",
       "to": "S4_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3508,7 +3508,7 @@
       "from": "S2_Hackerbrucke",
       "to": "S6_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3516,7 +3516,7 @@
       "from": "S2_Hackerbrucke",
       "to": "S7_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3524,7 +3524,7 @@
       "from": "S2_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3532,7 +3532,7 @@
       "from": "S3_Hackerbrucke",
       "to": "S4_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3540,7 +3540,7 @@
       "from": "S3_Hackerbrucke",
       "to": "S6_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3548,7 +3548,7 @@
       "from": "S3_Hackerbrucke",
       "to": "S7_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3556,7 +3556,7 @@
       "from": "S3_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3564,7 +3564,7 @@
       "from": "S4_Hackerbrucke",
       "to": "S6_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3572,7 +3572,7 @@
       "from": "S4_Hackerbrucke",
       "to": "S7_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3580,7 +3580,7 @@
       "from": "S4_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3588,7 +3588,7 @@
       "from": "S6_Hackerbrucke",
       "to": "S7_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3596,7 +3596,7 @@
       "from": "S6_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3604,7 +3604,7 @@
       "from": "S7_Hackerbrucke",
       "to": "S8_Hackerbrucke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3612,7 +3612,7 @@
       "from": "S1_Hirschgarten",
       "to": "S2_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3620,7 +3620,7 @@
       "from": "S1_Hirschgarten",
       "to": "S3_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3628,7 +3628,7 @@
       "from": "S1_Hirschgarten",
       "to": "S4_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3636,7 +3636,7 @@
       "from": "S1_Hirschgarten",
       "to": "S6_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3644,7 +3644,7 @@
       "from": "S1_Hirschgarten",
       "to": "S8_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3652,7 +3652,7 @@
       "from": "S2_Hirschgarten",
       "to": "S3_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3660,7 +3660,7 @@
       "from": "S2_Hirschgarten",
       "to": "S4_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3668,7 +3668,7 @@
       "from": "S2_Hirschgarten",
       "to": "S6_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3676,7 +3676,7 @@
       "from": "S2_Hirschgarten",
       "to": "S8_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3684,7 +3684,7 @@
       "from": "S3_Hirschgarten",
       "to": "S4_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3692,7 +3692,7 @@
       "from": "S3_Hirschgarten",
       "to": "S6_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3700,7 +3700,7 @@
       "from": "S3_Hirschgarten",
       "to": "S8_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3708,7 +3708,7 @@
       "from": "S4_Hirschgarten",
       "to": "S6_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3716,7 +3716,7 @@
       "from": "S4_Hirschgarten",
       "to": "S8_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3724,7 +3724,7 @@
       "from": "S6_Hirschgarten",
       "to": "S8_Hirschgarten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3732,7 +3732,7 @@
       "from": "S7_Hoellriegelskreuth",
       "to": "S20_Hoellriegelskreuth",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3740,7 +3740,7 @@
       "from": "S1_Isartor",
       "to": "S2_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3748,7 +3748,7 @@
       "from": "S1_Isartor",
       "to": "S3_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3756,7 +3756,7 @@
       "from": "S1_Isartor",
       "to": "S4_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3764,7 +3764,7 @@
       "from": "S1_Isartor",
       "to": "S6_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3772,7 +3772,7 @@
       "from": "S1_Isartor",
       "to": "S7_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3780,7 +3780,7 @@
       "from": "S1_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3788,7 +3788,7 @@
       "from": "S2_Isartor",
       "to": "S3_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3796,7 +3796,7 @@
       "from": "S2_Isartor",
       "to": "S4_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3804,7 +3804,7 @@
       "from": "S2_Isartor",
       "to": "S6_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3812,7 +3812,7 @@
       "from": "S2_Isartor",
       "to": "S7_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3820,7 +3820,7 @@
       "from": "S2_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3828,7 +3828,7 @@
       "from": "S3_Isartor",
       "to": "S4_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3836,7 +3836,7 @@
       "from": "S3_Isartor",
       "to": "S6_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3844,7 +3844,7 @@
       "from": "S3_Isartor",
       "to": "S7_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3852,7 +3852,7 @@
       "from": "S3_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3860,7 +3860,7 @@
       "from": "S4_Isartor",
       "to": "S6_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3868,7 +3868,7 @@
       "from": "S4_Isartor",
       "to": "S7_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3876,7 +3876,7 @@
       "from": "S4_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3884,7 +3884,7 @@
       "from": "S6_Isartor",
       "to": "S7_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3892,7 +3892,7 @@
       "from": "S6_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3900,7 +3900,7 @@
       "from": "S7_Isartor",
       "to": "S8_Isartor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3908,7 +3908,7 @@
       "from": "S4_Kirchseeon",
       "to": "S6_Kirchseeon",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3916,7 +3916,7 @@
       "from": "S1_Laim",
       "to": "S2_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3924,7 +3924,7 @@
       "from": "S1_Laim",
       "to": "S3_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3932,7 +3932,7 @@
       "from": "S1_Laim",
       "to": "S4_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3940,7 +3940,7 @@
       "from": "S1_Laim",
       "to": "S6_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3948,7 +3948,7 @@
       "from": "S1_Laim",
       "to": "S8_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3956,7 +3956,7 @@
       "from": "S2_Laim",
       "to": "S3_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3964,7 +3964,7 @@
       "from": "S2_Laim",
       "to": "S4_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3972,7 +3972,7 @@
       "from": "S2_Laim",
       "to": "S6_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3980,7 +3980,7 @@
       "from": "S2_Laim",
       "to": "S8_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3988,7 +3988,7 @@
       "from": "S3_Laim",
       "to": "S4_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -3996,7 +3996,7 @@
       "from": "S3_Laim",
       "to": "S6_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4004,7 +4004,7 @@
       "from": "S3_Laim",
       "to": "S8_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4012,7 +4012,7 @@
       "from": "S4_Laim",
       "to": "S6_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4020,7 +4020,7 @@
       "from": "S4_Laim",
       "to": "S8_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4028,7 +4028,7 @@
       "from": "S6_Laim",
       "to": "S8_Laim",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4036,7 +4036,7 @@
       "from": "S2_Leuchtenbergring",
       "to": "S4_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4044,7 +4044,7 @@
       "from": "S2_Leuchtenbergring",
       "to": "S6_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4052,7 +4052,7 @@
       "from": "S2_Leuchtenbergring",
       "to": "S8_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4060,7 +4060,7 @@
       "from": "S4_Leuchtenbergring",
       "to": "S6_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4068,7 +4068,7 @@
       "from": "S4_Leuchtenbergring",
       "to": "S8_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4076,7 +4076,7 @@
       "from": "S6_Leuchtenbergring",
       "to": "S8_Leuchtenbergring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4084,7 +4084,7 @@
       "from": "S7_Mittersendling",
       "to": "S20_Mittersendling",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4092,7 +4092,7 @@
       "from": "S1_MunichAirport",
       "to": "S8_MunichAirport",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4100,7 +4100,7 @@
       "from": "S3_Pasing",
       "to": "S4_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4108,7 +4108,7 @@
       "from": "S3_Pasing",
       "to": "S6_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4116,7 +4116,7 @@
       "from": "S3_Pasing",
       "to": "S8_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4124,7 +4124,7 @@
       "from": "S3_Pasing",
       "to": "S20_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4132,7 +4132,7 @@
       "from": "S4_Pasing",
       "to": "S6_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4140,7 +4140,7 @@
       "from": "S4_Pasing",
       "to": "S8_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4148,7 +4148,7 @@
       "from": "S4_Pasing",
       "to": "S20_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4156,7 +4156,7 @@
       "from": "S6_Pasing",
       "to": "S8_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4164,7 +4164,7 @@
       "from": "S6_Pasing",
       "to": "S20_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4172,7 +4172,7 @@
       "from": "S8_Pasing",
       "to": "S20_Pasing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4180,7 +4180,7 @@
       "from": "S7_Pullach",
       "to": "S20_Pullach",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4188,7 +4188,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S2_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4196,7 +4196,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S3_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4204,7 +4204,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S4_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4212,7 +4212,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S6_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4220,7 +4220,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S7_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4228,7 +4228,7 @@
       "from": "S1_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4236,7 +4236,7 @@
       "from": "S2_RosenheimeRPlatz",
       "to": "S3_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4244,7 +4244,7 @@
       "from": "S2_RosenheimeRPlatz",
       "to": "S4_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4252,7 +4252,7 @@
       "from": "S2_RosenheimeRPlatz",
       "to": "S6_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4260,7 +4260,7 @@
       "from": "S2_RosenheimeRPlatz",
       "to": "S7_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4268,7 +4268,7 @@
       "from": "S2_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4276,7 +4276,7 @@
       "from": "S3_RosenheimeRPlatz",
       "to": "S4_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4284,7 +4284,7 @@
       "from": "S3_RosenheimeRPlatz",
       "to": "S6_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4292,7 +4292,7 @@
       "from": "S3_RosenheimeRPlatz",
       "to": "S7_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4300,7 +4300,7 @@
       "from": "S3_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4308,7 +4308,7 @@
       "from": "S4_RosenheimeRPlatz",
       "to": "S6_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4316,7 +4316,7 @@
       "from": "S4_RosenheimeRPlatz",
       "to": "S7_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4324,7 +4324,7 @@
       "from": "S4_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4332,7 +4332,7 @@
       "from": "S6_RosenheimeRPlatz",
       "to": "S7_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4340,7 +4340,7 @@
       "from": "S6_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4348,7 +4348,7 @@
       "from": "S7_RosenheimeRPlatz",
       "to": "S8_RosenheimeRPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4356,7 +4356,7 @@
       "from": "S7_Siemenswerke",
       "to": "S20_Siemenswerke",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4364,7 +4364,7 @@
       "from": "S7_Solln",
       "to": "S20_Solln",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4372,7 +4372,7 @@
       "from": "S3_StMartinStrasse",
       "to": "S7_StMartinStrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4380,7 +4380,7 @@
       "from": "S4_Vaterstetten",
       "to": "S6_Vaterstetten",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4388,7 +4388,7 @@
       "from": "S6_Westkreuz",
       "to": "S8_Westkreuz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4396,7 +4396,7 @@
       "from": "S4_Zorneding",
       "to": "S6_Zorneding",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4404,7 +4404,7 @@
       "from": "U2_Giesing",
       "to": "U7_Giesing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4412,7 +4412,7 @@
       "from": "U2_Giesing",
       "to": "U8_Giesing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4420,7 +4420,7 @@
       "from": "U7_Giesing",
       "to": "U8_Giesing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4428,7 +4428,7 @@
       "from": "S3_Giesing",
       "to": "S7_Giesing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4436,7 +4436,7 @@
       "from": "U1_Hauptbahnhof",
       "to": "U2_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4444,7 +4444,7 @@
       "from": "U1_Hauptbahnhof",
       "to": "U4_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4452,7 +4452,7 @@
       "from": "U1_Hauptbahnhof",
       "to": "U5_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4460,7 +4460,7 @@
       "from": "U1_Hauptbahnhof",
       "to": "U7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4468,7 +4468,7 @@
       "from": "U1_Hauptbahnhof",
       "to": "U8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4476,7 +4476,7 @@
       "from": "U2_Hauptbahnhof",
       "to": "U4_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4484,7 +4484,7 @@
       "from": "U2_Hauptbahnhof",
       "to": "U5_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4492,7 +4492,7 @@
       "from": "U2_Hauptbahnhof",
       "to": "U7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4500,7 +4500,7 @@
       "from": "U2_Hauptbahnhof",
       "to": "U8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4508,7 +4508,7 @@
       "from": "U4_Hauptbahnhof",
       "to": "U5_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4516,7 +4516,7 @@
       "from": "U4_Hauptbahnhof",
       "to": "U7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4524,7 +4524,7 @@
       "from": "U4_Hauptbahnhof",
       "to": "U8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4532,7 +4532,7 @@
       "from": "U5_Hauptbahnhof",
       "to": "U7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4540,7 +4540,7 @@
       "from": "U5_Hauptbahnhof",
       "to": "U8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4548,7 +4548,7 @@
       "from": "U7_Hauptbahnhof",
       "to": "U8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4556,7 +4556,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S2_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4564,7 +4564,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S3_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4572,7 +4572,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S4_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4580,7 +4580,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S6_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4588,7 +4588,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4596,7 +4596,7 @@
       "from": "S1_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4604,7 +4604,7 @@
       "from": "S2_Hauptbahnhof",
       "to": "S3_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4612,7 +4612,7 @@
       "from": "S2_Hauptbahnhof",
       "to": "S4_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4620,7 +4620,7 @@
       "from": "S2_Hauptbahnhof",
       "to": "S6_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4628,7 +4628,7 @@
       "from": "S2_Hauptbahnhof",
       "to": "S7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4636,7 +4636,7 @@
       "from": "S2_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4644,7 +4644,7 @@
       "from": "S3_Hauptbahnhof",
       "to": "S4_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4652,7 +4652,7 @@
       "from": "S3_Hauptbahnhof",
       "to": "S6_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4660,7 +4660,7 @@
       "from": "S3_Hauptbahnhof",
       "to": "S7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4668,7 +4668,7 @@
       "from": "S3_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4676,7 +4676,7 @@
       "from": "S4_Hauptbahnhof",
       "to": "S6_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4684,7 +4684,7 @@
       "from": "S4_Hauptbahnhof",
       "to": "S7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4692,7 +4692,7 @@
       "from": "S4_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4700,7 +4700,7 @@
       "from": "S6_Hauptbahnhof",
       "to": "S7_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4708,7 +4708,7 @@
       "from": "S6_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4716,7 +4716,7 @@
       "from": "S7_Hauptbahnhof",
       "to": "S8_Hauptbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4724,7 +4724,7 @@
       "from": "U4_Heimeranplatz",
       "to": "U5_Heimeranplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4732,7 +4732,7 @@
       "from": "S7_Heimeranplatz",
       "to": "S20_Heimeranplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4740,7 +4740,7 @@
       "from": "U4_Karlsplatz",
       "to": "U5_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4748,7 +4748,7 @@
       "from": "S1_Karlsplatz",
       "to": "S2_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4756,7 +4756,7 @@
       "from": "S1_Karlsplatz",
       "to": "S3_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4764,7 +4764,7 @@
       "from": "S1_Karlsplatz",
       "to": "S4_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4772,7 +4772,7 @@
       "from": "S1_Karlsplatz",
       "to": "S6_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4780,7 +4780,7 @@
       "from": "S1_Karlsplatz",
       "to": "S7_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4788,7 +4788,7 @@
       "from": "S1_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4796,7 +4796,7 @@
       "from": "S2_Karlsplatz",
       "to": "S3_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4804,7 +4804,7 @@
       "from": "S2_Karlsplatz",
       "to": "S4_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4812,7 +4812,7 @@
       "from": "S2_Karlsplatz",
       "to": "S6_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4820,7 +4820,7 @@
       "from": "S2_Karlsplatz",
       "to": "S7_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4828,7 +4828,7 @@
       "from": "S2_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4836,7 +4836,7 @@
       "from": "S3_Karlsplatz",
       "to": "S4_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4844,7 +4844,7 @@
       "from": "S3_Karlsplatz",
       "to": "S6_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4852,7 +4852,7 @@
       "from": "S3_Karlsplatz",
       "to": "S7_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4860,7 +4860,7 @@
       "from": "S3_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4868,7 +4868,7 @@
       "from": "S4_Karlsplatz",
       "to": "S6_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4876,7 +4876,7 @@
       "from": "S4_Karlsplatz",
       "to": "S7_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4884,7 +4884,7 @@
       "from": "S4_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4892,7 +4892,7 @@
       "from": "S6_Karlsplatz",
       "to": "S7_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4900,7 +4900,7 @@
       "from": "S6_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4908,7 +4908,7 @@
       "from": "S7_Karlsplatz",
       "to": "S8_Karlsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4916,7 +4916,7 @@
       "from": "U3_Marienplatz",
       "to": "U6_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4924,7 +4924,7 @@
       "from": "S1_Marienplatz",
       "to": "S2_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4932,7 +4932,7 @@
       "from": "S1_Marienplatz",
       "to": "S3_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4940,7 +4940,7 @@
       "from": "S1_Marienplatz",
       "to": "S4_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4948,7 +4948,7 @@
       "from": "S1_Marienplatz",
       "to": "S6_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4956,7 +4956,7 @@
       "from": "S1_Marienplatz",
       "to": "S7_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4964,7 +4964,7 @@
       "from": "S1_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4972,7 +4972,7 @@
       "from": "S2_Marienplatz",
       "to": "S3_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4980,7 +4980,7 @@
       "from": "S2_Marienplatz",
       "to": "S4_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4988,7 +4988,7 @@
       "from": "S2_Marienplatz",
       "to": "S6_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -4996,7 +4996,7 @@
       "from": "S2_Marienplatz",
       "to": "S7_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5004,7 +5004,7 @@
       "from": "S2_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5012,7 +5012,7 @@
       "from": "S3_Marienplatz",
       "to": "S4_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5020,7 +5020,7 @@
       "from": "S3_Marienplatz",
       "to": "S6_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5028,7 +5028,7 @@
       "from": "S3_Marienplatz",
       "to": "S7_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5036,7 +5036,7 @@
       "from": "S3_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5044,7 +5044,7 @@
       "from": "S4_Marienplatz",
       "to": "S6_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5052,7 +5052,7 @@
       "from": "S4_Marienplatz",
       "to": "S7_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5060,7 +5060,7 @@
       "from": "S4_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5068,7 +5068,7 @@
       "from": "S6_Marienplatz",
       "to": "S7_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5076,7 +5076,7 @@
       "from": "S6_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5084,7 +5084,7 @@
       "from": "S7_Marienplatz",
       "to": "S8_Marienplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5092,7 +5092,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S2_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5100,7 +5100,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S3_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5108,7 +5108,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S4_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5116,7 +5116,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S6_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5124,7 +5124,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S7_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5132,7 +5132,7 @@
       "from": "S1_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5140,7 +5140,7 @@
       "from": "S2_Ostbahnhof",
       "to": "S3_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5148,7 +5148,7 @@
       "from": "S2_Ostbahnhof",
       "to": "S4_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5156,7 +5156,7 @@
       "from": "S2_Ostbahnhof",
       "to": "S6_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5164,7 +5164,7 @@
       "from": "S2_Ostbahnhof",
       "to": "S7_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5172,7 +5172,7 @@
       "from": "S2_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5180,7 +5180,7 @@
       "from": "S3_Ostbahnhof",
       "to": "S4_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5188,7 +5188,7 @@
       "from": "S3_Ostbahnhof",
       "to": "S6_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5196,7 +5196,7 @@
       "from": "S3_Ostbahnhof",
       "to": "S7_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5204,7 +5204,7 @@
       "from": "S3_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5212,7 +5212,7 @@
       "from": "S4_Ostbahnhof",
       "to": "S6_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5220,7 +5220,7 @@
       "from": "S4_Ostbahnhof",
       "to": "S7_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5228,7 +5228,7 @@
       "from": "S4_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5236,7 +5236,7 @@
       "from": "S6_Ostbahnhof",
       "to": "S7_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5244,7 +5244,7 @@
       "from": "S6_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5252,7 +5252,7 @@
       "from": "S7_Ostbahnhof",
       "to": "S8_Ostbahnhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5260,7 +5260,7 @@
       "from": "S4_Trudering",
       "to": "S6_Trudering",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5268,7 +5268,7 @@
       "from": "U1_Fraunhoferstrasse",
       "to": "U2_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5276,7 +5276,7 @@
       "from": "U1_Fraunhoferstrasse",
       "to": "U7_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5284,7 +5284,7 @@
       "from": "U1_Fraunhoferstrasse",
       "to": "U8_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5292,7 +5292,7 @@
       "from": "U2_Fraunhoferstrasse",
       "to": "U7_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5300,7 +5300,7 @@
       "from": "U2_Fraunhoferstrasse",
       "to": "U8_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5308,7 +5308,7 @@
       "from": "U7_Fraunhoferstrasse",
       "to": "U8_Fraunhoferstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5316,7 +5316,7 @@
       "from": "U1_GeorgBrauchleRing",
       "to": "U7_GeorgBrauchleRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5324,7 +5324,7 @@
       "from": "U1_Gern",
       "to": "U7_Gern",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5332,7 +5332,7 @@
       "from": "U3_Giselastrasse",
       "to": "U6_Giselastrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5340,7 +5340,7 @@
       "from": "U3_Goetheplatz",
       "to": "U6_Goetheplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5348,7 +5348,7 @@
       "from": "U2_Hohenzollernplatz",
       "to": "U8_Hohenzollernplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5356,7 +5356,7 @@
       "from": "U3_Implerstrasse",
       "to": "U6_Implerstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5364,7 +5364,7 @@
       "from": "U2_InnsbRuckerRing",
       "to": "U5_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5372,7 +5372,7 @@
       "from": "U2_InnsbRuckerRing",
       "to": "U7_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5380,7 +5380,7 @@
       "from": "U2_InnsbRuckerRing",
       "to": "U8_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5388,7 +5388,7 @@
       "from": "U5_InnsbRuckerRing",
       "to": "U7_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5396,7 +5396,7 @@
       "from": "U5_InnsbRuckerRing",
       "to": "U8_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5404,7 +5404,7 @@
       "from": "U7_InnsbRuckerRing",
       "to": "U8_InnsbRuckerRing",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5412,7 +5412,7 @@
       "from": "U2_Josephsplatz",
       "to": "U8_Josephsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5420,7 +5420,7 @@
       "from": "U2_KarlPreisPlatz",
       "to": "U7_KarlPreisPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5428,7 +5428,7 @@
       "from": "U2_KarlPreisPlatz",
       "to": "U8_KarlPreisPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5436,7 +5436,7 @@
       "from": "U7_KarlPreisPlatz",
       "to": "U8_KarlPreisPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5444,7 +5444,7 @@
       "from": "U1_Kolumbusplatz",
       "to": "U2_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5452,7 +5452,7 @@
       "from": "U1_Kolumbusplatz",
       "to": "U7_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5460,7 +5460,7 @@
       "from": "U1_Kolumbusplatz",
       "to": "U8_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5468,7 +5468,7 @@
       "from": "U2_Kolumbusplatz",
       "to": "U7_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5476,7 +5476,7 @@
       "from": "U2_Kolumbusplatz",
       "to": "U8_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5484,7 +5484,7 @@
       "from": "U7_Kolumbusplatz",
       "to": "U8_Kolumbusplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5492,7 +5492,7 @@
       "from": "U2_Konigsplatz",
       "to": "U8_Konigsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5500,7 +5500,7 @@
       "from": "U4_Lehel",
       "to": "U5_Lehel",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5508,7 +5508,7 @@
       "from": "U1_Maillingerstrasse",
       "to": "U7_Maillingerstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5516,7 +5516,7 @@
       "from": "U4_MaxWeberPlatz",
       "to": "U5_MaxWeberPlatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5524,7 +5524,7 @@
       "from": "U5_Michaelibad",
       "to": "U7_Michaelibad",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5532,7 +5532,7 @@
       "from": "U5_Michaelibad",
       "to": "U8_Michaelibad",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5540,7 +5540,7 @@
       "from": "U7_Michaelibad",
       "to": "U8_Michaelibad",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5548,7 +5548,7 @@
       "from": "U3_MunchnerFreiheit",
       "to": "U6_MunchnerFreiheit",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5556,7 +5556,7 @@
       "from": "U5_NeuperlachZentrum",
       "to": "U7_NeuperlachZentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5564,7 +5564,7 @@
       "from": "U5_NeuperlachZentrum",
       "to": "U8_NeuperlachZentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5572,7 +5572,7 @@
       "from": "U7_NeuperlachZentrum",
       "to": "U8_NeuperlachZentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5580,7 +5580,7 @@
       "from": "U3_Odeonsplatz",
       "to": "U4_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5588,7 +5588,7 @@
       "from": "U3_Odeonsplatz",
       "to": "U5_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5596,7 +5596,7 @@
       "from": "U3_Odeonsplatz",
       "to": "U6_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5604,7 +5604,7 @@
       "from": "U4_Odeonsplatz",
       "to": "U5_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5612,7 +5612,7 @@
       "from": "U4_Odeonsplatz",
       "to": "U6_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5620,7 +5620,7 @@
       "from": "U5_Odeonsplatz",
       "to": "U6_Odeonsplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5628,7 +5628,7 @@
       "from": "U1_OlympiaEinkaufszentrum",
       "to": "U3_OlympiaEinkaufszentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5636,7 +5636,7 @@
       "from": "U1_OlympiaEinkaufszentrum",
       "to": "U7_OlympiaEinkaufszentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5644,7 +5644,7 @@
       "from": "U3_OlympiaEinkaufszentrum",
       "to": "U7_OlympiaEinkaufszentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5652,7 +5652,7 @@
       "from": "U3_Olympiazentrum",
       "to": "U8_Olympiazentrum",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5660,7 +5660,7 @@
       "from": "U3_Petuelring",
       "to": "U8_Petuelring",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5668,7 +5668,7 @@
       "from": "U3_Poccistrasse",
       "to": "U6_Poccistrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5676,7 +5676,7 @@
       "from": "U5_Quiddestrasse",
       "to": "U7_Quiddestrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5684,7 +5684,7 @@
       "from": "U5_Quiddestrasse",
       "to": "U8_Quiddestrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5692,7 +5692,7 @@
       "from": "U7_Quiddestrasse",
       "to": "U8_Quiddestrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5700,7 +5700,7 @@
       "from": "U1_Rotkreuzplatz",
       "to": "U7_Rotkreuzplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5708,7 +5708,7 @@
       "from": "U2_Scheidplatz",
       "to": "U3_Scheidplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5716,7 +5716,7 @@
       "from": "U2_Scheidplatz",
       "to": "U8_Scheidplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5724,7 +5724,7 @@
       "from": "U3_Scheidplatz",
       "to": "U8_Scheidplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5732,7 +5732,7 @@
       "from": "U4_Schwanthalhohe",
       "to": "U5_Schwanthalhohe",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5740,7 +5740,7 @@
       "from": "U1_SendlingerTor",
       "to": "U2_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5748,7 +5748,7 @@
       "from": "U1_SendlingerTor",
       "to": "U3_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5756,7 +5756,7 @@
       "from": "U1_SendlingerTor",
       "to": "U6_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5764,7 +5764,7 @@
       "from": "U1_SendlingerTor",
       "to": "U7_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5772,7 +5772,7 @@
       "from": "U1_SendlingerTor",
       "to": "U8_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5780,7 +5780,7 @@
       "from": "U2_SendlingerTor",
       "to": "U3_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5788,7 +5788,7 @@
       "from": "U2_SendlingerTor",
       "to": "U6_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5796,7 +5796,7 @@
       "from": "U2_SendlingerTor",
       "to": "U7_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5804,7 +5804,7 @@
       "from": "U2_SendlingerTor",
       "to": "U8_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5812,7 +5812,7 @@
       "from": "U3_SendlingerTor",
       "to": "U6_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5820,7 +5820,7 @@
       "from": "U3_SendlingerTor",
       "to": "U7_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5828,7 +5828,7 @@
       "from": "U3_SendlingerTor",
       "to": "U8_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5836,7 +5836,7 @@
       "from": "U6_SendlingerTor",
       "to": "U7_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5844,7 +5844,7 @@
       "from": "U6_SendlingerTor",
       "to": "U8_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5852,7 +5852,7 @@
       "from": "U7_SendlingerTor",
       "to": "U8_SendlingerTor",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5860,7 +5860,7 @@
       "from": "U2_Silberhornstrasse",
       "to": "U7_Silberhornstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5868,7 +5868,7 @@
       "from": "U2_Silberhornstrasse",
       "to": "U8_Silberhornstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5876,7 +5876,7 @@
       "from": "U7_Silberhornstrasse",
       "to": "U8_Silberhornstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5884,7 +5884,7 @@
       "from": "U1_Stiglmaierplatz",
       "to": "U7_Stiglmaierplatz",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5892,7 +5892,7 @@
       "from": "U2_Theresienstrasse",
       "to": "U8_Theresienstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5900,7 +5900,7 @@
       "from": "U4_Theresienwiese",
       "to": "U5_Theresienwiese",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5908,7 +5908,7 @@
       "from": "U3_Universitat",
       "to": "U6_Universitat",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5916,7 +5916,7 @@
       "from": "U2_Untersbergstrasse",
       "to": "U7_Untersbergstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5924,7 +5924,7 @@
       "from": "U2_Untersbergstrasse",
       "to": "U8_Untersbergstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5932,7 +5932,7 @@
       "from": "U7_Untersbergstrasse",
       "to": "U8_Untersbergstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5940,7 +5940,7 @@
       "from": "U4_Westendstrasse",
       "to": "U5_Westendstrasse",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     },
@@ -5948,7 +5948,7 @@
       "from": "U1_Westfriedhof",
       "to": "U7_Westfriedhof",
       "distance_km": 0,
-      "time": 0,
+      "time": 3,
       "line": "T",
       "price_eur": 0.0
     }

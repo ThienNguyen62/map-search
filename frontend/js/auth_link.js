@@ -65,6 +65,7 @@ async function updateAuthLink() {
       }
       localStorage.removeItem("loggedInUser");
       localStorage.removeItem("isAdmin");
+      localStorage.removeItem("currentUserProfile");
       clearFromAdminFlag();
       window.location.href = "index.html";
     };
