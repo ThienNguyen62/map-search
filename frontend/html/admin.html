@@ -1135,7 +1135,6 @@
       window.addEventListener("focus", () => {
         try {
           checkAuthAndReload();
-          updateDebugPanel();
         } catch (e) {
           /* ignore */
         }
@@ -1175,69 +1174,6 @@
           );
         }
       }
-
-      // --- Debug panel for quick diagnostics ---
-      function createDebugPanel() {
-        try {
-          const panel = document.createElement("div");
-          panel.id = "debugPanel";
-          panel.style.position = "fixed";
-          panel.style.right = "12px";
-          panel.style.bottom = "12px";
-          panel.style.background = "rgba(0,0,0,0.75)";
-          panel.style.color = "#fff";
-          panel.style.padding = "8px 10px";
-          panel.style.borderRadius = "8px";
-          panel.style.fontSize = "12px";
-          panel.style.zIndex = "9999";
-          panel.style.maxWidth = "320px";
-          panel.style.boxShadow = "0 6px 18px rgba(0,0,0,0.2)";
-          panel.innerHTML = `
-            <div style="display:flex; gap:8px; align-items:center;">
-              <strong style="font-size:12px;">Debug</strong>
-              <button id="debugRefreshBtn" style="margin-left:auto; padding:4px 6px; font-size:11px;">Refresh</button>
-            </div>
-            <div id="debugContent" style="margin-top:8px; white-space:pre-wrap; max-height:220px; overflow:auto;"></div>
-          `;
-          document.body.appendChild(panel);
-          document
-            .getElementById("debugRefreshBtn")
-            .addEventListener("click", updateDebugPanel);
-          updateDebugPanel();
-        } catch (e) {
-          console.warn("createDebugPanel failed", e);
-        }
-      }
-
-      async function updateDebugPanel() {
-        try {
-          const contentEl = document.getElementById("debugContent");
-          if (!contentEl) return;
-          const cookieInfo = document.cookie || "<no document.cookie>";
-          let me = { error: "fetch failed" };
-          try {
-            const r = await fetch(`${API_BASE}/api/me`, {
-              credentials: "include",
-            });
-            me = await r.json();
-          } catch (err) {
-            me = { error: String(err) };
-          }
-          contentEl.textContent =
-            `navigator.cookieEnabled: ${navigator.cookieEnabled}\n` +
-            `document.cookie: ${cookieInfo}\n\n` +
-            `/api/me: ${JSON.stringify(me, null, 2)}`;
-        } catch (e) {
-          console.warn("updateDebugPanel failed", e);
-        }
-      }
-
-      // create debug panel after a short delay so DOM is ready
-      setTimeout(() => {
-        try {
-          createDebugPanel();
-        } catch (e) {}
-      }, 600);
 
       async function verifyAdminSession() {
         try {
