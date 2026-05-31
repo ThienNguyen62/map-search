@@ -1653,7 +1653,7 @@ function showResult(
       const lineLabel = (station.line && station.line.length > 0)
         ? ` (${station.line.join(', ')})`
         : '';
-      return `<li><span class="station-link" data-station-id="${id}" style="cursor: pointer; color: #0066cc; text-decoration: underline;">${index + 1}. ${station.name}${lineLabel}</span></li>`;
+      return `<li><span class="station-link" data-station-id="${id}" style="cursor: pointer; color: #0066cc; text-decoration: underline;">${station.name}${lineLabel}</span></li>`;
     })
     .join("");
 
