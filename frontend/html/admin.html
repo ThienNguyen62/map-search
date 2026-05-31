@@ -1467,7 +1467,9 @@
           loading.style.display = "none";
           adminUserCache.users = usersData.users;
           adminUserCache.loginHistory = historyData.history;
-          adminUserCache.userActivity = buildUserActivityMap(historyData.history);
+          adminUserCache.userActivity = buildUserActivityMap(
+            historyData.history,
+          );
           adminUserCache.displayedUsers = usersData.users;
           renderUsersSection(usersData.users, historyData.history);
         } catch (err) {
@@ -1507,7 +1509,8 @@
             const userLogins = userActivity[user.username] || [];
             const lastLogin = userLogins.length > 0 ? userLogins[0] : null;
             const totalLoginsForUser = userLogins.length;
-            const fullName = `${user.first_name || ""} ${user.last_name || ""}`.trim();
+            const fullName =
+              `${user.first_name || ""} ${user.last_name || ""}`.trim();
             return `
               <tr>
                 <td>${user.id}</td>
@@ -1543,7 +1546,8 @@
       function renderUsersSection(users, loginHistory) {
         const content = document.getElementById("usersContent");
         if (!content) return;
-        const userActivity = adminUserCache.userActivity || buildUserActivityMap(loginHistory);
+        const userActivity =
+          adminUserCache.userActivity || buildUserActivityMap(loginHistory);
 
         const sortedHistory = [...loginHistory].sort(
           (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
@@ -1552,8 +1556,9 @@
         const uniqueUsers = new Set(loginHistory.map((entry) => entry.username))
           .size;
         const totalLogins = loginHistory.length;
-        const failedLogins =
-          loginHistory.filter((entry) => entry.success === false).length;
+        const failedLogins = loginHistory.filter(
+          (entry) => entry.success === false,
+        ).length;
 
         const allUsers = adminUserCache.users || users;
         const userRows = buildUserTableRowsHtml(users, userActivity);
@@ -1731,6 +1736,10 @@
                 <div class="user-mgmt-field">
                   <label for="addUserLastName">Tên</label>
                   <input id="addUserLastName" type="text" placeholder="Nhập tên" />
+                </div>
+                <div class="user-mgmt-field">
+                  <label for="addUserPassword">Mật khẩu</label>
+                  <input id="addUserPassword" type="password" placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)" />
                 </div>
                 <div class="user-mgmt-field">
                   <label for="addUserRole">Vai trò</label>
@@ -1952,10 +1961,16 @@
           }
 
           closeEditUserModal();
-          showUserToast(data.message || "Cập nhật người dùng thành công", "success");
+          showUserToast(
+            data.message || "Cập nhật người dùng thành công",
+            "success",
+          );
           await loadUserData();
         } catch (err) {
-          setModalError("editUserError", err.message || "Không thể cập nhật người dùng.");
+          setModalError(
+            "editUserError",
+            err.message || "Không thể cập nhật người dùng.",
+          );
         }
       }
 
@@ -2009,14 +2024,22 @@
           showUserToast(data.message || "Xóa người dùng thành công", "success");
           await loadUserData();
         } catch (err) {
-          setModalError("deleteUserError", err.message || "Không thể xóa người dùng.");
+          setModalError(
+            "deleteUserError",
+            err.message || "Không thể xóa người dùng.",
+          );
         }
       }
 
       function openAddUserModal() {
         const modal = document.getElementById("addUserModal");
         if (!modal) return;
-        ["addUserUsername", "addUserFirstName", "addUserLastName"].forEach((id) => {
+        [
+          "addUserUsername",
+          "addUserFirstName",
+          "addUserLastName",
+          "addUserPassword",
+        ].forEach((id) => {
           const el = document.getElementById(id);
           if (el) el.value = "";
         });
@@ -2024,7 +2047,10 @@
         if (role) role.value = "user";
         setModalError("addUserError", "");
         modal.classList.add("show");
-        window.setTimeout(() => document.getElementById("addUserUsername")?.focus(), 50);
+        window.setTimeout(
+          () => document.getElementById("addUserUsername")?.focus(),
+          50,
+        );
       }
 
       function closeAddUserModal() {
@@ -2040,17 +2066,28 @@
       }
 
       async function submitAddUser() {
-        const username = document.getElementById("addUserUsername")?.value.trim() || "";
-        const firstName = document.getElementById("addUserFirstName")?.value.trim() || "";
-        const lastName = document.getElementById("addUserLastName")?.value.trim() || "";
+        const username =
+          document.getElementById("addUserUsername")?.value.trim() || "";
+        const firstName =
+          document.getElementById("addUserFirstName")?.value.trim() || "";
+        const lastName =
+          document.getElementById("addUserLastName")?.value.trim() || "";
+        const password =
+          document.getElementById("addUserPassword")?.value || "";
         const role = document.getElementById("addUserRole")?.value || "user";
 
         if (!username || username.length < 3) {
-          setModalError("addUserError", "Tên người dùng phải có ít nhất 3 ký tự.");
+          setModalError(
+            "addUserError",
+            "Tên người dùng phải có ít nhất 3 ký tự.",
+          );
           return;
         }
         if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-          setModalError("addUserError", "Tên người dùng chỉ được chứa chữ, số và dấu gạch dưới.");
+          setModalError(
+            "addUserError",
+            "Tên người dùng chỉ được chứa chữ, số và dấu gạch dưới.",
+          );
           return;
         }
         if (!firstName) {
@@ -2059,6 +2096,10 @@
         }
         if (!lastName) {
           setModalError("addUserError", "Vui lòng nhập tên.");
+          return;
+        }
+        if (!password || password.length < 6) {
+          setModalError("addUserError", "Mật khẩu phải có ít nhất 6 ký tự.");
           return;
         }
 
@@ -2073,6 +2114,7 @@
               username,
               first_name: firstName,
               last_name: lastName,
+              password,
               role,
             }),
           });
@@ -2086,7 +2128,10 @@
           showUserToast(data.message || "Thêm tài khoản thành công", "success");
           await loadUserData();
         } catch (err) {
-          setModalError("addUserError", err.message || "Không thể thêm tài khoản.");
+          setModalError(
+            "addUserError",
+            err.message || "Không thể thêm tài khoản.",
+          );
         }
       }
 
@@ -2101,7 +2146,10 @@
         if (role) role.value = "";
         setModalError("searchUserError", "");
         modal.classList.add("show");
-        window.setTimeout(() => document.getElementById("searchUserFullName")?.focus(), 50);
+        window.setTimeout(
+          () => document.getElementById("searchUserFullName")?.focus(),
+          50,
+        );
       }
 
       function closeSearchUserModal() {
@@ -2117,9 +2165,12 @@
       }
 
       async function submitSearchUser() {
-        const fullName = document.getElementById("searchUserFullName")?.value.trim() || "";
-        const username = document.getElementById("searchUserUsername")?.value.trim() || "";
-        const role = document.getElementById("searchUserRole")?.value.trim() || "";
+        const fullName =
+          document.getElementById("searchUserFullName")?.value.trim() || "";
+        const username =
+          document.getElementById("searchUserUsername")?.value.trim() || "";
+        const role =
+          document.getElementById("searchUserRole")?.value.trim() || "";
 
         setModalError("searchUserError", "");
 
@@ -2152,7 +2203,10 @@
             "success",
           );
         } catch (err) {
-          setModalError("searchUserError", err.message || "Không thể tìm kiếm.");
+          setModalError(
+            "searchUserError",
+            err.message || "Không thể tìm kiếm.",
+          );
         }
       }
 
@@ -2352,7 +2406,9 @@
           const parsed = JSON.parse(raw);
           return {
             lines: Array.isArray(parsed.lines)
-              ? parsed.lines.filter((line) => isAdminRailLineId(line && line.id))
+              ? parsed.lines.filter((line) =>
+                  isAdminRailLineId(line && line.id),
+                )
               : JSON.parse(JSON.stringify(defaultAdminState.lines)),
             stations: dedupePhysicalStations(parsed.stations),
             notices: Array.isArray(parsed.notices) ? parsed.notices : [],
@@ -2389,7 +2445,8 @@
       }
 
       function inferLineIdFromEdge(edge) {
-        const fromId = (edge && (edge.from || edge.from_id || edge.station1)) || "";
+        const fromId =
+          (edge && (edge.from || edge.from_id || edge.station1)) || "";
         const toId = (edge && (edge.to || edge.to_id || edge.station2)) || "";
         const fromPrefix = String(fromId).split("_")[0];
         const toPrefix = String(toId).split("_")[0];
@@ -2438,7 +2495,8 @@
           const existing = byKey.get(key);
           if (existing) {
             existing.closed = !!existing.closed || !!station.closed;
-            if (!existing.reason && station.reason) existing.reason = station.reason;
+            if (!existing.reason && station.reason)
+              existing.reason = station.reason;
             return;
           }
           byKey.set(key, { ...station });
@@ -2449,7 +2507,9 @@
       function buildGraphSummary(data) {
         const stations = [];
         const seenStations = new Set();
-        const rawStations = Array.isArray(data && data.stations) ? data.stations : [];
+        const rawStations = Array.isArray(data && data.stations)
+          ? data.stations
+          : [];
         rawStations.forEach((st) => {
           const id = st.id || st.ID || st.name || st.Name;
           const physicalKey = getPhysicalStationKey(st);
@@ -2469,8 +2529,11 @@
         const seenLines = new Set();
         const rawEdges = Array.isArray(data && data.edges) ? data.edges : [];
         rawEdges.forEach((edge) => {
-          const lineId = String(edge.line || edge.Line || inferLineIdFromEdge(edge) || "").trim();
-          if (!lineId || !isAdminRailLineId(lineId) || seenLines.has(lineId)) return;
+          const lineId = String(
+            edge.line || edge.Line || inferLineIdFromEdge(edge) || "",
+          ).trim();
+          if (!lineId || !isAdminRailLineId(lineId) || seenLines.has(lineId))
+            return;
           seenLines.add(lineId);
           lines.push({
             id: lineId,
@@ -2508,10 +2571,22 @@
         const nextState = graphData
           ? buildGraphSummary(graphData)
           : {
-              lines: JSON.parse(JSON.stringify(defaultAdminState.lines)).filter((line) => isAdminRailLineId(line.id)),
+              lines: JSON.parse(JSON.stringify(defaultAdminState.lines)).filter(
+                (line) => isAdminRailLineId(line.id),
+              ),
               stations: [
-                { id: "sample-1", name: "Marienplatz", closed: false, reason: "" },
-                { id: "sample-2", name: "Sendlinger Tor", closed: false, reason: "" },
+                {
+                  id: "sample-1",
+                  name: "Marienplatz",
+                  closed: false,
+                  reason: "",
+                },
+                {
+                  id: "sample-2",
+                  name: "Sendlinger Tor",
+                  closed: false,
+                  reason: "",
+                },
                 {
                   id: "sample-3",
                   name: "Munchner Freiheit",
@@ -2527,17 +2602,27 @@
         adminOperationsState.lines = nextState.lines.map((line) => {
           const existing = lineStateById.get(line.id);
           return existing
-            ? { ...line, blocked: !!existing.blocked, reason: existing.reason || "" }
+            ? {
+                ...line,
+                blocked: !!existing.blocked,
+                reason: existing.reason || "",
+              }
             : line;
         });
 
         const stationStateById = new Map(
-          dedupePhysicalStations(adminOperationsState.stations || []).map((station) => [getPhysicalStationKey(station), station]),
+          dedupePhysicalStations(adminOperationsState.stations || []).map(
+            (station) => [getPhysicalStationKey(station), station],
+          ),
         );
         adminOperationsState.stations = nextState.stations.map((station) => {
           const existing = stationStateById.get(getPhysicalStationKey(station));
           return existing
-            ? { ...station, closed: !!existing.closed, reason: existing.reason || "" }
+            ? {
+                ...station,
+                closed: !!existing.closed,
+                reason: existing.reason || "",
+              }
             : station;
         });
 
@@ -2560,9 +2645,9 @@
         const blockedLines = adminOperationsState.lines.filter(
           (line) => line.blocked,
         ).length;
-        const closedStations = dedupePhysicalStations(adminOperationsState.stations).filter(
-          (st) => st.closed,
-        ).length;
+        const closedStations = dedupePhysicalStations(
+          adminOperationsState.stations,
+        ).filter((st) => st.closed).length;
         const summaryLines = document.getElementById("summaryLines");
         const summaryBlocked = document.getElementById("summaryBlocked");
         const summaryStations = document.getElementById("summaryStations");
@@ -2582,7 +2667,9 @@
         const linesCount = document.getElementById("overviewLinesCount");
         const supportCount = document.getElementById("overviewSupportCount");
 
-        let stationTotal = dedupePhysicalStations(adminOperationsState?.stations || []).length;
+        let stationTotal = dedupePhysicalStations(
+          adminOperationsState?.stations || [],
+        ).length;
         let lineTotal = adminOperationsState?.lines?.length ?? 0;
         let supportTotal = adminOperationsState?.notices?.length ?? 0;
 
@@ -2603,7 +2690,9 @@
               const edges = Array.isArray(data.edges) ? data.edges : [];
               const lineIds = new Set();
               edges.forEach((edge) => {
-                const lineId = String(edge.line || edge.Line || inferLineIdFromEdge(edge) || "").trim();
+                const lineId = String(
+                  edge.line || edge.Line || inferLineIdFromEdge(edge) || "",
+                ).trim();
                 if (lineId && isAdminRailLineId(lineId)) lineIds.add(lineId);
               });
               lineTotal = lineIds.size || defaultAdminState.lines.length;
