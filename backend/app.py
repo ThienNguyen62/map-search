@@ -207,6 +207,7 @@ def auth_users():
     username = (data.get('username') or '').strip()
     first_name = (data.get('first_name') or '').strip()
     last_name = (data.get('last_name') or '').strip()
+    password = data.get('password') or ''
     role = (data.get('role') or 'user').strip()
 
     if not username or len(username) < 3:
@@ -215,20 +216,22 @@ def auth_users():
         return jsonify({"error": "Vui lòng nhập họ"}), 400
     if not last_name:
         return jsonify({"error": "Vui lòng nhập tên"}), 400
+    if not password or len(password) < 6:
+        return jsonify({"error": "Mật khẩu phải có ít nhất 6 ký tự"}), 400
     if role not in ('user', 'admin'):
         return jsonify({"error": "Vai trò không hợp lệ"}), 400
     if get_user_by_username(username):
         return jsonify({"error": "Tên người dùng đã tồn tại"}), 400
 
     try:
-        user_id = create_user_admin(username, first_name, last_name, role)
+        user_id = create_user_admin(username, first_name, last_name, role, password=password)
     except sqlite3.IntegrityError:
         return jsonify({"error": "Không thể tạo tài khoản, vui lòng thử lại"}), 500
 
     user = get_user_by_id(user_id)
     return jsonify({
         "success": True,
-        "message": "Thêm tài khoản thành công. Mật khẩu mặc định: User@123",
+        "message": "Thêm tài khoản thành công.",
         "user": user,
     }), 201
 
