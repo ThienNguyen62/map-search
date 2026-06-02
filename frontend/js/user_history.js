@@ -175,6 +175,23 @@
                 el.classList.toggle('active', key === tabName);
             }
         });
+
+        // Toggle map vs info panel on the right side
+        const mapEl = document.getElementById('map');
+        const mapToolbar = document.querySelector('.map-toolbar');
+        const infoPanel = document.getElementById('infoPanel');
+
+        if (tabName === 'info') {
+            // Hide map and toolbar, show info panel
+            if (mapEl) mapEl.style.display = 'none';
+            if (mapToolbar) mapToolbar.style.display = 'none';
+            if (infoPanel) infoPanel.style.display = 'block';
+        } else {
+            // Show map and toolbar, hide info panel
+            if (mapEl) mapEl.style.display = '';
+            if (mapToolbar) mapToolbar.style.display = '';
+            if (infoPanel) infoPanel.style.display = 'none';
+        }
     }
 
     // ── Initialize ──

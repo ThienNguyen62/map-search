@@ -1635,14 +1635,14 @@ function showResult(
       const to = graphById[seg.to];
       if (seg.line === 'T') {
         // Transfer segment: display as interchange info
-        return `<li style="color:#666;font-style:italic;"><strong>🔄 Chuyển tuyến tại ${from ? from.name : seg.from}</strong> (${formatMinutes(seg.time)} đi bộ giữa các platform)</li>`;
+        return `<li class="transfer-segment">🔄 <strong class="transfer-segment__title">Chuyển tuyến tại ${from ? from.name : seg.from}</strong> (${formatMinutes(seg.time)} đi bộ giữa các platform)</li>`;
       }
       const stops = route.path.slice(
         route.path.indexOf(seg.from),
         route.path.indexOf(seg.to) + 1,
       ).length;
       const lineColor = lineColors[seg.line] || '#666';
-      return `<li><strong>Đoạn ${index + 1} - <span style="color:${lineColor}">Tuyến ${seg.line}</span></strong>: ${from ? from.name : seg.from} → ${to ? to.name : seg.to} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
+      return `<li><strong>Đoạn ${index + 1} - <span class="route-line-name" style="color:#ffffff;">Tuyến ${seg.line}</span></strong>: ${from ? from.name : seg.from} → ${to ? to.name : seg.to} (${formatMinutes(seg.time)}, ${formatDistanceKm(seg.distance)})<br><small>${stops} ga trên tuyến</small></li>`;
     })
     .join("");
 
