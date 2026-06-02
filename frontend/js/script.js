@@ -1646,7 +1646,17 @@ function showResult(
     })
     .join("");
 
-  const listItems = route.path
+  // Remove duplicate stations while preserving order
+  const uniquePath = [];
+  const seenIds = new Set();
+  route.path.forEach((id) => {
+    if (!seenIds.has(id)) {
+      uniquePath.push(id);
+      seenIds.add(id);
+    }
+  });
+
+  const listItems = uniquePath
     .map((id, index) => {
       const station = graphById[id];
       if (!station) return `<li>${index + 1}. ${id}</li>`;

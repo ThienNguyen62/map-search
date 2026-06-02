@@ -119,15 +119,8 @@ def get_stations():
 @api_blueprint.route("/edges", methods=["GET"])
 def get_edges():
     """Trả về danh sách edges cho frontend"""
-    edges = []
-    seen = set()  # Tránh trùng lặp cạnh vô hướng
-    
-    for e in graph.edges:
-        key = tuple(sorted([e.from_station, e.to_station]))
-        if key not in seen:
-            edges.append(e.to_dict())
-            seen.add(key)
-    
+    # Return all edges without deduplication to preserve graph integrity
+    edges = [e.to_dict() for e in graph.edges]
     return jsonify({"edges": edges})
 
 
